@@ -1,16 +1,37 @@
 {
   "sections": {
-    "main": {
-      "type": "product-template",
+    "diagnostic": {
+      "type": "ring-builder-diagnostic",
+      "settings": {}
+    },
+    "main_builder": {
+      "type": "product-builder-main",
       "settings": {
-        "show_vendor": false,
-        "show_sku": true,
-        "builder_heading": "Default Product Ring Builder",
-        "scarcity_text": "DEFAULT PRODUCT TEMPLATE ACTIVE"
+        "builder_heading": "Joyari Ring Builder",
+        "carat_quarter_premium": 18500
+      }
+    },
+    "story": {
+      "type": "luxury-story",
+      "settings": {
+        "eyebrow": "Product story",
+        "heading": "Made to feel personal from every angle",
+        "text": "Each Joyari piece is designed around proportion, comfort, and the emotional weight of the moment it marks.",
+        "button_label": ""
+      }
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also love",
+        "product_limit": 4
       }
     }
   },
   "order": [
-    "main"
+    "diagnostic",
+    "main_builder",
+    "story",
+    "related"
   ]
 }

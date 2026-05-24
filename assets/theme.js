@@ -3,6 +3,8 @@
 
   var theme = window.JoyariTheme || {};
 
+  console.log('JOYARI PRODUCT BUILDER JS LOADED');
+
   function stripTags(value) {
     return String(value || '').replace(/<[^>]*>/g, '');
   }

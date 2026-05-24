@@ -1,0 +1,293 @@
+{% liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'JoyariProductBuilderForm-' | append: section.id
+%}
+
+<section class="jk-product-template jk-product-builder-main" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
+  {% if product != blank %}
+    <script type="application/json" data-product-json>{{ product | json }}</script>
+
+    <div class="jk-product-layout jk-product-layout--builder">
+      <div class="jk-product-gallery" data-product-gallery>
+        <div class="jk-product-gallery__main">
+          {% if product.media.size > 0 %}
+            {% for media in product.media %}
+              <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}" data-image-id="{{ media.preview_image.id | default: media.id }}">
+                {% if media.media_type == 'image' %}
+                  {{ media | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1500', sizes: '(min-width: 990px) 58vw, 100vw', alt: media.alt | default: product.title }}
+                {% else %}
+                  <div class="jk-product-placeholder jk-product-placeholder--media" aria-hidden="true"></div>
+                {% endif %}
+              </figure>
+            {% endfor %}
+          {% else %}
+            <figure class="jk-product-media is-active">
+              <div class="jk-product-placeholder jk-product-placeholder--large" aria-hidden="true"></div>
+            </figure>
+          {% endif %}
+        </div>
+
+        {% if product.media.size > 1 %}
+          <div class="jk-product-gallery__thumbs" aria-label="Product media">
+            {% for media in product.media %}
+              <button type="button" class="jk-media-thumb{% if forloop.first %} is-active{% endif %}" data-media-trigger="{{ media.id }}" data-image-trigger="{{ media.preview_image.id | default: media.id }}" aria-label="View media {{ forloop.index }}">
+                {% if media.media_type == 'image' %}
+                  {{ media | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '90px', alt: media.alt | default: product.title }}
+                {% else %}
+                  <span class="jk-thumb-placeholder" aria-hidden="true"></span>
+                {% endif %}
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="jk-product-panel">
+        <div class="jk-product-panel__inner jk-product-panel__inner--builder">
+          <div class="jk-product-panel__header">
+            <p class="jk-eyebrow">Default product builder section</p>
+            <h1>{{ product.title }}</h1>
+
+            <div class="jk-product-price-row">
+              <p class="jk-product-price" data-variant-price>{{ selected_variant.price | money }}</p>
+              {% if selected_variant.compare_at_price > selected_variant.price %}
+                <p class="jk-product-compare" data-variant-compare>{{ selected_variant.compare_at_price | money }}</p>
+              {% else %}
+                <p class="jk-product-compare is-hidden" data-variant-compare></p>
+              {% endif %}
+            </div>
+
+            <p class="jk-availability" data-availability>
+              {% if selected_variant.available %}
+                Available for secure checkout
+              {% else %}
+                This configuration is currently unavailable
+              {% endif %}
+            </p>
+          </div>
+
+          {% form 'product', product, id: product_form_id, class: 'jk-product-form', data-product-form: 'product' %}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}" data-variant-id-input>
+            <input type="hidden" name="properties[Joyari builder estimate]" value="{{ selected_variant.price | money }}" data-builder-estimate-property>
+            <input type="hidden" name="properties[Builder source]" value="Default product template">
+
+            <div class="jk-ring-builder-card jk-ring-builder-card--product">
+              <div class="jk-builder-card__header">
+                <div>
+                  <p class="jk-eyebrow">Ring builder controls</p>
+                  <h2>{{ section.settings.builder_heading }}</h2>
+                  <p class="jk-builder-subcopy">This builder renders for every normal product page and saves all custom choices as line item properties.</p>
+                </div>
+                <div class="jk-stone-preview" data-stone-preview data-shape="oval">
+                  <span></span>
+                </div>
+              </div>
+
+              {% unless product.has_only_default_variant %}
+                <div class="jk-builder-step jk-product-variant-group">
+                  <div class="jk-builder-step__header">
+                    <span class="jk-builder-step__number">01</span>
+                    <div>
+                      <h3>Shopify variant selector</h3>
+                      <p>These options control the real variant ID, price, media, and sold-out state.</p>
+                    </div>
+                  </div>
+
+                  {% for option in product.options_with_values %}
+                    {% assign selected_value = option.selected_value %}
+                    {% assign option_key = 'option' | append: forloop.index %}
+                    {% if selected_value == blank %}
+                      {% assign selected_value = selected_variant[option_key] %}
+                    {% endif %}
+
+                    <fieldset class="jk-option-fieldset" data-option-position="{{ forloop.index }}" data-option-name="{{ option.name | escape }}">
+                      <legend>{{ option.name }}</legend>
+                      <div class="jk-swatch-row">
+                        {% for value in option.values %}
+                          {% assign option_id = 'BuilderOption-' | append: section.id | append: '-' | append: option.position | append: '-' | append: value | handleize %}
+                          <input
+                            id="{{ option_id }}"
+                            type="radio"
+                            name="options[{{ option.name | escape }}]"
+                            value="{{ value | escape }}"
+                            data-option-input
+                            data-option-position="{{ forloop.parentloop.index }}"
+                            {% if value == selected_value %}checked{% endif %}
+                          >
+                          <label for="{{ option_id }}">{{ value }}</label>
+                        {% endfor %}
+                      </div>
+                    </fieldset>
+                  {% endfor %}
+                </div>
+              {% endunless %}
+
+              <div class="jk-builder-step">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
+                  <div>
+                    <h3>Metal selector</h3>
+                    <p>Saved as a line item property.</p>
+                  </div>
+                </div>
+                <fieldset class="jk-builder-field">
+                  <legend class="visually-hidden">Metal selector</legend>
+                  <div class="jk-choice-grid jk-choice-grid--metal">
+                    <label><input type="radio" name="properties[Metal preference]" value="18k Yellow Gold" data-builder-choice data-price-adjustment="0" checked><span><i class="jk-metal-swatch jk-metal-swatch--yellow" aria-hidden="true"></i>18k Yellow</span></label>
+                    <label><input type="radio" name="properties[Metal preference]" value="18k White Gold" data-builder-choice data-price-adjustment="0"><span><i class="jk-metal-swatch jk-metal-swatch--white" aria-hidden="true"></i>18k White</span></label>
+                    <label><input type="radio" name="properties[Metal preference]" value="18k Rose Gold" data-builder-choice data-price-adjustment="0"><span><i class="jk-metal-swatch jk-metal-swatch--rose" aria-hidden="true"></i>18k Rose</span></label>
+                    <label><input type="radio" name="properties[Metal preference]" value="Platinum" data-builder-choice data-price-adjustment="55000"><span><i class="jk-metal-swatch jk-metal-swatch--platinum" aria-hidden="true"></i>Platinum</span></label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="jk-builder-step">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}02{% else %}03{% endif %}</span>
+                  <div>
+                    <h3>Shape selector</h3>
+                    <p>Updates the stone preview and order properties.</p>
+                  </div>
+                </div>
+                <fieldset class="jk-builder-field">
+                  <legend class="visually-hidden">Shape selector</legend>
+                  <div class="jk-shape-row">
+                    {% assign shapes = 'Oval,Round,Emerald,Pear,Marquise,Cushion' | split: ',' %}
+                    {% for shape in shapes %}
+                      <label>
+                        <input type="radio" name="properties[Diamond shape preference]" value="{{ shape }}" data-builder-choice data-shape-choice="{{ shape | handleize }}" data-price-adjustment="{% if shape == 'Emerald' %}25000{% elsif shape == 'Oval' %}20000{% else %}0{% endif %}" {% if forloop.first %}checked{% endif %}>
+                        <span class="jk-shape-chip"><i class="jk-shape-icon jk-shape-icon--{{ shape | handleize }}" aria-hidden="true"></i>{{ shape }}</span>
+                      </label>
+                    {% endfor %}
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="jk-builder-step">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}03{% else %}04{% endif %}</span>
+                  <div>
+                    <h3>Carat slider</h3>
+                    <p>Updates the visible estimate without changing the checkout variant.</p>
+                  </div>
+                </div>
+                <div class="jk-builder-field">
+                  <label for="BuilderCarat-{{ section.id }}">Carat preference</label>
+                  <div class="jk-range-row">
+                    <input id="BuilderCarat-{{ section.id }}" type="range" min="0.5" max="5" step="0.25" value="1" name="properties[Carat preference]" data-carat-input data-builder-choice>
+                    <output for="BuilderCarat-{{ section.id }}" data-carat-output>1.00 ct</output>
+                  </div>
+                </div>
+              </div>
+
+              <div class="jk-builder-step">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}04{% else %}05{% endif %}</span>
+                  <div>
+                    <h3>Diamond type selector</h3>
+                    <p>Saved as a line item property.</p>
+                  </div>
+                </div>
+                <fieldset class="jk-builder-field">
+                  <legend class="visually-hidden">Diamond type selector</legend>
+                  <div class="jk-choice-grid jk-choice-grid--diamond">
+                    <label><input type="radio" name="properties[Diamond type preference]" value="Lab-grown diamond" data-builder-choice data-price-adjustment="0" checked><span>Lab-grown diamond</span></label>
+                    <label><input type="radio" name="properties[Diamond type preference]" value="Premium lab-grown diamond" data-builder-choice data-price-adjustment="75000"><span>Premium lab-grown</span></label>
+                    <label><input type="radio" name="properties[Diamond type preference]" value="Natural diamond consultation" data-builder-choice data-price-adjustment="185000"><span>Natural consult</span></label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="jk-builder-step">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}05{% else %}06{% endif %}</span>
+                  <div>
+                    <h3>Ring size selector</h3>
+                    <p>Saved as a line item property.</p>
+                  </div>
+                </div>
+                <div class="jk-builder-field jk-builder-field--split">
+                  <label for="BuilderRingSize-{{ section.id }}">Ring size</label>
+                  <select id="BuilderRingSize-{{ section.id }}" name="properties[Ring size]" data-builder-choice>
+                    <option value="Need guidance">Need guidance</option>
+                    <option value="US 4">US 4</option>
+                    <option value="US 4.5">US 4.5</option>
+                    <option value="US 5">US 5</option>
+                    <option value="US 5.5">US 5.5</option>
+                    <option value="US 6">US 6</option>
+                    <option value="US 6.5">US 6.5</option>
+                    <option value="US 7">US 7</option>
+                    <option value="US 7.5">US 7.5</option>
+                    <option value="US 8">US 8</option>
+                    <option value="US 8.5">US 8.5</option>
+                    <option value="US 9">US 9</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="jk-builder-price-summary" aria-live="polite">
+                <div>
+                  <span>Selected variant base price</span>
+                  <strong data-variant-price>{{ selected_variant.price | money }}</strong>
+                </div>
+                <div>
+                  <span>Builder choice estimate</span>
+                  <strong data-builder-adjustment>{{ 0 | money }}</strong>
+                </div>
+                <div class="jk-builder-total jk-builder-total--grand">
+                  <span>Live price estimate</span>
+                  <strong data-estimate-total>{{ selected_variant.price | money }}</strong>
+                </div>
+              </div>
+
+              <div class="jk-product-actions">
+                <button type="submit" name="add" class="jk-button jk-button--primary jk-add-to-cart" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>
+                  {% if selected_variant.available %}
+                    {{ 'products.product.add_to_cart' | t }}
+                  {% else %}
+                    {{ 'products.product.sold_out' | t }}
+                  {% endif %}
+                </button>
+                <p class="jk-availability" data-availability>
+                  {% if selected_variant.available %}
+                    Available for secure checkout
+                  {% else %}
+                    This configuration is currently unavailable
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="jk-section__header">
+      <p class="jk-eyebrow">Joyari diagnostic</p>
+      <h1>No product object detected</h1>
+      <p>The default product template rendered, but Shopify did not provide a product object.</p>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Product builder main",
+  "tag": "section",
+  "class": "shopify-section--product-builder-main",
+  "settings": [
+    {
+      "type": "text",
+      "id": "builder_heading",
+      "label": "Builder heading",
+      "default": "Joyari Ring Builder"
+    },
+    {
+      "type": "number",
+      "id": "carat_quarter_premium",
+      "label": "Estimate increase per 0.25ct above 1ct, in cents",
+      "default": 18500
+    }
+  ]
+}
+{% endschema %}
