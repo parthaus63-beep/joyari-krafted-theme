@@ -16,6 +16,18 @@
         "button_label": ""
       }
     },
+    "visual_story": {
+      "type": "product-visual-story",
+      "settings": {
+        "eyebrow": "Visual details",
+        "heading": "Beauty, craft, and care in context",
+        "subheading": "Use these image panels to show how the piece wears, how it is made, and how it is presented.",
+        "lifestyle_heading": "Designed to feel personal in real life",
+        "craftsmanship_heading": "Crafted with quiet precision",
+        "packaging_heading": "Presented with care",
+        "trust_heading": "Support beyond the purchase"
+      }
+    },
     "care_faq": {
       "type": "luxury-trust-faq",
       "blocks": {
@@ -87,6 +99,7 @@
   "order": [
     "main_builder",
     "story",
+    "visual_story",
     "care_faq",
     "related"
   ]

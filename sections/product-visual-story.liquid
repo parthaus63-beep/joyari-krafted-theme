@@ -1,0 +1,240 @@
+<section class="jk-section jk-product-visual-story">
+  <div class="jk-section__header jk-section__header--split">
+    <div>
+      {% if section.settings.eyebrow != blank %}
+        <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2>{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="jk-product-visual-story__grid">
+    <article class="jk-product-visual-card jk-product-visual-card--wide">
+      <div class="jk-product-visual-card__media">
+        {% if section.settings.lifestyle_image != blank %}
+          {{ section.settings.lifestyle_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '640, 900, 1200, 1600', sizes: '(min-width: 900px) 58vw, 100vw', alt: section.settings.lifestyle_image_alt, class: 'jk-product-visual-card__image' }}
+        {% else %}
+          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--lifestyle" aria-hidden="true"></span>
+        {% endif %}
+      </div>
+      <div class="jk-product-visual-card__content">
+        <p class="jk-card-badge">{{ section.settings.lifestyle_eyebrow }}</p>
+        <h3>{{ section.settings.lifestyle_heading }}</h3>
+        <p>{{ section.settings.lifestyle_text }}</p>
+      </div>
+    </article>
+
+    <article class="jk-product-visual-card">
+      <div class="jk-product-visual-card__media">
+        {% if section.settings.craftsmanship_image != blank %}
+          {{ section.settings.craftsmanship_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 33vw, 100vw', alt: section.settings.craftsmanship_image_alt, class: 'jk-product-visual-card__image' }}
+        {% else %}
+          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--craft" aria-hidden="true"></span>
+        {% endif %}
+      </div>
+      <div class="jk-product-visual-card__content">
+        <p class="jk-card-badge">{{ section.settings.craftsmanship_eyebrow }}</p>
+        <h3>{{ section.settings.craftsmanship_heading }}</h3>
+        <p>{{ section.settings.craftsmanship_text }}</p>
+      </div>
+    </article>
+
+    <article class="jk-product-visual-card">
+      <div class="jk-product-visual-card__media">
+        {% if section.settings.packaging_image != blank %}
+          {{ section.settings.packaging_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 33vw, 100vw', alt: section.settings.packaging_image_alt, class: 'jk-product-visual-card__image' }}
+        {% else %}
+          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--packaging" aria-hidden="true"></span>
+        {% endif %}
+      </div>
+      <div class="jk-product-visual-card__content">
+        <p class="jk-card-badge">{{ section.settings.packaging_eyebrow }}</p>
+        <h3>{{ section.settings.packaging_heading }}</h3>
+        <p>{{ section.settings.packaging_text }}</p>
+      </div>
+    </article>
+
+    <article class="jk-product-visual-card jk-product-visual-card--trust">
+      <div class="jk-product-visual-card__media">
+        {% if section.settings.trust_image != blank %}
+          {{ section.settings.trust_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 33vw, 100vw', alt: section.settings.trust_image_alt, class: 'jk-product-visual-card__image' }}
+        {% else %}
+          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--certificate" aria-hidden="true"></span>
+        {% endif %}
+      </div>
+      <div class="jk-product-visual-card__content">
+        <p class="jk-card-badge">{{ section.settings.trust_eyebrow }}</p>
+        <h3>{{ section.settings.trust_heading }}</h3>
+        <p>{{ section.settings.trust_text }}</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product visual story",
+  "tag": "section",
+  "class": "shopify-section--product-visual-story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The piece in detail"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A closer look at beauty, craft, and care"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Add product lifestyle, atelier, packaging, and certification visuals to make each product page feel complete and reassuring."
+    },
+    {
+      "type": "header",
+      "content": "Lifestyle image"
+    },
+    {
+      "type": "image_picker",
+      "id": "lifestyle_image",
+      "label": "Lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "lifestyle_image_alt",
+      "label": "Lifestyle image alt text",
+      "default": "Joyari Krafted jewellery lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "lifestyle_eyebrow",
+      "label": "Lifestyle eyebrow",
+      "default": "Worn beautifully"
+    },
+    {
+      "type": "text",
+      "id": "lifestyle_heading",
+      "label": "Lifestyle heading",
+      "default": "Designed to feel personal in real life"
+    },
+    {
+      "type": "textarea",
+      "id": "lifestyle_text",
+      "label": "Lifestyle text",
+      "default": "Use this space for ring-on-hand, proposal, or styled jewellery imagery that shows scale and emotion."
+    },
+    {
+      "type": "header",
+      "content": "Craftsmanship / atelier"
+    },
+    {
+      "type": "image_picker",
+      "id": "craftsmanship_image",
+      "label": "Craftsmanship / atelier image"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_image_alt",
+      "label": "Craftsmanship image alt text",
+      "default": "Joyari Krafted atelier detail"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_eyebrow",
+      "label": "Craftsmanship eyebrow",
+      "default": "Atelier"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_heading",
+      "label": "Craftsmanship heading",
+      "default": "Crafted with quiet precision"
+    },
+    {
+      "type": "textarea",
+      "id": "craftsmanship_text",
+      "label": "Craftsmanship text",
+      "default": "Show the bench, setting, polishing, or diamond selection details that make the piece feel considered."
+    },
+    {
+      "type": "header",
+      "content": "Packaging / certificate"
+    },
+    {
+      "type": "image_picker",
+      "id": "packaging_image",
+      "label": "Packaging / certificate image"
+    },
+    {
+      "type": "text",
+      "id": "packaging_image_alt",
+      "label": "Packaging image alt text",
+      "default": "Joyari Krafted packaging and certificate"
+    },
+    {
+      "type": "text",
+      "id": "packaging_eyebrow",
+      "label": "Packaging eyebrow",
+      "default": "Presentation"
+    },
+    {
+      "type": "text",
+      "id": "packaging_heading",
+      "label": "Packaging heading",
+      "default": "Presented with care"
+    },
+    {
+      "type": "textarea",
+      "id": "packaging_text",
+      "label": "Packaging text",
+      "default": "Use this panel for box, certificate, care card, or delivery imagery that builds confidence."
+    },
+    {
+      "type": "header",
+      "content": "Trust / warranty visual"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_image",
+      "label": "Trust / warranty visual image"
+    },
+    {
+      "type": "text",
+      "id": "trust_image_alt",
+      "label": "Trust image alt text",
+      "default": "Joyari Krafted warranty and care visual"
+    },
+    {
+      "type": "text",
+      "id": "trust_eyebrow",
+      "label": "Trust eyebrow",
+      "default": "Care"
+    },
+    {
+      "type": "text",
+      "id": "trust_heading",
+      "label": "Trust heading",
+      "default": "Support beyond the purchase"
+    },
+    {
+      "type": "textarea",
+      "id": "trust_text",
+      "label": "Trust text",
+      "default": "Use this visual card for resizing, warranty, inspection, or care information."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product visual story"
+    }
+  ]
+}
+{% endschema %}

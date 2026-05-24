@@ -1,4 +1,10 @@
-<section class="jk-section jk-testimonials">
+<section class="jk-section jk-testimonials{% if section.settings.background_image != blank %} jk-testimonials--image-bg{% endif %}">
+  {% if section.settings.background_image != blank %}
+    <div class="jk-testimonials__background" aria-hidden="true">
+      {{ section.settings.background_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '720, 1000, 1400, 1800', sizes: '100vw', alt: '', class: 'jk-testimonials__background-image' }}
+    </div>
+  {% endif %}
+
   <div class="jk-section__header">
     {% if section.settings.eyebrow != blank %}
       <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -69,6 +75,11 @@
       "id": "heading",
       "label": "Heading",
       "default": "Chosen for the most meaningful yes"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Testimonial background image"
     }
   ],
   "blocks": [

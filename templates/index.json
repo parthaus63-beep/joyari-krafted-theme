@@ -298,6 +298,45 @@
         "heading": "Chosen for the most meaningful yes"
       }
     },
+    "journal": {
+      "type": "luxury-journal",
+      "blocks": {
+        "j1": {
+          "type": "journal_card",
+          "settings": {
+            "eyebrow": "Diamond guide",
+            "title": "Choosing a diamond shape",
+            "text": "A visual guide to proportion, silhouette, and the feeling each diamond shape creates."
+          }
+        },
+        "j2": {
+          "type": "journal_card",
+          "settings": {
+            "eyebrow": "Proposal notes",
+            "title": "Planning the reveal",
+            "text": "A place for proposal styling, ring-on-hand imagery, and thoughtful milestone guidance."
+          }
+        },
+        "j3": {
+          "type": "journal_card",
+          "settings": {
+            "eyebrow": "Atelier",
+            "title": "Behind the polish",
+            "text": "Show craftsmanship, packaging, certification, and care-led details in an editorial way."
+          }
+        }
+      },
+      "block_order": [
+        "j1",
+        "j2",
+        "j3"
+      ],
+      "settings": {
+        "eyebrow": "Journal",
+        "heading": "Notes on diamonds, design, and meaningful moments",
+        "subheading": "Image-led cards for guidance, storytelling, and the quiet details behind Joyari pieces."
+      }
+    },
     "trust_badges": {
       "type": "brand-promise",
       "blocks": {
@@ -346,6 +385,7 @@
     "editorial_gallery",
     "trust_faq",
     "testimonials",
+    "journal",
     "trust_badges"
   ]
 }

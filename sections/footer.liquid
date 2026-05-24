@@ -1,4 +1,10 @@
-<footer class="jk-footer">
+<footer class="jk-footer{% if section.settings.background_image != blank %} jk-footer--image-bg{% endif %}">
+  {% if section.settings.background_image != blank %}
+    <div class="jk-footer__background" aria-hidden="true">
+      {{ section.settings.background_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '720, 1000, 1400, 1800', sizes: '100vw', alt: '', class: 'jk-footer__background-image' }}
+    </div>
+  {% endif %}
+
   <div class="jk-footer__top">
     <div class="jk-footer__brand">
       <a class="jk-brand jk-brand--footer" href="{{ routes.root_url }}">
@@ -105,6 +111,11 @@
       "id": "brand_image_alt",
       "label": "Footer image alt text",
       "default": "Joyari Krafted jewellery presentation"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Footer texture / background image"
     },
     {
       "type": "text",
