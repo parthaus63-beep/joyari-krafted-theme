@@ -1,4 +1,4 @@
-<section class="jk-hero section-{{ section.id }}">
+<section class="jk-hero section-{{ section.id }}{% if section.settings.hero_image != blank %} jk-hero--image-led{% endif %}">
   <div class="jk-hero__content">
     {% if section.settings.eyebrow != blank %}
       <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -15,30 +15,34 @@
     </div>
   </div>
 
-  <div class="jk-hero__visual" aria-hidden="true">
+  <div class="jk-hero__visual">
     <div class="jk-ring-stage">
-      <svg class="jk-ring-svg" viewBox="0 0 620 620" role="img" aria-label="">
-        <defs>
-          <linearGradient id="ringGold-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#fff6d7"></stop>
-            <stop offset="45%" stop-color="#c7a35a"></stop>
-            <stop offset="100%" stop-color="#8d6d2d"></stop>
-          </linearGradient>
-          <radialGradient id="diamondGlow-{{ section.id }}" cx="50%" cy="42%" r="50%">
-            <stop offset="0%" stop-color="#ffffff"></stop>
-            <stop offset="55%" stop-color="#dcecf0"></stop>
-            <stop offset="100%" stop-color="#8fa7af"></stop>
-          </radialGradient>
-        </defs>
-        <circle cx="310" cy="360" r="180" fill="none" stroke="url(#ringGold-{{ section.id }})" stroke-width="34"></circle>
-        <circle cx="310" cy="360" r="130" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"></circle>
-        <path d="M252 192 310 112l58 80-58 74-58-74Z" fill="url(#diamondGlow-{{ section.id }})"></path>
-        <path d="M252 192h116M310 112v154M252 192l116 0M282 192l28 74 28-74" fill="none" stroke="rgba(23,21,18,.28)" stroke-width="2"></path>
-        <path d="M236 220c48 44 100 44 148 0" fill="none" stroke="url(#ringGold-{{ section.id }})" stroke-width="12" stroke-linecap="round"></path>
-      </svg>
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '720, 960, 1200, 1500, 1800', sizes: '(min-width: 1000px) 50vw, 100vw', alt: section.settings.hero_image_alt, class: 'jk-hero__image' }}
+      {% else %}
+        <svg class="jk-ring-svg" viewBox="0 0 620 620" role="img" aria-label="">
+          <defs>
+            <linearGradient id="ringGold-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fff6d7"></stop>
+              <stop offset="45%" stop-color="#c7a35a"></stop>
+              <stop offset="100%" stop-color="#8d6d2d"></stop>
+            </linearGradient>
+            <radialGradient id="diamondGlow-{{ section.id }}" cx="50%" cy="42%" r="50%">
+              <stop offset="0%" stop-color="#ffffff"></stop>
+              <stop offset="55%" stop-color="#dcecf0"></stop>
+              <stop offset="100%" stop-color="#8fa7af"></stop>
+            </radialGradient>
+          </defs>
+          <circle cx="310" cy="360" r="180" fill="none" stroke="url(#ringGold-{{ section.id }})" stroke-width="34"></circle>
+          <circle cx="310" cy="360" r="130" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"></circle>
+          <path d="M252 192 310 112l58 80-58 74-58-74Z" fill="url(#diamondGlow-{{ section.id }})"></path>
+          <path d="M252 192h116M310 112v154M252 192l116 0M282 192l28 74 28-74" fill="none" stroke="rgba(23,21,18,.28)" stroke-width="2"></path>
+          <path d="M236 220c48 44 100 44 148 0" fill="none" stroke="url(#ringGold-{{ section.id }})" stroke-width="12" stroke-linecap="round"></path>
+        </svg>
+      {% endif %}
       <div class="jk-hero__caption">
-        <span>Lab-grown centre stones</span>
-        <strong>Designed for lifetime wear</strong>
+        <span>{{ section.settings.caption_label }}</span>
+        <strong>{{ section.settings.caption_heading }}</strong>
       </div>
     </div>
   </div>
@@ -69,6 +73,17 @@
       "default": "Luxury engagement rings and diamond jewellery crafted for the moment love becomes forever."
     },
     {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Joyari Krafted diamond jewellery editorial image"
+    },
+    {
       "type": "text",
       "id": "primary_label",
       "label": "Primary button label",
@@ -95,6 +110,18 @@
       "id": "trust_text",
       "label": "Trust message",
       "default": "Certified diamonds, considered craftsmanship, and insured delivery on every made-to-order piece."
+    },
+    {
+      "type": "text",
+      "id": "caption_label",
+      "label": "Image caption label",
+      "default": "Lab-grown centre stones"
+    },
+    {
+      "type": "text",
+      "id": "caption_heading",
+      "label": "Image caption heading",
+      "default": "Designed for lifetime wear"
     }
   ],
   "presets": [

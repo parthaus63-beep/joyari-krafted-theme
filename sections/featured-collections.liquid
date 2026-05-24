@@ -14,7 +14,9 @@
       {% assign card_collection = block.settings.collection %}
       <article class="jk-collection-card" {{ block.shopify_attributes }}>
         <a class="jk-collection-card__media" href="{{ card_collection.url | default: routes.all_products_collection_url }}" aria-label="{{ block.settings.title | escape }}">
-          {% if card_collection.featured_image != blank %}
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 1100px) 25vw, (min-width: 700px) 50vw, 100vw', alt: block.settings.image_alt | default: block.settings.title }}
+          {% elsif card_collection.featured_image != blank %}
             {{ card_collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 33vw, 100vw', alt: block.settings.title }}
           {% else %}
             <span class="jk-placeholder-ring jk-placeholder-ring--{{ forloop.index }}" aria-hidden="true"></span>
@@ -69,6 +71,16 @@
           "label": "Collection"
         },
         {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Lifestyle image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
           "type": "text",
           "id": "title",
           "label": "Title",
@@ -93,6 +105,9 @@
     {
       "name": "Featured collections",
       "blocks": [
+        {
+          "type": "collection_card"
+        },
         {
           "type": "collection_card"
         },

@@ -72,17 +72,83 @@
             "text": "Everyday diamond necklaces, earrings, and bracelets with a quiet luxury finish.",
             "badge": "Fine Essentials"
           }
+        },
+        "c4": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Custom Design",
+            "text": "A private design pathway for clients who want a more personal diamond piece.",
+            "badge": "Bespoke Service"
+          }
         }
       },
       "block_order": [
         "c1",
         "c2",
-        "c3"
+        "c3",
+        "c4"
       ],
       "settings": {
         "eyebrow": "Curated collections",
         "heading": "A considered edit of modern diamond jewellery",
         "subheading": "Explore signature categories designed for proposals, anniversaries, and luminous everyday wear."
+      }
+    },
+    "editorial_gallery": {
+      "type": "editorial-image-gallery",
+      "blocks": {
+        "e1": {
+          "type": "editorial_image",
+          "settings": {
+            "eyebrow": "Bridal",
+            "title": "Ring on hand",
+            "text": "Show scale, sparkle, and the intimacy of a piece worn close."
+          }
+        },
+        "e2": {
+          "type": "editorial_image",
+          "settings": {
+            "eyebrow": "Diamond detail",
+            "title": "Diamond close-up",
+            "text": "Bring facet detail, fire, and stone confidence into focus."
+          }
+        },
+        "e3": {
+          "type": "editorial_image",
+          "settings": {
+            "eyebrow": "Proposal",
+            "title": "Couple lifestyle",
+            "text": "Create an emotional bridal moment around proposals and milestones."
+          }
+        },
+        "e4": {
+          "type": "editorial_image",
+          "settings": {
+            "eyebrow": "Atelier",
+            "title": "Craftsmanship",
+            "text": "Show the quiet precision behind every setting and finish."
+          }
+        },
+        "e5": {
+          "type": "editorial_image",
+          "settings": {
+            "eyebrow": "Presentation",
+            "title": "Packaging and luxury box",
+            "text": "Make the reveal feel considered, elegant, and gift-ready."
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5"
+      ],
+      "settings": {
+        "eyebrow": "The Joyari world",
+        "heading": "A visual language for modern diamond luxury",
+        "subheading": "Upload editorial imagery for bridal, diamond, proposal, atelier, and packaging moments."
       }
     },
     "lab_diamonds": {
@@ -166,6 +232,7 @@
     "hero",
     "promise",
     "engagement",
+    "editorial_gallery",
     "lab_diamonds",
     "builder",
     "ethical",

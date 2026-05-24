@@ -5,6 +5,11 @@
         <span class="jk-brand__mark" aria-hidden="true">JK</span>
         <span class="jk-brand__name">{{ settings.brand_name | default: shop.name }}</span>
       </a>
+      {% if section.settings.brand_image != blank %}
+        <div class="jk-footer__image">
+          {{ section.settings.brand_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 34vw, 100vw', alt: section.settings.brand_image_alt }}
+        </div>
+      {% endif %}
       <p>{{ section.settings.brand_text }}</p>
       <div class="jk-footer__contact">
         {% if settings.support_email != blank %}
@@ -81,6 +86,17 @@
       "id": "brand_text",
       "label": "Brand text",
       "default": "Fine lab-grown diamond jewellery designed for modern romantics, meaningful milestones, and everyday brilliance."
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_image",
+      "label": "Footer brand image"
+    },
+    {
+      "type": "text",
+      "id": "brand_image_alt",
+      "label": "Footer image alt text",
+      "default": "Joyari Krafted jewellery presentation"
     },
     {
       "type": "text",

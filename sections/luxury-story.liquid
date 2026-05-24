@@ -1,18 +1,22 @@
 <section class="jk-section jk-story">
   <div class="jk-story__media" aria-hidden="true">
-    <div class="jk-story__gem">
-      <svg viewBox="0 0 520 520">
-        <defs>
-          <linearGradient id="storyGold-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f9e8b4"></stop>
-            <stop offset="100%" stop-color="#a98236"></stop>
-          </linearGradient>
-        </defs>
-        <circle cx="260" cy="260" r="210" fill="none" stroke="url(#storyGold-{{ section.id }})" stroke-width="2"></circle>
-        <path d="M164 214 260 92l96 122-96 214-96-214Z" fill="#eff5f4" stroke="#c7a35a" stroke-width="3"></path>
-        <path d="M164 214h192M210 214l50 214 50-214M260 92v336" fill="none" stroke="#8a7b62" stroke-width="2"></path>
-      </svg>
-    </div>
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 1300 | image_tag: loading: 'lazy', widths: '520, 720, 960, 1300', sizes: '(min-width: 900px) 45vw, 100vw', alt: section.settings.image_alt, class: 'jk-story__image' }}
+    {% else %}
+      <div class="jk-story__gem">
+        <svg viewBox="0 0 520 520">
+          <defs>
+            <linearGradient id="storyGold-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#f9e8b4"></stop>
+              <stop offset="100%" stop-color="#a98236"></stop>
+            </linearGradient>
+          </defs>
+          <circle cx="260" cy="260" r="210" fill="none" stroke="url(#storyGold-{{ section.id }})" stroke-width="2"></circle>
+          <path d="M164 214 260 92l96 122-96 214-96-214Z" fill="#eff5f4" stroke="#c7a35a" stroke-width="3"></path>
+          <path d="M164 214h192M210 214l50 214 50-214M260 92v336" fill="none" stroke="#8a7b62" stroke-width="2"></path>
+        </svg>
+      </div>
+    {% endif %}
   </div>
 
   <div class="jk-story__content">
@@ -52,6 +56,17 @@
       "id": "text",
       "label": "Text",
       "default": "From the first sketch to final polish, each Joyari piece is considered for balance, wearability, and emotional permanence."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Editorial image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Joyari Krafted jewellery craftsmanship"
     },
     {
       "type": "text",
