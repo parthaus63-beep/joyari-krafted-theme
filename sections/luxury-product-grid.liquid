@@ -30,22 +30,23 @@
   <div class="jk-product-grid">
     {% if grid_collection != blank and grid_collection.products_count > 0 %}
       {% for product in grid_collection.products limit: section.settings.product_limit %}
-        <article class="jk-product-card">
+        <article class="jk-product-card{% unless product.available %} jk-product-card--sold-out{% endunless %}">
           <a class="jk-product-card__media" href="{{ product.url }}">
             {% if product.featured_media != blank %}
-              {{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 640, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 640px) 50vw, 100vw', alt: product.featured_media.alt | default: product.title }}
+              {{ product.featured_media | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw', alt: product.featured_media.alt | default: product.title }}
             {% elsif section.settings.fallback_product_image != blank %}
               {% assign fallback_product_alt = section.settings.fallback_product_image_alt | default: product.title %}
-              {{ section.settings.fallback_product_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 640, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 640px) 50vw, 100vw', alt: fallback_product_alt }}
+              {{ section.settings.fallback_product_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw', alt: fallback_product_alt }}
             {% else %}
               <span class="jk-product-placeholder" aria-hidden="true"></span>
             {% endif %}
+            {% unless product.available %}
+              <span class="jk-product-card__status">{{ 'products.product.sold_out' | t }}</span>
+            {% endunless %}
+            <span class="jk-product-card__quick">View piece</span>
           </a>
           <div class="jk-product-card__content">
-            {% if product.vendor != blank %}
-              <p class="jk-card-badge">{{ product.vendor }}</p>
-            {% endif %}
-            <h2><a href="{{ product.url }}">{{ product.title }}</a></h2>
+            <h2 class="jk-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h2>
             <p class="jk-product-card__price">
               {% if product.price_varies %}
                 {{ 'products.product.from_price_html' | t: price: product.price_min | money }}
@@ -53,7 +54,7 @@
                 {{ product.price | money }}
               {% endif %}
             </p>
-            <a class="jk-text-link" href="{{ product.url }}">{{ 'products.product.view_details' | t }}</a>
+            <a class="jk-product-card__action" href="{{ product.url }}">Select details</a>
           </div>
         </article>
       {% endfor %}
@@ -81,16 +82,16 @@
         <article class="jk-product-card jk-product-card--placeholder">
           <div class="jk-product-card__media">
             {% if placeholder_image != blank %}
-              {{ placeholder_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 640, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 640px) 50vw, 100vw', alt: placeholder_alt }}
+              {{ placeholder_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw', alt: placeholder_alt }}
             {% else %}
               <span class="jk-product-placeholder" aria-hidden="true"></span>
             {% endif %}
+            <span class="jk-product-card__quick">View piece</span>
           </div>
           <div class="jk-product-card__content">
-            <p class="jk-card-badge">Joyari atelier</p>
-            <h2>Signature diamond piece {{ index }}</h2>
+            <h2 class="jk-product-card__title">Signature diamond piece {{ index }}</h2>
             <p class="jk-product-card__price">$2,400.00</p>
-            <span class="jk-text-link">Private collection preview</span>
+            <span class="jk-product-card__action">Private preview</span>
           </div>
         </article>
       {% endfor %}

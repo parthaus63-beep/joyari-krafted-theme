@@ -20,17 +20,22 @@
         {% unless related_product.id == product.id %}
           {% if shown < section.settings.product_limit %}
             {% assign shown = shown | plus: 1 %}
-            <article class="jk-product-card">
+            <article class="jk-product-card{% unless related_product.available %} jk-product-card--sold-out{% endunless %}">
               <a class="jk-product-card__media" href="{{ related_product.url }}">
                 {% if related_product.featured_media != blank %}
-                  {{ related_product.featured_media | image_url: width: 720 | image_tag: loading: 'lazy', widths: '320, 480, 720', sizes: '(min-width: 900px) 25vw, 50vw', alt: related_product.featured_media.alt | default: related_product.title }}
+                  {{ related_product.featured_media | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 900px) 33vw, 50vw', alt: related_product.featured_media.alt | default: related_product.title }}
                 {% else %}
                   <span class="jk-product-placeholder" aria-hidden="true"></span>
                 {% endif %}
+                {% unless related_product.available %}
+                  <span class="jk-product-card__status">{{ 'products.product.sold_out' | t }}</span>
+                {% endunless %}
+                <span class="jk-product-card__quick">View piece</span>
               </a>
               <div class="jk-product-card__content">
-                <h3><a href="{{ related_product.url }}">{{ related_product.title }}</a></h3>
+                <h3 class="jk-product-card__title"><a href="{{ related_product.url }}">{{ related_product.title }}</a></h3>
                 <p class="jk-product-card__price">{{ related_product.price | money }}</p>
+                <a class="jk-product-card__action" href="{{ related_product.url }}">Select details</a>
               </div>
             </article>
           {% endif %}
@@ -43,10 +48,12 @@
         <article class="jk-product-card jk-product-card--placeholder">
           <div class="jk-product-card__media">
             <span class="jk-product-placeholder" aria-hidden="true"></span>
+            <span class="jk-product-card__quick">View piece</span>
           </div>
           <div class="jk-product-card__content">
-            <h3>Related Joyari piece {{ index }}</h3>
+            <h3 class="jk-product-card__title">Related Joyari piece {{ index }}</h3>
             <p class="jk-product-card__price">$1,950.00</p>
+            <span class="jk-product-card__action">Private preview</span>
           </div>
         </article>
       {% endfor %}
