@@ -12,10 +12,11 @@
   <div class="jk-collection-grid">
     {% for block in section.blocks %}
       {% assign card_collection = block.settings.collection %}
+      {% assign card_image_alt = block.settings.image_alt | default: block.settings.title %}
       <article class="jk-collection-card" {{ block.shopify_attributes }}>
         <a class="jk-collection-card__media" href="{{ card_collection.url | default: routes.all_products_collection_url }}" aria-label="{{ block.settings.title | escape }}">
           {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 1100px) 25vw, (min-width: 700px) 50vw, 100vw', alt: block.settings.image_alt | default: block.settings.title }}
+            {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 1100px) 25vw, (min-width: 700px) 50vw, 100vw', alt: card_image_alt }}
           {% elsif card_collection.featured_image != blank %}
             {{ card_collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 33vw, 100vw', alt: block.settings.title }}
           {% else %}

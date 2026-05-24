@@ -1,5 +1,5 @@
 <section class="jk-section jk-story">
-  <div class="jk-story__media" aria-hidden="true">
+  <div class="jk-story__media">
     {% if section.settings.image != blank %}
       {{ section.settings.image | image_url: width: 1300 | image_tag: loading: 'lazy', widths: '520, 720, 960, 1300', sizes: '(min-width: 900px) 45vw, 100vw', alt: section.settings.image_alt, class: 'jk-story__image' }}
     {% else %}

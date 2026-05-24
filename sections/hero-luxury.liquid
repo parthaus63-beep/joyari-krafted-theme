@@ -1,4 +1,4 @@
-<section class="jk-hero section-{{ section.id }}{% if section.settings.hero_image != blank %} jk-hero--image-led{% endif %}">
+<section class="jk-hero section-{{ section.id }}{% if section.settings.hero_video != blank or section.settings.hero_image != blank %} jk-hero--image-led{% endif %}">
   <div class="jk-hero__content">
     {% if section.settings.eyebrow != blank %}
       <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -17,7 +17,9 @@
 
   <div class="jk-hero__visual">
     <div class="jk-ring-stage">
-      {% if section.settings.hero_image != blank %}
+      {% if section.settings.hero_video != blank %}
+        {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1800x', class: 'jk-hero__video' }}
+      {% elsif section.settings.hero_image != blank %}
         {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '720, 960, 1200, 1500, 1800', sizes: '(min-width: 1000px) 50vw, 100vw', alt: section.settings.hero_image_alt, class: 'jk-hero__image' }}
       {% else %}
         <svg class="jk-ring-svg" viewBox="0 0 620 620" role="img" aria-label="">
@@ -76,6 +78,11 @@
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero image"
+    },
+    {
+      "type": "video",
+      "id": "hero_video",
+      "label": "Hero video"
     },
     {
       "type": "text",
