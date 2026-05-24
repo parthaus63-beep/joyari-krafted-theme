@@ -26,7 +26,7 @@
         "type": "text",
         "id": "announcement_text",
         "label": "Announcement text",
-        "default": "Complimentary insured delivery and private guidance on made-to-order diamond jewellery."
+        "default": "Complimentary insured delivery and private guidance for made-to-order diamond jewellery."
       },
       {
         "type": "url",

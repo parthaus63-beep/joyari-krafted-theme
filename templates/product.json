@@ -16,6 +16,66 @@
         "button_label": ""
       }
     },
+    "care_faq": {
+      "type": "luxury-trust-faq",
+      "blocks": {
+        "a1": {
+          "type": "assurance",
+          "settings": {
+            "title": "Secure checkout",
+            "text": "Your purchase moves through Shopify checkout with protected payment handling."
+          }
+        },
+        "a2": {
+          "type": "assurance",
+          "settings": {
+            "title": "Delivery clarity",
+            "text": "Production and delivery expectations are communicated clearly for made-to-order jewellery."
+          }
+        },
+        "a3": {
+          "type": "assurance",
+          "settings": {
+            "title": "Warranty support",
+            "text": "Use this area to explain resizing, care, and warranty support for each Joyari piece."
+          }
+        },
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I confirm details before production?",
+            "answer": "Yes. Joyari can use this space to explain how clients confirm sizing, stone preferences, and design details before a piece is completed."
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What certification is included?",
+            "answer": "Use this answer to describe which diamond documentation or grading details are included with eligible products."
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "How should I care for my jewellery?",
+            "answer": "Keep this answer focused on cleaning, storage, resizing, and inspection guidance for long-term wear."
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "eyebrow": "Details that matter",
+        "heading": "Care, delivery, and certification",
+        "subheading": "A calm product page should answer the questions clients ask before choosing meaningful jewellery."
+      }
+    },
     "related": {
       "type": "related-products",
       "settings": {
@@ -27,6 +87,7 @@
   "order": [
     "main_builder",
     "story",
+    "care_faq",
     "related"
   ]
 }

@@ -24,10 +24,11 @@
           <a href="{{ link.url }}" class="jk-nav__link">{{ link.title }}</a>
         {% endfor %}
       {% else %}
-        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Engagement Rings</a>
-        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Lab Diamonds</a>
-        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Jewellery</a>
-        <a href="/pages/about" class="jk-nav__link">Craftsmanship</a>
+        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Engagement</a>
+        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Wedding</a>
+        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Fine Jewellery</a>
+        <a href="/pages/about" class="jk-nav__link">The Atelier</a>
+        <a href="/pages/contact" class="jk-nav__link">Client Care</a>
       {% endif %}
     </nav>
 
@@ -46,6 +47,12 @@
       </a>
     </div>
   </div>
+
+  {% if section.settings.show_assurance and section.settings.assurance_text != blank %}
+    <div class="jk-header__assurance">
+      <span>{{ section.settings.assurance_text }}</span>
+    </div>
+  {% endif %}
 </header>
 
 {% schema %}
@@ -79,6 +86,18 @@
       "type": "url",
       "id": "cta_link",
       "label": "Call to action link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_assurance",
+      "label": "Show assurance line",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "assurance_text",
+      "label": "Assurance line",
+      "default": "Certified lab-grown diamonds · insured delivery · private guidance"
     }
   ]
 }

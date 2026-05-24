@@ -1,0 +1,155 @@
+<section class="jk-section jk-trust-faq">
+  <div class="jk-trust-faq__intro">
+    {% if section.settings.eyebrow != blank %}
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h2>{{ section.settings.heading }}</h2>
+    {% if section.settings.subheading != blank %}
+      <p>{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+
+  <div class="jk-trust-faq__layout">
+    <div class="jk-trust-faq__assurances" aria-label="Joyari assurances">
+      {% for block in section.blocks %}
+        {% if block.type == 'assurance' %}
+          <article class="jk-assurance" {{ block.shopify_attributes }}>
+            <span aria-hidden="true"></span>
+            <div>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="jk-trust-faq__questions">
+      {% for block in section.blocks %}
+        {% if block.type == 'faq' %}
+          <details class="jk-faq-item" {{ block.shopify_attributes }}>
+            <summary>{{ block.settings.question }}</summary>
+            <div class="rte">
+              <p>{{ block.settings.answer }}</p>
+            </div>
+          </details>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Luxury trust and FAQ",
+  "tag": "section",
+  "class": "shopify-section--luxury-trust-faq",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Client confidence"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Everything important is considered before it reaches you"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clear guidance, careful delivery, and long-term care help every Joyari purchase feel calm and assured."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "assurance",
+      "name": "Assurance",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Lifetime care guidance"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Aftercare advice and considered support for the life of your Joyari piece."
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long will my piece take to arrive?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Made-to-order timelines vary by design and stone selection. Use this answer to share your current production, delivery, and communication process."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury trust and FAQ",
+      "blocks": [
+        {
+          "type": "assurance",
+          "settings": {
+            "title": "Insured delivery",
+            "text": "Each order is prepared with secure presentation and tracked delivery."
+          }
+        },
+        {
+          "type": "assurance",
+          "settings": {
+            "title": "Diamond documentation",
+            "text": "Certification and stone details are presented clearly where applicable."
+          }
+        },
+        {
+          "type": "assurance",
+          "settings": {
+            "title": "Care after purchase",
+            "text": "Joyari keeps aftercare, resizing guidance, and support easy to understand."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I speak with someone before ordering?",
+            "answer": "Yes. Invite clients to contact your team for stone guidance, sizing support, or design clarification before checkout."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Are your diamonds certified?",
+            "answer": "Use this space to describe your certification approach, lab-grown diamond standards, and what documentation is included."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What aftercare is included?",
+            "answer": "Share your warranty, resizing, cleaning, and inspection policies so clients feel supported long after purchase."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

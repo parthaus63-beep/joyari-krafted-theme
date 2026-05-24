@@ -160,12 +160,41 @@
         "product_limit": 8
       }
     },
-    "builder": {
-      "type": "ring-builder",
+    "design_process": {
+      "type": "luxury-design-process",
+      "blocks": {
+        "d1": {
+          "type": "step",
+          "settings": {
+            "title": "Choose the silhouette",
+            "text": "Begin with the setting style, diamond shape, and metal tone that feels closest to your story."
+          }
+        },
+        "d2": {
+          "type": "step",
+          "settings": {
+            "title": "Refine the diamond",
+            "text": "Consider brilliance, proportion, carat presence, and documentation with calm guidance."
+          }
+        },
+        "d3": {
+          "type": "step",
+          "settings": {
+            "title": "Confirm the final details",
+            "text": "Sizing, delivery, care, and presentation are considered before your jewellery is prepared."
+          }
+        }
+      },
+      "block_order": [
+        "d1",
+        "d2",
+        "d3"
+      ],
       "settings": {
-        "eyebrow": "Design your own ring",
-        "heading": "Shape a ring around your story",
-        "subheading": "Choose your diamond shape, metal tone, carat preference, and finish, then bring the design to life with a Joyari consultation."
+        "eyebrow": "Private design pathway",
+        "heading": "A calm way to create something deeply personal",
+        "subheading": "A refined design journey helps clients move from first idea to final piece with clarity, confidence, and emotional ease.",
+        "button_label": "Begin with a setting"
       }
     },
     "ethical": {
@@ -183,6 +212,66 @@
         "heading": "A quieter kind of luxury",
         "text": "From first sketch to final polish, each Joyari piece is considered for balance, wearability, and emotional permanence. The result is jewellery that feels intimate at first touch and remarkable for decades.",
         "button_label": "Discover the Joyari Standard"
+      }
+    },
+    "trust_faq": {
+      "type": "luxury-trust-faq",
+      "blocks": {
+        "a1": {
+          "type": "assurance",
+          "settings": {
+            "title": "Insured presentation delivery",
+            "text": "Every order is prepared with secure packaging, careful presentation, and tracked delivery."
+          }
+        },
+        "a2": {
+          "type": "assurance",
+          "settings": {
+            "title": "Warranty and aftercare",
+            "text": "Clear care guidance, warranty details, and resizing support help your jewellery stay luminous."
+          }
+        },
+        "a3": {
+          "type": "assurance",
+          "settings": {
+            "title": "Diamond confidence",
+            "text": "Joyari keeps stone details, certification notes, and design guidance easy to understand."
+          }
+        },
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I receive guidance before ordering?",
+            "answer": "Yes. Joyari is designed around a calm buying journey, with support for diamond selection, sizing, and design questions before checkout."
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What happens after I place an order?",
+            "answer": "You receive order confirmation and care-led communication as your piece moves through preparation, quality review, and delivery."
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "Are the diamonds lab-grown?",
+            "answer": "Joyari focuses on lab-grown diamond jewellery selected for brilliance, proportion, and a modern standard of traceable beauty."
+          }
+        }
+      },
+      "block_order": [
+        "a1",
+        "a2",
+        "a3",
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "eyebrow": "Care and confidence",
+        "heading": "A refined experience before and after the moment",
+        "subheading": "Premium jewellery should feel considered at every step, from stone guidance to delivery and long-term care."
       }
     },
     "testimonials": {
@@ -232,11 +321,12 @@
     "hero",
     "promise",
     "engagement",
-    "editorial_gallery",
     "lab_diamonds",
-    "builder",
+    "design_process",
     "ethical",
     "story",
+    "editorial_gallery",
+    "trust_faq",
     "testimonials",
     "trust_badges"
   ]

@@ -1,0 +1,114 @@
+<section class="jk-section jk-design-process">
+  <div class="jk-section__header">
+    {% if section.settings.eyebrow != blank %}
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h2>{{ section.settings.heading }}</h2>
+    {% if section.settings.subheading != blank %}
+      <p>{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+
+  <div class="jk-design-process__steps">
+    {% for block in section.blocks %}
+      <article class="jk-design-step" {{ block.shopify_attributes }}>
+        <span>{{ forloop.index | prepend: '0' }}</span>
+        <h3>{{ block.settings.title }}</h3>
+        <p>{{ block.settings.text }}</p>
+      </article>
+    {% endfor %}
+  </div>
+
+  {% if section.settings.button_label != blank %}
+    <div class="jk-design-process__action">
+      <a class="jk-button jk-button--secondary" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Luxury design process",
+  "tag": "section",
+  "class": "shopify-section--luxury-design-process",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Private design pathway"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A calm way to create something deeply personal"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Guide clients through the decisions that matter most: setting, stone, proportion, and the final details that make the piece feel like theirs."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Begin with a setting"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Choose the silhouette"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Begin with the setting style, diamond shape, and metal tone that feels closest to your story."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury design process",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Choose the silhouette",
+            "text": "Start with the setting style, stone shape, and metal tone that captures the feeling of the piece."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Refine the diamond",
+            "text": "Compare carat presence, cut, colour, clarity, and certification details with confidence."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Confirm the details",
+            "text": "Review sizing, engraving, delivery expectations, and care notes before your piece is prepared."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

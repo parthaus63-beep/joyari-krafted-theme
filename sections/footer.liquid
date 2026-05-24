@@ -40,6 +40,13 @@
     </div>
   </div>
 
+  <div class="jk-footer__assurance" aria-label="Joyari service standards">
+    <span>Certified stone guidance</span>
+    <span>Secure checkout</span>
+    <span>Insured presentation delivery</span>
+    <span>Aftercare support</span>
+  </div>
+
   <div class="jk-footer__links">
     <div>
       <h3>{{ section.settings.menu_title }}</h3>
@@ -48,26 +55,27 @@
           <a href="{{ link.url }}">{{ link.title }}</a>
         {% endfor %}
       {% else %}
-        <a href="{{ routes.all_products_collection_url }}">Shop All</a>
-        <a href="/pages/contact">Contact</a>
-        <a href="/pages/shipping-returns">Shipping & Returns</a>
+        <a href="{{ routes.all_products_collection_url }}">Engagement Rings</a>
+        <a href="{{ routes.all_products_collection_url }}">Wedding Bands</a>
+        <a href="{{ routes.all_products_collection_url }}">Diamond Jewellery</a>
+        <a href="/pages/about">The Atelier</a>
       {% endif %}
     </div>
     <div>
       <h3>Client Care</h3>
-      <span>Insured presentation delivery</span>
-      <span>Secure checkout</span>
-      <span>Diamond selection guidance</span>
+      <a href="/pages/contact">Contact</a>
+      <a href="/pages/shipping-returns">Shipping & Returns</a>
+      <span>Sizing and care guidance</span>
     </div>
     <div>
-      <h3>Atelier</h3>
+      <h3>The Joyari Standard</h3>
       {% if settings.instagram_url != blank %}
         <a href="{{ settings.instagram_url }}" rel="noopener" target="_blank">Instagram</a>
       {% else %}
         <span>Instagram</span>
       {% endif %}
-      <span>Private design appointments</span>
-      <span>Lab-grown diamond expertise</span>
+      <span>Traceable lab-grown diamonds</span>
+      <span>Considered made-to-order pieces</span>
     </div>
   </div>
 
