@@ -615,6 +615,21 @@ h3 {
   padding: 30px 0 96px;
 }
 
+.jk-builder-debug-heading {
+  display: block;
+  margin: 0 0 20px;
+  padding: 14px 18px;
+  border: 3px solid #171512;
+  background: #fff3a3;
+  color: #171512;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .jk-product-layout {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(380px, .92fr);
