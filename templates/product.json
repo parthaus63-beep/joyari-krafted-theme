@@ -1,22 +1,18 @@
 {
   "sections": {
-    "diagnostic": {
-      "type": "ring-builder-diagnostic",
-      "settings": {}
-    },
     "main_builder": {
       "type": "product-builder-main",
       "settings": {
-        "builder_heading": "Joyari Ring Builder",
+        "builder_heading": "Design your Joyari piece",
         "carat_quarter_premium": 18500
       }
     },
     "story": {
       "type": "luxury-story",
       "settings": {
-        "eyebrow": "Product story",
-        "heading": "Made to feel personal from every angle",
-        "text": "Each Joyari piece is designed around proportion, comfort, and the emotional weight of the moment it marks.",
+        "eyebrow": "Craft and provenance",
+        "heading": "A considered piece, made with intention",
+        "text": "Each Joyari design is shaped around proportion, comfort, and the emotional permanence of fine diamond jewellery. The result is luminous, precise, and quietly personal.",
         "button_label": ""
       }
     },
@@ -29,7 +25,6 @@
     }
   },
   "order": [
-    "diagnostic",
     "main_builder",
     "story",
     "related"

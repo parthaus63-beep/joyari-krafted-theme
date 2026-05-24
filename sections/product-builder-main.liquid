@@ -45,7 +45,7 @@
       <div class="jk-product-panel">
         <div class="jk-product-panel__inner jk-product-panel__inner--builder">
           <div class="jk-product-panel__header">
-            <p class="jk-eyebrow">Default product builder section</p>
+            <p class="jk-eyebrow">Joyari fine jewellery</p>
             <h1>{{ product.title }}</h1>
 
             <div class="jk-product-price-row">
@@ -69,14 +69,13 @@
           {% form 'product', product, id: product_form_id, class: 'jk-product-form', data-product-form: 'product' %}
             <input type="hidden" name="id" value="{{ selected_variant.id }}" data-variant-id-input>
             <input type="hidden" name="properties[Joyari builder estimate]" value="{{ selected_variant.price | money }}" data-builder-estimate-property>
-            <input type="hidden" name="properties[Builder source]" value="Default product template">
 
             <div class="jk-ring-builder-card jk-ring-builder-card--product">
               <div class="jk-builder-card__header">
                 <div>
-                  <p class="jk-eyebrow">Ring builder controls</p>
+                  <p class="jk-eyebrow">Personal selection</p>
                   <h2>{{ section.settings.builder_heading }}</h2>
-                  <p class="jk-builder-subcopy">This builder renders for every normal product page and saves all custom choices as line item properties.</p>
+                  <p class="jk-builder-subcopy">Choose the details that make the piece feel personal. Your preferences are saved with the order for Joyari review.</p>
                 </div>
                 <div class="jk-stone-preview" data-stone-preview data-shape="oval">
                   <span></span>
@@ -88,8 +87,8 @@
                   <div class="jk-builder-step__header">
                     <span class="jk-builder-step__number">01</span>
                     <div>
-                      <h3>Shopify variant selector</h3>
-                      <p>These options control the real variant ID, price, media, and sold-out state.</p>
+                      <h3>Finish and setting</h3>
+                      <p>Select the available option that best matches your preferred finish.</p>
                     </div>
                   </div>
 
@@ -127,7 +126,7 @@
                   <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
                   <div>
                     <h3>Metal selector</h3>
-                    <p>Saved as a line item property.</p>
+                    <p>Choose the precious metal tone for your Joyari piece.</p>
                   </div>
                 </div>
                 <fieldset class="jk-builder-field">
@@ -146,7 +145,7 @@
                   <span class="jk-builder-step__number">{% if product.has_only_default_variant %}02{% else %}03{% endif %}</span>
                   <div>
                     <h3>Shape selector</h3>
-                    <p>Updates the stone preview and order properties.</p>
+                    <p>Preview the centre-stone silhouette that feels most like you.</p>
                   </div>
                 </div>
                 <fieldset class="jk-builder-field">
@@ -168,7 +167,7 @@
                   <span class="jk-builder-step__number">{% if product.has_only_default_variant %}03{% else %}04{% endif %}</span>
                   <div>
                     <h3>Carat slider</h3>
-                    <p>Updates the visible estimate without changing the checkout variant.</p>
+                    <p>Explore presence and proportion with a live design estimate.</p>
                   </div>
                 </div>
                 <div class="jk-builder-field">
@@ -185,7 +184,7 @@
                   <span class="jk-builder-step__number">{% if product.has_only_default_variant %}04{% else %}05{% endif %}</span>
                   <div>
                     <h3>Diamond type selector</h3>
-                    <p>Saved as a line item property.</p>
+                    <p>Select a diamond pathway for final confirmation by Joyari.</p>
                   </div>
                 </div>
                 <fieldset class="jk-builder-field">
@@ -203,7 +202,7 @@
                   <span class="jk-builder-step__number">{% if product.has_only_default_variant %}05{% else %}06{% endif %}</span>
                   <div>
                     <h3>Ring size selector</h3>
-                    <p>Saved as a line item property.</p>
+                    <p>Choose your size or request guidance before crafting begins.</p>
                   </div>
                 </div>
                 <div class="jk-builder-field jk-builder-field--split">
@@ -258,14 +257,35 @@
               </div>
             </div>
           {% endform %}
+
+          <div class="jk-builder-trust-grid" aria-label="Joyari trust badges">
+            <span class="jk-trust-badge">Insured delivery</span>
+            <span class="jk-trust-badge">Secure checkout</span>
+            <span class="jk-trust-badge">Diamond guidance</span>
+            <span class="jk-trust-badge">Aftercare support</span>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <div class="jk-product-description">
+      <div>
+        <p class="jk-eyebrow">Product details</p>
+        <h2>Designed for brilliance, comfort, and permanence</h2>
+      </div>
+      <div class="rte">
+        {% if product.description != blank %}
+          {{ product.description }}
+        {% else %}
+          <p>Use this space for diamond specifications, metal details, setting notes, certification information, and the story behind the piece.</p>
+        {% endif %}
       </div>
     </div>
   {% else %}
     <div class="jk-section__header">
-      <p class="jk-eyebrow">Joyari diagnostic</p>
-      <h1>No product object detected</h1>
-      <p>The default product template rendered, but Shopify did not provide a product object.</p>
+      <p class="jk-eyebrow">Joyari Krafted</p>
+      <h1>Product details</h1>
+      <p>Add product information in Shopify admin to complete this fine jewellery page.</p>
     </div>
   {% endif %}
 </section>
@@ -280,7 +300,7 @@
       "type": "text",
       "id": "builder_heading",
       "label": "Builder heading",
-      "default": "Joyari Ring Builder"
+      "default": "Design your Joyari piece"
     },
     {
       "type": "number",

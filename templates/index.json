@@ -5,10 +5,10 @@
       "settings": {
         "eyebrow": "Fine lab-grown diamond jewellery",
         "heading": "Joyari Krafted",
-        "subheading": "Luxury engagement rings and diamond jewellery crafted for the moment love becomes forever.",
-        "primary_label": "Explore Engagement Rings",
-        "secondary_label": "Design Your Own Ring",
-        "trust_text": "Certified diamonds, considered craftsmanship, and insured delivery on every made-to-order piece."
+        "subheading": "Considered engagement rings and diamond jewellery, crafted with luminous lab-grown stones and an heirloom sense of restraint.",
+        "primary_label": "Explore Fine Jewellery",
+        "secondary_label": "Begin a Private Design",
+        "trust_text": "Certified lab-grown diamonds, refined settings, insured delivery, and care-led guidance from selection to aftercare."
       }
     },
     "promise": {
@@ -17,22 +17,22 @@
         "p1": {
           "type": "promise",
           "settings": {
-            "title": "Certified Diamonds",
-            "text": "Each centre stone is selected for brilliance, traceability, and long-term confidence."
+            "title": "Certified Stones",
+            "text": "Every diamond is selected for brilliance, traceability, and confidence at the moment of purchase."
           }
         },
         "p2": {
           "type": "promise",
           "settings": {
-            "title": "Made With Intention",
-            "text": "Every setting is created with proportion, comfort, and heirloom detail in mind."
+            "title": "Atelier Finish",
+            "text": "Settings are considered for balance, comfort, and the quiet detail expected of fine jewellery."
           }
         },
         "p3": {
           "type": "promise",
           "settings": {
-            "title": "Insured Delivery",
-            "text": "Secure packaging, tracked shipping, and support before and after your proposal."
+            "title": "Care-Led Delivery",
+            "text": "Secure presentation, tracked delivery, and responsive support before and after your milestone."
           }
         }
       },
@@ -43,7 +43,7 @@
       ],
       "settings": {
         "heading": "Confidence, from first glance to forever",
-        "subheading": "Joyari Krafted is built for clients who want a calmer, clearer, more luxurious way to choose diamond jewellery."
+        "subheading": "Joyari Krafted brings together precise diamond selection, refined design, and a buying experience that feels calm, private, and assured."
       }
     },
     "engagement": {
@@ -81,16 +81,16 @@
       ],
       "settings": {
         "eyebrow": "Curated collections",
-        "heading": "Begin with the piece that feels like you",
-        "subheading": "Explore signature categories designed for proposals, milestones, and luminous everyday wear."
+        "heading": "A considered edit of modern diamond jewellery",
+        "subheading": "Explore signature categories designed for proposals, anniversaries, and luminous everyday wear."
       }
     },
     "lab_diamonds": {
       "type": "luxury-product-grid",
       "settings": {
         "eyebrow": "Lab-grown diamond jewellery",
-        "heading": "Modern diamonds with timeless restraint",
-        "subheading": "A premium edit for clients who value brilliance, ethics, and enduring design.",
+        "heading": "Modern brilliance, timeless restraint",
+        "subheading": "A polished edit for clients who value traceable stones, elegant proportions, and enduring design.",
         "product_limit": 8
       }
     },
@@ -106,8 +106,8 @@
       "type": "diamond-education",
       "settings": {
         "eyebrow": "Ethical lab-grown diamonds",
-        "heading": "Traceable brilliance, crafted with care",
-        "subheading": "Joyari Krafted celebrates diamonds grown through advanced technology and selected for fire, scintillation, and beauty."
+        "heading": "Traceable brilliance, selected with care",
+        "subheading": "Joyari Krafted celebrates lab-grown diamonds chosen for fire, scintillation, and the clarity modern clients expect."
       }
     },
     "story": {
@@ -115,7 +115,7 @@
       "settings": {
         "eyebrow": "Craftsmanship",
         "heading": "A quieter kind of luxury",
-        "text": "From the first sketch to final polish, each Joyari piece is considered for balance, wearability, and emotional permanence. The result is jewellery that feels intimate at first touch and remarkable for decades.",
+        "text": "From first sketch to final polish, each Joyari piece is considered for balance, wearability, and emotional permanence. The result is jewellery that feels intimate at first touch and remarkable for decades.",
         "button_label": "Discover the Joyari Standard"
       }
     },
@@ -133,21 +133,21 @@
           "type": "promise",
           "settings": {
             "title": "Lifetime Care",
-            "text": "Guidance, resizing support, and careful aftercare for the life of your jewellery."
+            "text": "Aftercare guidance and support designed to keep your jewellery luminous for years."
           }
         },
         "t2": {
           "type": "promise",
           "settings": {
             "title": "Secure Checkout",
-            "text": "Protected payments and transparent communication from order to delivery."
+            "text": "Protected payment flow and clear communication from order to delivery."
           }
         },
         "t3": {
           "type": "promise",
           "settings": {
             "title": "Made To Order",
-            "text": "Small-batch craftsmanship keeps each piece personal without artificial urgency."
+            "text": "Measured production keeps each piece considered, personal, and carefully finished."
           }
         }
       },
@@ -158,7 +158,7 @@
       ],
       "settings": {
         "heading": "Luxury should feel certain",
-        "subheading": "Transparent timelines, considered materials, and a support-led buying experience."
+        "subheading": "Clear timelines, considered materials, and a support-led buying experience for meaningful jewellery."
       }
     }
   },

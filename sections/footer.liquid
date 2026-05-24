@@ -49,26 +49,26 @@
       {% endif %}
     </div>
     <div>
-      <h3>Trust</h3>
-      <span>Insured delivery</span>
+      <h3>Client Care</h3>
+      <span>Insured presentation delivery</span>
       <span>Secure checkout</span>
-      <span>Lab-grown diamond guidance</span>
+      <span>Diamond selection guidance</span>
     </div>
     <div>
-      <h3>Follow</h3>
+      <h3>Atelier</h3>
       {% if settings.instagram_url != blank %}
         <a href="{{ settings.instagram_url }}" rel="noopener" target="_blank">Instagram</a>
       {% else %}
         <span>Instagram</span>
       {% endif %}
-      <span>Private appointments</span>
-      <span>Custom design support</span>
+      <span>Private design appointments</span>
+      <span>Lab-grown diamond expertise</span>
     </div>
   </div>
 
   <div class="jk-footer__bottom">
     <p>&copy; {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: shop.name }}. All rights reserved.</p>
-    <p>Fine jewellery crafted with traceable lab-grown diamonds.</p>
+    <p>Traceable lab-grown diamonds, refined settings, and considered care.</p>
   </div>
 </footer>
 
@@ -80,7 +80,7 @@
       "type": "textarea",
       "id": "brand_text",
       "label": "Brand text",
-      "default": "Luxury diamond jewellery designed for modern romantics, meaningful milestones, and everyday brilliance."
+      "default": "Fine lab-grown diamond jewellery designed for modern romantics, meaningful milestones, and everyday brilliance."
     },
     {
       "type": "text",
@@ -92,13 +92,13 @@
       "type": "text",
       "id": "newsletter_heading",
       "label": "Newsletter heading",
-      "default": "Receive design notes and diamond guidance"
+      "default": "Receive private design notes and diamond guidance"
     },
     {
       "type": "textarea",
       "id": "newsletter_text",
       "label": "Newsletter text",
-      "default": "Join for collection previews, proposal planning notes, and care advice from Joyari Krafted."
+      "default": "Join for collection releases, proposal planning notes, and care advice from Joyari Krafted."
     },
     {
       "type": "text",
