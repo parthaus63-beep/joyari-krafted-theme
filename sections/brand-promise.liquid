@@ -12,25 +12,38 @@
   <div class="jk-promise__grid">
     {% if section.blocks.size > 0 %}
       {% for block in section.blocks %}
+        {% assign promise_image_alt = block.settings.image_alt | default: block.settings.title %}
         <article class="jk-promise-card" {{ block.shopify_attributes }}>
-          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+          <div class="jk-promise-card__media">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 520, 720', sizes: '(min-width: 900px) 31vw, 100vw', alt: promise_image_alt, class: 'jk-promise-card__image' }}
+            {% else %}
+              <span class="jk-promise-card__icon" aria-hidden="true"></span>
+            {% endif %}
+          </div>
           <h3>{{ block.settings.title }}</h3>
           <p>{{ block.settings.text }}</p>
         </article>
       {% endfor %}
     {% else %}
       <article class="jk-promise-card">
-        <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        <div class="jk-promise-card__media">
+          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        </div>
         <h3>Certified diamonds</h3>
         <p>Selected stones and transparent guidance for confident, informed buying.</p>
       </article>
       <article class="jk-promise-card">
-        <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        <div class="jk-promise-card__media">
+          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        </div>
         <h3>Secure delivery</h3>
         <p>Tracked, insured shipping with responsive support throughout the process.</p>
       </article>
       <article class="jk-promise-card">
-        <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        <div class="jk-promise-card__media">
+          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        </div>
         <h3>Lifetime care</h3>
         <p>Aftercare guidance to help your jewellery remain luminous for years.</p>
       </article>
@@ -79,6 +92,16 @@
           "id": "text",
           "label": "Text",
           "default": "Selected stones and transparent guidance for confident, informed buying."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Promise / trust card image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
         }
       ]
     }

@@ -9,7 +9,16 @@
   <div class="jk-testimonial-grid">
     {% if section.blocks.size > 0 %}
       {% for block in section.blocks %}
+        {% assign testimonial_image_alt = block.settings.image_alt | default: block.settings.name %}
+        {% assign testimonial_initial = block.settings.name | slice: 0, 1 %}
         <figure class="jk-testimonial" {{ block.shopify_attributes }}>
+          <div class="jk-testimonial__media">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '180, 280, 420, 640', sizes: '(min-width: 900px) 31vw, 100vw', alt: testimonial_image_alt, class: 'jk-testimonial__image' }}
+            {% else %}
+              <span aria-hidden="true">{{ testimonial_initial }}</span>
+            {% endif %}
+          </div>
           <blockquote>{{ block.settings.quote }}</blockquote>
           <figcaption>
             <strong>{{ block.settings.name }}</strong>
@@ -19,14 +28,23 @@
       {% endfor %}
     {% else %}
       <figure class="jk-testimonial">
+        <div class="jk-testimonial__media">
+          <span aria-hidden="true">A</span>
+        </div>
         <blockquote>The design process felt calm, personal, and genuinely special from the first message.</blockquote>
         <figcaption><strong>Amelia</strong><span>Custom engagement ring</span></figcaption>
       </figure>
       <figure class="jk-testimonial">
+        <div class="jk-testimonial__media">
+          <span aria-hidden="true">S</span>
+        </div>
         <blockquote>I understood every decision before buying, which made the final ring feel even more meaningful.</blockquote>
         <figcaption><strong>Sofia</strong><span>Oval lab-grown diamond ring</span></figcaption>
       </figure>
       <figure class="jk-testimonial">
+        <div class="jk-testimonial__media">
+          <span aria-hidden="true">M</span>
+        </div>
         <blockquote>The packaging, sparkle, and support all felt beautifully considered.</blockquote>
         <figcaption><strong>Maya</strong><span>Diamond earrings</span></figcaption>
       </figure>
@@ -75,6 +93,16 @@
           "id": "detail",
           "label": "Detail",
           "default": "Custom engagement ring"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Client / testimonial image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
         }
       ]
     }

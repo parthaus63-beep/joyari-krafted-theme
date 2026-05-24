@@ -526,8 +526,42 @@ h3 {
 .jk-promise-card {
   display: grid;
   gap: 16px;
-  min-height: 220px;
+  min-height: 260px;
   align-content: start;
+}
+
+.jk-promise-card__media,
+.jk-education-card__media,
+.jk-testimonial__media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(199, 163, 90, .18);
+  border-radius: var(--jk-radius);
+  background:
+    linear-gradient(145deg, rgba(255, 253, 248, .84), rgba(233, 220, 200, .52)),
+    var(--jk-sage);
+}
+
+.jk-promise-card__media,
+.jk-education-card__media {
+  aspect-ratio: 16 / 10;
+}
+
+.jk-promise-card__image,
+.jk-education-card__image,
+.jk-testimonial__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s var(--jk-ease);
+}
+
+.jk-promise-card:hover .jk-promise-card__image,
+.jk-education-card:hover .jk-education-card__image,
+.jk-testimonial:hover .jk-testimonial__image {
+  transform: scale(1.045);
 }
 
 .jk-promise-card__icon {
@@ -1464,6 +1498,8 @@ h3 {
 }
 
 .jk-builder-console__preview {
+  position: relative;
+  overflow: hidden;
   min-height: 420px;
   display: grid;
   place-items: center;
@@ -1475,6 +1511,36 @@ h3 {
   border: 1px solid rgba(199, 163, 90, .22);
   border-radius: var(--jk-radius);
   padding: 26px;
+}
+
+.jk-builder-console__preview--image {
+  background: var(--jk-ink);
+}
+
+.jk-builder-console__preview--image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(23, 21, 18, .04), rgba(23, 21, 18, .48)),
+    linear-gradient(90deg, rgba(255, 253, 248, .18), transparent);
+  pointer-events: none;
+}
+
+.jk-builder-console__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .68;
+}
+
+.jk-builder-console__preview > :not(.jk-builder-console__image) {
+  position: relative;
+  z-index: 1;
 }
 
 .jk-builder-console__preview p {
@@ -1532,8 +1598,10 @@ h3 {
   gap: 14px;
 }
 
-.jk-education-card span {
+.jk-education-card__media span {
   color: var(--jk-gold-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2rem;
   font-weight: 900;
 }
 
@@ -1541,6 +1609,23 @@ h3 {
   margin: 0;
   display: grid;
   gap: 20px;
+}
+
+.jk-testimonial__media {
+  aspect-ratio: 16 / 10;
+}
+
+.jk-testimonial__media span {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(199, 163, 90, .4);
+  border-radius: 50%;
+  background: rgba(255, 253, 248, .72);
+  color: var(--jk-gold-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.8rem;
 }
 
 .jk-testimonial blockquote {

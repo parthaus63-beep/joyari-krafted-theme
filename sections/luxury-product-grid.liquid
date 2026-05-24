@@ -34,6 +34,9 @@
           <a class="jk-product-card__media" href="{{ product.url }}">
             {% if product.featured_media != blank %}
               {{ product.featured_media | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 640, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 640px) 50vw, 100vw', alt: product.featured_media.alt | default: product.title }}
+            {% elsif section.settings.fallback_product_image != blank %}
+              {% assign fallback_product_alt = section.settings.fallback_product_image_alt | default: product.title %}
+              {{ section.settings.fallback_product_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 640, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 640px) 50vw, 100vw', alt: fallback_product_alt }}
             {% else %}
               <span class="jk-product-placeholder" aria-hidden="true"></span>
             {% endif %}
@@ -56,9 +59,32 @@
       {% endfor %}
     {% else %}
       {% for index in (1..4) %}
+        {% liquid
+          assign placeholder_image = blank
+          assign placeholder_alt = blank
+          case index
+            when 1
+              assign placeholder_image = section.settings.placeholder_image_1
+              assign placeholder_alt = section.settings.placeholder_image_1_alt
+            when 2
+              assign placeholder_image = section.settings.placeholder_image_2
+              assign placeholder_alt = section.settings.placeholder_image_2_alt
+            when 3
+              assign placeholder_image = section.settings.placeholder_image_3
+              assign placeholder_alt = section.settings.placeholder_image_3_alt
+            when 4
+              assign placeholder_image = section.settings.placeholder_image_4
+              assign placeholder_alt = section.settings.placeholder_image_4_alt
+          endcase
+          assign placeholder_alt = placeholder_alt | default: 'Joyari Krafted diamond jewellery placeholder'
+        %}
         <article class="jk-product-card jk-product-card--placeholder">
           <div class="jk-product-card__media">
-            <span class="jk-product-placeholder" aria-hidden="true"></span>
+            {% if placeholder_image != blank %}
+              {{ placeholder_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '320, 480, 640, 900', sizes: '(min-width: 1000px) 25vw, (min-width: 640px) 50vw, 100vw', alt: placeholder_alt }}
+            {% else %}
+              <span class="jk-product-placeholder" aria-hidden="true"></span>
+            {% endif %}
           </div>
           <div class="jk-product-card__content">
             <p class="jk-card-badge">Joyari atelier</p>
@@ -100,6 +126,61 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_product_image",
+      "label": "Fallback image for products without photos"
+    },
+    {
+      "type": "text",
+      "id": "fallback_product_image_alt",
+      "label": "Fallback product image alt text",
+      "default": "Joyari Krafted diamond jewellery"
+    },
+    {
+      "type": "header",
+      "content": "Placeholder card images"
+    },
+    {
+      "type": "image_picker",
+      "id": "placeholder_image_1",
+      "label": "Placeholder card image 1"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_image_1_alt",
+      "label": "Placeholder image 1 alt text"
+    },
+    {
+      "type": "image_picker",
+      "id": "placeholder_image_2",
+      "label": "Placeholder card image 2"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_image_2_alt",
+      "label": "Placeholder image 2 alt text"
+    },
+    {
+      "type": "image_picker",
+      "id": "placeholder_image_3",
+      "label": "Placeholder card image 3"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_image_3_alt",
+      "label": "Placeholder image 3 alt text"
+    },
+    {
+      "type": "image_picker",
+      "id": "placeholder_image_4",
+      "label": "Placeholder card image 4"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_image_4_alt",
+      "label": "Placeholder image 4 alt text"
     },
     {
       "type": "range",

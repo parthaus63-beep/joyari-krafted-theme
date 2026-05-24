@@ -12,25 +12,38 @@
   <div class="jk-education__grid">
     {% if section.blocks.size > 0 %}
       {% for block in section.blocks %}
+        {% assign education_image_alt = block.settings.image_alt | default: block.settings.title %}
         <article class="jk-education-card" {{ block.shopify_attributes }}>
-          <span>{{ forloop.index | prepend: '0' }}</span>
+          <div class="jk-education-card__media">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '240, 360, 520, 760', sizes: '(min-width: 900px) 31vw, 100vw', alt: education_image_alt, class: 'jk-education-card__image' }}
+            {% else %}
+              <span>{{ forloop.index | prepend: '0' }}</span>
+            {% endif %}
+          </div>
           <h3>{{ block.settings.title }}</h3>
           <p>{{ block.settings.text }}</p>
         </article>
       {% endfor %}
     {% else %}
       <article class="jk-education-card">
-        <span>01</span>
+        <div class="jk-education-card__media">
+          <span>01</span>
+        </div>
         <h3>Certified stone details</h3>
         <p>Give customers a clear path to understand diamond identity, specifications, and quality.</p>
       </article>
       <article class="jk-education-card">
-        <span>02</span>
+        <div class="jk-education-card__media">
+          <span>02</span>
+        </div>
         <h3>Lab-grown beauty</h3>
         <p>Lab-grown diamonds are selected for brilliance, proportion, and traceable modern origin.</p>
       </article>
       <article class="jk-education-card">
-        <span>03</span>
+        <div class="jk-education-card__media">
+          <span>03</span>
+        </div>
         <h3>The 4Cs, refined</h3>
         <p>Cut, colour, clarity, and carat are presented in a calmer, more client-friendly way.</p>
       </article>
@@ -79,6 +92,16 @@
           "id": "text",
           "label": "Text",
           "default": "Give customers a clear path to understand diamond identity, specifications, and quality."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Education card image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
         }
       ]
     }

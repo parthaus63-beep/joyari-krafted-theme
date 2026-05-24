@@ -14,7 +14,10 @@
   </div>
 
   <div class="jk-builder-console">
-    <div class="jk-builder-console__preview">
+    <div class="jk-builder-console__preview{% if section.settings.preview_image != blank %} jk-builder-console__preview--image{% endif %}">
+      {% if section.settings.preview_image != blank %}
+        {{ section.settings.preview_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 900px) 38vw, 100vw', alt: section.settings.preview_image_alt, class: 'jk-builder-console__image' }}
+      {% endif %}
       <div class="jk-stone-preview jk-stone-preview--large" data-stone-preview data-shape="oval">
         <span></span>
       </div>
@@ -103,6 +106,17 @@
       "type": "url",
       "id": "button_link",
       "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image",
+      "label": "Builder preview lifestyle image"
+    },
+    {
+      "type": "text",
+      "id": "preview_image_alt",
+      "label": "Builder preview image alt text",
+      "default": "Joyari Krafted custom ring design preview"
     },
     {
       "type": "number",
