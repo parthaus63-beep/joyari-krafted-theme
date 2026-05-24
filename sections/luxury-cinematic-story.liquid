@@ -13,7 +13,9 @@
     <div class="jk-cinematic-story__grid">
       <article class="jk-cinematic-panel jk-cinematic-panel--feature">
         <div class="jk-cinematic-panel__media">
-          {% if section.settings.proposal_image != blank %}
+          {% if section.settings.proposal_video != blank %}
+            {{ section.settings.proposal_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1800x', class: 'jk-cinematic-panel__video' }}
+          {% elsif section.settings.proposal_image != blank %}
             {{ section.settings.proposal_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '720, 1000, 1300, 1600, 1800', sizes: '(min-width: 990px) 62vw, 100vw', alt: section.settings.proposal_image_alt, class: 'jk-cinematic-panel__image' }}
           {% else %}
             <span class="jk-cinematic-placeholder jk-cinematic-placeholder--proposal" aria-hidden="true"></span>
@@ -91,6 +93,11 @@
       "type": "image_picker",
       "id": "proposal_image",
       "label": "Lifestyle / proposal image"
+    },
+    {
+      "type": "video",
+      "id": "proposal_video",
+      "label": "Lifestyle / proposal background video"
     },
     {
       "type": "text",
