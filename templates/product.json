@@ -5,73 +5,12 @@
       "settings": {
         "show_vendor": false,
         "show_sku": true,
-        "builder_heading": "Design your Joyari setting",
-        "scarcity_text": "Made to order in limited bench capacity each week."
-      }
-    },
-    "education": {
-      "type": "diamond-education",
-      "settings": {
-        "eyebrow": "Diamond certification",
-        "heading": "Clarity before you commit",
-        "subheading": "Understand how certification, cut, colour, clarity, and lab-grown origin support a confident purchase."
-      }
-    },
-    "promises": {
-      "type": "brand-promise",
-      "settings": {
-        "heading": "Included with every Joyari piece",
-        "subheading": "Premium care details designed to remove uncertainty from a meaningful purchase."
-      },
-      "blocks": {
-        "p1": {
-          "type": "promise",
-          "settings": {
-            "title": "Certificate Ready",
-            "text": "Diamond details and certification guidance are included where applicable."
-          }
-        },
-        "p2": {
-          "type": "promise",
-          "settings": {
-            "title": "Luxury Packaging",
-            "text": "Presented in considered packaging suitable for proposals and gifting."
-          }
-        },
-        "p3": {
-          "type": "promise",
-          "settings": {
-            "title": "Delivery Support",
-            "text": "Tracked delivery with clear timelines and responsive support."
-          }
-        }
-      },
-      "block_order": [
-        "p1",
-        "p2",
-        "p3"
-      ]
-    },
-    "related": {
-      "type": "related-products",
-      "settings": {
-        "heading": "You may also love",
-        "product_limit": 4
-      }
-    },
-    "testimonials": {
-      "type": "testimonials",
-      "settings": {
-        "eyebrow": "Client confidence",
-        "heading": "A calmer way to choose forever jewellery"
+        "builder_heading": "Default Product Ring Builder",
+        "scarcity_text": "DEFAULT PRODUCT TEMPLATE ACTIVE"
       }
     }
   },
   "order": [
-    "main",
-    "education",
-    "promises",
-    "related",
-    "testimonials"
+    "main"
   ]
 }
