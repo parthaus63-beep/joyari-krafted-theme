@@ -151,6 +151,23 @@
         "subheading": "Upload editorial imagery for bridal, diamond, proposal, atelier, and packaging moments."
       }
     },
+    "cinematic_story": {
+      "type": "luxury-cinematic-story",
+      "settings": {
+        "eyebrow": "The Joyari feeling",
+        "heading": "A visual world for the moment, the craft, and the reveal",
+        "subheading": "Large cinematic panels give the homepage a more emotional luxury rhythm while your final imagery is still being prepared.",
+        "proposal_eyebrow": "Proposal story",
+        "proposal_heading": "Designed for the moment everything changes",
+        "proposal_text": "A place for ring-on-hand, proposal, or couple imagery that helps clients picture the jewellery in real life.",
+        "craftsmanship_eyebrow": "Atelier detail",
+        "craftsmanship_heading": "Every proportion is considered",
+        "craftsmanship_text": "Use atelier, stone, bench, or finishing imagery to communicate quiet precision.",
+        "packaging_eyebrow": "Presentation",
+        "packaging_heading": "The reveal is part of the experience",
+        "packaging_text": "Show the box, certificate, care card, or final delivery presentation that makes the purchase feel complete."
+      }
+    },
     "lab_diamonds": {
       "type": "luxury-product-grid",
       "settings": {
@@ -321,6 +338,7 @@
     "hero",
     "promise",
     "engagement",
+    "cinematic_story",
     "lab_diamonds",
     "design_process",
     "ethical",

@@ -1,0 +1,192 @@
+<section class="jk-cinematic-story">
+  <div class="jk-cinematic-story__inner">
+    <div class="jk-cinematic-story__header">
+      {% if section.settings.eyebrow != blank %}
+        <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h2>{{ section.settings.heading }}</h2>
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+    </div>
+
+    <div class="jk-cinematic-story__grid">
+      <article class="jk-cinematic-panel jk-cinematic-panel--feature">
+        <div class="jk-cinematic-panel__media">
+          {% if section.settings.proposal_image != blank %}
+            {{ section.settings.proposal_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '720, 1000, 1300, 1600, 1800', sizes: '(min-width: 990px) 62vw, 100vw', alt: section.settings.proposal_image_alt, class: 'jk-cinematic-panel__image' }}
+          {% else %}
+            <span class="jk-cinematic-placeholder jk-cinematic-placeholder--proposal" aria-hidden="true"></span>
+          {% endif %}
+        </div>
+        <div class="jk-cinematic-panel__content">
+          <p class="jk-card-badge">{{ section.settings.proposal_eyebrow }}</p>
+          <h3>{{ section.settings.proposal_heading }}</h3>
+          <p>{{ section.settings.proposal_text }}</p>
+        </div>
+      </article>
+
+      <article class="jk-cinematic-panel">
+        <div class="jk-cinematic-panel__media">
+          {% if section.settings.craftsmanship_image != blank %}
+            {{ section.settings.craftsmanship_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 990px) 34vw, 100vw', alt: section.settings.craftsmanship_image_alt, class: 'jk-cinematic-panel__image' }}
+          {% else %}
+            <span class="jk-cinematic-placeholder jk-cinematic-placeholder--craft" aria-hidden="true"></span>
+          {% endif %}
+        </div>
+        <div class="jk-cinematic-panel__content">
+          <p class="jk-card-badge">{{ section.settings.craftsmanship_eyebrow }}</p>
+          <h3>{{ section.settings.craftsmanship_heading }}</h3>
+          <p>{{ section.settings.craftsmanship_text }}</p>
+        </div>
+      </article>
+
+      <article class="jk-cinematic-panel">
+        <div class="jk-cinematic-panel__media">
+          {% if section.settings.packaging_image != blank %}
+            {{ section.settings.packaging_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 990px) 34vw, 100vw', alt: section.settings.packaging_image_alt, class: 'jk-cinematic-panel__image' }}
+          {% else %}
+            <span class="jk-cinematic-placeholder jk-cinematic-placeholder--packaging" aria-hidden="true"></span>
+          {% endif %}
+        </div>
+        <div class="jk-cinematic-panel__content">
+          <p class="jk-card-badge">{{ section.settings.packaging_eyebrow }}</p>
+          <h3>{{ section.settings.packaging_heading }}</h3>
+          <p>{{ section.settings.packaging_text }}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinematic visual story",
+  "tag": "section",
+  "class": "shopify-section--luxury-cinematic-story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Joyari feeling"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A world built around the moment, the craft, and the reveal"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Use these cinematic panels for proposal imagery, atelier detail, and the presentation moments that make fine jewellery feel deeply considered."
+    },
+    {
+      "type": "header",
+      "content": "Lifestyle / proposal"
+    },
+    {
+      "type": "image_picker",
+      "id": "proposal_image",
+      "label": "Lifestyle / proposal image"
+    },
+    {
+      "type": "text",
+      "id": "proposal_image_alt",
+      "label": "Proposal image alt text",
+      "default": "Joyari Krafted proposal moment"
+    },
+    {
+      "type": "text",
+      "id": "proposal_eyebrow",
+      "label": "Proposal eyebrow",
+      "default": "Proposal story"
+    },
+    {
+      "type": "text",
+      "id": "proposal_heading",
+      "label": "Proposal heading",
+      "default": "Designed for the moment everything changes"
+    },
+    {
+      "type": "textarea",
+      "id": "proposal_text",
+      "label": "Proposal text",
+      "default": "An emotional space for ring-on-hand, proposal, or couple imagery that helps clients picture the jewellery in real life."
+    },
+    {
+      "type": "header",
+      "content": "Craftsmanship / atelier"
+    },
+    {
+      "type": "image_picker",
+      "id": "craftsmanship_image",
+      "label": "Craftsmanship image"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_image_alt",
+      "label": "Craftsmanship image alt text",
+      "default": "Joyari Krafted atelier craftsmanship"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_eyebrow",
+      "label": "Craftsmanship eyebrow",
+      "default": "Atelier detail"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_heading",
+      "label": "Craftsmanship heading",
+      "default": "Every proportion is considered"
+    },
+    {
+      "type": "textarea",
+      "id": "craftsmanship_text",
+      "label": "Craftsmanship text",
+      "default": "A place for bench, sketch, stone, or finishing imagery that communicates refinement without needing to over-explain."
+    },
+    {
+      "type": "header",
+      "content": "Packaging / certificate"
+    },
+    {
+      "type": "image_picker",
+      "id": "packaging_image",
+      "label": "Packaging image"
+    },
+    {
+      "type": "text",
+      "id": "packaging_image_alt",
+      "label": "Packaging image alt text",
+      "default": "Joyari Krafted packaging and certificate"
+    },
+    {
+      "type": "text",
+      "id": "packaging_eyebrow",
+      "label": "Packaging eyebrow",
+      "default": "Presentation"
+    },
+    {
+      "type": "text",
+      "id": "packaging_heading",
+      "label": "Packaging heading",
+      "default": "The reveal is part of the experience"
+    },
+    {
+      "type": "textarea",
+      "id": "packaging_text",
+      "label": "Packaging text",
+      "default": "Use this panel for luxury box, certificate, care card, or delivery presentation imagery."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinematic visual story"
+    }
+  ]
+}
+{% endschema %}

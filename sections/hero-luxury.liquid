@@ -1,27 +1,20 @@
-<section class="jk-hero section-{{ section.id }}{% if section.settings.hero_video != blank or section.settings.hero_image != blank %} jk-hero--image-led{% endif %}">
-  <div class="jk-hero__content">
-    {% if section.settings.eyebrow != blank %}
-      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
-    {% endif %}
-    <h1>{{ section.settings.heading }}</h1>
-    <p class="jk-hero__copy">{{ section.settings.subheading }}</p>
-    <div class="jk-hero__actions">
-      <a class="jk-button jk-button--primary" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_label }}</a>
-      <a class="jk-button jk-button--secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label }}</a>
-    </div>
-    <div class="jk-hero__trust" aria-label="Trust information">
-      <span></span>
-      <p>{{ section.settings.trust_text }}</p>
-    </div>
-  </div>
+{% liquid
+  assign has_hero_media = false
+  if section.settings.hero_video != blank or section.settings.hero_video_url != blank or section.settings.hero_image != blank
+    assign has_hero_media = true
+  endif
+%}
 
-  <div class="jk-hero__visual">
-    <div class="jk-ring-stage">
-      {% if section.settings.hero_video != blank %}
-        {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1800x', class: 'jk-hero__video' }}
-      {% elsif section.settings.hero_image != blank %}
-        {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '720, 960, 1200, 1500, 1800', sizes: '(min-width: 1000px) 50vw, 100vw', alt: section.settings.hero_image_alt, class: 'jk-hero__image' }}
-      {% else %}
+<section class="jk-hero section-{{ section.id }}{% if has_hero_media %} jk-hero--image-led{% endif %}">
+  <div class="jk-hero__media" aria-hidden="true">
+    {% if section.settings.hero_video != blank %}
+      {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2200x', class: 'jk-hero__video' }}
+    {% elsif section.settings.hero_video_url != blank %}
+      {{ section.settings.hero_video_url | external_video_tag: class: 'jk-hero__video jk-hero__video--external' }}
+    {% elsif section.settings.hero_image != blank %}
+      {{ section.settings.hero_image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.hero_image_alt, class: 'jk-hero__image' }}
+    {% else %}
+      <div class="jk-hero__fallback">
         <svg class="jk-ring-svg" viewBox="0 0 620 620" role="img" aria-label="">
           <defs>
             <linearGradient id="ringGold-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -41,12 +34,29 @@
           <path d="M252 192h116M310 112v154M252 192l116 0M282 192l28 74 28-74" fill="none" stroke="rgba(23,21,18,.28)" stroke-width="2"></path>
           <path d="M236 220c48 44 100 44 148 0" fill="none" stroke="url(#ringGold-{{ section.id }})" stroke-width="12" stroke-linecap="round"></path>
         </svg>
-      {% endif %}
-      <div class="jk-hero__caption">
-        <span>{{ section.settings.caption_label }}</span>
-        <strong>{{ section.settings.caption_heading }}</strong>
       </div>
+    {% endif %}
+  </div>
+
+  <div class="jk-hero__content">
+    {% if section.settings.eyebrow != blank %}
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h1>{{ section.settings.heading }}</h1>
+    <p class="jk-hero__copy">{{ section.settings.subheading }}</p>
+    <div class="jk-hero__actions">
+      <a class="jk-button jk-button--primary" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_label }}</a>
+      <a class="jk-button jk-button--secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label }}</a>
     </div>
+    <div class="jk-hero__trust" aria-label="Trust information">
+      <span></span>
+      <p>{{ section.settings.trust_text }}</p>
+    </div>
+  </div>
+
+  <div class="jk-hero__caption">
+    <span>{{ section.settings.caption_label }}</span>
+    <strong>{{ section.settings.caption_heading }}</strong>
   </div>
 </section>
 
@@ -83,6 +93,15 @@
       "type": "video",
       "id": "hero_video",
       "label": "Hero video"
+    },
+    {
+      "type": "video_url",
+      "id": "hero_video_url",
+      "label": "Hero video URL",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
     },
     {
       "type": "text",

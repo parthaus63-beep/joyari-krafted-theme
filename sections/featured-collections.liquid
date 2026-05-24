@@ -12,11 +12,32 @@
   <div class="jk-collection-grid">
     {% for block in section.blocks %}
       {% assign card_collection = block.settings.collection %}
-      {% assign card_image_alt = block.settings.image_alt | default: block.settings.title %}
+      {% liquid
+        assign category_image = blank
+        assign category_image_alt = blank
+        case forloop.index
+          when 1
+            assign category_image = section.settings.engagement_image
+            assign category_image_alt = section.settings.engagement_image_alt
+          when 2
+            assign category_image = section.settings.wedding_image
+            assign category_image_alt = section.settings.wedding_image_alt
+          when 3
+            assign category_image = section.settings.diamond_jewellery_image
+            assign category_image_alt = section.settings.diamond_jewellery_image_alt
+          when 4
+            assign category_image = section.settings.custom_design_image
+            assign category_image_alt = section.settings.custom_design_image_alt
+        endcase
+        if category_image == blank
+          assign category_image = block.settings.image
+        endif
+        assign card_image_alt = category_image_alt | default: block.settings.image_alt | default: block.settings.title
+      %}
       <article class="jk-collection-card" {{ block.shopify_attributes }}>
         <a class="jk-collection-card__media" href="{{ card_collection.url | default: routes.all_products_collection_url }}" aria-label="{{ block.settings.title | escape }}">
-          {% if block.settings.image != blank %}
-            {{ block.settings.image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 1100px) 25vw, (min-width: 700px) 50vw, 100vw', alt: card_image_alt }}
+          {% if category_image != blank %}
+            {{ category_image | image_url: width: 1300 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100, 1300', sizes: '(min-width: 1100px) 25vw, (min-width: 700px) 50vw, 100vw', alt: card_image_alt }}
           {% elsif card_collection.featured_image != blank %}
             {{ card_collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 33vw, 100vw', alt: block.settings.title }}
           {% else %}
@@ -59,6 +80,54 @@
       "id": "subheading",
       "label": "Subheading",
       "default": "Explore signature categories designed for proposals, milestones, and luminous everyday wear."
+    },
+    {
+      "type": "header",
+      "content": "Named category images"
+    },
+    {
+      "type": "image_picker",
+      "id": "engagement_image",
+      "label": "Engagement ring category image"
+    },
+    {
+      "type": "text",
+      "id": "engagement_image_alt",
+      "label": "Engagement image alt text",
+      "default": "Joyari Krafted engagement ring"
+    },
+    {
+      "type": "image_picker",
+      "id": "wedding_image",
+      "label": "Wedding band category image"
+    },
+    {
+      "type": "text",
+      "id": "wedding_image_alt",
+      "label": "Wedding band image alt text",
+      "default": "Joyari Krafted wedding bands"
+    },
+    {
+      "type": "image_picker",
+      "id": "diamond_jewellery_image",
+      "label": "Diamond jewellery category image"
+    },
+    {
+      "type": "text",
+      "id": "diamond_jewellery_image_alt",
+      "label": "Diamond jewellery image alt text",
+      "default": "Joyari Krafted diamond jewellery"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_design_image",
+      "label": "Custom design category image"
+    },
+    {
+      "type": "text",
+      "id": "custom_design_image_alt",
+      "label": "Custom design image alt text",
+      "default": "Joyari Krafted custom design jewellery"
     }
   ],
   "blocks": [
