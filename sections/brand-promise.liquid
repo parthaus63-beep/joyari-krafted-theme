@@ -1,0 +1,103 @@
+<section class="jk-section jk-promise">
+  <div class="jk-section__header">
+    {% if section.settings.eyebrow != blank %}
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h2>{{ section.settings.heading }}</h2>
+    {% if section.settings.subheading != blank %}
+      <p>{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+
+  <div class="jk-promise__grid">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <article class="jk-promise-card" {{ block.shopify_attributes }}>
+          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </article>
+      {% endfor %}
+    {% else %}
+      <article class="jk-promise-card">
+        <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        <h3>Certified diamonds</h3>
+        <p>Selected stones and transparent guidance for confident, informed buying.</p>
+      </article>
+      <article class="jk-promise-card">
+        <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        <h3>Secure delivery</h3>
+        <p>Tracked, insured shipping with responsive support throughout the process.</p>
+      </article>
+      <article class="jk-promise-card">
+        <span class="jk-promise-card__icon" aria-hidden="true"></span>
+        <h3>Lifetime care</h3>
+        <p>Aftercare guidance to help your jewellery remain luminous for years.</p>
+      </article>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand promise",
+  "tag": "section",
+  "class": "shopify-section--brand-promise",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Joyari promise"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Confidence, from first glance to forever"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "A refined buying experience with ethical diamonds, considered craftsmanship, and clear support."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promise",
+      "name": "Promise",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Certified diamonds"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Selected stones and transparent guidance for confident, informed buying."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand promise",
+      "blocks": [
+        {
+          "type": "promise"
+        },
+        {
+          "type": "promise"
+        },
+        {
+          "type": "promise"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

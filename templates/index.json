@@ -1,0 +1,176 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-luxury",
+      "settings": {
+        "eyebrow": "Fine lab-grown diamond jewellery",
+        "heading": "Joyari Krafted",
+        "subheading": "Luxury engagement rings and diamond jewellery crafted for the moment love becomes forever.",
+        "primary_label": "Explore Engagement Rings",
+        "secondary_label": "Design Your Own Ring",
+        "trust_text": "Certified diamonds, considered craftsmanship, and insured delivery on every made-to-order piece."
+      }
+    },
+    "promise": {
+      "type": "brand-promise",
+      "blocks": {
+        "p1": {
+          "type": "promise",
+          "settings": {
+            "title": "Certified Diamonds",
+            "text": "Each centre stone is selected for brilliance, traceability, and long-term confidence."
+          }
+        },
+        "p2": {
+          "type": "promise",
+          "settings": {
+            "title": "Made With Intention",
+            "text": "Every setting is created with proportion, comfort, and heirloom detail in mind."
+          }
+        },
+        "p3": {
+          "type": "promise",
+          "settings": {
+            "title": "Insured Delivery",
+            "text": "Secure packaging, tracked shipping, and support before and after your proposal."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3"
+      ],
+      "settings": {
+        "heading": "Confidence, from first glance to forever",
+        "subheading": "Joyari Krafted is built for clients who want a calmer, clearer, more luxurious way to choose diamond jewellery."
+      }
+    },
+    "engagement": {
+      "type": "featured-collections",
+      "blocks": {
+        "c1": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Engagement Rings",
+            "text": "Solitaire, hidden halo, trilogy, and bespoke-inspired settings with refined diamond presence.",
+            "badge": "Bridal Icons"
+          }
+        },
+        "c2": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Wedding Bands",
+            "text": "Elegant bands designed to stack, contour, or stand beautifully on their own.",
+            "badge": "Forever Pieces"
+          }
+        },
+        "c3": {
+          "type": "collection_card",
+          "settings": {
+            "title": "Diamond Jewellery",
+            "text": "Everyday diamond necklaces, earrings, and bracelets with a quiet luxury finish.",
+            "badge": "Fine Essentials"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "eyebrow": "Curated collections",
+        "heading": "Begin with the piece that feels like you",
+        "subheading": "Explore signature categories designed for proposals, milestones, and luminous everyday wear."
+      }
+    },
+    "lab_diamonds": {
+      "type": "luxury-product-grid",
+      "settings": {
+        "eyebrow": "Lab-grown diamond jewellery",
+        "heading": "Modern diamonds with timeless restraint",
+        "subheading": "A premium edit for clients who value brilliance, ethics, and enduring design.",
+        "product_limit": 8
+      }
+    },
+    "builder": {
+      "type": "ring-builder",
+      "settings": {
+        "eyebrow": "Design your own ring",
+        "heading": "Shape a ring around your story",
+        "subheading": "Choose your diamond shape, metal tone, carat preference, and finish, then bring the design to life with a Joyari consultation."
+      }
+    },
+    "ethical": {
+      "type": "diamond-education",
+      "settings": {
+        "eyebrow": "Ethical lab-grown diamonds",
+        "heading": "Traceable brilliance, crafted with care",
+        "subheading": "Joyari Krafted celebrates diamonds grown through advanced technology and selected for fire, scintillation, and beauty."
+      }
+    },
+    "story": {
+      "type": "luxury-story",
+      "settings": {
+        "eyebrow": "Craftsmanship",
+        "heading": "A quieter kind of luxury",
+        "text": "From the first sketch to final polish, each Joyari piece is considered for balance, wearability, and emotional permanence. The result is jewellery that feels intimate at first touch and remarkable for decades.",
+        "button_label": "Discover the Joyari Standard"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "eyebrow": "Client notes",
+        "heading": "Chosen for the most meaningful yes"
+      }
+    },
+    "trust_badges": {
+      "type": "brand-promise",
+      "blocks": {
+        "t1": {
+          "type": "promise",
+          "settings": {
+            "title": "Lifetime Care",
+            "text": "Guidance, resizing support, and careful aftercare for the life of your jewellery."
+          }
+        },
+        "t2": {
+          "type": "promise",
+          "settings": {
+            "title": "Secure Checkout",
+            "text": "Protected payments and transparent communication from order to delivery."
+          }
+        },
+        "t3": {
+          "type": "promise",
+          "settings": {
+            "title": "Made To Order",
+            "text": "Small-batch craftsmanship keeps each piece personal without artificial urgency."
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "settings": {
+        "heading": "Luxury should feel certain",
+        "subheading": "Transparent timelines, considered materials, and a support-led buying experience."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "promise",
+    "engagement",
+    "lab_diamonds",
+    "builder",
+    "ethical",
+    "story",
+    "testimonials",
+    "trust_badges"
+  ]
+}

@@ -1,0 +1,85 @@
+{% if section.settings.show_announcement and settings.announcement_text != blank %}
+  <div class="jk-announcement" role="status">
+    <span>{{ settings.announcement_text }}</span>
+  </div>
+{% endif %}
+
+<header class="jk-header" data-header>
+  <div class="jk-header__inner">
+    <a class="jk-brand" href="{{ routes.root_url }}" aria-label="{{ settings.brand_name | default: shop.name | escape }}">
+      <span class="jk-brand__mark" aria-hidden="true">JK</span>
+      <span class="jk-brand__name">{{ section.settings.logo_text | default: settings.brand_name | default: shop.name }}</span>
+    </a>
+
+    <button class="jk-nav-toggle" type="button" aria-controls="JoyariPrimaryNav" aria-expanded="false" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="visually-hidden">Menu</span>
+    </button>
+
+    <nav id="JoyariPrimaryNav" class="jk-nav" aria-label="Primary navigation" data-nav>
+      {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
+        {% for link in linklists[section.settings.menu].links %}
+          <a href="{{ link.url }}" class="jk-nav__link">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Engagement Rings</a>
+        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Lab Diamonds</a>
+        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Jewellery</a>
+        <a href="/pages/about" class="jk-nav__link">Craftsmanship</a>
+      {% endif %}
+    </nav>
+
+    <div class="jk-header__actions">
+      {% if section.settings.cta_label != blank %}
+        <a class="jk-header__cta" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_label }}
+        </a>
+      {% endif %}
+      <a class="jk-cart-link" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart.cart' | t }}">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6.5 7.5h11l-.8 12H7.3l-.8-12Z"></path>
+          <path d="M9 7.5a3 3 0 0 1 6 0"></path>
+        </svg>
+        <span>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "default": "Joyari Krafted"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Header call to action",
+      "default": "Book Consultation"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Call to action link"
+    }
+  ]
+}
+{% endschema %}

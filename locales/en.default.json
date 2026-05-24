@@ -1,0 +1,28 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close"
+    },
+    "cart": {
+      "cart": "Cart",
+      "checkout": "Checkout",
+      "empty": "Your cart is currently empty.",
+      "remove": "Remove"
+    },
+    "newsletter": {
+      "label": "Email address",
+      "button": "Join",
+      "success": "Thank you for joining Joyari Krafted."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "from_price_html": "From {{ price }}",
+      "view_details": "View details"
+    }
+  }
+}

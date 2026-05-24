@@ -1,0 +1,74 @@
+<section class="jk-section jk-story">
+  <div class="jk-story__media" aria-hidden="true">
+    <div class="jk-story__gem">
+      <svg viewBox="0 0 520 520">
+        <defs>
+          <linearGradient id="storyGold-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f9e8b4"></stop>
+            <stop offset="100%" stop-color="#a98236"></stop>
+          </linearGradient>
+        </defs>
+        <circle cx="260" cy="260" r="210" fill="none" stroke="url(#storyGold-{{ section.id }})" stroke-width="2"></circle>
+        <path d="M164 214 260 92l96 122-96 214-96-214Z" fill="#eff5f4" stroke="#c7a35a" stroke-width="3"></path>
+        <path d="M164 214h192M210 214l50 214 50-214M260 92v336" fill="none" stroke="#8a7b62" stroke-width="2"></path>
+      </svg>
+    </div>
+  </div>
+
+  <div class="jk-story__content">
+    {% if section.settings.eyebrow != blank %}
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="rte">
+      <p>{{ section.settings.text }}</p>
+    </div>
+    {% if section.settings.button_label != blank %}
+      <a class="jk-text-link" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Luxury story",
+  "tag": "section",
+  "class": "shopify-section--luxury-story",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Craftsmanship"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A quieter kind of luxury"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "From the first sketch to final polish, each Joyari piece is considered for balance, wearability, and emotional permanence."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Discover the Joyari Standard"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury story"
+    }
+  ]
+}
+{% endschema %}

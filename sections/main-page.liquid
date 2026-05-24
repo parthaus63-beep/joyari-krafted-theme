@@ -1,0 +1,32 @@
+<section class="jk-section jk-main-page">
+  <div class="jk-page-shell">
+    {% if section.settings.show_title %}
+      <p class="jk-eyebrow">{{ settings.brand_name | default: shop.name }}</p>
+      <h1>{{ page.title | default: 'Page' }}</h1>
+    {% endif %}
+
+    <div class="rte">
+      {% if page.content != blank %}
+        {{ page.content }}
+      {% else %}
+        <p>Add your page content in Shopify admin. This template keeps editorial copy spacious, elegant, and easy to read.</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main page",
+  "tag": "section",
+  "class": "shopify-section--main-page",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show page title",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

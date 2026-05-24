@@ -1,0 +1,116 @@
+<footer class="jk-footer">
+  <div class="jk-footer__top">
+    <div class="jk-footer__brand">
+      <a class="jk-brand jk-brand--footer" href="{{ routes.root_url }}">
+        <span class="jk-brand__mark" aria-hidden="true">JK</span>
+        <span class="jk-brand__name">{{ settings.brand_name | default: shop.name }}</span>
+      </a>
+      <p>{{ section.settings.brand_text }}</p>
+      <div class="jk-footer__contact">
+        {% if settings.support_email != blank %}
+          <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
+        {% endif %}
+        {% if settings.support_phone != blank %}
+          <a href="tel:{{ settings.support_phone | remove: ' ' }}">{{ settings.support_phone }}</a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="jk-footer__newsletter">
+      <p class="jk-eyebrow">{{ section.settings.newsletter_eyebrow }}</p>
+      <h2>{{ section.settings.newsletter_heading }}</h2>
+      <p>{{ section.settings.newsletter_text }}</p>
+      {% form 'customer', class: 'jk-newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="FooterNewsletterEmail">{{ 'general.newsletter.label' | t }}</label>
+        <input id="FooterNewsletterEmail" type="email" name="contact[email]" autocorrect="off" autocapitalize="off" autocomplete="email" placeholder="{{ 'general.newsletter.label' | t }}" required>
+        <button type="submit">{{ 'general.newsletter.button' | t }}</button>
+        {% if form.posted_successfully? %}
+          <p class="jk-form-message" tabindex="-1">{{ 'general.newsletter.success' | t }}</p>
+        {% endif %}
+        {% if form.errors %}
+          <p class="jk-form-message jk-form-message--error">{{ form.errors | default_errors }}</p>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="jk-footer__links">
+    <div>
+      <h3>{{ section.settings.menu_title }}</h3>
+      {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
+        {% for link in linklists[section.settings.menu].links %}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.all_products_collection_url }}">Shop All</a>
+        <a href="/pages/contact">Contact</a>
+        <a href="/pages/shipping-returns">Shipping & Returns</a>
+      {% endif %}
+    </div>
+    <div>
+      <h3>Trust</h3>
+      <span>Insured delivery</span>
+      <span>Secure checkout</span>
+      <span>Lab-grown diamond guidance</span>
+    </div>
+    <div>
+      <h3>Follow</h3>
+      {% if settings.instagram_url != blank %}
+        <a href="{{ settings.instagram_url }}" rel="noopener" target="_blank">Instagram</a>
+      {% else %}
+        <span>Instagram</span>
+      {% endif %}
+      <span>Private appointments</span>
+      <span>Custom design support</span>
+    </div>
+  </div>
+
+  <div class="jk-footer__bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ settings.brand_name | default: shop.name }}. All rights reserved.</p>
+    <p>Fine jewellery crafted with traceable lab-grown diamonds.</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "Luxury diamond jewellery designed for modern romantics, meaningful milestones, and everyday brilliance."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_eyebrow",
+      "label": "Newsletter eyebrow",
+      "default": "Private access"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Receive design notes and diamond guidance"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Join for collection previews, proposal planning notes, and care advice from Joyari Krafted."
+    },
+    {
+      "type": "text",
+      "id": "menu_title",
+      "label": "Menu title",
+      "default": "Explore"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Footer menu"
+    }
+  ]
+}
+{% endschema %}

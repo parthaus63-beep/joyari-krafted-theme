@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_title": true
+      }
+    },
+    "story": {
+      "type": "luxury-story",
+      "settings": {
+        "eyebrow": "Joyari Krafted",
+        "heading": "Jewellery with feeling, precision, and permanence",
+        "text": "Our philosophy is simple: bring together luminous diamonds, refined settings, and a deeply supported buying experience."
+      }
+    },
+    "education": {
+      "type": "diamond-education",
+      "settings": {
+        "eyebrow": "Education",
+        "heading": "Learn before you choose",
+        "subheading": "A refined guide to diamonds, metals, and customisation."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "story",
+    "education"
+  ]
+}

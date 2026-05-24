@@ -1,0 +1,103 @@
+<section class="jk-section jk-education">
+  <div class="jk-section__header">
+    {% if section.settings.eyebrow != blank %}
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h2>{{ section.settings.heading }}</h2>
+    {% if section.settings.subheading != blank %}
+      <p>{{ section.settings.subheading }}</p>
+    {% endif %}
+  </div>
+
+  <div class="jk-education__grid">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <article class="jk-education-card" {{ block.shopify_attributes }}>
+          <span>{{ forloop.index | prepend: '0' }}</span>
+          <h3>{{ block.settings.title }}</h3>
+          <p>{{ block.settings.text }}</p>
+        </article>
+      {% endfor %}
+    {% else %}
+      <article class="jk-education-card">
+        <span>01</span>
+        <h3>Certified stone details</h3>
+        <p>Give customers a clear path to understand diamond identity, specifications, and quality.</p>
+      </article>
+      <article class="jk-education-card">
+        <span>02</span>
+        <h3>Lab-grown beauty</h3>
+        <p>Lab-grown diamonds are selected for brilliance, proportion, and traceable modern origin.</p>
+      </article>
+      <article class="jk-education-card">
+        <span>03</span>
+        <h3>The 4Cs, refined</h3>
+        <p>Cut, colour, clarity, and carat are presented in a calmer, more client-friendly way.</p>
+      </article>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Diamond education",
+  "tag": "section",
+  "class": "shopify-section--diamond-education",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Ethical lab-grown diamonds"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Traceable brilliance, crafted with care"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Joyari Krafted celebrates diamonds grown through advanced technology and selected for fire, scintillation, and beauty."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "education_item",
+      "name": "Education item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Certified stone details"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Give customers a clear path to understand diamond identity, specifications, and quality."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Diamond education",
+      "blocks": [
+        {
+          "type": "education_item"
+        },
+        {
+          "type": "education_item"
+        },
+        {
+          "type": "education_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

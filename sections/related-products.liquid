@@ -1,0 +1,91 @@
+{% liquid
+  assign source_collection = product.collections.first
+  assign shown = 0
+%}
+
+<section class="jk-section jk-related-products">
+  <div class="jk-section__header jk-section__header--split">
+    <div>
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
+    {% if source_collection != blank %}
+      <a class="jk-text-link" href="{{ source_collection.url }}">View collection</a>
+    {% endif %}
+  </div>
+
+  <div class="jk-product-grid jk-product-grid--related">
+    {% if source_collection != blank and source_collection.products_count > 1 %}
+      {% for related_product in source_collection.products %}
+        {% unless related_product.id == product.id %}
+          {% if shown < section.settings.product_limit %}
+            {% assign shown = shown | plus: 1 %}
+            <article class="jk-product-card">
+              <a class="jk-product-card__media" href="{{ related_product.url }}">
+                {% if related_product.featured_media != blank %}
+                  {{ related_product.featured_media | image_url: width: 720 | image_tag: loading: 'lazy', widths: '320, 480, 720', sizes: '(min-width: 900px) 25vw, 50vw', alt: related_product.featured_media.alt | default: related_product.title }}
+                {% else %}
+                  <span class="jk-product-placeholder" aria-hidden="true"></span>
+                {% endif %}
+              </a>
+              <div class="jk-product-card__content">
+                <h3><a href="{{ related_product.url }}">{{ related_product.title }}</a></h3>
+                <p class="jk-product-card__price">{{ related_product.price | money }}</p>
+              </div>
+            </article>
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+
+    {% if shown == 0 %}
+      {% for index in (1..4) %}
+        <article class="jk-product-card jk-product-card--placeholder">
+          <div class="jk-product-card__media">
+            <span class="jk-product-placeholder" aria-hidden="true"></span>
+          </div>
+          <div class="jk-product-card__content">
+            <h3>Related Joyari piece {{ index }}</h3>
+            <p class="jk-product-card__price">$1,950.00</p>
+          </div>
+        </article>
+      {% endfor %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Related products",
+  "tag": "section",
+  "class": "shopify-section--related-products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Complete the story"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also love"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related products"
+    }
+  ]
+}
+{% endschema %}

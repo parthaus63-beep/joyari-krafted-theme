@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "cart-template",
+      "settings": {
+        "heading": "Your Joyari selection",
+        "subheading": "Review your jewellery before secure checkout."
+      }
+    },
+    "promises": {
+      "type": "brand-promise",
+      "settings": {
+        "heading": "Before it arrives, you are supported",
+        "subheading": "Clear communication, secure delivery, and careful packaging are included with every Joyari order."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promises"
+  ]
+}

@@ -1,0 +1,99 @@
+<section class="jk-section jk-testimonials">
+  <div class="jk-section__header">
+    {% if section.settings.eyebrow != blank %}
+      <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+    {% endif %}
+    <h2>{{ section.settings.heading }}</h2>
+  </div>
+
+  <div class="jk-testimonial-grid">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <figure class="jk-testimonial" {{ block.shopify_attributes }}>
+          <blockquote>{{ block.settings.quote }}</blockquote>
+          <figcaption>
+            <strong>{{ block.settings.name }}</strong>
+            <span>{{ block.settings.detail }}</span>
+          </figcaption>
+        </figure>
+      {% endfor %}
+    {% else %}
+      <figure class="jk-testimonial">
+        <blockquote>The design process felt calm, personal, and genuinely special from the first message.</blockquote>
+        <figcaption><strong>Amelia</strong><span>Custom engagement ring</span></figcaption>
+      </figure>
+      <figure class="jk-testimonial">
+        <blockquote>I understood every decision before buying, which made the final ring feel even more meaningful.</blockquote>
+        <figcaption><strong>Sofia</strong><span>Oval lab-grown diamond ring</span></figcaption>
+      </figure>
+      <figure class="jk-testimonial">
+        <blockquote>The packaging, sparkle, and support all felt beautifully considered.</blockquote>
+        <figcaption><strong>Maya</strong><span>Diamond earrings</span></figcaption>
+      </figure>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "shopify-section--testimonials",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Client notes"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Chosen for the most meaningful yes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The design process felt calm, personal, and genuinely special from the first message."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Amelia"
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail",
+          "default": "Custom engagement ring"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        },
+        {
+          "type": "testimonial"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,84 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Joyari Krafted Luxury",
+    "theme_version": "1.0.0",
+    "theme_author": "OpenAI",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://shopify.dev/docs/storefronts/themes"
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "Joyari Krafted"
+      },
+      {
+        "type": "textarea",
+        "id": "meta_description",
+        "label": "Default meta description",
+        "default": "Luxury lab-grown diamond jewellery, engagement rings, and made-to-order bridal pieces by Joyari Krafted."
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Complimentary insured delivery and consultation support on made-to-order diamond jewellery."
+      },
+      {
+        "type": "url",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      }
+    ]
+  },
+  {
+    "name": "Contact",
+    "settings": [
+      {
+        "type": "text",
+        "id": "support_email",
+        "label": "Support email",
+        "default": "care@joyarikrafted.com"
+      },
+      {
+        "type": "text",
+        "id": "support_phone",
+        "label": "Support phone",
+        "default": "+61 000 000 000"
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_ivory",
+        "label": "Ivory",
+        "default": "#fbf7ef"
+      },
+      {
+        "type": "color",
+        "id": "color_champagne",
+        "label": "Champagne gold",
+        "default": "#c7a35a"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Soft black",
+        "default": "#171512"
+      },
+      {
+        "type": "color",
+        "id": "color_beige",
+        "label": "Warm beige",
+        "default": "#e9dcc8"
+      }
+    ]
+  }
+]

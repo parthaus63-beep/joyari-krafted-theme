@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "main": {
+      "type": "luxury-product-grid",
+      "settings": {
+        "eyebrow": "Joyari collection",
+        "heading": "",
+        "subheading": "Fine diamond jewellery curated for luminous milestones and refined everyday wear.",
+        "product_limit": 24
+      }
+    },
+    "promises": {
+      "type": "brand-promise",
+      "settings": {
+        "heading": "Shop with quiet confidence",
+        "subheading": "Ethical diamonds, secure checkout, and personal support for every order."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promises"
+  ]
+}
