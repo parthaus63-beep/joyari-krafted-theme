@@ -303,16 +303,20 @@
   }
 
   function initRingSizeGuides() {
-    document.querySelectorAll('[data-ring-size-guide-open]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        openRingSizeGuide(button);
-      });
-    });
+    document.addEventListener('click', function (event) {
+      var target = event.target;
+      if (!target || typeof target.closest !== 'function') return;
 
-    document.querySelectorAll('[data-ring-size-guide-close]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        closeRingSizeGuide(button.closest('[data-ring-size-guide-modal]'));
-      });
+      var openButton = target.closest('[data-ring-size-guide-open]');
+      if (openButton) {
+        openRingSizeGuide(openButton);
+        return;
+      }
+
+      var closeButton = target.closest('[data-ring-size-guide-close]');
+      if (closeButton) {
+        closeRingSizeGuide(closeButton.closest('[data-ring-size-guide-modal]'));
+      }
     });
 
     document.addEventListener('keydown', function (event) {

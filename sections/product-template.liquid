@@ -1,40 +1,6 @@
 {% liquid
   assign selected_variant = product.selected_or_first_available_variant
   assign product_form_id = 'ProductForm-' | append: section.id
-  assign product_type_downcase = product.type | downcase
-  assign is_ring_product = false
-  assign is_non_ring_jewellery = false
-
-  if product_type_downcase contains 'ring'
-    assign is_ring_product = true
-  endif
-  if product_type_downcase contains 'earring' or product_type_downcase contains 'necklace' or product_type_downcase contains 'bracelet' or product_type_downcase contains 'pendant'
-    assign is_non_ring_jewellery = true
-  endif
-
-  for collection in product.collections
-    assign collection_handle_downcase = collection.handle | downcase
-    if collection_handle_downcase contains 'ring'
-      assign is_ring_product = true
-    endif
-    if collection_handle_downcase contains 'earring' or collection_handle_downcase contains 'necklace' or collection_handle_downcase contains 'bracelet' or collection_handle_downcase contains 'pendant'
-      assign is_non_ring_jewellery = true
-    endif
-  endfor
-
-  for tag in product.tags
-    assign tag_downcase = tag | downcase
-    if tag_downcase contains 'ring' or tag_downcase contains 'requires-ring-size'
-      assign is_ring_product = true
-    endif
-    if tag_downcase contains 'earring' or tag_downcase contains 'necklace' or tag_downcase contains 'bracelet' or tag_downcase contains 'pendant'
-      assign is_non_ring_jewellery = true
-    endif
-  endfor
-
-  if is_non_ring_jewellery
-    assign is_ring_product = false
-  endif
 %}
 
 <section class="jk-product-template" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
@@ -242,28 +208,26 @@
                 </fieldset>
               </div>
 
-              {% if is_ring_product %}
-                <div class="jk-builder-step">
-                  <div class="jk-builder-step__header">
-                    <span class="jk-builder-step__number">{% if product.has_only_default_variant %}05{% else %}06{% endif %}</span>
-                    <div>
-                      <h3>Ring size selector</h3>
-                      <p>Choose a known size or open the Joyari size guide.</p>
-                    </div>
-                  </div>
-
-                  {% liquid
-                    assign ring_size_select_id = 'RingSize-' | append: section.id
-                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
-                  %}
-                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
-
-                  <div class="jk-builder-field">
-                    <label for="Engraving-{{ section.id }}">Optional engraving</label>
-                    <input id="Engraving-{{ section.id }}" type="text" name="properties[Engraving]" maxlength="28" placeholder="Initials, date, or private note">
+              <div class="jk-builder-step">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}05{% else %}06{% endif %}</span>
+                  <div>
+                    <h3>Ring size selector</h3>
+                    <p>Temporarily shown on every product so we can confirm the Joyari size guide renders.</p>
                   </div>
                 </div>
-              {% endif %}
+
+                {% liquid
+                  assign ring_size_select_id = 'RingSize-' | append: section.id
+                  assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
+                %}
+                {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
+
+                <div class="jk-builder-field">
+                  <label for="Engraving-{{ section.id }}">Optional engraving</label>
+                  <input id="Engraving-{{ section.id }}" type="text" name="properties[Engraving]" maxlength="28" placeholder="Initials, date, or private note">
+                </div>
+              </div>
 
               <div class="jk-builder-price-summary" aria-live="polite">
                 <div>

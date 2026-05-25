@@ -1934,16 +1934,16 @@ h3 {
   gap: 10px;
 }
 
-.jk-ring-size-head {
-  display: flex;
+.jk-ring-size-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  justify-content: space-between;
-  gap: 14px;
+  gap: 10px;
 }
 
 .jk-size-guide-trigger {
-  min-height: 36px;
-  padding: 0 14px;
+  min-height: 46px;
+  padding: 0 18px;
   border: 1px solid rgba(199, 163, 90, .38);
   border-radius: 999px;
   background: rgba(255, 253, 248, .76);
@@ -3358,9 +3358,8 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .jk-ring-size-head {
-    align-items: flex-start;
-    flex-direction: column;
+  .jk-ring-size-control {
+    grid-template-columns: 1fr;
   }
 
   .jk-size-guide-trigger {
