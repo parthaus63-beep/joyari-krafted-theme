@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -6,9 +15,16 @@
         "eyebrow": "Fine lab-grown diamond jewellery",
         "heading": "Joyari Krafted",
         "subheading": "Considered engagement rings and diamond jewellery, crafted with luminous lab-grown stones and an heirloom sense of restraint.",
+        "hero_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_11_51_33_AM.png",
+        "hero_video_url": "",
+        "hero_image_alt": "Joyari Krafted diamond jewellery editorial image",
         "primary_label": "Explore Fine Jewellery",
+        "primary_link": "",
         "secondary_label": "Begin a Private Design",
-        "trust_text": "Certified lab-grown diamonds, refined settings, insured delivery, and care-led guidance from selection to aftercare."
+        "secondary_link": "",
+        "trust_text": "Certified lab-grown diamonds, refined settings, insured delivery, and care-led guidance from selection to aftercare.",
+        "caption_label": "Lab-grown centre stones",
+        "caption_heading": "Designed for lifetime wear"
       }
     },
     "promise": {
@@ -18,21 +34,24 @@
           "type": "promise",
           "settings": {
             "title": "Certified Stones",
-            "text": "Every diamond is selected for brilliance, traceability, and confidence at the moment of purchase."
+            "text": "Every diamond is selected for brilliance, traceability, and confidence at the moment of purchase.",
+            "image_alt": ""
           }
         },
         "p2": {
           "type": "promise",
           "settings": {
             "title": "Atelier Finish",
-            "text": "Settings are considered for balance, comfort, and the quiet detail expected of fine jewellery."
+            "text": "Settings are considered for balance, comfort, and the quiet detail expected of fine jewellery.",
+            "image_alt": ""
           }
         },
         "p3": {
           "type": "promise",
           "settings": {
             "title": "Care-Led Delivery",
-            "text": "Secure presentation, tracked delivery, and responsive support before and after your milestone."
+            "text": "Secure presentation, tracked delivery, and responsive support before and after your milestone.",
+            "image_alt": ""
           }
         }
       },
@@ -42,6 +61,7 @@
         "p3"
       ],
       "settings": {
+        "eyebrow": "The Joyari promise",
         "heading": "Confidence, from first glance to forever",
         "subheading": "Joyari Krafted brings together precise diamond selection, refined design, and a buying experience that feels calm, private, and assured."
       }
@@ -52,6 +72,8 @@
         "c1": {
           "type": "collection_card",
           "settings": {
+            "collection": "",
+            "image_alt": "",
             "title": "Engagement Rings",
             "text": "Solitaire, hidden halo, trilogy, and bespoke-inspired settings with refined diamond presence.",
             "badge": "Bridal Icons"
@@ -60,6 +82,8 @@
         "c2": {
           "type": "collection_card",
           "settings": {
+            "collection": "",
+            "image_alt": "",
             "title": "Wedding Bands",
             "text": "Elegant bands designed to stack, contour, or stand beautifully on their own.",
             "badge": "Forever Pieces"
@@ -68,6 +92,8 @@
         "c3": {
           "type": "collection_card",
           "settings": {
+            "collection": "",
+            "image_alt": "",
             "title": "Diamond Jewellery",
             "text": "Everyday diamond necklaces, earrings, and bracelets with a quiet luxury finish.",
             "badge": "Fine Essentials"
@@ -76,6 +102,8 @@
         "c4": {
           "type": "collection_card",
           "settings": {
+            "collection": "",
+            "image_alt": "",
             "title": "Custom Design",
             "text": "A private design pathway for clients who want a more personal diamond piece.",
             "badge": "Bespoke Service"
@@ -91,64 +119,11 @@
       "settings": {
         "eyebrow": "Curated collections",
         "heading": "A considered edit of modern diamond jewellery",
-        "subheading": "Explore signature categories designed for proposals, anniversaries, and luminous everyday wear."
-      }
-    },
-    "editorial_gallery": {
-      "type": "editorial-image-gallery",
-      "blocks": {
-        "e1": {
-          "type": "editorial_image",
-          "settings": {
-            "eyebrow": "Bridal",
-            "title": "Ring on hand",
-            "text": "Show scale, sparkle, and the intimacy of a piece worn close."
-          }
-        },
-        "e2": {
-          "type": "editorial_image",
-          "settings": {
-            "eyebrow": "Diamond detail",
-            "title": "Diamond close-up",
-            "text": "Bring facet detail, fire, and stone confidence into focus."
-          }
-        },
-        "e3": {
-          "type": "editorial_image",
-          "settings": {
-            "eyebrow": "Proposal",
-            "title": "Couple lifestyle",
-            "text": "Create an emotional bridal moment around proposals and milestones."
-          }
-        },
-        "e4": {
-          "type": "editorial_image",
-          "settings": {
-            "eyebrow": "Atelier",
-            "title": "Craftsmanship",
-            "text": "Show the quiet precision behind every setting and finish."
-          }
-        },
-        "e5": {
-          "type": "editorial_image",
-          "settings": {
-            "eyebrow": "Presentation",
-            "title": "Packaging and luxury box",
-            "text": "Make the reveal feel considered, elegant, and gift-ready."
-          }
-        }
-      },
-      "block_order": [
-        "e1",
-        "e2",
-        "e3",
-        "e4",
-        "e5"
-      ],
-      "settings": {
-        "eyebrow": "The Joyari world",
-        "heading": "A visual language for modern diamond luxury",
-        "subheading": "Upload editorial imagery for bridal, diamond, proposal, atelier, and packaging moments."
+        "subheading": "Explore signature categories designed for proposals, anniversaries, and luminous everyday wear.",
+        "engagement_image_alt": "Joyari Krafted engagement ring",
+        "wedding_image_alt": "Joyari Krafted wedding bands",
+        "diamond_jewellery_image_alt": "Joyari Krafted diamond jewellery",
+        "custom_design_image_alt": "Joyari Krafted custom design jewellery"
       }
     },
     "cinematic_story": {
@@ -157,12 +132,15 @@
         "eyebrow": "The Joyari feeling",
         "heading": "A visual world for the moment, the craft, and the reveal",
         "subheading": "Large cinematic panels give the homepage a more emotional luxury rhythm while your final imagery is still being prepared.",
+        "proposal_image_alt": "Joyari Krafted proposal moment",
         "proposal_eyebrow": "Proposal story",
         "proposal_heading": "Designed for the moment everything changes",
         "proposal_text": "A place for ring-on-hand, proposal, or couple imagery that helps clients picture the jewellery in real life.",
+        "craftsmanship_image_alt": "Joyari Krafted atelier craftsmanship",
         "craftsmanship_eyebrow": "Atelier detail",
         "craftsmanship_heading": "Every proportion is considered",
         "craftsmanship_text": "Use atelier, stone, bench, or finishing imagery to communicate quiet precision.",
+        "packaging_image_alt": "Joyari Krafted packaging and certificate",
         "packaging_eyebrow": "Presentation",
         "packaging_heading": "The reveal is part of the experience",
         "packaging_text": "Show the box, certificate, care card, or final delivery presentation that makes the purchase feel complete."
@@ -174,6 +152,23 @@
         "eyebrow": "Lab-grown diamond jewellery",
         "heading": "Modern brilliance, timeless restraint",
         "subheading": "A polished edit for clients who value traceable stones, elegant proportions, and enduring design.",
+        "collection": "",
+        "collection_banner_image_alt": "",
+        "collection_banner_eyebrow": "Joyari collection",
+        "grid_heading": "The collection edit",
+        "collection_intro_image_alt": "Joyari Krafted collection editorial image",
+        "collection_intro_eyebrow": "The edit",
+        "collection_intro_heading": "Designed to feel refined from every angle",
+        "collection_intro_text": "Use this visual space for campaign imagery, ring-on-hand detail, or a close-up that explains the mood of the collection.",
+        "collection_lifestyle_image_alt": "Joyari Krafted luxury lifestyle image",
+        "collection_lifestyle_eyebrow": "How it wears",
+        "collection_lifestyle_heading": "Fine jewellery made for real moments",
+        "collection_lifestyle_text": "Add lifestyle, proposal, packaging, or editorial imagery to make collection pages feel immersive before the product grid begins.",
+        "fallback_product_image_alt": "Joyari Krafted diamond jewellery",
+        "placeholder_image_1_alt": "",
+        "placeholder_image_2_alt": "",
+        "placeholder_image_3_alt": "",
+        "placeholder_image_4_alt": "",
         "product_limit": 8
       }
     },
@@ -211,7 +206,8 @@
         "eyebrow": "Private design pathway",
         "heading": "A calm way to create something deeply personal",
         "subheading": "A refined design journey helps clients move from first idea to final piece with clarity, confidence, and emotional ease.",
-        "button_label": "Begin with a setting"
+        "button_label": "Begin with a setting",
+        "button_link": ""
       }
     },
     "ethical": {
@@ -228,7 +224,71 @@
         "eyebrow": "Craftsmanship",
         "heading": "A quieter kind of luxury",
         "text": "From first sketch to final polish, each Joyari piece is considered for balance, wearability, and emotional permanence. The result is jewellery that feels intimate at first touch and remarkable for decades.",
-        "button_label": "Discover the Joyari Standard"
+        "image_alt": "Joyari Krafted jewellery craftsmanship",
+        "button_label": "Discover the Joyari Standard",
+        "button_link": ""
+      }
+    },
+    "editorial_gallery": {
+      "type": "editorial-image-gallery",
+      "blocks": {
+        "e1": {
+          "type": "editorial_image",
+          "settings": {
+            "image_alt": "",
+            "eyebrow": "Bridal",
+            "title": "Ring on hand",
+            "text": "Show scale, sparkle, and the intimacy of a piece worn close."
+          }
+        },
+        "e2": {
+          "type": "editorial_image",
+          "settings": {
+            "image_alt": "",
+            "eyebrow": "Diamond detail",
+            "title": "Diamond close-up",
+            "text": "Bring facet detail, fire, and stone confidence into focus."
+          }
+        },
+        "e3": {
+          "type": "editorial_image",
+          "settings": {
+            "image_alt": "",
+            "eyebrow": "Proposal",
+            "title": "Couple lifestyle",
+            "text": "Create an emotional bridal moment around proposals and milestones."
+          }
+        },
+        "e4": {
+          "type": "editorial_image",
+          "settings": {
+            "image_alt": "",
+            "eyebrow": "Atelier",
+            "title": "Craftsmanship",
+            "text": "Show the quiet precision behind every setting and finish."
+          }
+        },
+        "e5": {
+          "type": "editorial_image",
+          "settings": {
+            "image_alt": "",
+            "eyebrow": "Presentation",
+            "title": "Packaging and luxury box",
+            "text": "Make the reveal feel considered, elegant, and gift-ready."
+          }
+        }
+      },
+      "block_order": [
+        "e1",
+        "e2",
+        "e3",
+        "e4",
+        "e5"
+      ],
+      "settings": {
+        "eyebrow": "The Joyari world",
+        "heading": "A visual language for modern diamond luxury",
+        "subheading": "Upload editorial imagery for bridal, diamond, proposal, atelier, and packaging moments."
       }
     },
     "trust_faq": {
@@ -304,6 +364,7 @@
         "j1": {
           "type": "journal_card",
           "settings": {
+            "image_alt": "",
             "eyebrow": "Diamond guide",
             "title": "Choosing a diamond shape",
             "text": "A visual guide to proportion, silhouette, and the feeling each diamond shape creates."
@@ -312,6 +373,7 @@
         "j2": {
           "type": "journal_card",
           "settings": {
+            "image_alt": "",
             "eyebrow": "Proposal notes",
             "title": "Planning the reveal",
             "text": "A place for proposal styling, ring-on-hand imagery, and thoughtful milestone guidance."
@@ -320,6 +382,7 @@
         "j3": {
           "type": "journal_card",
           "settings": {
+            "image_alt": "",
             "eyebrow": "Atelier",
             "title": "Behind the polish",
             "text": "Show craftsmanship, packaging, certification, and care-led details in an editorial way."
@@ -344,21 +407,24 @@
           "type": "promise",
           "settings": {
             "title": "Lifetime Care",
-            "text": "Aftercare guidance and support designed to keep your jewellery luminous for years."
+            "text": "Aftercare guidance and support designed to keep your jewellery luminous for years.",
+            "image_alt": ""
           }
         },
         "t2": {
           "type": "promise",
           "settings": {
             "title": "Secure Checkout",
-            "text": "Protected payment flow and clear communication from order to delivery."
+            "text": "Protected payment flow and clear communication from order to delivery.",
+            "image_alt": ""
           }
         },
         "t3": {
           "type": "promise",
           "settings": {
             "title": "Made To Order",
-            "text": "Measured production keeps each piece considered, personal, and carefully finished."
+            "text": "Measured production keeps each piece considered, personal, and carefully finished.",
+            "image_alt": ""
           }
         }
       },
@@ -368,6 +434,7 @@
         "t3"
       ],
       "settings": {
+        "eyebrow": "The Joyari promise",
         "heading": "Luxury should feel certain",
         "subheading": "Clear timelines, considered materials, and a support-led buying experience for meaningful jewellery."
       }
