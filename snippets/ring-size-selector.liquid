@@ -1,0 +1,89 @@
+{% liquid
+  assign ring_size_select_id = select_id | default: 'JoyariRingSize'
+  assign ring_size_modal_id = modal_id | default: ring_size_select_id | append: '-Guide'
+  assign ring_size_rows = 'F|US 3|44|14.1|44.2,G|US 3.5|45|14.4|45.5,H|US 4|46.5|14.8|46.8,I|US 4.5|47.5|15.2|48.0,J|US 4.75|49|15.5|48.7,K|US 5.25|50|15.9|50.0,L|US 5.75|51|16.3|51.2,M|US 6.25|52|16.7|52.5,N|US 6.75|54|17.1|53.8,O|US 7|55|17.5|55.1,P|US 7.5|56|17.9|56.3,Q|US 8|57|18.3|57.6,R|US 8.5|58.5|18.7|58.9,S|US 9|60|19.1|60.2,T|US 9.5|61|19.5|61.4,U|US 10|62.5|19.9|62.7,V|US 10.5|63.5|20.3|64.0,W|US 11|65|20.7|65.3,X|US 11.5|66|21.1|66.6,Y|US 12|67.5|21.5|67.8,Z|US 12.5|69|21.9|69.1,Z+1|US 13|70|22.3|70.4,Z+2|US 13.5|71|22.7|71.7' | split: ','
+%}
+
+<div class="jk-builder-field jk-builder-field--ring-size">
+  <div class="jk-ring-size-head">
+    <label for="{{ ring_size_select_id }}">Ring size</label>
+    <button
+      type="button"
+      class="jk-size-guide-trigger"
+      aria-haspopup="dialog"
+      aria-controls="{{ ring_size_modal_id }}"
+      data-ring-size-guide-open="{{ ring_size_modal_id }}"
+    >
+      Size Guide
+    </button>
+  </div>
+
+  <select id="{{ ring_size_select_id }}" name="properties[Ring size]" data-builder-choice>
+    <option value="Need guidance">Need guidance</option>
+    {% for row in ring_size_rows %}
+      {% assign columns = row | split: '|' %}
+      <option value="{{ columns[1] }} / AUS-UK {{ columns[0] }} / EU {{ columns[2] }}">{{ columns[1] }} / AUS-UK {{ columns[0] }} / EU {{ columns[2] }}</option>
+    {% endfor %}
+  </select>
+  <p class="jk-ring-size-assurance">Your selected ring size is saved with the order for Joyari Krafted review before crafting.</p>
+</div>
+
+<div
+  id="{{ ring_size_modal_id }}"
+  class="jk-size-guide-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="{{ ring_size_modal_id }}-Title"
+  hidden
+  data-ring-size-guide-modal
+>
+  <button type="button" class="jk-size-guide-modal__backdrop" aria-label="Close ring size guide" data-ring-size-guide-close></button>
+  <div class="jk-size-guide-modal__panel" role="document">
+    <div class="jk-size-guide-modal__header">
+      <div>
+        <p class="jk-eyebrow">Joyari size guide</p>
+        <h2 id="{{ ring_size_modal_id }}-Title">Ring Size Conversion Chart</h2>
+        <p>Use this guide as a calm starting point. If you are unsure, choose “Need guidance” and Joyari Krafted can confirm sizing before crafting.</p>
+      </div>
+      <button type="button" class="jk-size-guide-modal__close" aria-label="Close ring size guide" data-ring-size-guide-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="jk-size-guide-table-wrap">
+      <table class="jk-size-guide-table">
+        <thead>
+          <tr>
+            <th scope="col">AUS/UK size</th>
+            <th scope="col">US/Canada size</th>
+            <th scope="col">EU size</th>
+            <th scope="col">Inside diameter mm</th>
+            <th scope="col">Inside circumference mm</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in ring_size_rows %}
+            {% assign columns = row | split: '|' %}
+            <tr>
+              <td>{{ columns[0] }}</td>
+              <td>{{ columns[1] }}</td>
+              <td>{{ columns[2] }}</td>
+              <td>{{ columns[3] }}</td>
+              <td>{{ columns[4] }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="jk-size-guide-notes">
+      <h3>Helpful measuring notes</h3>
+      <ul>
+        <li>Measure at the end of the day.</li>
+        <li>Avoid measuring cold fingers.</li>
+        <li>Wider bands may need half size up.</li>
+        <li>If between sizes, choose the larger size.</li>
+      </ul>
+    </div>
+  </div>
+</div>

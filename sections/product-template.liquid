@@ -1,6 +1,40 @@
 {% liquid
   assign selected_variant = product.selected_or_first_available_variant
   assign product_form_id = 'ProductForm-' | append: section.id
+  assign product_type_downcase = product.type | downcase
+  assign is_ring_product = false
+  assign is_non_ring_jewellery = false
+
+  if product_type_downcase contains 'ring'
+    assign is_ring_product = true
+  endif
+  if product_type_downcase contains 'earring' or product_type_downcase contains 'necklace' or product_type_downcase contains 'bracelet' or product_type_downcase contains 'pendant'
+    assign is_non_ring_jewellery = true
+  endif
+
+  for collection in product.collections
+    assign collection_handle_downcase = collection.handle | downcase
+    if collection_handle_downcase contains 'ring'
+      assign is_ring_product = true
+    endif
+    if collection_handle_downcase contains 'earring' or collection_handle_downcase contains 'necklace' or collection_handle_downcase contains 'bracelet' or collection_handle_downcase contains 'pendant'
+      assign is_non_ring_jewellery = true
+    endif
+  endfor
+
+  for tag in product.tags
+    assign tag_downcase = tag | downcase
+    if tag_downcase contains 'ring' or tag_downcase contains 'requires-ring-size'
+      assign is_ring_product = true
+    endif
+    if tag_downcase contains 'earring' or tag_downcase contains 'necklace' or tag_downcase contains 'bracelet' or tag_downcase contains 'pendant'
+      assign is_non_ring_jewellery = true
+    endif
+  endfor
+
+  if is_non_ring_jewellery
+    assign is_ring_product = false
+  endif
 %}
 
 <section class="jk-product-template" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
@@ -208,38 +242,28 @@
                 </fieldset>
               </div>
 
-              <div class="jk-builder-step">
-                <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}05{% else %}06{% endif %}</span>
-                  <div>
-                    <h3>Ring size selector</h3>
-                    <p>Choose a known size or request Joyari sizing guidance.</p>
+              {% if is_ring_product %}
+                <div class="jk-builder-step">
+                  <div class="jk-builder-step__header">
+                    <span class="jk-builder-step__number">{% if product.has_only_default_variant %}05{% else %}06{% endif %}</span>
+                    <div>
+                      <h3>Ring size selector</h3>
+                      <p>Choose a known size or open the Joyari size guide.</p>
+                    </div>
+                  </div>
+
+                  {% liquid
+                    assign ring_size_select_id = 'RingSize-' | append: section.id
+                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
+                  %}
+                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
+
+                  <div class="jk-builder-field">
+                    <label for="Engraving-{{ section.id }}">Optional engraving</label>
+                    <input id="Engraving-{{ section.id }}" type="text" name="properties[Engraving]" maxlength="28" placeholder="Initials, date, or private note">
                   </div>
                 </div>
-
-                <div class="jk-builder-field jk-builder-field--split">
-                  <label for="RingSize-{{ section.id }}">Ring size</label>
-                  <select id="RingSize-{{ section.id }}" name="properties[Ring size]" data-builder-choice>
-                    <option value="Need guidance">Need guidance</option>
-                    <option value="US 4">US 4</option>
-                    <option value="US 4.5">US 4.5</option>
-                    <option value="US 5">US 5</option>
-                    <option value="US 5.5">US 5.5</option>
-                    <option value="US 6">US 6</option>
-                    <option value="US 6.5">US 6.5</option>
-                    <option value="US 7">US 7</option>
-                    <option value="US 7.5">US 7.5</option>
-                    <option value="US 8">US 8</option>
-                    <option value="US 8.5">US 8.5</option>
-                    <option value="US 9">US 9</option>
-                  </select>
-                </div>
-
-                <div class="jk-builder-field">
-                  <label for="Engraving-{{ section.id }}">Optional engraving</label>
-                  <input id="Engraving-{{ section.id }}" type="text" name="properties[Engraving]" maxlength="28" placeholder="Initials, date, or private note">
-                </div>
-              </div>
+              {% endif %}
 
               <div class="jk-builder-price-summary" aria-live="polite">
                 <div>

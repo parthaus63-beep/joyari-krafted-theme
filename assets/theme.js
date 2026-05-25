@@ -278,8 +278,53 @@
     });
   }
 
+  function closeRingSizeGuide(modal) {
+    if (!modal) return;
+    modal.classList.remove('is-open');
+    modal.setAttribute('hidden', '');
+
+    if (modal._joyariReturnFocus && typeof modal._joyariReturnFocus.focus === 'function') {
+      modal._joyariReturnFocus.focus();
+    }
+  }
+
+  function openRingSizeGuide(button) {
+    var modalId = button.getAttribute('data-ring-size-guide-open');
+    var modal = modalId ? document.getElementById(modalId) : null;
+    if (!modal) return;
+
+    modal._joyariReturnFocus = button;
+    modal.removeAttribute('hidden');
+    window.requestAnimationFrame(function () {
+      modal.classList.add('is-open');
+      var closeButton = modal.querySelector('[data-ring-size-guide-close]:not(.jk-size-guide-modal__backdrop)');
+      if (closeButton) closeButton.focus();
+    });
+  }
+
+  function initRingSizeGuides() {
+    document.querySelectorAll('[data-ring-size-guide-open]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        openRingSizeGuide(button);
+      });
+    });
+
+    document.querySelectorAll('[data-ring-size-guide-close]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        closeRingSizeGuide(button.closest('[data-ring-size-guide-modal]'));
+      });
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      var openModal = document.querySelector('[data-ring-size-guide-modal].is-open');
+      if (openModal) closeRingSizeGuide(openModal);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initNavigation();
+    initRingSizeGuides();
     document.querySelectorAll('[data-product-builder]').forEach(initProductBuilder);
     document.querySelectorAll('[data-builder-showcase]').forEach(initBuilderShowcase);
   });
