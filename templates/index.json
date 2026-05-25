@@ -72,7 +72,8 @@
         "c1": {
           "type": "collection_card",
           "settings": {
-            "collection": "",
+            "collection": "engagement-ring",
+            "image": "shopify://shop_images/02_engagement_rings.png",
             "image_alt": "",
             "title": "Engagement Rings",
             "text": "Solitaire, hidden halo, trilogy, and bespoke-inspired settings with refined diamond presence.",
@@ -83,6 +84,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
+            "image": "shopify://shop_images/03_wedding_bands.png",
             "image_alt": "",
             "title": "Wedding Bands",
             "text": "Elegant bands designed to stack, contour, or stand beautifully on their own.",
@@ -93,6 +95,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
+            "image": "shopify://shop_images/04_diamond_jewellery_necklace.png",
             "image_alt": "",
             "title": "Diamond Jewellery",
             "text": "Everyday diamond necklaces, earrings, and bracelets with a quiet luxury finish.",
