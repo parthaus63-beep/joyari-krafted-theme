@@ -1,6 +1,51 @@
 {% liquid
   assign selected_variant = product.selected_or_first_available_variant
   assign product_form_id = 'JoyariProductBuilderForm-' | append: section.id
+  assign product_type_downcase = product.type | downcase
+  assign product_title_downcase = product.title | downcase
+  assign is_ring_product = false
+  assign is_non_ring_jewellery = false
+
+  if product_type_downcase contains 'earring' or product_type_downcase contains 'necklace' or product_type_downcase contains 'bracelet' or product_type_downcase contains 'pendant'
+    assign is_non_ring_jewellery = true
+  endif
+
+  if product_title_downcase contains 'earring' or product_title_downcase contains 'necklace' or product_title_downcase contains 'bracelet' or product_title_downcase contains 'pendant'
+    assign is_non_ring_jewellery = true
+  endif
+
+  unless is_non_ring_jewellery
+    if product_type_downcase contains 'ring' or product_title_downcase contains 'ring'
+      assign is_ring_product = true
+    endif
+  endunless
+
+  for collection in product.collections
+    assign collection_handle_downcase = collection.handle | downcase
+    assign collection_title_downcase = collection.title | downcase
+    if collection_handle_downcase contains 'earring' or collection_handle_downcase contains 'necklace' or collection_handle_downcase contains 'bracelet' or collection_handle_downcase contains 'pendant' or collection_title_downcase contains 'earring' or collection_title_downcase contains 'necklace' or collection_title_downcase contains 'bracelet' or collection_title_downcase contains 'pendant'
+      assign is_non_ring_jewellery = true
+    elsif collection_handle_downcase contains 'ring' or collection_title_downcase contains 'ring'
+      assign is_ring_product = true
+    endif
+  endfor
+
+  for tag in product.tags
+    assign tag_downcase = tag | downcase
+    if tag_downcase contains 'earring' or tag_downcase contains 'necklace' or tag_downcase contains 'bracelet' or tag_downcase contains 'pendant'
+      assign is_non_ring_jewellery = true
+    elsif tag_downcase == 'ring' or tag_downcase contains 'ring' or tag_downcase == 'requires-ring-size'
+      assign is_ring_product = true
+    endif
+  endfor
+
+  assign show_ring_size_selector = true
+  if section.settings.show_ring_size_on_all_products == false
+    assign show_ring_size_selector = false
+    if is_ring_product and is_non_ring_jewellery == false
+      assign show_ring_size_selector = true
+    endif
+  endif
 %}
 
 <section class="jk-product-template jk-product-builder-main" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
@@ -117,9 +162,33 @@
                 </div>
               {% endunless %}
 
+              {% if show_ring_size_selector %}
+                <div class="jk-builder-step jk-builder-step--ring-size">
+                  <div class="jk-builder-step__header">
+                    <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
+                    <div>
+                      <h3>Ring size</h3>
+                      <p>Select your preferred fit. This is saved with the order and does not change the Shopify variant.</p>
+                    </div>
+                  </div>
+
+                  {% liquid
+                    assign ring_size_select_id = 'RingSize-' | append: section.id
+                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
+                  %}
+                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
+                </div>
+              {% endif %}
+
               <div class="jk-builder-step jk-builder-step--custom-nudge">
                 <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
+                  <span class="jk-builder-step__number">
+                    {% if show_ring_size_selector %}
+                      {% if product.has_only_default_variant %}02{% else %}03{% endif %}
+                    {% else %}
+                      {% if product.has_only_default_variant %}01{% else %}02{% endif %}
+                    {% endif %}
+                  </span>
                   <div>
                     <h3>Need a custom version?</h3>
                     <p>Prefer a different metal, size, diamond shape or personal detail? Share your vision and our team will guide you.</p>
@@ -195,6 +264,12 @@
       "id": "builder_heading",
       "label": "Builder heading",
       "default": "Design your Joyari piece"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_ring_size_on_all_products",
+      "label": "Show ring size selector on all products temporarily",
+      "default": true
     },
     {
       "type": "number",

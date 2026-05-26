@@ -1,3 +1,21 @@
+{% liquid
+  assign engagement_rings_url = routes.collections_url | append: '/engagement-rings'
+  assign solitaire_rings_url = routes.collections_url | append: '/solitaire-rings'
+  assign halo_rings_url = routes.collections_url | append: '/halo-rings'
+  assign custom_design_url = routes.collections_url | append: '/custom-design'
+  assign wedding_bands_url = routes.collections_url | append: '/wedding-bands'
+  assign diamond_bands_url = routes.collections_url | append: '/diamond-bands'
+  assign eternity_bands_url = routes.collections_url | append: '/eternity-bands'
+  assign mens_wedding_bands_url = routes.collections_url | append: '/mens-wedding-bands'
+  assign rings_url = routes.collections_url | append: '/rings'
+  assign earrings_url = routes.collections_url | append: '/earrings'
+  assign bracelets_url = routes.collections_url | append: '/bracelets'
+  assign necklaces_url = routes.collections_url | append: '/necklaces'
+  assign diamonds_url = routes.collections_url | append: '/diamonds'
+  assign lab_diamonds_url = routes.collections_url | append: '/lab-grown-diamonds'
+  assign diamond_jewellery_url = routes.collections_url | append: '/diamond-jewellery'
+%}
+
 {% if section.settings.show_announcement and settings.announcement_text != blank %}
   <div class="jk-announcement" role="status">
     <span>{{ settings.announcement_text }}</span>
@@ -6,52 +24,114 @@
 
 <header class="jk-header" data-header>
   <div class="jk-header__inner">
+    <button class="jk-nav-toggle" type="button" aria-controls="JoyariMobileMenu" aria-expanded="false" data-nav-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="visually-hidden">Open menu</span>
+    </button>
+
     <a class="jk-brand" href="{{ routes.root_url }}" aria-label="{{ settings.brand_name | default: shop.name | escape }}">
       <span class="jk-brand__mark" aria-hidden="true">JK</span>
       <span class="jk-brand__name">{{ section.settings.logo_text | default: settings.brand_name | default: shop.name }}</span>
     </a>
 
-    <button class="jk-nav-toggle" type="button" aria-controls="JoyariPrimaryNav" aria-expanded="false" data-nav-toggle>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span class="visually-hidden">Menu</span>
-    </button>
-
-    <nav id="JoyariPrimaryNav" class="jk-nav" aria-label="Primary navigation" data-nav>
-      {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
-        {% for link in linklists[section.settings.menu].links %}
-          <a href="{{ link.url }}" class="jk-nav__link">{{ link.title }}</a>
-        {% endfor %}
-      {% else %}
-        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Engagement</a>
-        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Wedding</a>
-        <a href="{{ routes.all_products_collection_url }}" class="jk-nav__link">Fine Jewellery</a>
-        <a href="/pages/about" class="jk-nav__link">The Atelier</a>
-        <a href="/pages/contact" class="jk-nav__link">Client Care</a>
-      {% endif %}
+    <nav id="JoyariPrimaryNav" class="jk-nav" aria-label="Primary navigation">
+      <div class="jk-nav__item jk-nav__item--dropdown">
+        <a href="{{ engagement_rings_url }}" class="jk-nav__link">Engagement Rings</a>
+        <div class="jk-nav-dropdown" aria-label="Engagement Rings menu">
+          <a href="{{ engagement_rings_url }}">All Engagement Rings</a>
+          <a href="{{ solitaire_rings_url }}">Solitaire Rings</a>
+          <a href="{{ halo_rings_url }}">Halo Rings</a>
+          <a href="{{ custom_design_url }}">Design Your Own Ring</a>
+        </div>
+      </div>
+      <div class="jk-nav__item jk-nav__item--dropdown">
+        <a href="{{ wedding_bands_url }}" class="jk-nav__link">Wedding Bands</a>
+        <div class="jk-nav-dropdown" aria-label="Wedding Bands menu">
+          <a href="{{ wedding_bands_url }}">All Wedding Bands</a>
+          <a href="{{ diamond_bands_url }}">Diamond Bands</a>
+          <a href="{{ eternity_bands_url }}">Eternity Bands</a>
+          <a href="{{ mens_wedding_bands_url }}">Men's Bands</a>
+        </div>
+      </div>
+      <a href="{{ rings_url }}" class="jk-nav__link">Rings</a>
+      <a href="{{ earrings_url }}" class="jk-nav__link">Earrings</a>
+      <a href="{{ bracelets_url }}" class="jk-nav__link">Bracelets</a>
+      <a href="{{ necklaces_url }}" class="jk-nav__link">Necklaces</a>
+      <div class="jk-nav__item jk-nav__item--dropdown">
+        <a href="{{ diamonds_url }}" class="jk-nav__link">Diamonds</a>
+        <div class="jk-nav-dropdown" aria-label="Diamond Jewellery menu">
+          <a href="{{ diamonds_url }}">Certified Diamonds</a>
+          <a href="{{ lab_diamonds_url }}">Lab-Grown Diamonds</a>
+          <a href="{{ diamond_jewellery_url }}">Diamond Jewellery</a>
+          <a href="/pages/education">Diamond Education</a>
+        </div>
+      </div>
+      <a href="/pages/education" class="jk-nav__link">Education</a>
+      <a href="/pages/contact" class="jk-nav__link">Contact</a>
     </nav>
 
     <div class="jk-header__actions">
-      {% if section.settings.cta_label != blank %}
-        <a class="jk-header__cta" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
-          {{ section.settings.cta_label }}
-        </a>
-      {% endif %}
-      <a class="jk-account-link" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{% if customer %}Account{% else %}Sign in{% endif %}">
+      <a class="jk-header-icon-link" href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="5.8"></circle>
+          <path d="m15 15 4.4 4.4"></path>
+        </svg>
+        <span>Search</span>
+      </a>
+      <a class="jk-account-link jk-header-icon-link" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{% if customer %}Account{% else %}Sign in{% endif %}">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 12.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
           <path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path>
         </svg>
-        <span>{% if customer %}Account{% else %}Sign in{% endif %}</span>
+        <span>Account</span>
       </a>
-      <a class="jk-cart-link" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart.cart' | t }}">
+      <a class="jk-header-icon-link" href="/pages/wishlist" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.1 5.9a5 5 0 0 0-7.1 0l-1 1-1-1a5 5 0 0 0-7.1 7.1l8.1 8.1 8.1-8.1a5 5 0 0 0 0-7.1Z"></path>
+        </svg>
+        <span>Wishlist</span>
+      </a>
+      <a class="jk-cart-link jk-header-icon-link" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart.cart' | t }}">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6.5 7.5h11l-.8 12H7.3l-.8-12Z"></path>
           <path d="M9 7.5a3 3 0 0 1 6 0"></path>
         </svg>
-        <span>{{ cart.item_count }}</span>
+        <span>Cart</span>
+        <strong>{{ cart.item_count }}</strong>
       </a>
+      <button class="jk-currency-selector" type="button" aria-label="Currency selector placeholder">AUD</button>
+    </div>
+  </div>
+
+  <div id="JoyariMobileMenu" class="jk-mobile-drawer" hidden data-mobile-drawer>
+    <button type="button" class="jk-mobile-drawer__backdrop" aria-label="Close menu" data-nav-close></button>
+    <div class="jk-mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <div class="jk-mobile-drawer__header">
+        <span class="jk-mobile-drawer__title">{{ section.settings.logo_text | default: settings.brand_name | default: shop.name }}</span>
+        <button type="button" class="jk-mobile-drawer__close" aria-label="Close menu" data-nav-close>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <nav class="jk-mobile-menu" aria-label="Mobile navigation links">
+        <a href="{{ routes.root_url }}" class="jk-mobile-menu__link" data-nav-link>Home</a>
+        <a href="{{ engagement_rings_url }}" class="jk-mobile-menu__link" data-nav-link>Engagement Rings</a>
+        <a href="{{ wedding_bands_url }}" class="jk-mobile-menu__link" data-nav-link>Wedding Bands</a>
+        <a href="{{ diamond_jewellery_url }}" class="jk-mobile-menu__link" data-nav-link>Diamond Jewellery</a>
+        <a href="{{ custom_design_url }}" class="jk-mobile-menu__link" data-nav-link>Custom Design</a>
+        <a href="/pages/about" class="jk-mobile-menu__link" data-nav-link>About</a>
+        <a href="/pages/contact" class="jk-mobile-menu__link" data-nav-link>Contact</a>
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="jk-mobile-menu__link" data-nav-link>Account</a>
+        <a href="{{ routes.cart_url }}" class="jk-mobile-menu__link" data-nav-link>Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
+      </nav>
+
+      <div class="jk-mobile-drawer__utility">
+        <a href="{{ routes.search_url }}" data-nav-link>Search</a>
+        <a href="/pages/wishlist" data-nav-link>Wishlist</a>
+        <span>Currency AUD</span>
+      </div>
     </div>
   </div>
 

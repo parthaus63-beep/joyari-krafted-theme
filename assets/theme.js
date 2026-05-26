@@ -268,13 +268,66 @@
   }
 
   function initNavigation() {
+    var header = document.querySelector('[data-header]');
     var toggle = document.querySelector('[data-nav-toggle]');
-    var nav = document.querySelector('[data-nav]');
-    if (!toggle || !nav) return;
+    var drawer = document.querySelector('[data-mobile-drawer]');
+    if (!toggle || !drawer) return;
+
+    function lockScroll(isLocked) {
+      document.documentElement.classList.toggle('jk-menu-lock', isLocked);
+      document.body.classList.toggle('jk-menu-lock', isLocked);
+    }
+
+    function setMenuOpen(isOpen) {
+      window.clearTimeout(drawer._joyariHideTimer);
+
+      if (isOpen) {
+        drawer.hidden = false;
+        window.requestAnimationFrame(function () {
+          drawer.classList.add('is-open');
+          if (header) header.classList.add('is-menu-open');
+          toggle.setAttribute('aria-expanded', 'true');
+          lockScroll(true);
+
+          var closeButton = drawer.querySelector('[data-nav-close]:not(.jk-mobile-drawer__backdrop)');
+          if (closeButton) closeButton.focus();
+        });
+        return;
+      }
+
+      drawer.classList.remove('is-open');
+      if (header) header.classList.remove('is-menu-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      lockScroll(false);
+
+      drawer._joyariHideTimer = window.setTimeout(function () {
+        if (!drawer.classList.contains('is-open')) {
+          drawer.hidden = true;
+        }
+      }, 320);
+    }
 
     toggle.addEventListener('click', function () {
-      var isOpen = nav.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', String(isOpen));
+      setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    drawer.querySelectorAll('[data-nav-close], [data-nav-link]').forEach(function (element) {
+      element.addEventListener('click', function () {
+        setMenuOpen(false);
+      });
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && drawer.classList.contains('is-open')) {
+        setMenuOpen(false);
+        toggle.focus();
+      }
+    });
+
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 820 && drawer.classList.contains('is-open')) {
+        setMenuOpen(false);
+      }
     });
   }
 
