@@ -57,39 +57,13 @@
           %}
 
           {% if link.links.size > 0 %}
-            <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown>
+            <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown data-desktop-dropdown-target="{{ desktop_dropdown_id }}">
               <div class="jk-nav__parent">
                 <a href="{{ link.url }}" class="jk-nav__link" data-desktop-dropdown-link data-menu-link>{{ link.title }}</a>
                 <button class="jk-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="{{ desktop_dropdown_id }}" data-desktop-dropdown-toggle>
                   <span class="visually-hidden">Open {{ link.title }} menu</span>
                   <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
                 </button>
-              </div>
-
-              <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" aria-hidden="true" data-desktop-dropdown-panel>
-                <div class="jk-nav-dropdown__panel">
-                  <div class="jk-nav-dropdown__header">
-                    <span class="jk-nav-dropdown__eyebrow">Joyari Krafted</span>
-                    <a class="jk-nav-dropdown__title" href="{{ link.url }}" data-menu-link>View all {{ link.title }}</a>
-                  </div>
-
-                  <div class="jk-nav-dropdown__inner">
-                    {% for child_link in link.links %}
-                      {% if child_link.links.size > 0 %}
-                        <div class="jk-nav-dropdown__group">
-                          <a class="jk-nav-dropdown__heading" href="{{ child_link.url }}" data-menu-link>{{ child_link.title }}</a>
-                          <div class="jk-nav-dropdown__children">
-                            {% for grandchild_link in child_link.links %}
-                              <a class="jk-nav-dropdown__link" href="{{ grandchild_link.url }}" data-menu-link>{{ grandchild_link.title }}</a>
-                            {% endfor %}
-                          </div>
-                        </div>
-                      {% else %}
-                        <a class="jk-nav-dropdown__link" href="{{ child_link.url }}" data-menu-link>{{ child_link.title }}</a>
-                      {% endif %}
-                    {% endfor %}
-                  </div>
-                </div>
               </div>
             </div>
           {% else %}
@@ -138,6 +112,44 @@
     </div>
   {% endif %}
 </header>
+
+{% if primary_menu.links.size > 0 %}
+  <div class="jk-desktop-dropdown-layer" data-desktop-dropdown-layer>
+    {% for link in primary_menu.links %}
+      {% if link.links.size > 0 %}
+        {% liquid
+          assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
+        %}
+
+        <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" aria-hidden="true" data-desktop-dropdown-panel>
+          <div class="jk-nav-dropdown__panel">
+            <div class="jk-nav-dropdown__header">
+              <span class="jk-nav-dropdown__eyebrow">Joyari Krafted</span>
+              <a class="jk-nav-dropdown__title" href="{{ link.url }}" data-menu-link>View all {{ link.title }}</a>
+            </div>
+
+            <div class="jk-nav-dropdown__inner">
+              {% for child_link in link.links %}
+                {% if child_link.links.size > 0 %}
+                  <div class="jk-nav-dropdown__group">
+                    <a class="jk-nav-dropdown__heading" href="{{ child_link.url }}" data-menu-link>{{ child_link.title }}</a>
+                    <div class="jk-nav-dropdown__children">
+                      {% for grandchild_link in child_link.links %}
+                        <a class="jk-nav-dropdown__link" href="{{ grandchild_link.url }}" data-menu-link>{{ grandchild_link.title }}</a>
+                      {% endfor %}
+                    </div>
+                  </div>
+                {% else %}
+                  <a class="jk-nav-dropdown__link" href="{{ child_link.url }}" data-menu-link>{{ child_link.title }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
 
 <div id="JoyariMobileMenu-{{ section.id }}" class="jk-mobile-drawer" hidden data-mobile-drawer>
   <button type="button" class="jk-mobile-drawer__backdrop" aria-label="Close menu" data-nav-close></button>
