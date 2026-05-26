@@ -11,15 +11,34 @@
   assign earrings_url = routes.collections_url | append: '/earrings'
   assign bracelets_url = routes.collections_url | append: '/bracelets'
   assign necklaces_url = routes.collections_url | append: '/necklaces'
-  assign diamonds_url = routes.collections_url | append: '/diamonds'
   assign loose_diamonds_url = routes.collections_url | append: '/loose-diamonds'
   assign lab_diamonds_url = routes.collections_url | append: '/lab-grown-diamonds'
   assign natural_diamonds_url = routes.collections_url | append: '/natural-diamonds'
   assign ready_to_ship_url = routes.collections_url | append: '/ready-to-ship'
+  assign education_page = pages['education']
+  assign education_url = education_page.url
+  if education_url == blank
+    assign education_url = '/pages/education'
+  endif
+  assign contact_page = pages['contact']
+  assign contact_url = contact_page.url
+  if contact_url == blank
+    assign contact_url = '/pages/contact'
+  endif
+  assign about_page = pages['about-us']
+  assign about_url = about_page.url
+  if about_url == blank
+    assign about_url = '/pages/about-us'
+  endif
+  assign wishlist_page = pages['wishlist']
+  assign wishlist_url = wishlist_page.url
+  if wishlist_url == blank
+    assign wishlist_url = '/pages/wishlist'
+  endif
   assign design_ring_page = pages['design-your-ring']
   assign design_ring_url = design_ring_page.url
   if design_ring_url == blank
-    assign design_ring_url = routes.all_products_collection_url
+    assign design_ring_url = '/pages/design-your-ring'
   endif
 %}
 
@@ -44,27 +63,39 @@
     </a>
 
     <nav id="JoyariPrimaryNav" class="jk-nav" aria-label="Primary navigation">
-      <div class="jk-nav__item jk-nav__item--dropdown">
+      <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown>
         <a href="{{ engagement_rings_url }}" class="jk-nav__link">Engagement Rings</a>
-        <div class="jk-nav-dropdown" aria-label="Engagement Rings menu">
+        <button class="jk-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="JoyariEngagementDropdown" data-desktop-dropdown-toggle>
+          <span class="visually-hidden">Open Engagement Rings menu</span>
+          <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+        </button>
+        <div id="JoyariEngagementDropdown" class="jk-nav-dropdown" aria-label="Engagement Rings menu" data-desktop-dropdown-menu>
           <a href="{{ engagement_rings_url }}">All Engagement Rings</a>
           <a href="{{ solitaire_rings_url }}">Solitaire Rings</a>
           <a href="{{ halo_rings_url }}">Halo Rings</a>
           <a href="{{ design_ring_url }}">Design Your Own Ring</a>
         </div>
       </div>
-      <div class="jk-nav__item jk-nav__item--dropdown">
+      <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown>
         <a href="{{ wedding_bands_url }}" class="jk-nav__link">Wedding Bands</a>
-        <div class="jk-nav-dropdown" aria-label="Wedding Bands menu">
+        <button class="jk-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="JoyariWeddingDropdown" data-desktop-dropdown-toggle>
+          <span class="visually-hidden">Open Wedding Bands menu</span>
+          <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+        </button>
+        <div id="JoyariWeddingDropdown" class="jk-nav-dropdown" aria-label="Wedding Bands menu" data-desktop-dropdown-menu>
           <a href="{{ wedding_bands_url }}">All Wedding Bands</a>
           <a href="{{ diamond_bands_url }}">Diamond Bands</a>
           <a href="{{ eternity_bands_url }}">Eternity Bands</a>
           <a href="{{ mens_wedding_bands_url }}">Men's Bands</a>
         </div>
       </div>
-      <div class="jk-nav__item jk-nav__item--dropdown">
+      <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown>
         <a href="{{ jewellery_url }}" class="jk-nav__link">Jewellery</a>
-        <div class="jk-nav-dropdown" aria-label="Jewellery menu">
+        <button class="jk-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="JoyariJewelleryDropdown" data-desktop-dropdown-toggle>
+          <span class="visually-hidden">Open Jewellery menu</span>
+          <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+        </button>
+        <div id="JoyariJewelleryDropdown" class="jk-nav-dropdown" aria-label="Jewellery menu" data-desktop-dropdown-menu>
           <a href="{{ rings_url }}">Rings</a>
           <a href="{{ earrings_url }}">Earrings</a>
           <a href="{{ bracelets_url }}">Bracelets</a>
@@ -72,17 +103,22 @@
           <a href="{{ ready_to_ship_url }}">Ready To Ship</a>
         </div>
       </div>
-      <div class="jk-nav__item jk-nav__item--dropdown">
-        <a href="{{ diamonds_url }}" class="jk-nav__link">Diamonds</a>
-        <div class="jk-nav-dropdown" aria-label="Diamonds menu">
+      <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown>
+        <a href="{{ loose_diamonds_url }}" class="jk-nav__link">Diamonds</a>
+        <button class="jk-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="JoyariDiamondsDropdown" data-desktop-dropdown-toggle>
+          <span class="visually-hidden">Open Diamonds menu</span>
+          <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+        </button>
+        <div id="JoyariDiamondsDropdown" class="jk-nav-dropdown" aria-label="Diamonds menu" data-desktop-dropdown-menu>
           <a href="{{ loose_diamonds_url }}">Loose Diamonds</a>
           <a href="{{ lab_diamonds_url }}">Lab Grown</a>
           <a href="{{ natural_diamonds_url }}">Natural Diamonds</a>
         </div>
       </div>
       <a href="{{ design_ring_url }}" class="jk-nav__link">Custom Design</a>
-      <a href="/pages/education" class="jk-nav__link">Education</a>
-      <a href="/pages/contact" class="jk-nav__link">Contact</a>
+      <a href="{{ education_url }}" class="jk-nav__link">Education</a>
+      <a href="{{ about_url }}" class="jk-nav__link">About</a>
+      <a href="{{ contact_url }}" class="jk-nav__link">Contact</a>
     </nav>
 
     <div class="jk-header__actions">
@@ -100,7 +136,7 @@
         </svg>
         <span>Account</span>
       </a>
-      <a class="jk-header-icon-link" href="/pages/wishlist" aria-label="Wishlist">
+      <a class="jk-header-icon-link" href="{{ wishlist_url }}" aria-label="Wishlist">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M20.1 5.9a5 5 0 0 0-7.1 0l-1 1-1-1a5 5 0 0 0-7.1 7.1l8.1 8.1 8.1-8.1a5 5 0 0 0 0-7.1Z"></path>
         </svg>
@@ -130,24 +166,63 @@
 
       <nav class="jk-mobile-menu" aria-label="Mobile navigation links">
         <a href="{{ routes.root_url }}" class="jk-mobile-menu__link" data-nav-link>Home</a>
-        <a href="{{ engagement_rings_url }}" class="jk-mobile-menu__link" data-nav-link>Engagement Rings</a>
-        <a href="{{ wedding_bands_url }}" class="jk-mobile-menu__link" data-nav-link>Wedding Bands</a>
+        <div class="jk-mobile-menu-group">
+          <div class="jk-mobile-menu-group__summary">
+            <a href="{{ engagement_rings_url }}" class="jk-mobile-menu__link" data-nav-link>Engagement Rings</a>
+            <button type="button" class="jk-mobile-menu__toggle" aria-expanded="false" aria-controls="JoyariMobileEngagement" data-mobile-submenu-toggle>
+              <span class="visually-hidden">Expand Engagement Rings menu</span>
+              <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+            </button>
+          </div>
+          <div id="JoyariMobileEngagement" class="jk-mobile-submenu" hidden data-mobile-submenu>
+            <a href="{{ engagement_rings_url }}" data-nav-link>All Engagement Rings</a>
+            <a href="{{ solitaire_rings_url }}" data-nav-link>Solitaire Rings</a>
+            <a href="{{ halo_rings_url }}" data-nav-link>Halo Rings</a>
+            <a href="{{ design_ring_url }}" data-nav-link>Design Your Own Ring</a>
+          </div>
+        </div>
+        <div class="jk-mobile-menu-group">
+          <div class="jk-mobile-menu-group__summary">
+            <a href="{{ wedding_bands_url }}" class="jk-mobile-menu__link" data-nav-link>Wedding Bands</a>
+            <button type="button" class="jk-mobile-menu__toggle" aria-expanded="false" aria-controls="JoyariMobileWedding" data-mobile-submenu-toggle>
+              <span class="visually-hidden">Expand Wedding Bands menu</span>
+              <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+            </button>
+          </div>
+          <div id="JoyariMobileWedding" class="jk-mobile-submenu" hidden data-mobile-submenu>
+            <a href="{{ wedding_bands_url }}" data-nav-link>All Wedding Bands</a>
+            <a href="{{ diamond_bands_url }}" data-nav-link>Diamond Bands</a>
+            <a href="{{ eternity_bands_url }}" data-nav-link>Eternity Bands</a>
+            <a href="{{ mens_wedding_bands_url }}" data-nav-link>Men's Bands</a>
+          </div>
+        </div>
         <a href="{{ jewellery_url }}" class="jk-mobile-menu__link" data-nav-link>Jewellery</a>
-        <a href="{{ loose_diamonds_url }}" class="jk-mobile-menu__link" data-nav-link>Loose Diamonds</a>
-        <a href="{{ lab_diamonds_url }}" class="jk-mobile-menu__link" data-nav-link>Lab Grown Diamonds</a>
-        <a href="{{ natural_diamonds_url }}" class="jk-mobile-menu__link" data-nav-link>Natural Diamonds</a>
+        <div class="jk-mobile-menu-group">
+          <div class="jk-mobile-menu-group__summary">
+            <a href="{{ loose_diamonds_url }}" class="jk-mobile-menu__link" data-nav-link>Diamonds</a>
+            <button type="button" class="jk-mobile-menu__toggle" aria-expanded="false" aria-controls="JoyariMobileDiamonds" data-mobile-submenu-toggle>
+              <span class="visually-hidden">Expand Diamonds menu</span>
+              <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+            </button>
+          </div>
+          <div id="JoyariMobileDiamonds" class="jk-mobile-submenu" hidden data-mobile-submenu>
+            <a href="{{ loose_diamonds_url }}" data-nav-link>Loose Diamonds</a>
+            <a href="{{ lab_diamonds_url }}" data-nav-link>Lab Grown Diamonds</a>
+            <a href="{{ natural_diamonds_url }}" data-nav-link>Natural Diamonds</a>
+          </div>
+        </div>
         <a href="{{ design_ring_url }}" class="jk-mobile-menu__link" data-nav-link>Custom Design</a>
         <a href="{{ ready_to_ship_url }}" class="jk-mobile-menu__link" data-nav-link>Ready To Ship</a>
-        <a href="/pages/education" class="jk-mobile-menu__link" data-nav-link>Education</a>
-        <a href="/pages/about" class="jk-mobile-menu__link" data-nav-link>About</a>
-        <a href="/pages/contact" class="jk-mobile-menu__link" data-nav-link>Contact</a>
+        <a href="{{ education_url }}" class="jk-mobile-menu__link" data-nav-link>Education</a>
+        <a href="{{ about_url }}" class="jk-mobile-menu__link" data-nav-link>About</a>
+        <a href="{{ contact_url }}" class="jk-mobile-menu__link" data-nav-link>Contact</a>
         <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="jk-mobile-menu__link" data-nav-link>Account</a>
         <a href="{{ routes.cart_url }}" class="jk-mobile-menu__link" data-nav-link>Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
       </nav>
 
       <div class="jk-mobile-drawer__utility">
         <a href="{{ routes.search_url }}" data-nav-link>Search</a>
-        <a href="/pages/wishlist" data-nav-link>Wishlist</a>
+        <a href="{{ wishlist_url }}" data-nav-link>Wishlist</a>
         <span>Currency AUD</span>
       </div>
     </div>

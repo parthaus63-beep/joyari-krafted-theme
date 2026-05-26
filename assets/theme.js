@@ -273,6 +273,28 @@
     var drawer = document.querySelector('[data-mobile-drawer]');
     if (!toggle || !drawer) return;
 
+    function closeDesktopDropdowns(exceptItem) {
+      document.querySelectorAll('[data-desktop-dropdown].is-open').forEach(function (item) {
+        if (exceptItem && item === exceptItem) return;
+
+        item.classList.remove('is-open');
+        var button = item.querySelector('[data-desktop-dropdown-toggle]');
+        if (button) button.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    function closeMobileSubmenus(exceptGroup) {
+      drawer.querySelectorAll('.jk-mobile-menu-group.is-open').forEach(function (group) {
+        if (exceptGroup && group === exceptGroup) return;
+
+        group.classList.remove('is-open');
+        var button = group.querySelector('[data-mobile-submenu-toggle]');
+        var panel = group.querySelector('[data-mobile-submenu]');
+        if (button) button.setAttribute('aria-expanded', 'false');
+        if (panel) panel.hidden = true;
+      });
+    }
+
     function lockScroll(isLocked) {
       document.documentElement.classList.toggle('jk-menu-lock', isLocked);
       document.body.classList.toggle('jk-menu-lock', isLocked);
@@ -299,6 +321,7 @@
       if (header) header.classList.remove('is-menu-open');
       toggle.setAttribute('aria-expanded', 'false');
       lockScroll(false);
+      closeMobileSubmenus();
 
       drawer._joyariHideTimer = window.setTimeout(function () {
         if (!drawer.classList.contains('is-open')) {
@@ -311,21 +334,67 @@
       setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
+    document.querySelectorAll('[data-desktop-dropdown-toggle]').forEach(function (button) {
+      button.addEventListener('click', function (event) {
+        event.stopPropagation();
+        var item = button.closest('[data-desktop-dropdown]');
+        if (!item) return;
+
+        var shouldOpen = !item.classList.contains('is-open');
+        closeDesktopDropdowns(item);
+        item.classList.toggle('is-open', shouldOpen);
+        button.setAttribute('aria-expanded', String(shouldOpen));
+      });
+    });
+
+    document.querySelectorAll('[data-desktop-dropdown-menu] a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        closeDesktopDropdowns();
+      });
+    });
+
+    drawer.querySelectorAll('[data-mobile-submenu-toggle]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var group = button.closest('.jk-mobile-menu-group');
+        var panelId = button.getAttribute('aria-controls');
+        var panel = panelId ? document.getElementById(panelId) : null;
+        if (!group || !panel) return;
+
+        var shouldOpen = button.getAttribute('aria-expanded') !== 'true';
+        closeMobileSubmenus(group);
+        group.classList.toggle('is-open', shouldOpen);
+        button.setAttribute('aria-expanded', String(shouldOpen));
+        panel.hidden = !shouldOpen;
+      });
+    });
+
     drawer.querySelectorAll('[data-nav-close], [data-nav-link]').forEach(function (element) {
       element.addEventListener('click', function () {
         setMenuOpen(false);
       });
     });
 
+    document.addEventListener('click', function (event) {
+      var target = event.target;
+      if (!target || typeof target.closest !== 'function') return;
+      if (!target.closest('[data-desktop-dropdown]')) {
+        closeDesktopDropdowns();
+      }
+    });
+
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && drawer.classList.contains('is-open')) {
+      if (event.key !== 'Escape') return;
+
+      closeDesktopDropdowns();
+      if (drawer.classList.contains('is-open')) {
         setMenuOpen(false);
-        toggle.focus();
+        if (toggle) toggle.focus();
       }
     });
 
     window.addEventListener('resize', function () {
-      if (window.innerWidth > 820 && drawer.classList.contains('is-open')) {
+      closeDesktopDropdowns();
+      if (window.innerWidth > 1080 && drawer.classList.contains('is-open')) {
         setMenuOpen(false);
       }
     });

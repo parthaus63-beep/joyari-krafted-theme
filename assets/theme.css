@@ -337,6 +337,40 @@ h3 {
   color: var(--jk-ink);
 }
 
+.jk-nav__dropdown-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  min-height: 82px;
+  margin-left: -14px;
+  border: 0;
+  background: transparent;
+  color: var(--jk-muted);
+  padding: 0;
+}
+
+.jk-nav__dropdown-toggle svg,
+.jk-mobile-menu__toggle svg {
+  width: 11px;
+  height: 8px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .24s var(--jk-ease);
+}
+
+.jk-nav__dropdown-toggle:hover,
+.jk-nav__dropdown-toggle:focus-visible,
+.jk-nav__item.is-open > .jk-nav__dropdown-toggle {
+  color: var(--jk-gold-dark);
+}
+
+.jk-nav__item.is-open > .jk-nav__dropdown-toggle svg {
+  transform: rotate(180deg);
+}
+
 .jk-nav-dropdown {
   position: absolute;
   top: calc(100% - 8px);
@@ -376,7 +410,8 @@ h3 {
 }
 
 .jk-nav__item:hover .jk-nav-dropdown,
-.jk-nav__item:focus-within .jk-nav-dropdown {
+.jk-nav__item:focus-within .jk-nav-dropdown,
+.jk-nav__item.is-open .jk-nav-dropdown {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 0);
@@ -581,6 +616,65 @@ h3 {
 .jk-mobile-menu__link:focus-visible,
 .jk-mobile-menu__link:hover {
   color: var(--jk-gold-dark);
+}
+
+.jk-mobile-menu-group {
+  border-bottom: 1px solid rgba(23, 21, 18, .08);
+}
+
+.jk-mobile-menu-group__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 46px;
+  align-items: center;
+}
+
+.jk-mobile-menu-group .jk-mobile-menu__link {
+  border-bottom: 0;
+}
+
+.jk-mobile-menu__toggle {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(23, 21, 18, .09);
+  border-radius: 50%;
+  background: rgba(255, 253, 248, .7);
+  color: var(--jk-muted);
+}
+
+.jk-mobile-menu-group.is-open .jk-mobile-menu__toggle {
+  color: var(--jk-gold-dark);
+  border-color: rgba(199, 163, 90, .34);
+}
+
+.jk-mobile-menu-group.is-open .jk-mobile-menu__toggle svg {
+  transform: rotate(180deg);
+}
+
+.jk-mobile-submenu[hidden] {
+  display: none;
+}
+
+.jk-mobile-submenu {
+  display: grid;
+  gap: 2px;
+  padding: 0 0 14px 18px;
+  animation: jkSoftReveal .24s var(--jk-ease) both;
+}
+
+.jk-mobile-submenu a {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  color: var(--jk-muted);
+  font-size: .94rem;
+  font-weight: 680;
+}
+
+.jk-mobile-submenu a:hover,
+.jk-mobile-submenu a:focus-visible {
+  color: var(--jk-ink);
 }
 
 .jk-mobile-drawer__utility {
