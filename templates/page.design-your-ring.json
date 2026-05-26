@@ -93,10 +93,10 @@
         "subheading": "Custom design is guided through sizing, diamond selection, setting detail, delivery, and long-term care."
       }
     },
-    "177979233225934058": {
+    "17797923442230bda5": {
       "type": "apps",
       "blocks": {
-        "nivoda_connect_feed_EPLqfQ": {
+        "nivoda_connect_feed_MpmxTf": {
           "type": "shopify://apps/nivoda-connect/blocks/feed/1818f65a-9917-4ef2-bca9-2424a925fc76",
           "settings": {
             "primary_color": "#bdc3c7",
@@ -128,7 +128,7 @@
         }
       },
       "block_order": [
-        "nivoda_connect_feed_EPLqfQ"
+        "nivoda_connect_feed_MpmxTf"
       ],
       "settings": {}
     }
@@ -139,6 +139,6 @@
     "builder",
     "education",
     "promises",
-    "177979233225934058"
+    "17797923442230bda5"
   ]
 }
