@@ -47,6 +47,18 @@
         {% for link in primary_menu.links %}
           {% liquid
             assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
+            assign mega_block = blank
+            assign normalized_link_title = link.title | strip | downcase
+
+            for block in section.blocks
+              if block.type == 'mega_menu'
+                assign normalized_block_title = block.settings.menu_title | strip | downcase
+                if normalized_block_title == normalized_link_title
+                  assign mega_block = block
+                  break
+                endif
+              endif
+            endfor
           %}
 
           {% if link.links.size > 0 %}
@@ -59,27 +71,94 @@
 
               <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" data-desktop-dropdown-menu>
                 <div class="jk-nav-dropdown__panel">
-                  <div class="jk-nav-dropdown__header">
-                    <span class="jk-nav-dropdown__eyebrow">Joyari Krafted</span>
-                    <a class="jk-nav-dropdown__title" href="{{ link.url }}">View all {{ link.title }}</a>
+                  <div class="jk-nav-dropdown__menu">
+                    <div class="jk-nav-dropdown__header">
+                      <div>
+                        <span class="jk-nav-dropdown__eyebrow">
+                          {% if mega_block != blank and mega_block.settings.eyebrow != blank %}
+                            {{ mega_block.settings.eyebrow }}
+                          {% else %}
+                            Joyari Krafted
+                          {% endif %}
+                        </span>
+                        <a class="jk-nav-dropdown__title" href="{{ link.url }}">View all {{ link.title }}</a>
+                      </div>
+                      <p>
+                        {% if mega_block != blank and mega_block.settings.menu_note != blank %}
+                          {{ mega_block.settings.menu_note }}
+                        {% else %}
+                          Explore refined jewellery paths, private guidance, and made-to-order details.
+                        {% endif %}
+                      </p>
+                    </div>
+
+                    <div class="jk-nav-dropdown__inner">
+                      {% for child_link in link.links %}
+                        {% if child_link.links.size > 0 %}
+                          <div class="jk-nav-dropdown__group">
+                            <a class="jk-nav-dropdown__heading" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                            <div class="jk-nav-dropdown__children">
+                              {% for grandchild_link in child_link.links %}
+                                <a class="jk-nav-dropdown__link" href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        {% else %}
+                          <a class="jk-nav-dropdown__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
                   </div>
 
-                  <div class="jk-nav-dropdown__inner">
-                    {% for child_link in link.links %}
-                      {% if child_link.links.size > 0 %}
-                        <div class="jk-nav-dropdown__group">
-                          <a class="jk-nav-dropdown__heading" href="{{ child_link.url }}">{{ child_link.title }}</a>
-                          <div class="jk-nav-dropdown__children">
-                            {% for grandchild_link in child_link.links %}
-                              <a class="jk-nav-dropdown__link" href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
-                            {% endfor %}
-                          </div>
-                        </div>
-                      {% else %}
-                        <a class="jk-nav-dropdown__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
-                      {% endif %}
-                    {% endfor %}
-                  </div>
+                  <aside class="jk-nav-dropdown__feature" aria-label="{{ link.title }} feature">
+                    <div class="jk-nav-dropdown__media-grid">
+                      <div class="jk-nav-dropdown__media jk-nav-dropdown__media--primary">
+                        {% if mega_block != blank and mega_block.settings.feature_image != blank %}
+                          {{ mega_block.settings.feature_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 320px, 0px', alt: mega_block.settings.feature_image_alt }}
+                        {% else %}
+                          <span>{{ link.title }}</span>
+                        {% endif %}
+                      </div>
+                      <div class="jk-nav-dropdown__media jk-nav-dropdown__media--secondary">
+                        {% if mega_block != blank and mega_block.settings.lifestyle_image != blank %}
+                          {{ mega_block.settings.lifestyle_image | image_url: width: 520 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 180px, 0px', alt: mega_block.settings.lifestyle_image_alt }}
+                        {% else %}
+                          <span>Fine jewellery</span>
+                        {% endif %}
+                      </div>
+                    </div>
+
+                    <div class="jk-nav-dropdown__cta">
+                      <span>
+                        {% if mega_block != blank and mega_block.settings.cta_eyebrow != blank %}
+                          {{ mega_block.settings.cta_eyebrow }}
+                        {% else %}
+                          Private guidance
+                        {% endif %}
+                      </span>
+                      <h3>
+                        {% if mega_block != blank and mega_block.settings.cta_heading != blank %}
+                          {{ mega_block.settings.cta_heading }}
+                        {% else %}
+                          Choose with confidence
+                        {% endif %}
+                      </h3>
+                      <p>
+                        {% if mega_block != blank and mega_block.settings.cta_text != blank %}
+                          {{ mega_block.settings.cta_text }}
+                        {% else %}
+                          Refine stones, settings, proportions, and meaningful details with a calm luxury experience.
+                        {% endif %}
+                      </p>
+                      <a href="{% if mega_block != blank and mega_block.settings.cta_link != blank %}{{ mega_block.settings.cta_link }}{% else %}{{ link.url }}{% endif %}">
+                        {% if mega_block != blank and mega_block.settings.cta_label != blank %}
+                          {{ mega_block.settings.cta_label }}
+                        {% else %}
+                          Explore {{ link.title }}
+                        {% endif %}
+                      </a>
+                    </div>
+                  </aside>
                 </div>
               </div>
             </div>
@@ -230,6 +309,82 @@
       "label": "Assurance line",
       "default": "Certified lab-grown diamonds · insured delivery · private guidance"
     }
-  ]
+  ],
+  "blocks": [
+    {
+      "type": "mega_menu",
+      "name": "Mega menu feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "menu_title",
+          "label": "Top-level menu title",
+          "info": "Match the title of a top-level Shopify menu item, for example Engagement Rings."
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Menu eyebrow",
+          "default": "Joyari Krafted"
+        },
+        {
+          "type": "text",
+          "id": "menu_note",
+          "label": "Short menu note",
+          "default": "Explore refined jewellery paths, private guidance, and made-to-order details."
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_image",
+          "label": "Featured collection image"
+        },
+        {
+          "type": "text",
+          "id": "feature_image_alt",
+          "label": "Featured image alt text"
+        },
+        {
+          "type": "image_picker",
+          "id": "lifestyle_image",
+          "label": "Promotional or lifestyle image"
+        },
+        {
+          "type": "text",
+          "id": "lifestyle_image_alt",
+          "label": "Lifestyle image alt text"
+        },
+        {
+          "type": "text",
+          "id": "cta_eyebrow",
+          "label": "CTA eyebrow",
+          "default": "Private guidance"
+        },
+        {
+          "type": "text",
+          "id": "cta_heading",
+          "label": "CTA heading",
+          "default": "Design your ring"
+        },
+        {
+          "type": "textarea",
+          "id": "cta_text",
+          "label": "CTA text",
+          "default": "Refine stones, settings, proportions, and meaningful details with a calm luxury experience."
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA button label",
+          "default": "Design Your Ring"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8
 }
 {% endschema %}
