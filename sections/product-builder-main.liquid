@@ -68,17 +68,13 @@
 
           {% form 'product', product, id: product_form_id, class: 'jk-product-form', data-product-form: 'product' %}
             <input type="hidden" name="id" value="{{ selected_variant.id }}" data-variant-id-input>
-            <input type="hidden" name="properties[Joyari builder estimate]" value="{{ selected_variant.price | money }}" data-builder-estimate-property>
 
             <div class="jk-ring-builder-card jk-ring-builder-card--product">
               <div class="jk-builder-card__header">
                 <div>
-                  <p class="jk-eyebrow">Personal selection</p>
+                  <p class="jk-eyebrow">Simple selection</p>
                   <h2>{{ section.settings.builder_heading }}</h2>
-                  <p class="jk-builder-subcopy">Choose the details that make the piece feel personal. Your preferences are saved with the order for Joyari review.</p>
-                </div>
-                <div class="jk-stone-preview" data-stone-preview data-shape="oval">
-                  <span></span>
+                  <p class="jk-builder-subcopy">Choose the available Shopify option for checkout. For a different metal, size, diamond shape, engraving, or personal detail, send a custom request below.</p>
                 </div>
               </div>
 
@@ -87,8 +83,8 @@
                   <div class="jk-builder-step__header">
                     <span class="jk-builder-step__number">01</span>
                     <div>
-                      <h3>Finish and setting</h3>
-                      <p>Select the available option that best matches your preferred finish.</p>
+                      <h3>Available options</h3>
+                      <p>These are the real Shopify variants for this product, often kept to a simple choice such as carat size.</p>
                     </div>
                   </div>
 
@@ -121,111 +117,15 @@
                 </div>
               {% endunless %}
 
-              <div class="jk-builder-step">
+              <div class="jk-builder-step jk-builder-step--custom-nudge">
                 <div class="jk-builder-step__header">
                   <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
                   <div>
-                    <h3>Metal selector</h3>
-                    <p>Choose the precious metal tone for your Joyari piece.</p>
+                    <h3>Need a custom version?</h3>
+                    <p>Prefer a different metal, size, diamond shape or personal detail? Share your vision and our team will guide you.</p>
                   </div>
                 </div>
-                <fieldset class="jk-builder-field">
-                  <legend class="visually-hidden">Metal selector</legend>
-                  <div class="jk-choice-grid jk-choice-grid--metal">
-                    <label><input type="radio" name="properties[Metal preference]" value="18k Yellow Gold" data-builder-choice data-price-adjustment="0" checked><span><i class="jk-metal-swatch jk-metal-swatch--yellow" aria-hidden="true"></i>18k Yellow</span></label>
-                    <label><input type="radio" name="properties[Metal preference]" value="18k White Gold" data-builder-choice data-price-adjustment="0"><span><i class="jk-metal-swatch jk-metal-swatch--white" aria-hidden="true"></i>18k White</span></label>
-                    <label><input type="radio" name="properties[Metal preference]" value="18k Rose Gold" data-builder-choice data-price-adjustment="0"><span><i class="jk-metal-swatch jk-metal-swatch--rose" aria-hidden="true"></i>18k Rose</span></label>
-                    <label><input type="radio" name="properties[Metal preference]" value="Platinum" data-builder-choice data-price-adjustment="55000"><span><i class="jk-metal-swatch jk-metal-swatch--platinum" aria-hidden="true"></i>Platinum</span></label>
-                  </div>
-                </fieldset>
-              </div>
-
-              <div class="jk-builder-step">
-                <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}02{% else %}03{% endif %}</span>
-                  <div>
-                    <h3>Shape selector</h3>
-                    <p>Preview the centre-stone silhouette that feels most like you.</p>
-                  </div>
-                </div>
-                <fieldset class="jk-builder-field">
-                  <legend class="visually-hidden">Shape selector</legend>
-                  <div class="jk-shape-row">
-                    {% assign shapes = 'Oval,Round,Emerald,Pear,Marquise,Cushion' | split: ',' %}
-                    {% for shape in shapes %}
-                      <label>
-                        <input type="radio" name="properties[Diamond shape preference]" value="{{ shape }}" data-builder-choice data-shape-choice="{{ shape | handleize }}" data-price-adjustment="{% if shape == 'Emerald' %}25000{% elsif shape == 'Oval' %}20000{% else %}0{% endif %}" {% if forloop.first %}checked{% endif %}>
-                        <span class="jk-shape-chip"><i class="jk-shape-icon jk-shape-icon--{{ shape | handleize }}" aria-hidden="true"></i>{{ shape }}</span>
-                      </label>
-                    {% endfor %}
-                  </div>
-                </fieldset>
-              </div>
-
-              <div class="jk-builder-step">
-                <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}03{% else %}04{% endif %}</span>
-                  <div>
-                    <h3>Carat slider</h3>
-                    <p>Explore presence and proportion with a live design estimate.</p>
-                  </div>
-                </div>
-                <div class="jk-builder-field">
-                  <label for="BuilderCarat-{{ section.id }}">Carat preference</label>
-                  <div class="jk-range-row">
-                    <input id="BuilderCarat-{{ section.id }}" type="range" min="0.5" max="5" step="0.25" value="1" name="properties[Carat preference]" data-carat-input data-builder-choice>
-                    <output for="BuilderCarat-{{ section.id }}" data-carat-output>1.00 ct</output>
-                  </div>
-                </div>
-              </div>
-
-              <div class="jk-builder-step">
-                <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}04{% else %}05{% endif %}</span>
-                  <div>
-                    <h3>Diamond type selector</h3>
-                    <p>Select a diamond pathway for final confirmation by Joyari.</p>
-                  </div>
-                </div>
-                <fieldset class="jk-builder-field">
-                  <legend class="visually-hidden">Diamond type selector</legend>
-                  <div class="jk-choice-grid jk-choice-grid--diamond">
-                    <label><input type="radio" name="properties[Diamond type preference]" value="Lab-grown diamond" data-builder-choice data-price-adjustment="0" checked><span>Lab-grown diamond</span></label>
-                    <label><input type="radio" name="properties[Diamond type preference]" value="Premium lab-grown diamond" data-builder-choice data-price-adjustment="75000"><span>Premium lab-grown</span></label>
-                    <label><input type="radio" name="properties[Diamond type preference]" value="Natural diamond consultation" data-builder-choice data-price-adjustment="185000"><span>Natural consult</span></label>
-                  </div>
-                </fieldset>
-              </div>
-
-              <div class="jk-builder-step">
-                <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}05{% else %}06{% endif %}</span>
-                  <div>
-                    <h3>Ring size selector</h3>
-                    <p>Temporarily shown on every product so we can confirm the size guide renders.</p>
-                  </div>
-                </div>
-
-                {% liquid
-                  assign ring_size_select_id = 'BuilderRingSize-' | append: section.id
-                  assign ring_size_modal_id = 'BuilderRingSizeGuide-' | append: section.id
-                %}
-                {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
-              </div>
-
-              <div class="jk-builder-price-summary" aria-live="polite">
-                <div>
-                  <span>Selected variant base price</span>
-                  <strong data-variant-price>{{ selected_variant.price | money }}</strong>
-                </div>
-                <div>
-                  <span>Builder choice estimate</span>
-                  <strong data-builder-adjustment>{{ 0 | money }}</strong>
-                </div>
-                <div class="jk-builder-total jk-builder-total--grand">
-                  <span>Live price estimate</span>
-                  <strong data-estimate-total>{{ selected_variant.price | money }}</strong>
-                </div>
+                <a class="jk-text-link" href="#JoyariCustomRequest-{{ section.id }}">Request a Custom Version</a>
               </div>
 
               <div class="jk-product-actions">
@@ -256,6 +156,11 @@
         </div>
       </div>
     </div>
+
+    {% liquid
+      assign custom_request_id = 'JoyariCustomRequest-' | append: section.id
+    %}
+    {% render 'product-custom-request', request_id: custom_request_id %}
 
     <div class="jk-product-description">
       <div>

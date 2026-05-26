@@ -1,0 +1,97 @@
+{% liquid
+  assign custom_request_id = request_id | default: 'JoyariCustomRequest'
+%}
+
+<section id="{{ custom_request_id }}" class="jk-custom-request" aria-labelledby="{{ custom_request_id }}-Heading">
+  <div class="jk-custom-request__intro">
+    <div>
+      <p class="jk-eyebrow">Request Customisation</p>
+      <h2 id="{{ custom_request_id }}-Heading">A more personal version, guided by Joyari</h2>
+      <p>Prefer a different metal, size, diamond shape or personal detail? Share your vision and our team will guide you.</p>
+    </div>
+    <details class="jk-custom-request__details">
+      <summary class="jk-custom-request__summary">
+        <span class="jk-button jk-button--secondary">Request a Custom Version</span>
+      </summary>
+
+      <div class="jk-custom-request__panel" id="{{ custom_request_id }}-Form">
+        {% form 'contact', class: 'jk-custom-request__form' %}
+          <input type="hidden" name="contact[tags]" value="product-customisation, custom-version-request">
+          <input type="hidden" name="contact[Product URL]" value="{{ product.url }}">
+
+          {% if form.posted_successfully? %}
+            <p class="jk-form-message" tabindex="-1">Thank you. Your custom request has been sent to Joyari Krafted.</p>
+          {% endif %}
+          {% if form.errors %}
+            <div class="jk-form-message jk-form-message--error">{{ form.errors | default_errors }}</div>
+          {% endif %}
+
+          <div class="jk-custom-request__fields">
+            <div class="jk-custom-request__field">
+              <label for="{{ custom_request_id }}-Name">Name</label>
+              <input id="{{ custom_request_id }}-Name" type="text" name="contact[name]" autocomplete="name" required>
+            </div>
+
+            <div class="jk-custom-request__field">
+              <label for="{{ custom_request_id }}-Email">Email</label>
+              <input id="{{ custom_request_id }}-Email" type="email" name="contact[email]" autocomplete="email" required>
+            </div>
+
+            <div class="jk-custom-request__field jk-custom-request__field--full">
+              <label for="{{ custom_request_id }}-Product">Product name</label>
+              <input id="{{ custom_request_id }}-Product" type="text" name="contact[Product name]" value="{{ product.title | escape }}" readonly>
+            </div>
+
+            <div class="jk-custom-request__field">
+              <label for="{{ custom_request_id }}-Carat">Desired carat</label>
+              <input id="{{ custom_request_id }}-Carat" type="text" name="contact[Desired carat]" placeholder="Example: 1.50ct">
+            </div>
+
+            <div class="jk-custom-request__field">
+              <label for="{{ custom_request_id }}-Metal">Metal preference</label>
+              <select id="{{ custom_request_id }}-Metal" name="contact[Metal preference]">
+                <option value="">Select a metal</option>
+                <option value="18k Yellow Gold">18k Yellow Gold</option>
+                <option value="18k White Gold">18k White Gold</option>
+                <option value="18k Rose Gold">18k Rose Gold</option>
+                <option value="Platinum">Platinum</option>
+                <option value="Unsure">Unsure</option>
+              </select>
+            </div>
+
+            <div class="jk-custom-request__field">
+              <label for="{{ custom_request_id }}-RingSize">Ring size</label>
+              <input id="{{ custom_request_id }}-RingSize" type="text" name="contact[Ring size]" placeholder="Example: US 6.5 / AUS-UK M">
+            </div>
+
+            <div class="jk-custom-request__field">
+              <label for="{{ custom_request_id }}-Shape">Diamond shape</label>
+              <select id="{{ custom_request_id }}-Shape" name="contact[Diamond shape]">
+                <option value="">Select a shape</option>
+                <option value="Oval">Oval</option>
+                <option value="Round">Round</option>
+                <option value="Emerald">Emerald</option>
+                <option value="Pear">Pear</option>
+                <option value="Marquise">Marquise</option>
+                <option value="Cushion">Cushion</option>
+                <option value="Unsure">Unsure</option>
+              </select>
+            </div>
+
+            <div class="jk-custom-request__field jk-custom-request__field--full">
+              <label for="{{ custom_request_id }}-Engraving">Engraving</label>
+              <input id="{{ custom_request_id }}-Engraving" type="text" name="contact[Engraving]" maxlength="80" placeholder="Initials, date, or private message">
+            </div>
+
+            <div class="jk-custom-request__field jk-custom-request__field--full">
+              <label for="{{ custom_request_id }}-Message">Special request</label>
+              <textarea id="{{ custom_request_id }}-Message" name="contact[body]" rows="5" placeholder="Tell us what you would like changed, matched, resized, engraved, or sourced."></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="jk-button jk-button--primary">Send Custom Request</button>
+        {% endform %}
+      </div>
+    </details>
+  </div>
+</section>
