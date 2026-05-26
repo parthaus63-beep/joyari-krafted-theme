@@ -272,7 +272,8 @@
     if (!header) return;
 
     var toggle = header.querySelector('[data-nav-toggle]');
-    var drawer = header.querySelector('[data-mobile-drawer]');
+    var drawerId = toggle ? toggle.getAttribute('aria-controls') : '';
+    var drawer = drawerId ? document.getElementById(drawerId) : document.querySelector('[data-mobile-drawer]');
     var desktopDropdowns = header.querySelectorAll('[data-desktop-dropdown]');
     var desktopMedia = window.matchMedia('(min-width: 1361px)');
     var desktopCloseTimer;

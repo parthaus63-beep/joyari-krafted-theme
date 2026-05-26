@@ -231,7 +231,7 @@ h3 {
 .jk-header {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 2500;
   isolation: isolate;
   overflow: visible;
   --jk-header-dropdown-top: 118px;
@@ -241,10 +241,11 @@ h3 {
 }
 
 .jk-header.is-menu-open {
-  z-index: 3000;
+  z-index: 2500;
 }
 
 .jk-header__inner {
+  overflow: visible;
   width: min(1500px, calc(100vw - 48px));
   margin: 0 auto;
   min-height: 118px;
@@ -260,6 +261,8 @@ h3 {
 }
 
 .jk-header__assurance {
+  position: relative;
+  overflow: visible;
   border-top: 1px solid rgba(23, 21, 18, .07);
   background: rgba(255, 253, 248, .72);
   color: var(--jk-muted);
@@ -305,6 +308,7 @@ h3 {
 }
 
 .jk-nav {
+  position: static;
   grid-area: nav;
   display: flex;
   align-items: stretch;
@@ -403,10 +407,10 @@ h3 {
 }
 
 .jk-nav-dropdown {
-  position: fixed;
-  top: calc(var(--jk-header-dropdown-top) - 1px);
+  position: absolute;
+  top: 100%;
   left: 50%;
-  z-index: 1001;
+  z-index: 2600;
   width: min(1280px, calc(100vw - 48px));
   min-width: min(720px, calc(100vw - 48px));
   max-width: calc(100vw - 48px);
@@ -798,7 +802,7 @@ h3 {
 .jk-mobile-drawer {
   position: fixed;
   inset: 0;
-  z-index: 3200;
+  z-index: 5000;
   display: grid;
   width: 100vw;
   height: 100vh;

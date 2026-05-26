@@ -202,6 +202,13 @@
     </div>
   </div>
 
+  {% if section.settings.show_assurance and section.settings.assurance_text != blank %}
+    <div class="jk-header__assurance">
+      <span>{{ section.settings.assurance_text }}</span>
+    </div>
+  {% endif %}
+</header>
+
   <div id="JoyariMobileMenu-{{ section.id }}" class="jk-mobile-drawer" hidden data-mobile-drawer>
     <button type="button" class="jk-mobile-drawer__backdrop" aria-label="Close menu" data-nav-close></button>
     <div class="jk-mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
@@ -262,13 +269,6 @@
       </div>
     </div>
   </div>
-
-  {% if section.settings.show_assurance and section.settings.assurance_text != blank %}
-    <div class="jk-header__assurance">
-      <span>{{ section.settings.assurance_text }}</span>
-    </div>
-  {% endif %}
-</header>
 
 {% schema %}
 {
