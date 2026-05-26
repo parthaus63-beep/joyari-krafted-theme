@@ -24,9 +24,7 @@
         "settings": {
           "show_announcement": true,
           "logo_text": "Joyari Krafted",
-          "menu": "main-menu",
-          "cta_label": "Book Consultation",
-          "cta_link": "",
+          "menu": "main-menu-1",
           "show_assurance": true,
           "assurance_text": "Certified lab-grown diamonds · insured delivery · private guidance"
         }
