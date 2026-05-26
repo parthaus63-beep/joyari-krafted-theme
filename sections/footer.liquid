@@ -2,7 +2,6 @@
   assign engagement_rings_url = routes.collections_url | append: '/engagement-rings'
   assign wedding_bands_url = routes.collections_url | append: '/wedding-bands'
   assign jewellery_url = routes.collections_url | append: '/jewellery'
-  assign diamonds_url = routes.collections_url | append: '/diamonds'
   assign loose_diamonds_url = routes.collections_url | append: '/loose-diamonds'
   assign design_ring_page = pages['design-your-ring']
   assign design_ring_url = design_ring_page.url
@@ -77,7 +76,7 @@
         <a href="{{ engagement_rings_url }}">Engagement Rings</a>
         <a href="{{ wedding_bands_url }}">Wedding Bands</a>
         <a href="{{ jewellery_url }}">Jewellery</a>
-        <a href="{{ diamonds_url }}">Diamonds</a>
+        <a href="{{ loose_diamonds_url }}">Diamonds</a>
         <a href="{{ loose_diamonds_url }}">Loose Diamonds</a>
         <a href="{{ design_ring_url }}">Custom Design</a>
         <a href="/pages/about">The Atelier</a>

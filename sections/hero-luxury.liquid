@@ -44,10 +44,16 @@
     {% endif %}
     <h1>{{ section.settings.heading }}</h1>
     <p class="jk-hero__copy">{{ section.settings.subheading }}</p>
-    <div class="jk-hero__actions">
-      <a class="jk-button jk-button--primary" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_label }}</a>
-      <a class="jk-button jk-button--secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label }}</a>
-    </div>
+    {% if section.settings.primary_label != blank or section.settings.secondary_label != blank %}
+      <div class="jk-hero__actions">
+        {% if section.settings.primary_label != blank %}
+          <a class="jk-button jk-button--primary" href="{{ section.settings.primary_link | default: routes.all_products_collection_url }}">{{ section.settings.primary_label }}</a>
+        {% endif %}
+        {% if section.settings.secondary_label != blank %}
+          <a class="jk-button jk-button--secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label }}</a>
+        {% endif %}
+      </div>
+    {% endif %}
     <div class="jk-hero__trust" aria-label="Trust information">
       <span></span>
       <p>{{ section.settings.trust_text }}</p>
