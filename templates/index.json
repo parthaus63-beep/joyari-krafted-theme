@@ -18,9 +18,9 @@
         "hero_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_11_51_33_AM.png",
         "hero_video_url": "",
         "hero_image_alt": "Joyari Krafted diamond jewellery editorial image",
-        "primary_label": "Browse Loose Diamonds",
-        "primary_link": "/collections/loose-diamonds",
-        "secondary_label": "",
+        "primary_label": "Explore Fine Jewellery",
+        "primary_link": "",
+        "secondary_label": "Begin a Private Design",
         "secondary_link": "",
         "trust_text": "Certified lab-grown diamonds, refined settings, insured delivery, and care-led guidance from selection to aftercare.",
         "caption_label": "Lab-grown centre stones",
@@ -448,6 +448,10 @@
         "heading": "Luxury should feel certain",
         "subheading": "Clear timelines, considered materials, and a support-led buying experience for meaningful jewellery."
       }
+    },
+    "177975965951474988": {
+      "type": "apps",
+      "settings": {}
     }
   },
   "order": [
@@ -455,6 +459,7 @@
     "promise",
     "engagement",
     "cinematic_story",
+    "lab_diamonds",
     "design_process",
     "ethical",
     "story",
@@ -462,6 +467,7 @@
     "trust_faq",
     "testimonials",
     "journal",
-    "trust_badges"
+    "trust_badges",
+    "177975965951474988"
   ]
 }
