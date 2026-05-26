@@ -47,18 +47,6 @@
         {% for link in primary_menu.links %}
           {% liquid
             assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
-            assign mega_block = blank
-            assign normalized_link_title = link.title | strip | downcase
-
-            for block in section.blocks
-              if block.type == 'mega_menu'
-                assign normalized_block_title = block.settings.menu_title | strip | downcase
-                if normalized_block_title == normalized_link_title
-                  assign mega_block = block
-                  break
-                endif
-              endif
-            endfor
           %}
 
           {% if link.links.size > 0 %}
@@ -122,41 +110,14 @@
       {% if link.links.size > 0 %}
         {% liquid
           assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
-          assign mega_block = blank
-          assign normalized_link_title = link.title | strip | downcase
-
-          for block in section.blocks
-            if block.type == 'mega_menu'
-              assign normalized_block_title = block.settings.menu_title | strip | downcase
-              if normalized_block_title == normalized_link_title
-                assign mega_block = block
-                break
-              endif
-            endif
-          endfor
         %}
 
         <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" data-mega-panel>
           <div class="jk-nav-dropdown__panel">
             <div class="jk-nav-dropdown__menu">
               <div class="jk-nav-dropdown__header">
-                <div>
-                  <span class="jk-nav-dropdown__eyebrow">
-                    {% if mega_block != blank and mega_block.settings.eyebrow != blank %}
-                      {{ mega_block.settings.eyebrow }}
-                    {% else %}
-                      Joyari Krafted
-                    {% endif %}
-                  </span>
-                  <a class="jk-nav-dropdown__title" href="{{ link.url }}">View all {{ link.title }}</a>
-                </div>
-                <p>
-                  {% if mega_block != blank and mega_block.settings.menu_note != blank %}
-                    {{ mega_block.settings.menu_note }}
-                  {% else %}
-                    Explore refined jewellery paths, private guidance, and made-to-order details.
-                  {% endif %}
-                </p>
+                <span class="jk-nav-dropdown__eyebrow">Joyari Krafted</span>
+                <a class="jk-nav-dropdown__title" href="{{ link.url }}">View all {{ link.title }}</a>
               </div>
 
               <div class="jk-nav-dropdown__inner">
@@ -176,56 +137,6 @@
                 {% endfor %}
               </div>
             </div>
-
-            <aside class="jk-nav-dropdown__feature" aria-label="{{ link.title }} feature">
-              <div class="jk-nav-dropdown__media-grid">
-                <div class="jk-nav-dropdown__media jk-nav-dropdown__media--primary">
-                  {% if mega_block != blank and mega_block.settings.feature_image != blank %}
-                    {{ mega_block.settings.feature_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 320px, 0px', alt: mega_block.settings.feature_image_alt }}
-                  {% else %}
-                    <span>{{ link.title }}</span>
-                  {% endif %}
-                </div>
-                <div class="jk-nav-dropdown__media jk-nav-dropdown__media--secondary">
-                  {% if mega_block != blank and mega_block.settings.lifestyle_image != blank %}
-                    {{ mega_block.settings.lifestyle_image | image_url: width: 520 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 180px, 0px', alt: mega_block.settings.lifestyle_image_alt }}
-                  {% else %}
-                    <span>Fine jewellery</span>
-                  {% endif %}
-                </div>
-              </div>
-
-              <div class="jk-nav-dropdown__cta">
-                <span>
-                  {% if mega_block != blank and mega_block.settings.cta_eyebrow != blank %}
-                    {{ mega_block.settings.cta_eyebrow }}
-                  {% else %}
-                    Private guidance
-                  {% endif %}
-                </span>
-                <h3>
-                  {% if mega_block != blank and mega_block.settings.cta_heading != blank %}
-                    {{ mega_block.settings.cta_heading }}
-                  {% else %}
-                    Choose with confidence
-                  {% endif %}
-                </h3>
-                <p>
-                  {% if mega_block != blank and mega_block.settings.cta_text != blank %}
-                    {{ mega_block.settings.cta_text }}
-                  {% else %}
-                    Refine stones, settings, proportions, and meaningful details with a calm luxury experience.
-                  {% endif %}
-                </p>
-                <a href="{% if mega_block != blank and mega_block.settings.cta_link != blank %}{{ mega_block.settings.cta_link }}{% else %}{{ link.url }}{% endif %}">
-                  {% if mega_block != blank and mega_block.settings.cta_label != blank %}
-                    {{ mega_block.settings.cta_label }}
-                  {% else %}
-                    Explore {{ link.title }}
-                  {% endif %}
-                </a>
-              </div>
-            </aside>
           </div>
         </div>
       {% endif %}
