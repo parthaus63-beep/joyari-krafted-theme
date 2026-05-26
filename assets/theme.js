@@ -296,6 +296,7 @@
         dropdownLayer.style.inset = '0';
         dropdownLayer.style.zIndex = '2147483001';
         dropdownLayer.style.overflow = 'visible';
+        dropdownLayer.style.pointerEvents = 'none';
       }
 
       var headerSection = header.closest('[id^="shopify-section-"], .shopify-section');
@@ -337,15 +338,22 @@
 
       if (!exceptItem && dropdownLayer) {
         dropdownLayer.classList.remove('is-open');
-        dropdownLayer.style.pointerEvents = '';
+        dropdownLayer.style.pointerEvents = 'none';
       }
     }
 
     function scheduleDesktopClose() {
       cancelDesktopClose();
       desktopCloseTimer = window.setTimeout(function () {
+        if (
+          document.querySelector('[data-desktop-dropdown]:hover') ||
+          document.querySelector('[data-desktop-dropdown-panel].is-open:hover')
+        ) {
+          return;
+        }
+
         closeDesktopDropdowns();
-      }, 260);
+      }, 520);
     }
 
     function openDesktopDropdown(item) {
@@ -363,7 +371,7 @@
       if (panel) {
         if (dropdownLayer) {
           dropdownLayer.classList.add('is-open');
-          dropdownLayer.style.pointerEvents = 'auto';
+          dropdownLayer.style.pointerEvents = 'none';
         }
         panel.classList.add('is-open');
         panel.setAttribute('aria-hidden', 'false');

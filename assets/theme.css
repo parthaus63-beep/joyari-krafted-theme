@@ -5598,7 +5598,7 @@ body.jk-menu-lock {
 }
 
 .jk-desktop-dropdown-layer.is-open {
-  pointer-events: auto !important;
+  pointer-events: none !important;
 }
 
 @media (min-width: 1361px) {
@@ -5612,7 +5612,7 @@ body.jk-menu-lock {
   }
 
   body .jk-desktop-dropdown-layer.is-open {
-    pointer-events: auto !important;
+    pointer-events: none !important;
   }
 
   body .jk-desktop-dropdown-layer .jk-nav-dropdown {
