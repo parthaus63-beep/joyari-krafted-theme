@@ -1,6 +1,19 @@
 {% liquid
   assign menu_handle = section.settings.menu | default: 'main-menu'
   assign primary_menu = linklists[menu_handle]
+  assign wishlist_url = routes.root_url
+
+  if section.settings.wishlist_page != blank
+    assign selected_wishlist_page = section.settings.wishlist_page
+    if selected_wishlist_page.url != blank
+      assign wishlist_url = selected_wishlist_page.url
+    else
+      assign selected_wishlist_page = pages[section.settings.wishlist_page]
+      if selected_wishlist_page != blank
+        assign wishlist_url = selected_wishlist_page.url
+      endif
+    endif
+  endif
 %}
 
 {% if section.settings.show_announcement and settings.announcement_text != blank %}
@@ -79,6 +92,12 @@
         </svg>
         <span>{% if customer %}Account{% else %}Sign in{% endif %}</span>
       </a>
+      <a class="jk-header-icon-link" href="{{ wishlist_url }}" aria-label="Wishlist">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 20.5s-7.2-4.6-8.7-9A4.5 4.5 0 0 1 11.2 7l.8 1 .8-1a4.5 4.5 0 0 1 7.9 4.5c-1.5 4.4-8.7 9-8.7 9Z"></path>
+        </svg>
+        <span>Wishlist</span>
+      </a>
       <a class="jk-cart-link jk-header-icon-link" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart.cart' | t }}">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6.5 7.5h11l-.8 12H7.3l-.8-12Z"></path>
@@ -145,6 +164,7 @@
       <div class="jk-mobile-drawer__utility">
         <a href="{{ routes.search_url }}" data-nav-link>Search</a>
         <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" data-nav-link>{% if customer %}Account{% else %}Sign in{% endif %}</a>
+        <a href="{{ wishlist_url }}" data-nav-link>Wishlist</a>
         <a href="{{ routes.cart_url }}" data-nav-link>Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
         <span>Currency AUD</span>
       </div>
@@ -179,6 +199,11 @@
       "id": "menu",
       "label": "Menu",
       "default": "main-menu"
+    },
+    {
+      "type": "page",
+      "id": "wishlist_page",
+      "label": "Wishlist page"
     },
     {
       "type": "checkbox",

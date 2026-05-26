@@ -232,6 +232,7 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 80;
+  isolation: isolate;
   background: rgba(255, 255, 255, .96);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(23, 21, 18, .09);
@@ -298,6 +299,26 @@ h3 {
   display: flex;
   align-items: stretch;
   gap: 4px;
+}
+
+.jk-nav__item--dropdown {
+  isolation: isolate;
+}
+
+.jk-nav__item--dropdown::after {
+  content: "";
+  position: absolute;
+  left: -14px;
+  right: -14px;
+  top: calc(100% - 8px);
+  height: 20px;
+  pointer-events: none;
+}
+
+.jk-nav__item--dropdown:hover::after,
+.jk-nav__item--dropdown:focus-within::after,
+.jk-nav__item--dropdown.is-open::after {
+  pointer-events: auto;
 }
 
 .jk-nav__link {
@@ -375,7 +396,7 @@ h3 {
   position: absolute;
   top: calc(100% - 8px);
   left: 50%;
-  z-index: 5;
+  z-index: 6;
   width: max-content;
   min-width: 240px;
   max-width: min(680px, calc(100vw - 32px));

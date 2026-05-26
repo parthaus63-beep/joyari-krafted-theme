@@ -269,13 +269,17 @@
 
   function initNavigation() {
     var header = document.querySelector('[data-header]');
-    var toggle = document.querySelector('[data-nav-toggle]');
-    var drawer = document.querySelector('[data-mobile-drawer]');
+    if (!header) return;
+
+    var toggle = header.querySelector('[data-nav-toggle]');
+    var drawer = header.querySelector('[data-mobile-drawer]');
+    var desktopDropdowns = header.querySelectorAll('[data-desktop-dropdown]');
     if (!toggle || !drawer) return;
 
     function closeDesktopDropdowns(exceptItem) {
-      document.querySelectorAll('[data-desktop-dropdown].is-open').forEach(function (item) {
+      desktopDropdowns.forEach(function (item) {
         if (exceptItem && item === exceptItem) return;
+        if (!item.classList.contains('is-open')) return;
 
         item.classList.remove('is-open');
         var button = item.querySelector('[data-desktop-dropdown-toggle]');
@@ -334,7 +338,17 @@
       setMenuOpen(toggle.getAttribute('aria-expanded') !== 'true');
     });
 
-    document.querySelectorAll('[data-desktop-dropdown-toggle]').forEach(function (button) {
+    desktopDropdowns.forEach(function (item) {
+      item.addEventListener('mouseenter', function () {
+        closeDesktopDropdowns(item);
+      });
+
+      item.addEventListener('focusin', function () {
+        closeDesktopDropdowns(item);
+      });
+    });
+
+    header.querySelectorAll('[data-desktop-dropdown-toggle]').forEach(function (button) {
       button.addEventListener('click', function (event) {
         event.stopPropagation();
         var item = button.closest('[data-desktop-dropdown]');
@@ -347,14 +361,15 @@
       });
     });
 
-    document.querySelectorAll('[data-desktop-dropdown-menu] a').forEach(function (link) {
+    header.querySelectorAll('[data-desktop-dropdown-menu] a').forEach(function (link) {
       link.addEventListener('click', function () {
         closeDesktopDropdowns();
       });
     });
 
     drawer.querySelectorAll('[data-mobile-submenu-toggle]').forEach(function (button) {
-      button.addEventListener('click', function () {
+      button.addEventListener('click', function (event) {
+        event.stopPropagation();
         var group = button.closest('.jk-mobile-menu-group');
         var panelId = button.getAttribute('aria-controls');
         var panel = panelId ? document.getElementById(panelId) : null;
@@ -377,7 +392,7 @@
     document.addEventListener('click', function (event) {
       var target = event.target;
       if (!target || typeof target.closest !== 'function') return;
-      if (!target.closest('[data-desktop-dropdown]')) {
+      if (!target.closest('[data-header] [data-desktop-dropdown]')) {
         closeDesktopDropdowns();
       }
     });
