@@ -62,105 +62,12 @@
           %}
 
           {% if link.links.size > 0 %}
-            <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown>
+            <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown data-mega-trigger="{{ desktop_dropdown_id }}">
               <a href="{{ link.url }}" class="jk-nav__link" data-desktop-dropdown-link>{{ link.title }}</a>
               <button class="jk-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="{{ desktop_dropdown_id }}" data-desktop-dropdown-toggle>
                 <span class="visually-hidden">Open {{ link.title }} menu</span>
                 <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
               </button>
-
-              <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" data-desktop-dropdown-menu>
-                <div class="jk-nav-dropdown__panel">
-                  <div class="jk-nav-dropdown__menu">
-                    <div class="jk-nav-dropdown__header">
-                      <div>
-                        <span class="jk-nav-dropdown__eyebrow">
-                          {% if mega_block != blank and mega_block.settings.eyebrow != blank %}
-                            {{ mega_block.settings.eyebrow }}
-                          {% else %}
-                            Joyari Krafted
-                          {% endif %}
-                        </span>
-                        <a class="jk-nav-dropdown__title" href="{{ link.url }}">View all {{ link.title }}</a>
-                      </div>
-                      <p>
-                        {% if mega_block != blank and mega_block.settings.menu_note != blank %}
-                          {{ mega_block.settings.menu_note }}
-                        {% else %}
-                          Explore refined jewellery paths, private guidance, and made-to-order details.
-                        {% endif %}
-                      </p>
-                    </div>
-
-                    <div class="jk-nav-dropdown__inner">
-                      {% for child_link in link.links %}
-                        {% if child_link.links.size > 0 %}
-                          <div class="jk-nav-dropdown__group">
-                            <a class="jk-nav-dropdown__heading" href="{{ child_link.url }}">{{ child_link.title }}</a>
-                            <div class="jk-nav-dropdown__children">
-                              {% for grandchild_link in child_link.links %}
-                                <a class="jk-nav-dropdown__link" href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
-                              {% endfor %}
-                            </div>
-                          </div>
-                        {% else %}
-                          <a class="jk-nav-dropdown__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
-                        {% endif %}
-                      {% endfor %}
-                    </div>
-                  </div>
-
-                  <aside class="jk-nav-dropdown__feature" aria-label="{{ link.title }} feature">
-                    <div class="jk-nav-dropdown__media-grid">
-                      <div class="jk-nav-dropdown__media jk-nav-dropdown__media--primary">
-                        {% if mega_block != blank and mega_block.settings.feature_image != blank %}
-                          {{ mega_block.settings.feature_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 320px, 0px', alt: mega_block.settings.feature_image_alt }}
-                        {% else %}
-                          <span>{{ link.title }}</span>
-                        {% endif %}
-                      </div>
-                      <div class="jk-nav-dropdown__media jk-nav-dropdown__media--secondary">
-                        {% if mega_block != blank and mega_block.settings.lifestyle_image != blank %}
-                          {{ mega_block.settings.lifestyle_image | image_url: width: 520 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 180px, 0px', alt: mega_block.settings.lifestyle_image_alt }}
-                        {% else %}
-                          <span>Fine jewellery</span>
-                        {% endif %}
-                      </div>
-                    </div>
-
-                    <div class="jk-nav-dropdown__cta">
-                      <span>
-                        {% if mega_block != blank and mega_block.settings.cta_eyebrow != blank %}
-                          {{ mega_block.settings.cta_eyebrow }}
-                        {% else %}
-                          Private guidance
-                        {% endif %}
-                      </span>
-                      <h3>
-                        {% if mega_block != blank and mega_block.settings.cta_heading != blank %}
-                          {{ mega_block.settings.cta_heading }}
-                        {% else %}
-                          Choose with confidence
-                        {% endif %}
-                      </h3>
-                      <p>
-                        {% if mega_block != blank and mega_block.settings.cta_text != blank %}
-                          {{ mega_block.settings.cta_text }}
-                        {% else %}
-                          Refine stones, settings, proportions, and meaningful details with a calm luxury experience.
-                        {% endif %}
-                      </p>
-                      <a href="{% if mega_block != blank and mega_block.settings.cta_link != blank %}{{ mega_block.settings.cta_link }}{% else %}{{ link.url }}{% endif %}">
-                        {% if mega_block != blank and mega_block.settings.cta_label != blank %}
-                          {{ mega_block.settings.cta_label }}
-                        {% else %}
-                          Explore {{ link.title }}
-                        {% endif %}
-                      </a>
-                    </div>
-                  </aside>
-                </div>
-              </div>
             </div>
           {% else %}
             <a href="{{ link.url }}" class="jk-nav__link">{{ link.title }}</a>
@@ -209,66 +116,183 @@
   {% endif %}
 </header>
 
-  <div id="JoyariMobileMenu-{{ section.id }}" class="jk-mobile-drawer" hidden data-mobile-drawer>
-    <button type="button" class="jk-mobile-drawer__backdrop" aria-label="Close menu" data-nav-close></button>
-    <div class="jk-mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-      <div class="jk-mobile-drawer__header">
-        <span class="jk-mobile-drawer__title">{{ section.settings.logo_text | default: settings.brand_name | default: shop.name }}</span>
-        <button type="button" class="jk-mobile-drawer__close" aria-label="Close menu" data-nav-close>
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+{% if primary_menu.links.size > 0 %}
+  <div class="jk-mega-layer" data-mega-layer>
+    {% for link in primary_menu.links %}
+      {% if link.links.size > 0 %}
+        {% liquid
+          assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
+          assign mega_block = blank
+          assign normalized_link_title = link.title | strip | downcase
 
-      <nav class="jk-mobile-menu" aria-label="Mobile navigation links">
-        {% if primary_menu.links.size > 0 %}
-          {% for link in primary_menu.links %}
-            {% liquid
-              assign mobile_submenu_id = 'JoyariMobileSubmenu-' | append: section.id | append: '-' | append: forloop.index
-            %}
+          for block in section.blocks
+            if block.type == 'mega_menu'
+              assign normalized_block_title = block.settings.menu_title | strip | downcase
+              if normalized_block_title == normalized_link_title
+                assign mega_block = block
+                break
+              endif
+            endif
+          endfor
+        %}
 
-            {% if link.links.size > 0 %}
-              <div class="jk-mobile-menu-group" data-mobile-menu-group>
-                <div class="jk-mobile-menu-group__summary">
-                  <a href="{{ link.url }}" class="jk-mobile-menu__link" data-nav-link>{{ link.title }}</a>
-                  <button type="button" class="jk-mobile-menu__toggle" aria-expanded="false" aria-controls="{{ mobile_submenu_id }}" data-mobile-submenu-toggle>
-                    <span class="visually-hidden">Expand {{ link.title }} menu</span>
-                    <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
-                  </button>
-                </div>
-
-                <div id="{{ mobile_submenu_id }}" class="jk-mobile-submenu" hidden data-mobile-submenu>
-                  {% for child_link in link.links %}
-                    {% if child_link.links.size > 0 %}
-                      <div class="jk-mobile-submenu__group">
-                        <a class="jk-mobile-submenu__heading" href="{{ child_link.url }}" data-nav-link>{{ child_link.title }}</a>
-                        <div class="jk-mobile-submenu__children">
-                          {% for grandchild_link in child_link.links %}
-                            <a href="{{ grandchild_link.url }}" data-nav-link>{{ grandchild_link.title }}</a>
-                          {% endfor %}
-                        </div>
-                      </div>
+        <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" data-mega-panel>
+          <div class="jk-nav-dropdown__panel">
+            <div class="jk-nav-dropdown__menu">
+              <div class="jk-nav-dropdown__header">
+                <div>
+                  <span class="jk-nav-dropdown__eyebrow">
+                    {% if mega_block != blank and mega_block.settings.eyebrow != blank %}
+                      {{ mega_block.settings.eyebrow }}
                     {% else %}
-                      <a href="{{ child_link.url }}" data-nav-link>{{ child_link.title }}</a>
+                      Joyari Krafted
                     {% endif %}
-                  {% endfor %}
+                  </span>
+                  <a class="jk-nav-dropdown__title" href="{{ link.url }}">View all {{ link.title }}</a>
+                </div>
+                <p>
+                  {% if mega_block != blank and mega_block.settings.menu_note != blank %}
+                    {{ mega_block.settings.menu_note }}
+                  {% else %}
+                    Explore refined jewellery paths, private guidance, and made-to-order details.
+                  {% endif %}
+                </p>
+              </div>
+
+              <div class="jk-nav-dropdown__inner">
+                {% for child_link in link.links %}
+                  {% if child_link.links.size > 0 %}
+                    <div class="jk-nav-dropdown__group">
+                      <a class="jk-nav-dropdown__heading" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                      <div class="jk-nav-dropdown__children">
+                        {% for grandchild_link in child_link.links %}
+                          <a class="jk-nav-dropdown__link" href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% else %}
+                    <a class="jk-nav-dropdown__link" href="{{ child_link.url }}">{{ child_link.title }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+
+            <aside class="jk-nav-dropdown__feature" aria-label="{{ link.title }} feature">
+              <div class="jk-nav-dropdown__media-grid">
+                <div class="jk-nav-dropdown__media jk-nav-dropdown__media--primary">
+                  {% if mega_block != blank and mega_block.settings.feature_image != blank %}
+                    {{ mega_block.settings.feature_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 320px, 0px', alt: mega_block.settings.feature_image_alt }}
+                  {% else %}
+                    <span>{{ link.title }}</span>
+                  {% endif %}
+                </div>
+                <div class="jk-nav-dropdown__media jk-nav-dropdown__media--secondary">
+                  {% if mega_block != blank and mega_block.settings.lifestyle_image != blank %}
+                    {{ mega_block.settings.lifestyle_image | image_url: width: 520 | image_tag: loading: 'lazy', sizes: '(min-width: 1361px) 180px, 0px', alt: mega_block.settings.lifestyle_image_alt }}
+                  {% else %}
+                    <span>Fine jewellery</span>
+                  {% endif %}
                 </div>
               </div>
-            {% else %}
-              <a href="{{ link.url }}" class="jk-mobile-menu__link" data-nav-link>{{ link.title }}</a>
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-      </nav>
 
-      <div class="jk-mobile-drawer__utility">
-        <a href="{{ routes.search_url }}" data-nav-link>Search</a>
-        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" data-nav-link>{% if customer %}Account{% else %}Sign in{% endif %}</a>
-        <a href="{{ wishlist_url }}" data-nav-link>Wishlist</a>
-        <a href="{{ routes.cart_url }}" data-nav-link>Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
-        <span>Currency AUD</span>
-      </div>
+              <div class="jk-nav-dropdown__cta">
+                <span>
+                  {% if mega_block != blank and mega_block.settings.cta_eyebrow != blank %}
+                    {{ mega_block.settings.cta_eyebrow }}
+                  {% else %}
+                    Private guidance
+                  {% endif %}
+                </span>
+                <h3>
+                  {% if mega_block != blank and mega_block.settings.cta_heading != blank %}
+                    {{ mega_block.settings.cta_heading }}
+                  {% else %}
+                    Choose with confidence
+                  {% endif %}
+                </h3>
+                <p>
+                  {% if mega_block != blank and mega_block.settings.cta_text != blank %}
+                    {{ mega_block.settings.cta_text }}
+                  {% else %}
+                    Refine stones, settings, proportions, and meaningful details with a calm luxury experience.
+                  {% endif %}
+                </p>
+                <a href="{% if mega_block != blank and mega_block.settings.cta_link != blank %}{{ mega_block.settings.cta_link }}{% else %}{{ link.url }}{% endif %}">
+                  {% if mega_block != blank and mega_block.settings.cta_label != blank %}
+                    {{ mega_block.settings.cta_label }}
+                  {% else %}
+                    Explore {{ link.title }}
+                  {% endif %}
+                </a>
+              </div>
+            </aside>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endif %}
+
+<div id="JoyariMobileMenu-{{ section.id }}" class="jk-mobile-drawer" hidden data-mobile-drawer>
+  <button type="button" class="jk-mobile-drawer__backdrop" aria-label="Close menu" data-nav-close></button>
+  <div class="jk-mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="jk-mobile-drawer__header">
+      <span class="jk-mobile-drawer__title">{{ section.settings.logo_text | default: settings.brand_name | default: shop.name }}</span>
+      <button type="button" class="jk-mobile-drawer__close" aria-label="Close menu" data-nav-close>
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <nav class="jk-mobile-menu" aria-label="Mobile navigation links">
+      {% if primary_menu.links.size > 0 %}
+        {% for link in primary_menu.links %}
+          {% liquid
+            assign mobile_submenu_id = 'JoyariMobileSubmenu-' | append: section.id | append: '-' | append: forloop.index
+          %}
+
+          {% if link.links.size > 0 %}
+            <div class="jk-mobile-menu-group" data-mobile-menu-group>
+              <div class="jk-mobile-menu-group__summary">
+                <a href="{{ link.url }}" class="jk-mobile-menu__link" data-nav-link>{{ link.title }}</a>
+                <button type="button" class="jk-mobile-menu__toggle" aria-expanded="false" aria-controls="{{ mobile_submenu_id }}" data-mobile-submenu-toggle>
+                  <span class="visually-hidden">Expand {{ link.title }} menu</span>
+                  <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+                </button>
+              </div>
+
+              <div id="{{ mobile_submenu_id }}" class="jk-mobile-submenu" hidden data-mobile-submenu>
+                {% for child_link in link.links %}
+                  {% if child_link.links.size > 0 %}
+                    <div class="jk-mobile-submenu__group">
+                      <a class="jk-mobile-submenu__heading" href="{{ child_link.url }}" data-nav-link>{{ child_link.title }}</a>
+                      <div class="jk-mobile-submenu__children">
+                        {% for grandchild_link in child_link.links %}
+                          <a href="{{ grandchild_link.url }}" data-nav-link>{{ grandchild_link.title }}</a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% else %}
+                    <a href="{{ child_link.url }}" data-nav-link>{{ child_link.title }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <a href="{{ link.url }}" class="jk-mobile-menu__link" data-nav-link>{{ link.title }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </nav>
+
+    <div class="jk-mobile-drawer__utility">
+      <a href="{{ routes.search_url }}" data-nav-link>Search</a>
+      <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" data-nav-link>{% if customer %}Account{% else %}Sign in{% endif %}</a>
+      <a href="{{ wishlist_url }}" data-nav-link>Wishlist</a>
+      <a href="{{ routes.cart_url }}" data-nav-link>Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
+      <span>Currency AUD</span>
     </div>
   </div>
+</div>
 
 {% schema %}
 {

@@ -275,13 +275,14 @@
     var drawerId = toggle ? toggle.getAttribute('aria-controls') : '';
     var drawer = drawerId ? document.getElementById(drawerId) : document.querySelector('[data-mobile-drawer]');
     var desktopDropdowns = header.querySelectorAll('[data-desktop-dropdown]');
+    var megaPanels = document.querySelectorAll('[data-mega-panel]');
     var desktopMedia = window.matchMedia('(min-width: 1361px)');
     var desktopCloseTimer;
     if (!toggle || !drawer) return;
 
-    function setDropdownPosition() {
+    function setMegaPosition() {
       var rect = header.getBoundingClientRect();
-      header.style.setProperty('--jk-header-dropdown-top', Math.max(0, rect.bottom) + 'px');
+      document.documentElement.style.setProperty('--jk-mega-top', Math.max(0, rect.bottom) + 'px');
     }
 
     function cancelDesktopClose() {
@@ -299,6 +300,11 @@
         var button = item.querySelector('[data-desktop-dropdown-toggle]');
         if (button) button.setAttribute('aria-expanded', 'false');
       });
+
+      megaPanels.forEach(function (panel) {
+        if (exceptItem && panel.id === exceptItem.getAttribute('data-mega-trigger')) return;
+        panel.classList.remove('is-open');
+      });
     }
 
     function scheduleDesktopClose() {
@@ -311,12 +317,16 @@
     function openDesktopDropdown(item) {
       if (!item || !desktopMedia.matches) return;
       cancelDesktopClose();
-      setDropdownPosition();
+      setMegaPosition();
       closeDesktopDropdowns(item);
       item.classList.add('is-open');
 
       var button = item.querySelector('[data-desktop-dropdown-toggle]');
       if (button) button.setAttribute('aria-expanded', 'true');
+
+      var panelId = item.getAttribute('data-mega-trigger');
+      var panel = panelId ? document.getElementById(panelId) : null;
+      if (panel) panel.classList.add('is-open');
     }
 
     function toggleDesktopDropdown(item) {
@@ -381,8 +391,6 @@
     });
 
     desktopDropdowns.forEach(function (item) {
-      var menu = item.querySelector('[data-desktop-dropdown-menu]');
-
       item.addEventListener('mouseenter', function () {
         openDesktopDropdown(item);
       });
@@ -392,11 +400,12 @@
       });
 
       item.addEventListener('mouseleave', scheduleDesktopClose);
+    });
 
-      if (menu) {
-        menu.addEventListener('mouseenter', cancelDesktopClose);
-        menu.addEventListener('mouseleave', scheduleDesktopClose);
-      }
+    megaPanels.forEach(function (panel) {
+      panel.addEventListener('mouseenter', cancelDesktopClose);
+      panel.addEventListener('mouseleave', scheduleDesktopClose);
+      panel.addEventListener('focusin', cancelDesktopClose);
     });
 
     header.querySelectorAll('[data-desktop-dropdown-toggle]').forEach(function (button) {
@@ -408,7 +417,7 @@
       });
     });
 
-    header.querySelectorAll('[data-desktop-dropdown-menu] a').forEach(function (link) {
+    document.querySelectorAll('[data-mega-panel] a').forEach(function (link) {
       link.addEventListener('click', function () {
         closeDesktopDropdowns();
       });
@@ -439,7 +448,7 @@
     document.addEventListener('click', function (event) {
       var target = event.target;
       if (!target || typeof target.closest !== 'function') return;
-      if (!target.closest('[data-header] [data-desktop-dropdown]')) {
+      if (!target.closest('[data-desktop-dropdown]') && !target.closest('[data-mega-panel]')) {
         closeDesktopDropdowns();
       }
     });
@@ -455,7 +464,7 @@
     });
 
     window.addEventListener('resize', function () {
-      setDropdownPosition();
+      setMegaPosition();
       closeDesktopDropdowns();
       if (window.innerWidth > 1360 && drawer.classList.contains('is-open')) {
         setMenuOpen(false);
@@ -463,12 +472,12 @@
     });
 
     window.addEventListener('scroll', function () {
-      if (header.querySelector('[data-desktop-dropdown].is-open')) {
-        setDropdownPosition();
+      if (document.querySelector('[data-mega-panel].is-open')) {
+        setMegaPosition();
       }
     }, { passive: true });
 
-    setDropdownPosition();
+    setMegaPosition();
   }
 
   function closeRingSizeGuide(modal) {
