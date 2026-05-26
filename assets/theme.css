@@ -5099,3 +5099,299 @@ body.jk-menu-lock {
     pointer-events: auto !important;
   }
 }
+
+/* Final header anchoring fix: keep dropdowns attached to the header, not the page */
+.jk-mega-layer {
+  display: none !important;
+}
+
+.jk-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10000 !important;
+  overflow: visible !important;
+  isolation: isolate !important;
+  background: #fff !important;
+}
+
+.jk-header__inner,
+.jk-nav,
+.jk-nav__item,
+.jk-nav__parent {
+  overflow: visible !important;
+}
+
+@media (min-width: 1361px) {
+  .jk-nav__item {
+    position: static !important;
+  }
+
+  .jk-nav-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 50% !important;
+    z-index: 10001 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    width: min(1120px, calc(100vw - 48px)) !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 48px) !important;
+    max-height: min(62vh, 520px) !important;
+    max-height: min(62dvh, 520px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid rgba(23, 21, 18, .12) !important;
+    border-top: 0 !important;
+    border-radius: 0 0 16px 16px !important;
+    background: #fffdf8 !important;
+    box-shadow: 0 28px 80px rgba(23, 21, 18, .18) !important;
+    opacity: 0 !important;
+    overflow: auto !important;
+    pointer-events: none !important;
+    transform: translateX(-50%) translateY(8px) !important;
+    visibility: hidden !important;
+    transition: opacity .18s var(--jk-ease), transform .18s var(--jk-ease), visibility .18s var(--jk-ease) !important;
+  }
+
+  .jk-nav__item--dropdown:hover > .jk-nav-dropdown,
+  .jk-nav__item--dropdown:focus-within > .jk-nav-dropdown,
+  .jk-nav-dropdown.is-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+    visibility: visible !important;
+  }
+
+  .jk-nav-dropdown__panel {
+    display: block !important;
+    padding: 30px !important;
+    background: #fffdf8 !important;
+  }
+
+  .jk-nav-dropdown__inner {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 12px 18px !important;
+  }
+
+  .jk-nav-dropdown__group {
+    background: #fff !important;
+  }
+
+  .jk-nav-dropdown__feature,
+  .jk-nav-dropdown__image-card,
+  .jk-nav-dropdown__image-placeholder,
+  .jk-nav-dropdown__image-label,
+  .jk-nav-dropdown__media-grid,
+  .jk-nav-dropdown__media,
+  .jk-nav-dropdown__media--secondary,
+  .jk-nav-dropdown__cta {
+    display: none !important;
+  }
+
+  .jk-nav-dropdown a {
+    position: relative !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+  }
+}
+
+@media (min-width: 1361px) and (max-width: 1540px) {
+  .jk-nav-dropdown {
+    width: min(980px, calc(100vw - 40px)) !important;
+  }
+
+  .jk-nav-dropdown__inner {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1360px) {
+  .jk-nav {
+    display: none !important;
+  }
+
+  .jk-nav-dropdown {
+    display: none !important;
+  }
+
+  .jk-mobile-drawer[hidden] {
+    display: none !important;
+  }
+
+  .jk-mobile-drawer:not([hidden]) {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 11000 !important;
+    display: grid !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    pointer-events: auto !important;
+  }
+
+  .jk-mobile-drawer__backdrop {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    background: rgba(23, 21, 18, .5) !important;
+  }
+
+  .jk-mobile-drawer__panel {
+    position: relative !important;
+    z-index: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    width: min(540px, 94vw) !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow: hidden !important;
+    background: #fffdf8 !important;
+  }
+
+  .jk-mobile-menu {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain !important;
+  }
+
+  .jk-mobile-submenu:not([hidden]) {
+    display: grid !important;
+  }
+}
+
+/* Highest-specificity header override: this must win over older body-scoped mega rules. */
+@media (min-width: 1361px) {
+  body .jk-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    isolation: isolate !important;
+  }
+
+  body .jk-header__inner,
+  body .jk-nav,
+  body .jk-nav__item,
+  body .jk-nav__parent {
+    overflow: visible !important;
+  }
+
+  body .jk-nav__item {
+    position: static !important;
+  }
+
+  body .jk-nav-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 50% !important;
+    z-index: 10001 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    width: min(1120px, calc(100vw - 48px)) !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 48px) !important;
+    max-height: min(62vh, 520px) !important;
+    max-height: min(62dvh, 520px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid rgba(23, 21, 18, .12) !important;
+    border-top: 0 !important;
+    border-radius: 0 0 16px 16px !important;
+    background: #fffdf8 !important;
+    box-shadow: 0 28px 80px rgba(23, 21, 18, .18) !important;
+    opacity: 0 !important;
+    overflow: auto !important;
+    pointer-events: none !important;
+    transform: translateX(-50%) translateY(8px) !important;
+    visibility: hidden !important;
+  }
+
+  body .jk-nav__item--dropdown:hover > .jk-nav-dropdown,
+  body .jk-nav__item--dropdown:focus-within > .jk-nav-dropdown,
+  body .jk-nav-dropdown.is-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+    visibility: visible !important;
+  }
+
+  body .jk-nav-dropdown__panel {
+    display: block !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 30px !important;
+    background: #fffdf8 !important;
+  }
+
+  body .jk-nav-dropdown__menu {
+    display: block !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  body .jk-nav-dropdown__inner {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 12px 18px !important;
+    min-width: 0 !important;
+  }
+
+  body .jk-nav-dropdown__group {
+    display: grid !important;
+    gap: 6px !important;
+    min-width: 0 !important;
+    padding: 10px !important;
+    background: #fff !important;
+  }
+
+  body .jk-nav-dropdown__feature,
+  body .jk-nav-dropdown__image-card,
+  body .jk-nav-dropdown__image-placeholder,
+  body .jk-nav-dropdown__image-label,
+  body .jk-nav-dropdown__media-grid,
+  body .jk-nav-dropdown__media,
+  body .jk-nav-dropdown__media--secondary,
+  body .jk-nav-dropdown__cta {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1361px) and (max-width: 1540px) {
+  body .jk-nav-dropdown {
+    width: min(980px, calc(100vw - 40px)) !important;
+  }
+
+  body .jk-nav-dropdown__inner {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1360px) {
+  body .jk-nav-dropdown {
+    display: none !important;
+  }
+
+  body .jk-mobile-drawer:not([hidden]) {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 11000 !important;
+    display: grid !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+    pointer-events: auto !important;
+  }
+}
