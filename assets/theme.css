@@ -109,6 +109,15 @@ h3 {
   animation: jkSoftReveal .75s var(--jk-slow-ease) both;
 }
 
+#shopify-section-header.shopify-section {
+  position: relative !important;
+  z-index: 2147483000 !important;
+  overflow: visible !important;
+  animation: none !important;
+  transform: none !important;
+  contain: none !important;
+}
+
 .visually-hidden,
 .skip-to-content {
   position: absolute;
@@ -5564,6 +5573,21 @@ body.jk-menu-lock {
 }
 
 /* Desktop dropdown portal layer: keeps mega menu above all page sections. */
+#shopify-section-header,
+#shopify-section-header .jk-header,
+#shopify-section-header .jk-header__inner,
+#shopify-section-header .jk-nav {
+  overflow: visible !important;
+}
+
+#shopify-section-header {
+  position: relative !important;
+  z-index: 2147483000 !important;
+  animation: none !important;
+  transform: none !important;
+  contain: none !important;
+}
+
 .jk-desktop-dropdown-layer {
   position: fixed !important;
   inset: 0 !important;
@@ -5621,6 +5645,13 @@ body.jk-menu-lock {
   }
 
   body .jk-desktop-dropdown-layer .jk-nav-dropdown.is-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+    visibility: visible !important;
+  }
+
+  body .jk-desktop-dropdown-layer .jk-nav-dropdown[aria-hidden="false"] {
     opacity: 1 !important;
     pointer-events: auto !important;
     transform: translateX(-50%) translateY(0) !important;

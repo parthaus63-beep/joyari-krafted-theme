@@ -287,11 +287,25 @@
       document.documentElement.style.setProperty('--jk-dropdown-top', top);
       document.documentElement.style.setProperty('--jk-mega-top', top);
 
+      if (dropdownLayer) {
+        if (dropdownLayer.parentNode !== document.body) {
+          document.body.appendChild(dropdownLayer);
+        }
+
+        dropdownLayer.style.position = 'fixed';
+        dropdownLayer.style.inset = '0';
+        dropdownLayer.style.zIndex = '2147483001';
+        dropdownLayer.style.overflow = 'visible';
+      }
+
       var headerSection = header.closest('[id^="shopify-section-"], .shopify-section');
       if (headerSection) {
         headerSection.style.position = 'relative';
         headerSection.style.zIndex = '2147483000';
         headerSection.style.overflow = 'visible';
+        headerSection.style.transform = 'none';
+        headerSection.style.animation = 'none';
+        headerSection.style.contain = 'none';
       }
     }
 
@@ -315,9 +329,16 @@
         if (exceptItem && panel.id === exceptItem.getAttribute('data-desktop-dropdown-target')) return;
         panel.classList.remove('is-open');
         panel.setAttribute('aria-hidden', 'true');
+        panel.style.opacity = '';
+        panel.style.visibility = '';
+        panel.style.pointerEvents = '';
+        panel.style.transform = '';
       });
 
-      if (!exceptItem && dropdownLayer) dropdownLayer.classList.remove('is-open');
+      if (!exceptItem && dropdownLayer) {
+        dropdownLayer.classList.remove('is-open');
+        dropdownLayer.style.pointerEvents = '';
+      }
     }
 
     function scheduleDesktopClose() {
@@ -340,9 +361,16 @@
       var panelId = item.getAttribute('data-desktop-dropdown-target');
       var panel = panelId ? document.getElementById(panelId) : null;
       if (panel) {
-        if (dropdownLayer) dropdownLayer.classList.add('is-open');
+        if (dropdownLayer) {
+          dropdownLayer.classList.add('is-open');
+          dropdownLayer.style.pointerEvents = 'auto';
+        }
         panel.classList.add('is-open');
         panel.setAttribute('aria-hidden', 'false');
+        panel.style.opacity = '1';
+        panel.style.visibility = 'visible';
+        panel.style.pointerEvents = 'auto';
+        panel.style.transform = 'translateX(-50%) translateY(0)';
       }
     }
 
