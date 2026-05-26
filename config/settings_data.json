@@ -24,7 +24,7 @@
         "settings": {
           "show_announcement": true,
           "logo_text": "Joyari Krafted",
-          "menu": "main-menu-1",
+          "menu": "main-menu",
           "cta_label": "Book Consultation",
           "cta_link": "",
           "show_assurance": true,
