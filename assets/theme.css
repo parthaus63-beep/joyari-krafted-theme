@@ -306,6 +306,26 @@ h3 {
   text-overflow: ellipsis;
 }
 
+.jk-brand--image {
+  width: fit-content;
+  max-width: min(var(--jk-logo-width, 180px), 100%);
+  justify-self: start;
+}
+
+.jk-brand__logo {
+  display: block;
+  width: min(var(--jk-logo-width, 180px), 100%);
+  max-width: 100%;
+}
+
+.jk-brand__logo-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 76px;
+  object-fit: contain;
+}
+
 .jk-nav {
   position: static;
   grid-area: nav;
@@ -934,6 +954,14 @@ h3 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.jk-mobile-drawer__logo {
+  display: block;
+  width: auto;
+  max-width: 170px;
+  max-height: 42px;
+  object-fit: contain;
 }
 
 .jk-mobile-drawer__close {
