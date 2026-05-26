@@ -2,18 +2,21 @@
   assign engagement_rings_url = routes.collections_url | append: '/engagement-rings'
   assign solitaire_rings_url = routes.collections_url | append: '/solitaire-rings'
   assign halo_rings_url = routes.collections_url | append: '/halo-rings'
-  assign custom_design_url = routes.collections_url | append: '/custom-design'
   assign wedding_bands_url = routes.collections_url | append: '/wedding-bands'
   assign diamond_bands_url = routes.collections_url | append: '/diamond-bands'
   assign eternity_bands_url = routes.collections_url | append: '/eternity-bands'
   assign mens_wedding_bands_url = routes.collections_url | append: '/mens-wedding-bands'
+  assign jewellery_url = routes.collections_url | append: '/jewellery'
   assign rings_url = routes.collections_url | append: '/rings'
   assign earrings_url = routes.collections_url | append: '/earrings'
   assign bracelets_url = routes.collections_url | append: '/bracelets'
   assign necklaces_url = routes.collections_url | append: '/necklaces'
   assign diamonds_url = routes.collections_url | append: '/diamonds'
+  assign loose_diamonds_url = routes.collections_url | append: '/loose-diamonds'
   assign lab_diamonds_url = routes.collections_url | append: '/lab-grown-diamonds'
-  assign diamond_jewellery_url = routes.collections_url | append: '/diamond-jewellery'
+  assign natural_diamonds_url = routes.collections_url | append: '/natural-diamonds'
+  assign ready_to_ship_url = routes.collections_url | append: '/ready-to-ship'
+  assign design_ring_url = '/pages/design-your-ring'
 %}
 
 {% if section.settings.show_announcement and settings.announcement_text != blank %}
@@ -55,19 +58,25 @@
           <a href="{{ mens_wedding_bands_url }}">Men's Bands</a>
         </div>
       </div>
-      <a href="{{ rings_url }}" class="jk-nav__link">Rings</a>
-      <a href="{{ earrings_url }}" class="jk-nav__link">Earrings</a>
-      <a href="{{ bracelets_url }}" class="jk-nav__link">Bracelets</a>
-      <a href="{{ necklaces_url }}" class="jk-nav__link">Necklaces</a>
       <div class="jk-nav__item jk-nav__item--dropdown">
-        <a href="{{ diamonds_url }}" class="jk-nav__link">Diamonds</a>
-        <div class="jk-nav-dropdown" aria-label="Diamond Jewellery menu">
-          <a href="{{ diamonds_url }}">Certified Diamonds</a>
-          <a href="{{ lab_diamonds_url }}">Lab-Grown Diamonds</a>
-          <a href="{{ diamond_jewellery_url }}">Diamond Jewellery</a>
-          <a href="/pages/education">Diamond Education</a>
+        <a href="{{ jewellery_url }}" class="jk-nav__link">Jewellery</a>
+        <div class="jk-nav-dropdown" aria-label="Jewellery menu">
+          <a href="{{ rings_url }}">Rings</a>
+          <a href="{{ earrings_url }}">Earrings</a>
+          <a href="{{ bracelets_url }}">Bracelets</a>
+          <a href="{{ necklaces_url }}">Necklaces</a>
+          <a href="{{ ready_to_ship_url }}">Ready To Ship</a>
         </div>
       </div>
+      <div class="jk-nav__item jk-nav__item--dropdown">
+        <a href="{{ diamonds_url }}" class="jk-nav__link">Diamonds</a>
+        <div class="jk-nav-dropdown" aria-label="Diamonds menu">
+          <a href="{{ loose_diamonds_url }}">Loose Diamonds</a>
+          <a href="{{ lab_diamonds_url }}">Lab Grown</a>
+          <a href="{{ natural_diamonds_url }}">Natural Diamonds</a>
+        </div>
+      </div>
+      <a href="{{ design_ring_url }}" class="jk-nav__link">Custom Design</a>
       <a href="/pages/education" class="jk-nav__link">Education</a>
       <a href="/pages/contact" class="jk-nav__link">Contact</a>
     </nav>
@@ -119,8 +128,13 @@
         <a href="{{ routes.root_url }}" class="jk-mobile-menu__link" data-nav-link>Home</a>
         <a href="{{ engagement_rings_url }}" class="jk-mobile-menu__link" data-nav-link>Engagement Rings</a>
         <a href="{{ wedding_bands_url }}" class="jk-mobile-menu__link" data-nav-link>Wedding Bands</a>
-        <a href="{{ diamond_jewellery_url }}" class="jk-mobile-menu__link" data-nav-link>Diamond Jewellery</a>
-        <a href="{{ custom_design_url }}" class="jk-mobile-menu__link" data-nav-link>Custom Design</a>
+        <a href="{{ jewellery_url }}" class="jk-mobile-menu__link" data-nav-link>Jewellery</a>
+        <a href="{{ loose_diamonds_url }}" class="jk-mobile-menu__link" data-nav-link>Loose Diamonds</a>
+        <a href="{{ lab_diamonds_url }}" class="jk-mobile-menu__link" data-nav-link>Lab Grown Diamonds</a>
+        <a href="{{ natural_diamonds_url }}" class="jk-mobile-menu__link" data-nav-link>Natural Diamonds</a>
+        <a href="{{ design_ring_url }}" class="jk-mobile-menu__link" data-nav-link>Custom Design</a>
+        <a href="{{ ready_to_ship_url }}" class="jk-mobile-menu__link" data-nav-link>Ready To Ship</a>
+        <a href="/pages/education" class="jk-mobile-menu__link" data-nav-link>Education</a>
         <a href="/pages/about" class="jk-mobile-menu__link" data-nav-link>About</a>
         <a href="/pages/contact" class="jk-mobile-menu__link" data-nav-link>Contact</a>
         <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="jk-mobile-menu__link" data-nav-link>Account</a>

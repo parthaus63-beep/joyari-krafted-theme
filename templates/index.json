@@ -182,6 +182,70 @@
         "product_limit": 8
       }
     },
+    "diamond_gateway": {
+      "type": "diamond-catalogue-gateway",
+      "blocks": {
+        "dg1": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "loose",
+            "badge": "Diamond search",
+            "title": "Loose Diamonds",
+            "text": "Browse individual stones in a dedicated catalogue experience away from the editorial homepage."
+          }
+        },
+        "dg2": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "lab",
+            "badge": "Traceable brilliance",
+            "title": "Lab Grown Diamonds",
+            "text": "Explore lab-grown stones with the clarity and focus a diamond decision deserves."
+          }
+        },
+        "dg3": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "natural",
+            "badge": "Classic provenance",
+            "title": "Natural Diamonds",
+            "text": "A quieter destination for natural diamond selection, comparison, and guidance."
+          }
+        },
+        "dg4": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "design",
+            "badge": "Private pathway",
+            "title": "Design Your Ring",
+            "text": "Move from stone to setting with a guided custom ring journey."
+          }
+        },
+        "dg5": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "ready",
+            "badge": "Available now",
+            "title": "Ready To Ship",
+            "text": "Discover finished pieces for clients seeking a more immediate Joyari moment."
+          }
+        }
+      },
+      "block_order": [
+        "dg1",
+        "dg2",
+        "dg3",
+        "dg4",
+        "dg5"
+      ],
+      "settings": {
+        "eyebrow": "Diamond concierge",
+        "heading": "Diamond search belongs in its own calm space",
+        "subheading": "Joyari keeps the homepage emotional and brand-led, while loose stones, lab-grown options, natural diamonds, custom design, and ready pieces live in focused destinations.",
+        "button_label": "Browse Loose Diamonds",
+        "button_link": ""
+      }
+    },
     "design_process": {
       "type": "luxury-design-process",
       "blocks": {
@@ -494,7 +558,7 @@
     "promise",
     "engagement",
     "cinematic_story",
-    "lab_diamonds",
+    "diamond_gateway",
     "design_process",
     "ethical",
     "story",

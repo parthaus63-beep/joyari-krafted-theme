@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "main": {
+      "type": "luxury-product-grid",
+      "settings": {
+        "eyebrow": "Diamond catalogue",
+        "heading": "",
+        "subheading": "A focused destination for comparing loose diamonds, stone specifications, and certification details without crowding the Joyari homepage.",
+        "collection_banner_eyebrow": "Loose Diamonds",
+        "grid_heading": "Available stones",
+        "collection_intro_eyebrow": "Stone selection",
+        "collection_intro_heading": "Compare brilliance with a calmer eye",
+        "collection_intro_text": "Use this collection for Nivoda-connected stones, loose diamond search, and individual diamond listings supported by Joyari guidance.",
+        "collection_lifestyle_eyebrow": "Guided choice",
+        "collection_lifestyle_heading": "From stone to setting",
+        "collection_lifestyle_text": "Clients can begin with a diamond here, then move into a custom setting or private consultation.",
+        "fallback_product_image_alt": "Joyari Krafted loose diamond",
+        "product_limit": 36
+      }
+    },
+    "education": {
+      "type": "diamond-education",
+      "settings": {
+        "eyebrow": "Diamond guidance",
+        "heading": "The details that shape a beautiful stone",
+        "subheading": "Cut, colour, clarity, carat, ratio, and certification are presented as part of a considered jewellery journey."
+      }
+    },
+    "promises": {
+      "type": "brand-promise",
+      "settings": {
+        "eyebrow": "Joyari support",
+        "heading": "A catalogue with concierge calm",
+        "subheading": "Keep supplier inventory connected while the experience remains refined, guided, and brand-led."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "education",
+    "promises"
+  ]
+}
