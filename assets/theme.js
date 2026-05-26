@@ -282,7 +282,7 @@
 
     function setMegaPosition() {
       var rect = header.getBoundingClientRect();
-      document.documentElement.style.setProperty('--jk-mega-top', Math.max(0, rect.bottom) + 'px');
+      document.documentElement.style.setProperty('--jk-mega-top', Math.ceil(Math.max(0, rect.bottom)) + 'px');
     }
 
     function cancelDesktopClose() {
@@ -311,7 +311,7 @@
       cancelDesktopClose();
       desktopCloseTimer = window.setTimeout(function () {
         closeDesktopDropdowns();
-      }, 180);
+      }, 260);
     }
 
     function openDesktopDropdown(item) {
