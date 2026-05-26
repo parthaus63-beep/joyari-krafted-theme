@@ -110,6 +110,7 @@
       {% if link.links.size > 0 %}
         {% liquid
           assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
+          assign link_title_handle = link.title | handleize
         %}
 
         <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" data-mega-panel>
@@ -137,6 +138,60 @@
                 {% endfor %}
               </div>
             </div>
+
+            {% capture dropdown_feature_markup %}
+              {% for block in section.blocks %}
+                {% liquid
+                  assign block_title_handle = block.settings.menu_title | handleize
+                  assign feature_image = block.settings.feature_image
+                  if feature_image == blank
+                    assign feature_image = block.settings.lifestyle_image
+                  endif
+                  assign feature_alt = block.settings.feature_image_alt | default: block.settings.lifestyle_image_alt | default: block.settings.cta_heading | default: link.title
+                  assign feature_link = block.settings.cta_link | default: link.url
+                %}
+
+                {% if block_title_handle == link_title_handle %}
+                  <aside class="jk-nav-dropdown__feature" {{ block.shopify_attributes }}>
+                    <a class="jk-nav-dropdown__image-card" href="{{ feature_link }}" data-menu-link>
+                      {% if feature_image != blank %}
+                        {{ feature_image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '320, 480, 640, 760', sizes: '(min-width: 1361px) 380px, 0px', alt: feature_alt }}
+                      {% else %}
+                        <span class="jk-nav-dropdown__image-placeholder" aria-hidden="true"></span>
+                      {% endif %}
+                      <span class="jk-nav-dropdown__image-label">{{ block.settings.cta_heading | default: link.title }}</span>
+                    </a>
+
+                    <div class="jk-nav-dropdown__cta">
+                      <span>{{ block.settings.cta_eyebrow | default: 'Joyari guidance' }}</span>
+                      <h3>{{ block.settings.cta_heading | default: 'Explore with intention' }}</h3>
+                      <p>{{ block.settings.cta_text | default: 'Discover refined settings, certified stones, and personal guidance for a meaningful piece.' }}</p>
+                      <a href="{{ feature_link }}" data-menu-link>{{ block.settings.cta_label | default: 'Explore' }}</a>
+                    </div>
+                  </aside>
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% endcapture %}
+
+            {% assign dropdown_feature_markup_stripped = dropdown_feature_markup | strip %}
+            {% if dropdown_feature_markup_stripped != blank %}
+              {{ dropdown_feature_markup }}
+            {% else %}
+              <aside class="jk-nav-dropdown__feature jk-nav-dropdown__feature--fallback">
+                <a class="jk-nav-dropdown__image-card" href="{{ link.url }}" data-menu-link>
+                  <span class="jk-nav-dropdown__image-placeholder" aria-hidden="true"></span>
+                  <span class="jk-nav-dropdown__image-label">Quiet luxury, made personal</span>
+                </a>
+
+                <div class="jk-nav-dropdown__cta">
+                  <span>Joyari Krafted</span>
+                  <h3>Explore {{ link.title }}</h3>
+                  <p>Refined jewellery paths with calm guidance, considered proportions, and enduring detail.</p>
+                  <a href="{{ link.url }}" data-menu-link>View collection</a>
+                </div>
+              </aside>
+            {% endif %}
           </div>
         </div>
       {% endif %}
