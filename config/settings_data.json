@@ -12,6 +12,7 @@
     "brand_name": "Joyari Krafted",
     "meta_description": "Luxury lab-grown diamond jewellery, engagement rings, and made-to-order bridal pieces by Joyari Krafted.",
     "announcement_text": "Complimentary insured delivery and private guidance on made-to-order diamond jewellery.",
+    "instagram_url": "https://www.instagram.com/joyari_krafted?igsh=MTNiMmVhZmxtNjUzaw==",
     "support_email": "care@joyarikrafted.com",
     "support_phone": "+61 000 000 000",
     "color_ivory": "#fbf7ef",
@@ -21,10 +22,31 @@
     "sections": {
       "header": {
         "type": "header",
+        "blocks": {
+          "mega_menu_XhGbN7": {
+            "type": "mega_menu",
+            "settings": {
+              "menu_title": "",
+              "eyebrow": "Joyari Krafted",
+              "menu_note": "Explore refined jewellery paths, private guidance, and made-to-order details.",
+              "feature_image_alt": "",
+              "lifestyle_image_alt": "",
+              "cta_eyebrow": "Private guidance",
+              "cta_heading": "Design your ring",
+              "cta_text": "Refine stones, settings, proportions, and meaningful details with a calm luxury experience.",
+              "cta_label": "Design Your Ring",
+              "cta_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "mega_menu_XhGbN7"
+        ],
         "settings": {
           "show_announcement": true,
           "logo_text": "Joyari Krafted",
           "menu": "main-menu-1",
+          "wishlist_page": "",
           "show_assurance": true,
           "assurance_text": "Certified lab-grown diamonds · insured delivery · private guidance"
         }
