@@ -275,6 +275,7 @@
     var drawer = header.querySelector('[data-mobile-drawer]');
     var desktopDropdowns = header.querySelectorAll('[data-desktop-dropdown]');
     var desktopMedia = window.matchMedia('(min-width: 1361px)');
+    var desktopCloseTimer;
     if (!toggle || !drawer) return;
 
     function setDropdownPosition() {
@@ -282,7 +283,13 @@
       header.style.setProperty('--jk-header-dropdown-top', Math.max(0, rect.bottom) + 'px');
     }
 
+    function cancelDesktopClose() {
+      window.clearTimeout(desktopCloseTimer);
+    }
+
     function closeDesktopDropdowns(exceptItem) {
+      cancelDesktopClose();
+
       desktopDropdowns.forEach(function (item) {
         if (exceptItem && item === exceptItem) return;
         if (!item.classList.contains('is-open')) return;
@@ -293,8 +300,16 @@
       });
     }
 
+    function scheduleDesktopClose() {
+      cancelDesktopClose();
+      desktopCloseTimer = window.setTimeout(function () {
+        closeDesktopDropdowns();
+      }, 180);
+    }
+
     function openDesktopDropdown(item) {
-      if (!item) return;
+      if (!item || !desktopMedia.matches) return;
+      cancelDesktopClose();
       setDropdownPosition();
       closeDesktopDropdowns(item);
       item.classList.add('is-open');
@@ -365,34 +380,29 @@
     });
 
     desktopDropdowns.forEach(function (item) {
+      var menu = item.querySelector('[data-desktop-dropdown-menu]');
+
       item.addEventListener('mouseenter', function () {
-        closeDesktopDropdowns(item);
-        setDropdownPosition();
+        openDesktopDropdown(item);
       });
 
       item.addEventListener('focusin', function () {
-        closeDesktopDropdowns(item);
-        setDropdownPosition();
+        openDesktopDropdown(item);
       });
+
+      item.addEventListener('mouseleave', scheduleDesktopClose);
+
+      if (menu) {
+        menu.addEventListener('mouseenter', cancelDesktopClose);
+        menu.addEventListener('mouseleave', scheduleDesktopClose);
+      }
     });
 
     header.querySelectorAll('[data-desktop-dropdown-toggle]').forEach(function (button) {
       button.addEventListener('click', function (event) {
+        event.preventDefault();
         event.stopPropagation();
         var item = button.closest('[data-desktop-dropdown]');
-        toggleDesktopDropdown(item);
-      });
-    });
-
-    header.querySelectorAll('[data-desktop-dropdown-link]').forEach(function (link) {
-      link.addEventListener('click', function (event) {
-        if (!desktopMedia.matches) return;
-        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
-
-        var item = link.closest('[data-desktop-dropdown]');
-        if (!item) return;
-
-        event.preventDefault();
         toggleDesktopDropdown(item);
       });
     });

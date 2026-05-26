@@ -240,6 +240,10 @@ h3 {
   border-bottom: 1px solid rgba(23, 21, 18, .09);
 }
 
+.jk-header.is-menu-open {
+  z-index: 3000;
+}
+
 .jk-header__inner {
   width: min(1500px, calc(100vw - 48px));
   margin: 0 auto;
@@ -794,8 +798,13 @@ h3 {
 .jk-mobile-drawer {
   position: fixed;
   inset: 0;
-  z-index: 120;
+  z-index: 3200;
   display: grid;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
   pointer-events: none;
 }
 
@@ -811,9 +820,15 @@ h3 {
 .jk-mobile-drawer__panel {
   position: relative;
   z-index: 1;
-  width: min(430px, calc(100vw - 32px));
-  min-height: 100%;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  width: min(460px, 92vw);
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
   background: var(--jk-porcelain);
   box-shadow: 24px 0 80px rgba(23, 21, 18, .18);
   transform: translateX(-104%);
@@ -834,38 +849,50 @@ h3 {
 }
 
 .jk-mobile-drawer__header {
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  min-height: 72px;
-  padding: 0 22px;
+  min-height: 64px;
+  padding: 0 18px 0 22px;
   border-bottom: 1px solid var(--jk-line);
 }
 
 .jk-mobile-drawer__title {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.08rem;
+  font-size: 1rem;
   color: var(--jk-ink);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .jk-mobile-drawer__close {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
   border: 1px solid var(--jk-line);
   border-radius: 50%;
   background: var(--jk-porcelain);
   color: var(--jk-ink);
-  font-size: 1.35rem;
+  font-size: 1rem;
   line-height: 1;
 }
 
 .jk-mobile-menu {
+  flex: 1 1 auto;
+  min-height: 0;
   display: grid;
+  align-content: start;
   gap: 8px;
-  padding: 18px 18px 8px;
+  padding: 18px 18px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .jk-mobile-menu__link {
@@ -972,9 +999,12 @@ h3 {
 }
 
 .jk-mobile-drawer__utility {
+  flex: 0 0 auto;
   display: grid;
   gap: 10px;
-  padding: 22px;
+  padding: 18px 22px calc(18px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(23, 21, 18, .08);
+  background: rgba(255, 253, 248, .94);
   color: var(--jk-muted);
   font-size: .9rem;
 }
@@ -989,6 +1019,7 @@ h3 {
 html.jk-menu-lock,
 body.jk-menu-lock {
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 .jk-hero {
