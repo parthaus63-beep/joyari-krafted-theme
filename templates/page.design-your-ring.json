@@ -15,6 +15,8 @@
         "eyebrow": "Private custom design",
         "heading": "Design Your Ring",
         "subheading": "A guided pathway from diamond selection to setting, metal, proportion, ring size, and final presentation.",
+        "hero_video_url": "",
+        "hero_image_alt": "Joyari Krafted diamond jewellery editorial image",
         "primary_label": "Start With Loose Diamonds",
         "primary_link": "/collections/loose-diamonds",
         "secondary_label": "Contact Joyari",
@@ -67,7 +69,12 @@
       "settings": {
         "eyebrow": "Ring builder preview",
         "heading": "Start with shape, metal, and carat presence",
-        "subheading": "Use this guided preview to help clients imagine a ring before they move into a product or consultation."
+        "subheading": "Use this guided preview to help clients imagine a ring before they move into a product or consultation.",
+        "button_label": "Start with a setting",
+        "button_link": "",
+        "preview_image_alt": "Joyari Krafted custom ring design preview",
+        "base_price": 280000,
+        "carat_quarter_premium": 18500
       }
     },
     "education": {
@@ -85,6 +92,45 @@
         "heading": "Support from stone to reveal",
         "subheading": "Custom design is guided through sizing, diamond selection, setting detail, delivery, and long-term care."
       }
+    },
+    "177979233225934058": {
+      "type": "apps",
+      "blocks": {
+        "nivoda_connect_feed_EPLqfQ": {
+          "type": "shopify://apps/nivoda-connect/blocks/feed/1818f65a-9917-4ef2-bca9-2424a925fc76",
+          "settings": {
+            "primary_color": "#bdc3c7",
+            "diamond_type_natural": true,
+            "diamond_type_lab": true,
+            "diamond_type_gem_v2": false,
+            "shapes": "ROUND,OVAL,EMERALD,PEAR,PRINCESS,CUSHION,RADIANT,MARQUISE,HEART,SQUARE_EMERALD",
+            "carats_min": 0,
+            "carats_max": 10,
+            "price_min": 1,
+            "price_max": 5000000,
+            "color_min": "J",
+            "color_max": "D",
+            "clarity_min": "VS2",
+            "clarity_max": "FL",
+            "cut_min": "VG",
+            "cut_max": "ID",
+            "polish_min": "GD",
+            "polish_max": "EX",
+            "symmetry_min": "GD",
+            "symmetry_max": "EX",
+            "fluorescence_min": "NON",
+            "fluorescence_max": "VST",
+            "certificate_lab": "GIA,IGI,WISE",
+            "table_min": 0,
+            "table_max": 100,
+            "is_rjc": false
+          }
+        }
+      },
+      "block_order": [
+        "nivoda_connect_feed_EPLqfQ"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -92,6 +138,7 @@
     "process",
     "builder",
     "education",
-    "promises"
+    "promises",
+    "177979233225934058"
   ]
 }
