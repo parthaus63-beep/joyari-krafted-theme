@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "brand_name": "Joyari Krafted",
@@ -8,6 +17,33 @@
     "color_ivory": "#fbf7ef",
     "color_champagne": "#c7a35a",
     "color_ink": "#171512",
-    "color_beige": "#e9dcc8"
+    "color_beige": "#e9dcc8",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "show_announcement": true,
+          "logo_text": "Joyari Krafted",
+          "menu": "main-menu-1",
+          "cta_label": "Book Consultation",
+          "cta_link": "",
+          "show_assurance": true,
+          "assurance_text": "Certified lab-grown diamonds · insured delivery · private guidance"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "brand_text": "Fine lab-grown diamond jewellery designed for modern romantics, meaningful milestones, and everyday brilliance.",
+          "brand_image_alt": "Joyari Krafted jewellery presentation",
+          "newsletter_eyebrow": "Private access",
+          "newsletter_heading": "Receive private design notes and diamond guidance",
+          "newsletter_text": "Join for collection releases, proposal planning notes, and care advice from Joyari Krafted.",
+          "menu_title": "Explore",
+          "menu": ""
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
