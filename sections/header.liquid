@@ -38,6 +38,13 @@
           {{ section.settings.cta_label }}
         </a>
       {% endif %}
+      <a class="jk-account-link" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" aria-label="{% if customer %}Account{% else %}Sign in{% endif %}">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 12.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
+          <path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path>
+        </svg>
+        <span>{% if customer %}Account{% else %}Sign in{% endif %}</span>
+      </a>
       <a class="jk-cart-link" href="{{ routes.cart_url }}" aria-label="{{ 'general.cart.cart' | t }}">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M6.5 7.5h11l-.8 12H7.3l-.8-12Z"></path>

@@ -326,6 +326,44 @@ h3 {
   border-bottom: 1px solid var(--jk-champagne);
 }
 
+.jk-account-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid rgba(199, 163, 90, .24);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, .62);
+  color: var(--jk-charcoal);
+  font-size: .85rem;
+  font-weight: 750;
+  line-height: 1;
+  transition: transform .25s var(--jk-ease), border-color .25s var(--jk-ease), background .25s var(--jk-ease), box-shadow .25s var(--jk-ease);
+}
+
+.jk-account-link:hover,
+.jk-account-link:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(199, 163, 90, .48);
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 12px 28px rgba(23, 21, 18, .07);
+}
+
+.jk-account-link svg {
+  width: 21px;
+  height: 21px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jk-account-link span {
+  white-space: nowrap;
+}
+
 .jk-cart-link {
   display: inline-flex;
   align-items: center;
@@ -3361,10 +3399,22 @@ h3 {
 
   .jk-header__actions {
     justify-self: end;
+    gap: 8px;
   }
 
   .jk-header__cta {
     display: none;
+  }
+
+  .jk-account-link {
+    min-height: 38px;
+    padding: 0 10px;
+    font-size: .82rem;
+  }
+
+  .jk-account-link svg {
+    width: 20px;
+    height: 20px;
   }
 
   .jk-hero {
@@ -3578,6 +3628,16 @@ h3 {
 
   .jk-brand__name {
     max-width: 138px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .jk-account-link {
+    padding: 0 9px;
+  }
+
+  .jk-account-link span {
+    max-width: 48px;
     overflow: hidden;
     text-overflow: ellipsis;
   }
