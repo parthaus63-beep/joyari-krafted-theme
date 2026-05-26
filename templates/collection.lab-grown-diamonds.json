@@ -3,18 +3,18 @@
     "main": {
       "type": "luxury-product-grid",
       "settings": {
-        "eyebrow": "Diamond catalogue",
+        "eyebrow": "Lab-grown diamonds",
         "heading": "",
-        "subheading": "A focused destination for comparing loose diamonds, stone specifications, and certification details without crowding the Joyari homepage.",
-        "collection_banner_eyebrow": "Loose Diamonds",
-        "grid_heading": "Available stones",
-        "collection_intro_eyebrow": "Stone selection",
-        "collection_intro_heading": "Compare brilliance with a calmer eye",
-        "collection_intro_text": "Use this collection for Nivoda-connected stones, loose diamond search, and individual diamond listings supported by Joyari guidance.",
-        "collection_lifestyle_eyebrow": "Guided choice",
-        "collection_lifestyle_heading": "From stone to setting",
-        "collection_lifestyle_text": "Clients can begin with a diamond here, then move into a custom setting or private consultation.",
-        "fallback_product_image_alt": "Joyari Krafted loose diamond",
+        "subheading": "A dedicated lab-grown diamond catalogue for clients who want traceable brilliance, strong value, and a refined selection experience.",
+        "collection_banner_eyebrow": "Lab Grown",
+        "grid_heading": "Lab-grown diamond edit",
+        "collection_intro_eyebrow": "Modern brilliance",
+        "collection_intro_heading": "Traceable stones, selected with intention",
+        "collection_intro_text": "Keep Nivoda-connected lab-grown stones here so the homepage remains cinematic, emotional, and brand-led.",
+        "collection_lifestyle_eyebrow": "Setting pathway",
+        "collection_lifestyle_heading": "Choose the diamond, then design the ring",
+        "collection_lifestyle_text": "Pair a lab-grown diamond with a Joyari setting, custom metal preference, and final sizing guidance.",
+        "fallback_product_image_alt": "Joyari Krafted lab-grown diamond",
         "product_limit": 36
       }
     },
@@ -25,7 +25,7 @@
           "type": "shopify://apps/nivoda-connect/blocks/feed/1818f65a-9917-4ef2-bca9-2424a925fc76",
           "settings": {
             "primary_color": "#bdc3c7",
-            "diamond_type_natural": true,
+            "diamond_type_natural": false,
             "diamond_type_lab": true,
             "diamond_type_gem_v2": false,
             "shapes": "ROUND,OVAL,EMERALD,PEAR,PRINCESS,CUSHION,RADIANT,MARQUISE,HEART,SQUARE_EMERALD",
@@ -60,17 +60,17 @@
     "education": {
       "type": "diamond-education",
       "settings": {
-        "eyebrow": "Diamond guidance",
-        "heading": "The details that shape a beautiful stone",
-        "subheading": "Cut, colour, clarity, carat, ratio, and certification are presented as part of a considered jewellery journey."
+        "eyebrow": "Lab-grown education",
+        "heading": "Modern diamonds with fine jewellery standards",
+        "subheading": "Help clients understand certification, cut quality, carat presence, and what makes a lab-grown diamond feel exceptional."
       }
     },
     "promises": {
       "type": "brand-promise",
       "settings": {
-        "eyebrow": "Joyari support",
-        "heading": "A catalogue with concierge calm",
-        "subheading": "Keep supplier inventory connected while the experience remains refined, guided, and brand-led."
+        "eyebrow": "Confidence",
+        "heading": "Traceable brilliance, guided privately",
+        "subheading": "A focused diamond page keeps browsing practical while the Joyari experience stays premium."
       }
     }
   },

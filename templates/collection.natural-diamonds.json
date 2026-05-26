@@ -3,18 +3,18 @@
     "main": {
       "type": "luxury-product-grid",
       "settings": {
-        "eyebrow": "Diamond catalogue",
+        "eyebrow": "Natural diamonds",
         "heading": "",
-        "subheading": "A focused destination for comparing loose diamonds, stone specifications, and certification details without crowding the Joyari homepage.",
-        "collection_banner_eyebrow": "Loose Diamonds",
-        "grid_heading": "Available stones",
-        "collection_intro_eyebrow": "Stone selection",
-        "collection_intro_heading": "Compare brilliance with a calmer eye",
-        "collection_intro_text": "Use this collection for Nivoda-connected stones, loose diamond search, and individual diamond listings supported by Joyari guidance.",
-        "collection_lifestyle_eyebrow": "Guided choice",
-        "collection_lifestyle_heading": "From stone to setting",
-        "collection_lifestyle_text": "Clients can begin with a diamond here, then move into a custom setting or private consultation.",
-        "fallback_product_image_alt": "Joyari Krafted loose diamond",
+        "subheading": "A focused natural diamond destination for clients seeking classic provenance, certified stone details, and Joyari guidance.",
+        "collection_banner_eyebrow": "Natural Diamonds",
+        "grid_heading": "Natural diamond selection",
+        "collection_intro_eyebrow": "Classic provenance",
+        "collection_intro_heading": "A considered path to natural brilliance",
+        "collection_intro_text": "Natural diamond inventory can live here as a refined catalogue rather than appearing as a supplier feed on the homepage.",
+        "collection_lifestyle_eyebrow": "Client guidance",
+        "collection_lifestyle_heading": "Selected for the setting it will become",
+        "collection_lifestyle_text": "Encourage clients to compare stones, then request guidance on proportion, setting style, metal, and final ring design.",
+        "fallback_product_image_alt": "Joyari Krafted natural diamond",
         "product_limit": 36
       }
     },
@@ -26,7 +26,7 @@
           "settings": {
             "primary_color": "#bdc3c7",
             "diamond_type_natural": true,
-            "diamond_type_lab": true,
+            "diamond_type_lab": false,
             "diamond_type_gem_v2": false,
             "shapes": "ROUND,OVAL,EMERALD,PEAR,PRINCESS,CUSHION,RADIANT,MARQUISE,HEART,SQUARE_EMERALD",
             "carats_min": 0,
@@ -60,17 +60,17 @@
     "education": {
       "type": "diamond-education",
       "settings": {
-        "eyebrow": "Diamond guidance",
-        "heading": "The details that shape a beautiful stone",
-        "subheading": "Cut, colour, clarity, carat, ratio, and certification are presented as part of a considered jewellery journey."
+        "eyebrow": "Natural diamond guide",
+        "heading": "Certification, rarity, and proportion",
+        "subheading": "Present natural diamond details with calm education and a luxury consultation pathway."
       }
     },
     "promises": {
       "type": "brand-promise",
       "settings": {
-        "eyebrow": "Joyari support",
-        "heading": "A catalogue with concierge calm",
-        "subheading": "Keep supplier inventory connected while the experience remains refined, guided, and brand-led."
+        "eyebrow": "Joyari care",
+        "heading": "A refined way to select a natural stone",
+        "subheading": "Clients can browse inventory while Joyari keeps the experience personal, guided, and premium."
       }
     }
   },

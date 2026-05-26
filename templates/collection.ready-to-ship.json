@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "main": {
+      "type": "luxury-product-grid",
+      "settings": {
+        "eyebrow": "Ready To Ship",
+        "heading": "",
+        "subheading": "A dedicated edit of completed or near-immediate pieces for clients who want the Joyari feeling without a long custom journey.",
+        "collection_banner_eyebrow": "Available now",
+        "grid_heading": "Ready pieces",
+        "collection_intro_eyebrow": "Immediate moments",
+        "collection_intro_heading": "Finished jewellery with a luxury rhythm",
+        "collection_intro_text": "Use this collection for ready-to-ship rings, jewellery, and special pieces while keeping homepage storytelling uncluttered.",
+        "collection_lifestyle_eyebrow": "Presented beautifully",
+        "collection_lifestyle_heading": "Prepared for the reveal",
+        "collection_lifestyle_text": "Pair ready product listings with delivery, packaging, warranty, and support messaging.",
+        "fallback_product_image_alt": "Joyari Krafted ready to ship jewellery",
+        "product_limit": 24
+      }
+    },
+    "promises": {
+      "type": "brand-promise",
+      "settings": {
+        "eyebrow": "Availability with care",
+        "heading": "Ready does not have to feel rushed",
+        "subheading": "Keep the practical catalogue separate while maintaining Joyari presentation, warranty, and delivery confidence."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "promises"
+  ]
+}

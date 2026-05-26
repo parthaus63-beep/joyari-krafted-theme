@@ -16,7 +16,11 @@
   assign lab_diamonds_url = routes.collections_url | append: '/lab-grown-diamonds'
   assign natural_diamonds_url = routes.collections_url | append: '/natural-diamonds'
   assign ready_to_ship_url = routes.collections_url | append: '/ready-to-ship'
-  assign design_ring_url = '/pages/design-your-ring'
+  assign design_ring_page = pages['design-your-ring']
+  assign design_ring_url = design_ring_page.url
+  if design_ring_url == blank
+    assign design_ring_url = routes.all_products_collection_url
+  endif
 %}
 
 {% if section.settings.show_announcement and settings.announcement_text != blank %}
@@ -46,7 +50,7 @@
           <a href="{{ engagement_rings_url }}">All Engagement Rings</a>
           <a href="{{ solitaire_rings_url }}">Solitaire Rings</a>
           <a href="{{ halo_rings_url }}">Halo Rings</a>
-          <a href="{{ custom_design_url }}">Design Your Own Ring</a>
+          <a href="{{ design_ring_url }}">Design Your Own Ring</a>
         </div>
       </div>
       <div class="jk-nav__item jk-nav__item--dropdown">

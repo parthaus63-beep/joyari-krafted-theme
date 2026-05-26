@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "gateway": {
+      "type": "diamond-catalogue-gateway",
+      "blocks": {
+        "loose": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "loose",
+            "badge": "Stone search",
+            "title": "Loose Diamonds",
+            "text": "Explore individual stones, certification details, proportions, and carat presence."
+          }
+        },
+        "lab": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "lab",
+            "badge": "Traceable brilliance",
+            "title": "Lab Grown",
+            "text": "Browse lab-grown diamonds in a focused catalogue designed for clear comparison."
+          }
+        },
+        "natural": {
+          "type": "catalogue_link",
+          "settings": {
+            "destination": "natural",
+            "badge": "Classic provenance",
+            "title": "Natural Diamonds",
+            "text": "Review natural diamond options with Joyari guidance and a refined selection path."
+          }
+        }
+      },
+      "block_order": [
+        "loose",
+        "lab",
+        "natural"
+      ],
+      "settings": {
+        "eyebrow": "Diamonds",
+        "heading": "Choose the diamond path that feels right",
+        "subheading": "A calm gateway into loose stones, lab-grown diamonds, and natural diamonds, separated from the editorial homepage.",
+        "button_label": "Browse Loose Diamonds",
+        "button_link": ""
+      }
+    },
+    "education": {
+      "type": "diamond-education",
+      "settings": {
+        "eyebrow": "Diamond education",
+        "heading": "Understand the stone before the setting",
+        "subheading": "Use this space to explain certification, cut quality, carat presence, and how Joyari guides each diamond decision."
+      }
+    },
+    "promises": {
+      "type": "brand-promise",
+      "settings": {
+        "eyebrow": "Concierge support",
+        "heading": "A diamond catalogue with a jewellery-brand soul",
+        "subheading": "Nivoda-connected browsing remains available, but the experience stays calm, curated, and Joyari-led."
+      }
+    }
+  },
+  "order": [
+    "gateway",
+    "education",
+    "promises"
+  ]
+}
