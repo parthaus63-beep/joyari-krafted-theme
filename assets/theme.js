@@ -419,12 +419,13 @@
 
     document.querySelectorAll('[data-mega-panel] a').forEach(function (link) {
       link.addEventListener('click', function () {
-        closeDesktopDropdowns();
+        window.setTimeout(closeDesktopDropdowns, 0);
       });
     });
 
     drawer.querySelectorAll('[data-mobile-submenu-toggle]').forEach(function (button) {
       button.addEventListener('click', function (event) {
+        event.preventDefault();
         event.stopPropagation();
         var group = button.closest('.jk-mobile-menu-group');
         var panelId = button.getAttribute('aria-controls');
@@ -441,6 +442,13 @@
 
     drawer.querySelectorAll('[data-nav-close], [data-nav-link]').forEach(function (element) {
       element.addEventListener('click', function () {
+        if (element.matches('[data-nav-link]')) {
+          window.setTimeout(function () {
+            setMenuOpen(false);
+          }, 0);
+          return;
+        }
+
         setMenuOpen(false);
       });
     });
