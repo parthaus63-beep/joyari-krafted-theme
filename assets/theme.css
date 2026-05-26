@@ -5423,3 +5423,142 @@ body.jk-menu-lock {
     pointer-events: auto !important;
   }
 }
+
+/* Final live-store override: dropdown is a solid overlay below the header. */
+@media (min-width: 1361px) {
+  body .jk-header {
+    z-index: 2147483000 !important;
+    overflow: visible !important;
+    isolation: auto !important;
+    background: #fff !important;
+  }
+
+  body .jk-header__inner,
+  body .jk-nav,
+  body .jk-nav__item,
+  body .jk-nav__parent {
+    overflow: visible !important;
+  }
+
+  body .jk-nav-dropdown {
+    position: fixed !important;
+    top: var(--jk-dropdown-top, 132px) !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: 50% !important;
+    z-index: 2147483001 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    width: min(1220px, calc(100vw - 48px)) !important;
+    min-width: 0 !important;
+    max-width: calc(100vw - 48px) !important;
+    min-height: 300px !important;
+    max-height: min(72vh, 560px) !important;
+    max-height: min(72dvh, 560px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 1px solid rgba(23, 21, 18, .12) !important;
+    border-top: 0 !important;
+    border-radius: 0 0 16px 16px !important;
+    background: #fffdf8 !important;
+    box-shadow: 0 32px 90px rgba(23, 21, 18, .2) !important;
+    opacity: 0 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    pointer-events: none !important;
+    transform: translateX(-50%) translateY(8px) !important;
+    visibility: hidden !important;
+  }
+
+  body .jk-nav__item--dropdown:hover > .jk-nav-dropdown,
+  body .jk-nav__item--dropdown:focus-within > .jk-nav-dropdown,
+  body .jk-nav-dropdown.is-open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    transform: translateX(-50%) translateY(0) !important;
+    visibility: visible !important;
+  }
+
+  body .jk-nav-dropdown__panel {
+    display: block !important;
+    min-height: 300px !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 34px !important;
+    background: #fffdf8 !important;
+  }
+
+  body .jk-nav-dropdown__header {
+    display: grid !important;
+    gap: 8px !important;
+    margin: 0 0 22px !important;
+    padding: 0 0 18px !important;
+    border-bottom: 1px solid rgba(23, 21, 18, .1) !important;
+    background: transparent !important;
+  }
+
+  body .jk-nav-dropdown__inner {
+    position: relative !important;
+    z-index: 2 !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+    gap: 12px 18px !important;
+    min-width: 0 !important;
+    background: transparent !important;
+  }
+
+  body .jk-nav-dropdown__group {
+    display: grid !important;
+    align-content: start !important;
+    gap: 6px !important;
+    min-width: 0 !important;
+    padding: 10px !important;
+    border: 1px solid rgba(23, 21, 18, .06) !important;
+    border-radius: 10px !important;
+    background: #fff !important;
+  }
+
+  body .jk-nav-dropdown__heading,
+  body .jk-nav-dropdown__link,
+  body .jk-nav-dropdown__children a,
+  body .jk-nav-dropdown__title {
+    position: relative !important;
+    z-index: 3 !important;
+    pointer-events: auto !important;
+  }
+
+  body .jk-nav-dropdown__feature,
+  body .jk-nav-dropdown__image-card,
+  body .jk-nav-dropdown__image-placeholder,
+  body .jk-nav-dropdown__image-label,
+  body .jk-nav-dropdown__media-grid,
+  body .jk-nav-dropdown__media,
+  body .jk-nav-dropdown__media--secondary,
+  body .jk-nav-dropdown__cta {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1361px) and (max-width: 1540px) {
+  body .jk-nav-dropdown {
+    width: min(1040px, calc(100vw - 40px)) !important;
+  }
+
+  body .jk-nav-dropdown__inner {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 1360px) {
+  body .jk-nav-dropdown {
+    display: none !important;
+  }
+
+  body .jk-mobile-drawer:not([hidden]) {
+    z-index: 2147483002 !important;
+  }
+
+  body .jk-mobile-drawer.is-open .jk-mobile-drawer__panel {
+    transform: translateX(0) !important;
+  }
+}
