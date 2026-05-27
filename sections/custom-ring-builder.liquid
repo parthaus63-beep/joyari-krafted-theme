@@ -1,14 +1,40 @@
 {{ 'custom-ring-builder.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'custom-ring-builder.js' | asset_url }}" defer></script>
+{% assign initial_model_url = section.settings.default_model_url %}
+{% if initial_model_url == blank %}
+  {% assign initial_model_url = section.settings.round_model_url %}
+{% endif %}
+{% if initial_model_url == blank %}
+  {% assign initial_model_url = section.settings.oval_model_url %}
+{% endif %}
+{% if initial_model_url == blank %}
+  {% assign initial_model_url = section.settings.emerald_model_url %}
+{% endif %}
+{% if initial_model_url == blank %}
+  {% assign initial_model_url = section.settings.pear_model_url %}
+{% endif %}
+{% if initial_model_url == blank %}
+  {% assign initial_model_url = section.settings.cushion_model_url %}
+{% endif %}
+{% if initial_model_url != blank %}
+  <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
+{% endif %}
 
 <section
   id="CustomRingBuilder-{{ section.id }}"
-  class="jkrb"
+  class="jkrb{% if initial_model_url != blank %} jkrb--has-model-source jkrb--has-active-model{% endif %}"
   data-custom-ring-builder
   data-api-ready="true"
   data-base-price="{{ section.settings.base_price }}"
   data-base-carat="{{ section.settings.base_carat }}"
   data-quarter-premium="{{ section.settings.carat_quarter_premium }}"
+  data-model-default="{{ section.settings.default_model_url | escape }}"
+  data-model-round="{{ section.settings.round_model_url | escape }}"
+  data-model-oval="{{ section.settings.oval_model_url | escape }}"
+  data-model-emerald="{{ section.settings.emerald_model_url | escape }}"
+  data-model-pear="{{ section.settings.pear_model_url | escape }}"
+  data-model-cushion="{{ section.settings.cushion_model_url | escape }}"
+  data-gallery-view="main"
   data-current-shape="round"
   data-current-setting="solitaire"
   data-current-metal="platinum"
@@ -137,6 +163,22 @@
           </div>
           <p>Estimate updates instantly. Final price depends on live diamond availability, certification, and setting review.</p>
         </div>
+
+        <div class="jkrb-builder-summary">
+          <div>
+            <p class="jkrb-eyebrow">Selected design</p>
+            <h2 data-jkrb-summary-panel>Round solitaire in platinum</h2>
+          </div>
+          <div class="jkrb-estimate jkrb-estimate--panel">
+            <span>Estimated from</span>
+            <strong data-jkrb-price-panel>{{ section.settings.base_price | plus: 60000 | money }}</strong>
+          </div>
+          <div class="jkrb-builder-actions">
+            <a class="jkrb-button jkrb-button--dark" href="{{ section.settings.choose_diamond_link | default: '/collections/loose-diamonds' }}" data-jkrb-choose-diamond-link>Choose a Diamond</a>
+            <a class="jkrb-button jkrb-button--light" href="{{ section.settings.choose_setting_link | default: '/pages/contact' }}" data-jkrb-choose-setting-link>Choose this Setting</a>
+            <a class="jkrb-button jkrb-button--outline" href="{{ section.settings.request_link | default: '/pages/contact' }}" data-jkrb-request-link-panel>Request This Ring</a>
+          </div>
+        </div>
       </div>
 
       <aside class="jkrb-preview" aria-label="Luxury live ring preview">
@@ -146,6 +188,35 @@
           {% endif %}
 
           <div class="jkrb-preview-stage" data-jkrb-preview-stage>
+            {% if initial_model_url != blank %}
+              <div class="jkrb-model-shell" data-jkrb-model-shell>
+                <model-viewer
+                  class="jkrb-model-viewer"
+                  data-jkrb-model
+                  src="{{ initial_model_url | escape }}"
+                  {% if section.settings.preview_image != blank %}
+                    poster="{{ section.settings.preview_image | image_url: width: 1200 }}"
+                  {% endif %}
+                  camera-controls
+                  auto-rotate
+                  auto-rotate-delay="1800"
+                  rotation-per-second="18deg"
+                  shadow-intensity="0.72"
+                  exposure="1"
+                  environment-image="neutral"
+                  loading="eager"
+                  reveal="auto"
+                  aria-label="Interactive Joyari Krafted ring model"
+                >
+                  <div class="jkrb-model-progress" slot="progress-bar"><span></span></div>
+                </model-viewer>
+                <div class="jkrb-model-loading" data-jkrb-model-loading>
+                  <span></span>
+                  <p>Preparing 3D ring preview</p>
+                </div>
+              </div>
+            {% endif %}
+
             <div class="jkrb-preview-photo jkrb-preview-photo--setting is-active" data-jkrb-preview-setting="solitaire">
               {% if section.settings.setting_solitaire_image != blank %}
                 {{ section.settings.setting_solitaire_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: 'Solitaire engagement ring preview', class: 'jkrb-preview-photo__image' }}
@@ -245,7 +316,51 @@
                 {% endif %}
               </div>
             </div>
+
+            <div class="jkrb-lifestyle-panel" data-jkrb-lifestyle-panel aria-hidden="true">
+              {% if section.settings.lifestyle_image != blank %}
+                {{ section.settings.lifestyle_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 600px, 100vw', alt: section.settings.lifestyle_image_alt, class: 'jkrb-lifestyle-panel__image' }}
+              {% else %}
+                <span class="jkrb-preview-placeholder jkrb-preview-placeholder--lifestyle"><span>Lifestyle preview</span></span>
+              {% endif %}
+            </div>
           </div>
+        </div>
+
+        <div class="jkrb-gallery-thumbs" aria-label="Preview gallery">
+          <button class="jkrb-gallery-thumb is-active" type="button" data-jkrb-gallery-thumb data-gallery-view="main">
+            <span class="jkrb-gallery-thumb__visual jkrb-gallery-thumb__visual--main"></span>
+            <span>Main preview</span>
+          </button>
+          <button class="jkrb-gallery-thumb" type="button" data-jkrb-gallery-thumb data-gallery-view="shape">
+            <span class="jkrb-gallery-thumb__visual">
+              <span class="jkrb-gallery-thumb__layer is-active" data-jkrb-thumb-shape="round">{% if section.settings.shape_round_image != blank %}{{ section.settings.shape_round_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Round diamond thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__stone jkrb-gallery-thumb__stone--round"></span>{% endif %}</span>
+              <span class="jkrb-gallery-thumb__layer" data-jkrb-thumb-shape="oval">{% if section.settings.shape_oval_image != blank %}{{ section.settings.shape_oval_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Oval diamond thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__stone jkrb-gallery-thumb__stone--oval"></span>{% endif %}</span>
+              <span class="jkrb-gallery-thumb__layer" data-jkrb-thumb-shape="pear">{% if section.settings.shape_pear_image != blank %}{{ section.settings.shape_pear_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Pear diamond thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__stone jkrb-gallery-thumb__stone--pear"></span>{% endif %}</span>
+              <span class="jkrb-gallery-thumb__layer" data-jkrb-thumb-shape="emerald">{% if section.settings.shape_emerald_image != blank %}{{ section.settings.shape_emerald_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Emerald diamond thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__stone jkrb-gallery-thumb__stone--emerald"></span>{% endif %}</span>
+              <span class="jkrb-gallery-thumb__layer" data-jkrb-thumb-shape="cushion">{% if section.settings.shape_cushion_image != blank %}{{ section.settings.shape_cushion_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Cushion diamond thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__stone jkrb-gallery-thumb__stone--cushion"></span>{% endif %}</span>
+            </span>
+            <span>Shape image</span>
+          </button>
+          <button class="jkrb-gallery-thumb" type="button" data-jkrb-gallery-thumb data-gallery-view="setting">
+            <span class="jkrb-gallery-thumb__visual">
+              <span class="jkrb-gallery-thumb__layer is-active" data-jkrb-thumb-setting="solitaire">{% if section.settings.setting_solitaire_image != blank %}{{ section.settings.setting_solitaire_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Solitaire setting thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__ring"></span>{% endif %}</span>
+              <span class="jkrb-gallery-thumb__layer" data-jkrb-thumb-setting="hidden-halo">{% if section.settings.setting_hidden_halo_image != blank %}{{ section.settings.setting_hidden_halo_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Hidden halo setting thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__ring"></span>{% endif %}</span>
+              <span class="jkrb-gallery-thumb__layer" data-jkrb-thumb-setting="halo">{% if section.settings.setting_halo_image != blank %}{{ section.settings.setting_halo_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Halo setting thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__ring"></span>{% endif %}</span>
+              <span class="jkrb-gallery-thumb__layer" data-jkrb-thumb-setting="three-stone">{% if section.settings.setting_three_stone_image != blank %}{{ section.settings.setting_three_stone_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Three stone setting thumbnail' }}{% else %}<span class="jkrb-gallery-thumb__ring"></span>{% endif %}</span>
+            </span>
+            <span>Setting image</span>
+          </button>
+          <button class="jkrb-gallery-thumb" type="button" data-jkrb-gallery-thumb data-gallery-view="lifestyle">
+            <span class="jkrb-gallery-thumb__visual">
+              {% if section.settings.lifestyle_image != blank %}
+                {{ section.settings.lifestyle_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: section.settings.lifestyle_image_alt }}
+              {% else %}
+                <span class="jkrb-gallery-thumb__lifestyle"></span>
+              {% endif %}
+            </span>
+            <span>Lifestyle</span>
+          </button>
         </div>
 
         <div class="jkrb-preview__content">
@@ -266,6 +381,29 @@
           <textarea class="jkrb-payload" aria-hidden="true" tabindex="-1" data-jkrb-payload readonly></textarea>
         </div>
       </aside>
+    </div>
+
+    <div class="jkrb-spec-grid" aria-label="Ring specification cards">
+      <article>
+        <span>Metal</span>
+        <strong data-jkrb-spec-metal>Platinum</strong>
+        <p>Refined finish selected for tone, durability, and daily wear.</p>
+      </article>
+      <article>
+        <span>Diamond shape</span>
+        <strong data-jkrb-spec-shape>Round</strong>
+        <p>Preview shape updates now; live diamond availability can connect later.</p>
+      </article>
+      <article>
+        <span>Setting</span>
+        <strong data-jkrb-spec-setting>Solitaire</strong>
+        <p>Setting architecture is prepared for future setting and diamond API data.</p>
+      </article>
+      <article>
+        <span>Private quote</span>
+        <strong>Joyari guidance</strong>
+        <p>Our team confirms proportions, certification, and final pricing before production.</p>
+      </article>
     </div>
 
     <div class="jkrb-consultation">
@@ -345,6 +483,52 @@
       "id": "preview_image_alt",
       "label": "Preview image alt text",
       "default": "Luxury ring preview"
+    },
+    {
+      "type": "image_picker",
+      "id": "lifestyle_image",
+      "label": "Lifestyle gallery image"
+    },
+    {
+      "type": "text",
+      "id": "lifestyle_image_alt",
+      "label": "Lifestyle image alt text",
+      "default": "Joyari Krafted custom ring lifestyle preview"
+    },
+    {
+      "type": "header",
+      "content": "Optional 3D model URLs"
+    },
+    {
+      "type": "text",
+      "id": "default_model_url",
+      "label": "Default GLB/GLTF model URL",
+      "info": "Upload a .glb or .gltf file to Shopify Files, then paste the file URL here."
+    },
+    {
+      "type": "text",
+      "id": "round_model_url",
+      "label": "Round GLB/GLTF model URL"
+    },
+    {
+      "type": "text",
+      "id": "oval_model_url",
+      "label": "Oval GLB/GLTF model URL"
+    },
+    {
+      "type": "text",
+      "id": "emerald_model_url",
+      "label": "Emerald GLB/GLTF model URL"
+    },
+    {
+      "type": "text",
+      "id": "pear_model_url",
+      "label": "Pear GLB/GLTF model URL"
+    },
+    {
+      "type": "text",
+      "id": "cushion_model_url",
+      "label": "Cushion GLB/GLTF model URL"
     },
     {
       "type": "header",
@@ -469,6 +653,16 @@
       "type": "url",
       "id": "consultation_link",
       "label": "Consultation link"
+    },
+    {
+      "type": "url",
+      "id": "choose_diamond_link",
+      "label": "Choose a Diamond link"
+    },
+    {
+      "type": "url",
+      "id": "choose_setting_link",
+      "label": "Choose this Setting link"
     },
     {
       "type": "url",

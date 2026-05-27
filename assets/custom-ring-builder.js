@@ -78,6 +78,25 @@
     });
   }
 
+  function modelUrlFor(root, shapeHandle) {
+    return root.getAttribute('data-model-' + shapeHandle) || root.getAttribute('data-model-default') || '';
+  }
+
+  function updateModel(root, shapeHandle) {
+    var model = root.querySelector('[data-jkrb-model]');
+    var loading = root.querySelector('[data-jkrb-model-loading]');
+    var url = modelUrlFor(root, shapeHandle);
+
+    root.classList.toggle('jkrb--has-active-model', Boolean(model && url));
+
+    if (!model || !url) return;
+    if (model.getAttribute('src') === url) return;
+
+    root.classList.remove('jkrb--model-loaded', 'jkrb--model-error');
+    if (loading) loading.removeAttribute('hidden');
+    model.setAttribute('src', url);
+  }
+
   function updateLink(link, payload) {
     if (!link) return;
 
@@ -99,9 +118,32 @@
     var baseCarat = parseFloat(root.getAttribute('data-base-carat')) || 1.5;
     var quarterPremium = parseInt(root.getAttribute('data-quarter-premium'), 10) || 0;
     var caratInput = root.querySelector('[data-jkrb-carat]');
+    var model = root.querySelector('[data-jkrb-model]');
     var payloadField = root.querySelector('[data-jkrb-payload]');
-    var requestLinks = root.querySelectorAll('[data-jkrb-request-link], [data-jkrb-request-link-secondary], [data-jkrb-sticky-link]');
-    var consultationLinks = root.querySelectorAll('[data-jkrb-consultation-link]');
+    var requestLinks = root.querySelectorAll('[data-jkrb-request-link], [data-jkrb-request-link-secondary], [data-jkrb-request-link-panel], [data-jkrb-sticky-link]');
+    var consultationLinks = root.querySelectorAll('[data-jkrb-consultation-link], [data-jkrb-choose-diamond-link], [data-jkrb-choose-setting-link]');
+
+    if (model) {
+      model.addEventListener('load', function () {
+        root.classList.add('jkrb--model-loaded');
+        root.classList.remove('jkrb--model-error');
+      });
+
+      model.addEventListener('error', function () {
+        root.classList.add('jkrb--model-error');
+        root.classList.remove('jkrb--model-loaded', 'jkrb--has-active-model');
+      });
+    }
+
+    root.querySelectorAll('[data-jkrb-gallery-thumb]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        root.setAttribute('data-gallery-view', button.getAttribute('data-gallery-view') || 'main');
+
+        root.querySelectorAll('[data-jkrb-gallery-thumb]').forEach(function (item) {
+          item.classList.toggle('is-active', item === button);
+        });
+      });
+    });
 
     function update() {
       var shape = readChoice(checked(root, '[data-jkrb-shape]'), { label: 'Round', handle: 'round', adjustment: 0 });
@@ -123,14 +165,22 @@
       updatePreviewLayer(root, '[data-jkrb-preview-shape]', 'data-jkrb-preview-shape', shape.handle);
       updatePreviewLayer(root, '[data-jkrb-preview-setting]', 'data-jkrb-preview-setting', setting.handle);
       updatePreviewLayer(root, '[data-jkrb-preview-metal]', 'data-jkrb-preview-metal', metal.handle);
+      updatePreviewLayer(root, '[data-jkrb-thumb-shape]', 'data-jkrb-thumb-shape', shape.handle);
+      updatePreviewLayer(root, '[data-jkrb-thumb-setting]', 'data-jkrb-thumb-setting', setting.handle);
+      updateModel(root, shape.handle);
       text(root, '[data-jkrb-selected-shape]', shape.label);
       text(root, '[data-jkrb-selected-setting]', setting.label);
       text(root, '[data-jkrb-selected-metal]', metal.label);
       text(root, '[data-jkrb-selected-carat]', caratText);
       text(root, '[data-jkrb-carat-output]', caratText);
       text(root, '[data-jkrb-summary]', summary);
+      text(root, '[data-jkrb-summary-panel]', summary);
       text(root, '[data-jkrb-price]', formattedEstimate);
+      text(root, '[data-jkrb-price-panel]', formattedEstimate);
       text(root, '[data-jkrb-sticky-price]', formattedEstimate);
+      text(root, '[data-jkrb-spec-metal]', metal.label);
+      text(root, '[data-jkrb-spec-shape]', shape.label);
+      text(root, '[data-jkrb-spec-setting]', setting.label);
 
       var payload = {
         source: 'joyari-custom-ring-builder',
