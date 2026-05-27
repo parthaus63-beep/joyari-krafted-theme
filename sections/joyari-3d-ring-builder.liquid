@@ -66,10 +66,12 @@
           {% endif %}
         </div>
 
-        <div class="jk3d-viewer__loading" data-jk3d-loading>
-          <span></span>
-          <p>Preparing 3D ring preview</p>
-        </div>
+        {% if section.settings.model_url != blank %}
+          <div class="jk3d-viewer__loading" data-jk3d-loading>
+            <span></span>
+            <p>Preparing 3D ring preview</p>
+          </div>
+        {% endif %}
       </div>
 
       <div class="jk3d-thumbs" aria-label="Ring gallery thumbnails">
