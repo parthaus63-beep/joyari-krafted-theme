@@ -5697,23 +5697,17 @@ body.jk-menu-lock {
     display: none !important;
   }
 }
-.product-video{
+.jk-product-video-wrapper{
   width:100%;
-  height:auto;
   display:block;
-  border-radius:12px;
 }
-.product-video,
-.product-video video,
-video.product-video{
+
+.jk-product-video-wrapper video{
+  width:100% !important;
+  height:auto !important;
   display:block !important;
   visibility:visible !important;
   opacity:1 !important;
-  width:100% !important;
-  height:auto !important;
-  z-index:9;
-}
-
-.jk-product-media video{
-  display:block !important;
+  position:relative !important;
+  z-index:9 !important;
 }

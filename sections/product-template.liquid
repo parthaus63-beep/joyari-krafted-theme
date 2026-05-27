@@ -66,19 +66,18 @@
   {{ media | image_url: width: 1500 | image_tag }}
 
 {% when 'video' %}
-
- <video
-  class="product-video"
-  controls
-  autoplay
-  muted
-  loop
-  playsinline
-  width="100%"
+<video
+class="product-video"
+controls
+autoplay
+muted
+loop
+playsinline
+width="100%"
 >
-  {% for source in media.sources %}
-    <source src="{{ source.url }}" type="{{ source.mime_type }}">
-  {% endfor %}
+{% for source in media.sources %}
+<source src="{{ source.url }}" type="{{ source.mime_type }}">
+{% endfor %}
 </video>
 {% when 'external_video' %}
 
