@@ -20,40 +20,58 @@
   <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
 {% endif %}
 {% assign sequence_frame_1 = section.settings.sequence_frame_1 %}
-{% if sequence_frame_1 == blank %}
-  {% assign sequence_frame_1 = images['lucid-origin_Luxury_round_diamond_floating_on_white_background_ultra_realistic_jewellery_rend-0.jpg'] %}
+{% if sequence_frame_1 != blank %}
+  {% assign sequence_frame_1_url = sequence_frame_1 | image_url: width: 1600 %}
+{% else %}
+  {% assign sequence_frame_1_url = 'https://cdn.shopify.com/s/files/1/0685/4187/4219/files/lucid-origin_Luxury_round_diamond_floating_on_white_background_ultra_realistic_jewellery_rend-0.jpg?v=1779875825' %}
 {% endif %}
 {% assign sequence_frame_2 = section.settings.sequence_frame_2 %}
-{% if sequence_frame_2 == blank %}
-  {% assign sequence_frame_2 = images['lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0.jpg'] %}
+{% if sequence_frame_2 != blank %}
+  {% assign sequence_frame_2_url = sequence_frame_2 | image_url: width: 1600 %}
+{% else %}
+  {% assign sequence_frame_2_url = 'https://cdn.shopify.com/s/files/1/0685/4187/4219/files/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0.jpg?v=1779876024' %}
 {% endif %}
 {% assign sequence_frame_3 = section.settings.sequence_frame_3 %}
-{% if sequence_frame_3 == blank %}
-  {% assign sequence_frame_3 = images['lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0_83d75022-e1c1-4194-845f-bbe2d78cc139.jpg'] %}
+{% if sequence_frame_3 != blank %}
+  {% assign sequence_frame_3_url = sequence_frame_3 | image_url: width: 1600 %}
+{% else %}
+  {% assign sequence_frame_3_url = 'https://cdn.shopify.com/s/files/1/0685/4187/4219/files/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0_83d75022-e1c1-4194-845f-bbe2d78cc139.jpg?v=1779876289' %}
 {% endif %}
 {% assign sequence_frame_4 = section.settings.sequence_frame_4 %}
-{% if sequence_frame_4 == blank %}
-  {% assign sequence_frame_4 = images['lucid-origin_Luxury_round_brilliant_diamond_rotated_slightly_to_the_left_visible_crown_and_pa-0.jpg'] %}
+{% if sequence_frame_4 != blank %}
+  {% assign sequence_frame_4_url = sequence_frame_4 | image_url: width: 1600 %}
+{% else %}
+  {% assign sequence_frame_4_url = 'https://cdn.shopify.com/s/files/1/0685/4187/4219/files/lucid-origin_Luxury_round_brilliant_diamond_rotated_slightly_to_the_left_visible_crown_and_pa-0.jpg?v=1779876342' %}
 {% endif %}
 {% assign sequence_frame_5 = section.settings.sequence_frame_5 %}
-{% if sequence_frame_5 == blank %}
-  {% assign sequence_frame_5 = images['lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0_c3f83e97-f71b-475e-9807-e8faf9c838c4.jpg'] %}
+{% if sequence_frame_5 != blank %}
+  {% assign sequence_frame_5_url = sequence_frame_5 | image_url: width: 1600 %}
+{% else %}
+  {% assign sequence_frame_5_url = 'https://cdn.shopify.com/s/files/1/0685/4187/4219/files/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0_c3f83e97-f71b-475e-9807-e8faf9c838c4.jpg?v=1779876394' %}
 {% endif %}
 {% assign sequence_frame_6 = section.settings.sequence_frame_6 %}
-{% if sequence_frame_6 == blank %}
-  {% assign sequence_frame_6 = images['lucid-origin_Luxury_round_brilliant_diamond_side_profile_facing_left_visible_pavilion_depth_a-0.jpg'] %}
+{% if sequence_frame_6 != blank %}
+  {% assign sequence_frame_6_url = sequence_frame_6 | image_url: width: 1600 %}
+{% else %}
+  {% assign sequence_frame_6_url = 'https://cdn.shopify.com/s/files/1/0685/4187/4219/files/lucid-origin_Luxury_round_brilliant_diamond_side_profile_facing_left_visible_pavilion_depth_a-0.jpg?v=1779876457' %}
 {% endif %}
 {% assign sequence_frame_7 = section.settings.sequence_frame_7 %}
+{% if sequence_frame_7 != blank %}
+  {% assign sequence_frame_7_url = sequence_frame_7 | image_url: width: 1600 %}
+{% endif %}
 {% assign sequence_frame_8 = section.settings.sequence_frame_8 %}
+{% if sequence_frame_8 != blank %}
+  {% assign sequence_frame_8_url = sequence_frame_8 | image_url: width: 1600 %}
+{% endif %}
 {% assign sequence_count = 0 %}
-{% if sequence_frame_1 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
-{% if sequence_frame_2 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
-{% if sequence_frame_3 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
-{% if sequence_frame_4 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
-{% if sequence_frame_5 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
-{% if sequence_frame_6 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
-{% if sequence_frame_7 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
-{% if sequence_frame_8 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_1_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_2_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_3_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_4_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_5_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_6_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_7_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if sequence_frame_8_url != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
 
 <section
   id="CustomRingBuilder-{{ section.id }}"
@@ -260,61 +278,61 @@
                   <span>{% if sequence_count > 1 %}Drag to rotate{% else %}Move to inspect{% endif %}</span>
                 </div>
                 {% assign rendered_sequence_index = 0 %}
-                {% if sequence_frame_1 != blank %}
+                {% if sequence_frame_1_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
-                  {{ sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: 'Joyari Krafted 360 ring preview', class: 'jkrb-sequence-main', data-jkrb-sequence-main: '' }}
+                  <img src="{{ sequence_frame_1_url }}" alt="Joyari Krafted 360 ring preview" class="jkrb-sequence-main" loading="eager" width="1600" height="1600" data-jkrb-sequence-main>
                   <div class="jkrb-sequence-frame is-active" data-jkrb-sequence-frame data-frame-index="0">
-                    {{ sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_1_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
-                {% if sequence_frame_2 != blank %}
+                {% if sequence_frame_2_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
                   <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                    {{ sequence_frame_2 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_2_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
-                {% if sequence_frame_3 != blank %}
+                {% if sequence_frame_3_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
                   <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                    {{ sequence_frame_3 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_3_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
-                {% if sequence_frame_4 != blank %}
+                {% if sequence_frame_4_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
                   <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                    {{ sequence_frame_4 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_4_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
-                {% if sequence_frame_5 != blank %}
+                {% if sequence_frame_5_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
                   <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                    {{ sequence_frame_5 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_5_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
-                {% if sequence_frame_6 != blank %}
+                {% if sequence_frame_6_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
                   <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                    {{ sequence_frame_6 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_6_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
-                {% if sequence_frame_7 != blank %}
+                {% if sequence_frame_7_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
                   <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                    {{ sequence_frame_7 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_7_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
-                {% if sequence_frame_8 != blank %}
+                {% if sequence_frame_8_url != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
                   <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                    {{ sequence_frame_8 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    <img src="{{ sequence_frame_8_url }}" alt="{{ sequence_alt | escape }}" class="jkrb-sequence-frame__image" loading="eager" width="1600" height="1600">
                   </div>
                 {% endif %}
               </div>
