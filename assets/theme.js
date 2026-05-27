@@ -236,37 +236,6 @@
     updateVariantState();
   }
 
-  function initBuilderShowcase(root) {
-    function updateShowcase() {
-      var basePrice = parseInt(root.getAttribute('data-base-price'), 10) || 0;
-      var estimate = Math.max(0, basePrice + calculateBuilderAdjustment(root));
-      var shape = root.querySelector('[data-shape-choice]:checked');
-      var shapeValue = shape ? shape.value : 'Oval';
-      var metal = getSelectedRadioValue(root, 'showcase-metal-' + root.id.replace('joyari-ring-builder', '').replace(/[^A-Za-z0-9_-]/g, ''));
-      var diamond = getSelectedRadioValue(root, 'showcase-diamond-' + root.id.replace('joyari-ring-builder', '').replace(/[^A-Za-z0-9_-]/g, ''));
-
-      if (!metal) {
-        var metalInput = root.querySelector('input[name^="showcase-metal-"]:checked');
-        metal = metalInput ? metalInput.value : '18k yellow gold';
-      }
-      if (!diamond) {
-        var diamondInput = root.querySelector('input[name^="showcase-diamond-"]:checked');
-        diamond = diamondInput ? diamondInput.value : 'lab-grown diamond';
-      }
-
-      updateStonePreview(root);
-      setText(root, '[data-estimate-total]', formatMoney(estimate));
-      setText(root, '[data-showcase-summary]', shapeValue + ' ' + diamond + ' in ' + metal);
-    }
-
-    root.querySelectorAll('[data-builder-choice]').forEach(function (input) {
-      input.addEventListener('change', updateShowcase);
-      input.addEventListener('input', updateShowcase);
-    });
-
-    updateShowcase();
-  }
-
   function initNavigation() {
     var header = document.querySelector('[data-header]');
     if (!header) return;
@@ -593,6 +562,5 @@
     initNavigation();
     initRingSizeGuides();
     document.querySelectorAll('[data-product-builder]').forEach(initProductBuilder);
-    document.querySelectorAll('[data-builder-showcase]').forEach(initBuilderShowcase);
   });
 })();

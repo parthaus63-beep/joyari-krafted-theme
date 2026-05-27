@@ -14,87 +14,20 @@
       "settings": {
         "eyebrow": "Private custom design",
         "heading": "Design Your Ring",
-        "subheading": "A guided pathway from diamond selection to setting, metal, proportion, ring size, and final presentation.",
+        "subheading": "A refined studio for choosing your setting, diamond, and personal details with Joyari guidance.",
         "hero_video_url": "",
         "hero_image_alt": "Joyari Krafted diamond jewellery editorial image",
-        "primary_label": "Start With Loose Diamonds",
-        "primary_link": "/collections/loose-diamonds",
-        "secondary_label": "Contact Joyari",
+        "primary_label": "Book Consultation",
+        "primary_link": "/pages/contact",
+        "secondary_label": "Request Custom Ring",
         "secondary_link": "/pages/contact",
-        "trust_text": "Diamond guidance, custom setting support, secure checkout, and care-led delivery.",
+        "trust_text": "Private guidance, certified stones, custom setting support, and care-led delivery.",
         "caption_label": "Custom engagement rings",
         "caption_heading": "Built around your stone and story"
       }
     },
-    "process": {
-      "type": "luxury-design-process",
-      "blocks": {
-        "s1": {
-          "type": "step",
-          "settings": {
-            "title": "Choose the stone",
-            "text": "Begin with a loose diamond, lab-grown diamond, natural diamond, or a stone sourced with Joyari guidance."
-          }
-        },
-        "s2": {
-          "type": "step",
-          "settings": {
-            "title": "Shape the setting",
-            "text": "Refine silhouette, metal, band profile, diamond shape, carat presence, and personal details."
-          }
-        },
-        "s3": {
-          "type": "step",
-          "settings": {
-            "title": "Confirm the piece",
-            "text": "Review ring size, delivery timing, certification, presentation, and aftercare before the final order."
-          }
-        }
-      },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3"
-      ],
-      "settings": {
-        "eyebrow": "How it works",
-        "heading": "A quieter way to create something personal",
-        "subheading": "The custom journey should feel guided, calm, and luxurious rather than like a supplier catalogue.",
-        "button_label": "Browse Loose Diamonds",
-        "button_link": "/collections/loose-diamonds"
-      }
-    },
-    "builder": {
-      "type": "ring-builder",
-      "settings": {
-        "eyebrow": "Ring builder preview",
-        "heading": "Start with shape, metal, and carat presence",
-        "subheading": "Use this guided preview to help clients imagine a ring before they move into a product or consultation.",
-        "button_label": "Start with a setting",
-        "button_link": "",
-        "preview_image_alt": "Joyari Krafted custom ring design preview",
-        "base_price": 280000,
-        "carat_quarter_premium": 18500
-      }
-    },
-    "education": {
-      "type": "diamond-education",
-      "settings": {
-        "eyebrow": "Before you choose",
-        "heading": "Diamond knowledge, translated into feeling",
-        "subheading": "Joyari keeps certification, cut, carat, and proportion easy to understand while preserving the emotion of the ring."
-      }
-    },
-    "promises": {
-      "type": "brand-promise",
-      "settings": {
-        "eyebrow": "Custom confidence",
-        "heading": "Support from stone to reveal",
-        "subheading": "Custom design is guided through sizing, diamond selection, setting detail, delivery, and long-term care."
-      }
-    },
-    "17797923442230bda5": {
-      "type": "apps",
+    "ring_studio": {
+      "type": "nivoda-ring-studio",
       "blocks": {
         "nivoda_connect_feed_MpmxTf": {
           "type": "shopify://apps/nivoda-connect/blocks/feed/1818f65a-9917-4ef2-bca9-2424a925fc76",
@@ -130,15 +63,23 @@
       "block_order": [
         "nivoda_connect_feed_MpmxTf"
       ],
-      "settings": {}
+      "settings": {
+        "eyebrow": "Nivoda Ring Studio",
+        "heading": "Choose your setting and stone",
+        "subheading": "The studio will appear here as compatible Nivoda ring settings and diamonds complete syncing.",
+        "show_sync_message": true,
+        "status_eyebrow": "Studio status",
+        "status_heading": "Premium settings are syncing",
+        "status_text": "Our live ring studio is currently syncing premium ring settings and diamonds. Please check back shortly or contact us for a bespoke consultation.",
+        "primary_label": "Book Consultation",
+        "primary_link": "/pages/contact",
+        "secondary_label": "Request Custom Ring",
+        "secondary_link": "/pages/contact"
+      }
     }
   },
   "order": [
     "hero",
-    "process",
-    "builder",
-    "education",
-    "promises",
-    "17797923442230bda5"
+    "ring_studio"
   ]
 }
