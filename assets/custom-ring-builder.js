@@ -72,6 +72,12 @@
     });
   }
 
+  function updatePreviewLayer(root, selector, attribute, handle) {
+    root.querySelectorAll(selector).forEach(function (item) {
+      item.classList.toggle('is-active', item.getAttribute(attribute) === handle);
+    });
+  }
+
   function updateLink(link, payload) {
     if (!link) return;
 
@@ -114,6 +120,9 @@
       root.setAttribute('data-current-metal', metal.handle);
 
       updateSelectedCards(root);
+      updatePreviewLayer(root, '[data-jkrb-preview-shape]', 'data-jkrb-preview-shape', shape.handle);
+      updatePreviewLayer(root, '[data-jkrb-preview-setting]', 'data-jkrb-preview-setting', setting.handle);
+      updatePreviewLayer(root, '[data-jkrb-preview-metal]', 'data-jkrb-preview-metal', metal.handle);
       text(root, '[data-jkrb-selected-shape]', shape.label);
       text(root, '[data-jkrb-selected-setting]', setting.label);
       text(root, '[data-jkrb-selected-metal]', metal.label);

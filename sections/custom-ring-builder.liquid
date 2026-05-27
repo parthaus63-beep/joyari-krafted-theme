@@ -142,15 +142,109 @@
       <aside class="jkrb-preview" aria-label="Luxury live ring preview">
         <div class="jkrb-preview__media{% if section.settings.preview_image != blank %} jkrb-preview__media--image{% endif %}">
           {% if section.settings.preview_image != blank %}
-            {{ section.settings.preview_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: section.settings.preview_image_alt, class: 'jkrb-preview__image' }}
+            {{ section.settings.preview_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: section.settings.preview_image_alt, class: 'jkrb-preview__backdrop' }}
           {% endif %}
-          <div class="jkrb-ring-visual" data-jkrb-preview aria-hidden="true">
-            <span class="jkrb-ring-visual__band"></span>
-            <span class="jkrb-ring-visual__side jkrb-ring-visual__side--left"></span>
-            <span class="jkrb-ring-visual__side jkrb-ring-visual__side--right"></span>
-            <span class="jkrb-ring-visual__halo"></span>
-            <span class="jkrb-ring-visual__hidden-halo"></span>
-            <span class="jkrb-ring-visual__stone"></span>
+
+          <div class="jkrb-preview-stage" data-jkrb-preview-stage>
+            <div class="jkrb-preview-photo jkrb-preview-photo--setting is-active" data-jkrb-preview-setting="solitaire">
+              {% if section.settings.setting_solitaire_image != blank %}
+                {{ section.settings.setting_solitaire_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: 'Solitaire engagement ring preview', class: 'jkrb-preview-photo__image' }}
+              {% else %}
+                <span class="jkrb-preview-placeholder jkrb-preview-placeholder--setting jkrb-preview-placeholder--solitaire"><span>Solitaire setting</span></span>
+              {% endif %}
+            </div>
+            <div class="jkrb-preview-photo jkrb-preview-photo--setting" data-jkrb-preview-setting="hidden-halo">
+              {% if section.settings.setting_hidden_halo_image != blank %}
+                {{ section.settings.setting_hidden_halo_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: 'Hidden halo engagement ring preview', class: 'jkrb-preview-photo__image' }}
+              {% else %}
+                <span class="jkrb-preview-placeholder jkrb-preview-placeholder--setting jkrb-preview-placeholder--hidden-halo"><span>Hidden halo setting</span></span>
+              {% endif %}
+            </div>
+            <div class="jkrb-preview-photo jkrb-preview-photo--setting" data-jkrb-preview-setting="halo">
+              {% if section.settings.setting_halo_image != blank %}
+                {{ section.settings.setting_halo_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: 'Halo engagement ring preview', class: 'jkrb-preview-photo__image' }}
+              {% else %}
+                <span class="jkrb-preview-placeholder jkrb-preview-placeholder--setting jkrb-preview-placeholder--halo"><span>Halo setting</span></span>
+              {% endif %}
+            </div>
+            <div class="jkrb-preview-photo jkrb-preview-photo--setting" data-jkrb-preview-setting="three-stone">
+              {% if section.settings.setting_three_stone_image != blank %}
+                {{ section.settings.setting_three_stone_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: 'Three stone engagement ring preview', class: 'jkrb-preview-photo__image' }}
+              {% else %}
+                <span class="jkrb-preview-placeholder jkrb-preview-placeholder--setting jkrb-preview-placeholder--three-stone"><span>Three stone setting</span></span>
+              {% endif %}
+            </div>
+
+            <div class="jkrb-preview-inset" aria-hidden="true">
+              <span class="jkrb-preview-inset__label">Diamond shape</span>
+              <div class="jkrb-preview-photo jkrb-preview-photo--shape is-active" data-jkrb-preview-shape="round">
+                {% if section.settings.shape_round_image != blank %}
+                  {{ section.settings.shape_round_image | image_url: width: 520 | image_tag: loading: 'lazy', widths: '220, 360, 520', sizes: '150px', alt: 'Round diamond preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--shape jkrb-preview-placeholder--round"><span>Round</span></span>
+                {% endif %}
+              </div>
+              <div class="jkrb-preview-photo jkrb-preview-photo--shape" data-jkrb-preview-shape="oval">
+                {% if section.settings.shape_oval_image != blank %}
+                  {{ section.settings.shape_oval_image | image_url: width: 520 | image_tag: loading: 'lazy', widths: '220, 360, 520', sizes: '150px', alt: 'Oval diamond preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--shape jkrb-preview-placeholder--oval"><span>Oval</span></span>
+                {% endif %}
+              </div>
+              <div class="jkrb-preview-photo jkrb-preview-photo--shape" data-jkrb-preview-shape="pear">
+                {% if section.settings.shape_pear_image != blank %}
+                  {{ section.settings.shape_pear_image | image_url: width: 520 | image_tag: loading: 'lazy', widths: '220, 360, 520', sizes: '150px', alt: 'Pear diamond preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--shape jkrb-preview-placeholder--pear"><span>Pear</span></span>
+                {% endif %}
+              </div>
+              <div class="jkrb-preview-photo jkrb-preview-photo--shape" data-jkrb-preview-shape="emerald">
+                {% if section.settings.shape_emerald_image != blank %}
+                  {{ section.settings.shape_emerald_image | image_url: width: 520 | image_tag: loading: 'lazy', widths: '220, 360, 520', sizes: '150px', alt: 'Emerald diamond preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--shape jkrb-preview-placeholder--emerald"><span>Emerald</span></span>
+                {% endif %}
+              </div>
+              <div class="jkrb-preview-photo jkrb-preview-photo--shape" data-jkrb-preview-shape="cushion">
+                {% if section.settings.shape_cushion_image != blank %}
+                  {{ section.settings.shape_cushion_image | image_url: width: 520 | image_tag: loading: 'lazy', widths: '220, 360, 520', sizes: '150px', alt: 'Cushion diamond preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--shape jkrb-preview-placeholder--cushion"><span>Cushion</span></span>
+                {% endif %}
+              </div>
+            </div>
+
+            <div class="jkrb-preview-metal-panel" aria-hidden="true">
+              <span class="jkrb-preview-inset__label">Metal tone</span>
+              <div class="jkrb-preview-photo jkrb-preview-photo--metal is-active" data-jkrb-preview-metal="platinum">
+                {% if section.settings.metal_platinum_image != blank %}
+                  {{ section.settings.metal_platinum_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '240, 420, 640', sizes: '190px', alt: 'Platinum metal tone preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--metal jkrb-preview-placeholder--platinum"><span>Platinum</span></span>
+                {% endif %}
+              </div>
+              <div class="jkrb-preview-photo jkrb-preview-photo--metal" data-jkrb-preview-metal="yellow-gold">
+                {% if section.settings.metal_yellow_gold_image != blank %}
+                  {{ section.settings.metal_yellow_gold_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '240, 420, 640', sizes: '190px', alt: '18K yellow gold metal tone preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--metal jkrb-preview-placeholder--yellow-gold"><span>18K Yellow Gold</span></span>
+                {% endif %}
+              </div>
+              <div class="jkrb-preview-photo jkrb-preview-photo--metal" data-jkrb-preview-metal="white-gold">
+                {% if section.settings.metal_white_gold_image != blank %}
+                  {{ section.settings.metal_white_gold_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '240, 420, 640', sizes: '190px', alt: '18K white gold metal tone preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--metal jkrb-preview-placeholder--white-gold"><span>18K White Gold</span></span>
+                {% endif %}
+              </div>
+              <div class="jkrb-preview-photo jkrb-preview-photo--metal" data-jkrb-preview-metal="rose-gold">
+                {% if section.settings.metal_rose_gold_image != blank %}
+                  {{ section.settings.metal_rose_gold_image | image_url: width: 640 | image_tag: loading: 'lazy', widths: '240, 420, 640', sizes: '190px', alt: 'Rose gold metal tone preview', class: 'jkrb-preview-photo__image' }}
+                {% else %}
+                  <span class="jkrb-preview-placeholder jkrb-preview-placeholder--metal jkrb-preview-placeholder--rose-gold"><span>Rose Gold</span></span>
+                {% endif %}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -251,6 +345,83 @@
       "id": "preview_image_alt",
       "label": "Preview image alt text",
       "default": "Luxury ring preview"
+    },
+    {
+      "type": "header",
+      "content": "Diamond shape preview photos"
+    },
+    {
+      "type": "image_picker",
+      "id": "shape_round_image",
+      "label": "Round diamond photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "shape_oval_image",
+      "label": "Oval diamond photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "shape_pear_image",
+      "label": "Pear diamond photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "shape_emerald_image",
+      "label": "Emerald diamond photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "shape_cushion_image",
+      "label": "Cushion diamond photo"
+    },
+    {
+      "type": "header",
+      "content": "Ring setting preview photos"
+    },
+    {
+      "type": "image_picker",
+      "id": "setting_solitaire_image",
+      "label": "Solitaire ring photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "setting_hidden_halo_image",
+      "label": "Hidden halo ring photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "setting_halo_image",
+      "label": "Halo ring photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "setting_three_stone_image",
+      "label": "Three stone ring photo"
+    },
+    {
+      "type": "header",
+      "content": "Metal tone preview photos"
+    },
+    {
+      "type": "image_picker",
+      "id": "metal_platinum_image",
+      "label": "Platinum tone photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "metal_yellow_gold_image",
+      "label": "18K yellow gold tone photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "metal_white_gold_image",
+      "label": "18K white gold tone photo"
+    },
+    {
+      "type": "image_picker",
+      "id": "metal_rose_gold_image",
+      "label": "Rose gold tone photo"
     },
     {
       "type": "number",
