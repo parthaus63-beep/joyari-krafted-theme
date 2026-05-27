@@ -86,6 +86,13 @@
     var model = root.querySelector('[data-jkrb-model]');
     var loading = root.querySelector('[data-jkrb-model-loading]');
     var url = modelUrlFor(root, shapeHandle);
+    var hasSequenceFrames = Boolean(root.querySelector('[data-jkrb-sequence-frame]'));
+
+    if (hasSequenceFrames) {
+      root.classList.remove('jkrb--has-active-model', 'jkrb--model-loaded', 'jkrb--model-error');
+      if (loading) loading.setAttribute('hidden', 'hidden');
+      return;
+    }
 
     root.classList.toggle('jkrb--has-active-model', Boolean(model && url));
 

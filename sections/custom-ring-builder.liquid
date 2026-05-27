@@ -31,7 +31,7 @@
 
 <section
   id="CustomRingBuilder-{{ section.id }}"
-  class="jkrb{% if initial_model_url != blank %} jkrb--has-model-source jkrb--has-active-model{% endif %}{% if sequence_count > 0 %} jkrb--has-sequence{% endif %}{% if sequence_count <= 1 %} jkrb--single-image-mode{% endif %}"
+  class="jkrb{% if initial_model_url != blank %} jkrb--has-model-source{% endif %}{% if initial_model_url != blank and sequence_count == 0 %} jkrb--has-active-model{% endif %}{% if sequence_count > 0 %} jkrb--has-sequence jkrb--sequence-ready{% endif %}{% if sequence_count <= 1 %} jkrb--single-image-mode{% endif %}"
   data-custom-ring-builder
   data-api-ready="true"
   data-base-price="{{ section.settings.base_price }}"
@@ -199,7 +199,7 @@
           {% endif %}
 
           <div class="jkrb-preview-stage" data-jkrb-preview-stage>
-            {% if initial_model_url != blank %}
+            {% if initial_model_url != blank and sequence_count == 0 %}
               <div class="jkrb-model-shell" data-jkrb-model-shell>
                 <model-viewer
                   class="jkrb-model-viewer"
