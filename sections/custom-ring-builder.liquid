@@ -19,10 +19,17 @@
 {% if initial_model_url != blank %}
   <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
 {% endif %}
+{% assign sequence_count = 0 %}
+{% for index in (1..8) %}
+  {% assign sequence_key = 'sequence_frame_' | append: index %}
+  {% if section.settings[sequence_key] != blank %}
+    {% assign sequence_count = sequence_count | plus: 1 %}
+  {% endif %}
+{% endfor %}
 
 <section
   id="CustomRingBuilder-{{ section.id }}"
-  class="jkrb{% if initial_model_url != blank %} jkrb--has-model-source jkrb--has-active-model{% endif %}"
+  class="jkrb{% if initial_model_url != blank %} jkrb--has-model-source jkrb--has-active-model{% endif %}{% if sequence_count > 0 %} jkrb--has-sequence{% endif %}{% if sequence_count <= 1 %} jkrb--single-image-mode{% endif %}"
   data-custom-ring-builder
   data-api-ready="true"
   data-base-price="{{ section.settings.base_price }}"
@@ -34,6 +41,7 @@
   data-model-emerald="{{ section.settings.emerald_model_url | escape }}"
   data-model-pear="{{ section.settings.pear_model_url | escape }}"
   data-model-cushion="{{ section.settings.cushion_model_url | escape }}"
+  data-sequence-count="{{ sequence_count }}"
   data-gallery-view="main"
   data-current-shape="round"
   data-current-setting="solitaire"
@@ -217,6 +225,26 @@
               </div>
             {% endif %}
 
+            {% if sequence_count > 0 %}
+              <div class="jkrb-sequence-viewer" data-jkrb-sequence-viewer aria-label="Drag to rotate ring preview" role="img">
+                <div class="jkrb-sequence-viewer__hint">
+                  <span>{% if sequence_count > 1 %}Drag to rotate{% else %}Move to inspect{% endif %}</span>
+                </div>
+                {% assign rendered_sequence_index = 0 %}
+                {% for index in (1..8) %}
+                  {% assign sequence_key = 'sequence_frame_' | append: index %}
+                  {% assign sequence_frame = section.settings[sequence_key] %}
+                  {% if sequence_frame != blank %}
+                    {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                    {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                    <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                      {{ sequence_frame | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+
             <div class="jkrb-preview-photo jkrb-preview-photo--setting is-active" data-jkrb-preview-setting="solitaire">
               {% if section.settings.setting_solitaire_image != blank %}
                 {{ section.settings.setting_solitaire_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: 'Solitaire engagement ring preview', class: 'jkrb-preview-photo__image' }}
@@ -324,13 +352,17 @@
                 <span class="jkrb-preview-placeholder jkrb-preview-placeholder--lifestyle"><span>Lifestyle preview</span></span>
               {% endif %}
             </div>
+
+            <button class="jkrb-zoom-trigger" type="button" data-jkrb-zoom-open aria-label="Open ring preview fullscreen">
+              <span>Zoom</span>
+            </button>
           </div>
         </div>
 
         <div class="jkrb-gallery-thumbs" aria-label="Preview gallery">
           <button class="jkrb-gallery-thumb is-active" type="button" data-jkrb-gallery-thumb data-gallery-view="main">
             <span class="jkrb-gallery-thumb__visual jkrb-gallery-thumb__visual--main"></span>
-            <span>Main preview</span>
+            <span>{% if sequence_count > 1 %}360 preview{% else %}Main preview{% endif %}</span>
           </button>
           <button class="jkrb-gallery-thumb" type="button" data-jkrb-gallery-thumb data-gallery-view="shape">
             <span class="jkrb-gallery-thumb__visual">
@@ -424,6 +456,19 @@
     </div>
     <a class="jkrb-button jkrb-button--dark" href="{{ section.settings.request_link | default: '/pages/contact' }}" data-jkrb-sticky-link>Request This Ring</a>
   </div>
+
+  <div class="jkrb-zoom-modal" data-jkrb-zoom-modal hidden>
+    <button class="jkrb-zoom-modal__backdrop" type="button" data-jkrb-zoom-close aria-label="Close preview"></button>
+    <div class="jkrb-zoom-modal__dialog" role="dialog" aria-modal="true" aria-label="Ring preview fullscreen">
+      <button class="jkrb-zoom-modal__close" type="button" data-jkrb-zoom-close aria-label="Close fullscreen preview">Close</button>
+      <div class="jkrb-zoom-modal__media">
+        <div class="jkrb-zoom-modal__image" role="img" aria-label="Joyari Krafted ring preview" data-jkrb-zoom-image hidden></div>
+        <div class="jkrb-zoom-modal__placeholder" data-jkrb-zoom-placeholder>
+          <span>Joyari Krafted ring preview</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 {% schema %}
@@ -494,6 +539,50 @@
       "id": "lifestyle_image_alt",
       "label": "Lifestyle image alt text",
       "default": "Joyari Krafted custom ring lifestyle preview"
+    },
+    {
+      "type": "header",
+      "content": "Free 360 image sequence"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_1",
+      "label": "360 frame 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_2",
+      "label": "360 frame 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_3",
+      "label": "360 frame 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_4",
+      "label": "360 frame 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_5",
+      "label": "360 frame 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_6",
+      "label": "360 frame 6"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_7",
+      "label": "360 frame 7"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_8",
+      "label": "360 frame 8"
     },
     {
       "type": "header",

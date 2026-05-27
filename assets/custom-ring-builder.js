@@ -97,6 +97,155 @@
     model.setAttribute('src', url);
   }
 
+  function setSequenceFrame(root, index) {
+    var frames = Array.prototype.slice.call(root.querySelectorAll('[data-jkrb-sequence-frame]'));
+    if (!frames.length) return 0;
+
+    var nextIndex = ((index % frames.length) + frames.length) % frames.length;
+    frames.forEach(function (frame, frameIndex) {
+      frame.classList.toggle('is-active', frameIndex === nextIndex);
+    });
+    root.setAttribute('data-sequence-index', String(nextIndex));
+    return nextIndex;
+  }
+
+  function initSequence(root) {
+    var stage = root.querySelector('[data-jkrb-preview-stage]');
+    var viewer = root.querySelector('[data-jkrb-sequence-viewer]');
+    var frames = Array.prototype.slice.call(root.querySelectorAll('[data-jkrb-sequence-frame]'));
+    var activeIndex = 0;
+    var dragging = false;
+    var lastX = 0;
+    var travel = 0;
+
+    if (!stage) return;
+    if (frames.length <= 1) root.classList.add('jkrb--single-image-mode');
+
+    function rotateBy(deltaX) {
+      var threshold = 16;
+      travel += deltaX;
+
+      if (Math.abs(travel) < threshold) return;
+
+      var steps = travel > 0 ? Math.floor(travel / threshold) : Math.ceil(travel / threshold);
+      activeIndex = setSequenceFrame(root, activeIndex + steps);
+      travel -= steps * threshold;
+    }
+
+    function setParallax(event) {
+      var rect = stage.getBoundingClientRect();
+      var x = ((event.clientX - rect.left) / rect.width) - 0.5;
+      var y = ((event.clientY - rect.top) / rect.height) - 0.5;
+
+      root.style.setProperty('--jkrb-parallax-x', (x * 14).toFixed(2) + 'px');
+      root.style.setProperty('--jkrb-parallax-y', (y * 10).toFixed(2) + 'px');
+      root.style.setProperty('--jkrb-shine-x', Math.round((x + 0.5) * 100) + '%');
+      root.style.setProperty('--jkrb-shine-y', Math.round((y + 0.5) * 100) + '%');
+    }
+
+    function resetParallax() {
+      if (dragging) return;
+      root.style.setProperty('--jkrb-parallax-x', '0px');
+      root.style.setProperty('--jkrb-parallax-y', '0px');
+      root.style.setProperty('--jkrb-shine-x', '50%');
+      root.style.setProperty('--jkrb-shine-y', '24%');
+    }
+
+    stage.addEventListener('pointermove', setParallax);
+    stage.addEventListener('pointerleave', resetParallax);
+
+    if (!viewer || !frames.length) return;
+
+    viewer.addEventListener('pointerdown', function (event) {
+      dragging = true;
+      lastX = event.clientX;
+      travel = 0;
+      viewer.classList.add('is-dragging');
+      viewer.setPointerCapture(event.pointerId);
+    });
+
+    viewer.addEventListener('pointermove', function (event) {
+      setParallax(event);
+      if (!dragging) return;
+      rotateBy(event.clientX - lastX);
+      lastX = event.clientX;
+    });
+
+    function stopDragging(event) {
+      dragging = false;
+      travel = 0;
+      viewer.classList.remove('is-dragging');
+      if (event && viewer.hasPointerCapture(event.pointerId)) {
+        viewer.releasePointerCapture(event.pointerId);
+      }
+    }
+
+    viewer.addEventListener('pointerup', stopDragging);
+    viewer.addEventListener('pointercancel', stopDragging);
+    viewer.addEventListener('lostpointercapture', stopDragging);
+  }
+
+  function activeImage(root) {
+    var view = root.getAttribute('data-gallery-view') || 'main';
+    var selector = '';
+
+    if (view === 'shape') {
+      selector = '[data-jkrb-preview-shape].is-active img';
+    } else if (view === 'setting') {
+      selector = '[data-jkrb-preview-setting].is-active img';
+    } else if (view === 'lifestyle') {
+      selector = '[data-jkrb-lifestyle-panel] img';
+    } else {
+      selector = '[data-jkrb-sequence-frame].is-active img, [data-jkrb-preview-setting].is-active img';
+    }
+
+    return root.querySelector(selector) || root.querySelector('[data-jkrb-preview-setting].is-active img, [data-jkrb-preview-shape].is-active img, [data-jkrb-lifestyle-panel] img');
+  }
+
+  function initZoom(root) {
+    var modal = root.querySelector('[data-jkrb-zoom-modal]');
+    var openButton = root.querySelector('[data-jkrb-zoom-open]');
+    var image = root.querySelector('[data-jkrb-zoom-image]');
+    var placeholder = root.querySelector('[data-jkrb-zoom-placeholder]');
+    if (!modal || !openButton || !image || !placeholder) return;
+
+    function openModal() {
+      var source = activeImage(root);
+      var imageUrl = source && (source.currentSrc || source.src);
+
+      if (imageUrl) {
+        image.style.backgroundImage = 'url("' + imageUrl.replace(/"/g, '\\"') + '")';
+        image.setAttribute('aria-label', source.alt || 'Joyari Krafted ring preview');
+        image.hidden = false;
+        placeholder.hidden = true;
+      } else {
+        image.style.backgroundImage = '';
+        image.hidden = true;
+        placeholder.hidden = false;
+      }
+
+      modal.hidden = false;
+      document.documentElement.classList.add('jkrb-zoom-lock');
+      openButton.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.documentElement.classList.remove('jkrb-zoom-lock');
+      openButton.setAttribute('aria-expanded', 'false');
+    }
+
+    openButton.setAttribute('aria-expanded', 'false');
+    openButton.addEventListener('click', openModal);
+    root.querySelectorAll('[data-jkrb-zoom-close]').forEach(function (button) {
+      button.addEventListener('click', closeModal);
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  }
+
   function updateLink(link, payload) {
     if (!link) return;
 
@@ -123,6 +272,9 @@
     var requestLinks = root.querySelectorAll('[data-jkrb-request-link], [data-jkrb-request-link-secondary], [data-jkrb-request-link-panel], [data-jkrb-sticky-link]');
     var consultationLinks = root.querySelectorAll('[data-jkrb-consultation-link], [data-jkrb-choose-diamond-link], [data-jkrb-choose-setting-link]');
 
+    initSequence(root);
+    initZoom(root);
+
     if (model) {
       model.addEventListener('load', function () {
         root.classList.add('jkrb--model-loaded');
@@ -135,13 +287,17 @@
       });
     }
 
+    function setGalleryView(view) {
+      root.setAttribute('data-gallery-view', view || 'main');
+
+      root.querySelectorAll('[data-jkrb-gallery-thumb]').forEach(function (item) {
+        item.classList.toggle('is-active', item.getAttribute('data-gallery-view') === view);
+      });
+    }
+
     root.querySelectorAll('[data-jkrb-gallery-thumb]').forEach(function (button) {
       button.addEventListener('click', function () {
-        root.setAttribute('data-gallery-view', button.getAttribute('data-gallery-view') || 'main');
-
-        root.querySelectorAll('[data-jkrb-gallery-thumb]').forEach(function (item) {
-          item.classList.toggle('is-active', item === button);
-        });
+        setGalleryView(button.getAttribute('data-gallery-view') || 'main');
       });
     });
 
@@ -209,7 +365,17 @@
     }
 
     root.querySelectorAll('[data-jkrb-choice]').forEach(function (input) {
-      input.addEventListener('change', update);
+      input.addEventListener('change', function () {
+        if (input.hasAttribute('data-jkrb-shape')) {
+          setGalleryView('shape');
+        } else if (input.hasAttribute('data-jkrb-setting')) {
+          setGalleryView('setting');
+        } else if (input.hasAttribute('data-jkrb-metal')) {
+          setGalleryView('main');
+        }
+
+        update();
+      });
       input.addEventListener('input', update);
     });
 
