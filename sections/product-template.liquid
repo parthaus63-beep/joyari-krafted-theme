@@ -55,49 +55,51 @@
     <div class="jk-product-layout jk-product-layout--builder">
       <div class="jk-product-gallery" data-product-gallery>
         <div class="jk-product-gallery__main">
-          {% if product.media.size > 0 %}
-            {% for media in product.media %}
+{% if product.media.size > 0 %}
 
- <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}" style="display:block;">
-{% case media.media_type %}
+  {% for media in product.media %}
 
-{% when 'image' %}
+    <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}">
 
-  {{ media | image_url: width: 1500 | image_tag }}
+      {% case media.media_type %}
 
-{% when 'video' %}
-<video
-class="product-video"
-controls
-autoplay
-muted
-loop
-playsinline
-width="100%"
->
-{% for source in media.sources %}
-<source src="{{ source.url }}" type="{{ source.mime_type }}">
-{% endfor %}
-</video>
-{% when 'external_video' %}
+        {% when 'image' %}
 
-  {{ media | external_video_tag }}
+          {{ media | image_url: width: 1500 | image_tag }}
+
+        {% when 'video' %}
+
+          <div class="jk-product-video-wrapper">
+            {{ media | video_tag:
+              controls: true,
+              autoplay: true,
+              muted: true,
+              loop: true,
+              playsinline: true
+            }}
+          </div>
+
+        {% when 'external_video' %}
+
+          {{ media | external_video_tag }}
+
+        {% else %}
+
+          <div class="jk-product-placeholder"></div>
+
+      {% endcase %}
+
+    </figure>
+
+  {% endfor %}
 
 {% else %}
 
-  <div class="jk-product-placeholder"></div>
-
-{% endcase %}
-
-  </figure>
-{% endfor %}
-{% else %}
- <figure class="jk-product-media is-active">
+  <figure class="jk-product-media is-active">
     <div class="jk-product-placeholder jk-product-placeholder--large"></div>
   </figure>
 
 {% endif %}
-
         {% if product.media.size > 1 %}
           <div class="jk-product-gallery__thumbs" aria-label="Product media">
             {% for media in product.media %}
