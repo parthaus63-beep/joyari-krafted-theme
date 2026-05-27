@@ -15,6 +15,7 @@
         "eyebrow": "Joyari Krafted ring studio",
         "heading": "Design Your Ring in 3D",
         "subheading": "Explore a refined setting in three dimensions, then choose your diamond or request a private custom quote.",
+        "model_url": "",
         "model_label": "Interactive 3D engagement ring model",
         "fallback_image_alt": "Joyari Krafted engagement ring preview",
         "base_price": 280000,
@@ -26,9 +27,14 @@
         "choose_setting_link": "/pages/contact",
         "request_link": "/pages/contact"
       }
+    },
+    "1779858467586065f0": {
+      "type": "apps",
+      "settings": {}
     }
   },
   "order": [
-    "joyari_3d_ring_builder"
+    "joyari_3d_ring_builder",
+    "1779858467586065f0"
   ]
 }
