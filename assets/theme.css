@@ -1337,152 +1337,6 @@ body.jk-menu-lock {
   line-height: 1.75;
 }
 
-.shopify-section--nivoda-ring-studio {
-  position: relative;
-  z-index: 1;
-  background: #fffdf8;
-}
-
-.jk-ring-studio {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  padding: 88px 0 108px;
-  background:
-    radial-gradient(circle at 14% 4%, rgba(199, 163, 90, .12), transparent 30%),
-    linear-gradient(180deg, #fff 0%, #fffdf8 48%, #f8f1e7 100%);
-}
-
-.jk-ring-studio__shell {
-  width: min(1480px, calc(100vw - 40px));
-  margin: 0 auto;
-  display: grid;
-  gap: 28px;
-}
-
-.jk-ring-studio__intro {
-  max-width: 820px;
-  display: grid;
-  gap: 14px;
-}
-
-.jk-ring-studio__intro h2 {
-  color: var(--jk-ink);
-  font-size: 2.6rem;
-}
-
-.jk-ring-studio__intro p:not(.jk-eyebrow) {
-  color: var(--jk-muted);
-  font-size: 1.05rem;
-  line-height: 1.75;
-}
-
-.jk-ring-studio__status {
-  display: grid;
-  grid-template-columns: 54px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 22px;
-  padding: 26px;
-  border: 1px solid rgba(199, 163, 90, .24);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, .82);
-  box-shadow: 0 22px 58px rgba(23, 21, 18, .08);
-}
-
-.jk-ring-studio__status-mark {
-  position: relative;
-  width: 54px;
-  height: 54px;
-  border: 1px solid rgba(199, 163, 90, .36);
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, rgba(255, 255, 255, .96) 0 34%, rgba(199, 163, 90, .22) 36% 42%, transparent 44%),
-    linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(248, 241, 231, .9));
-}
-
-.jk-ring-studio__status-mark::after {
-  content: "";
-  position: absolute;
-  inset: 13px;
-  border-radius: 50%;
-  border: 1px solid rgba(23, 21, 18, .16);
-  border-top-color: rgba(199, 163, 90, .8);
-  animation: jkStudioSpin 1.6s linear infinite;
-}
-
-.jk-ring-studio__status-copy {
-  display: grid;
-  gap: 7px;
-}
-
-.jk-ring-studio__status-copy h3 {
-  font-size: 1.25rem;
-  color: var(--jk-ink);
-}
-
-.jk-ring-studio__status-copy p:not(.jk-eyebrow) {
-  max-width: 760px;
-  color: var(--jk-muted);
-  line-height: 1.65;
-}
-
-.jk-ring-studio__actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 12px;
-}
-
-.jk-ring-studio__app {
-  width: 100%;
-  min-height: 560px;
-  overflow: hidden;
-  border: 1px solid rgba(23, 21, 18, .1);
-  border-radius: 22px;
-  background: #fff;
-  box-shadow: 0 26px 70px rgba(23, 21, 18, .1);
-}
-
-.jk-ring-studio__app-block {
-  width: 100%;
-  min-height: 560px;
-}
-
-.jk-ring-studio__app-block > *,
-.jk-ring-studio__app iframe,
-.jk-ring-studio__app .shopify-app-block {
-  width: 100%;
-  max-width: none;
-}
-
-.jk-ring-studio__app iframe {
-  min-height: 620px;
-  border: 0;
-}
-
-.jk-ring-studio__empty {
-  min-height: 420px;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 12px;
-  padding: 44px 24px;
-  text-align: center;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, .94), rgba(248, 241, 231, .72)),
-    radial-gradient(circle at 50% 30%, rgba(199, 163, 90, .14), transparent 38%);
-}
-
-.jk-ring-studio__empty h3 {
-  color: var(--jk-ink);
-}
-
-.jk-ring-studio__empty p:not(.jk-eyebrow) {
-  max-width: 540px;
-  color: var(--jk-muted);
-  line-height: 1.65;
-}
-
 .jk-section__header--split {
   max-width: none;
   display: flex;
@@ -4320,12 +4174,6 @@ body.jk-menu-lock {
   }
 }
 
-@keyframes jkStudioSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes jkGemPulse {
   0%,
   100% {
@@ -4503,39 +4351,6 @@ body.jk-menu-lock {
 
   h2 {
     font-size: 1.9rem;
-  }
-
-  .jk-ring-studio {
-    padding: 64px 0 78px;
-  }
-
-  .jk-ring-studio__shell {
-    width: min(100vw - 28px, 720px);
-    gap: 20px;
-  }
-
-  .jk-ring-studio__intro h2 {
-    font-size: 2rem;
-  }
-
-  .jk-ring-studio__status {
-    grid-template-columns: 1fr;
-    align-items: start;
-    padding: 22px;
-  }
-
-  .jk-ring-studio__actions {
-    justify-content: stretch;
-  }
-
-  .jk-ring-studio__actions .jk-button {
-    width: 100%;
-  }
-
-  .jk-ring-studio__app,
-  .jk-ring-studio__app-block {
-    min-height: 520px;
-    border-radius: 16px;
   }
 
   .jk-header__inner {

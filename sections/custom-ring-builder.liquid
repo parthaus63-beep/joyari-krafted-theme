@@ -1,0 +1,314 @@
+{{ 'custom-ring-builder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-ring-builder.js' | asset_url }}" defer></script>
+
+<section
+  id="CustomRingBuilder-{{ section.id }}"
+  class="jkrb"
+  data-custom-ring-builder
+  data-api-ready="true"
+  data-base-price="{{ section.settings.base_price }}"
+  data-base-carat="{{ section.settings.base_carat }}"
+  data-quarter-premium="{{ section.settings.carat_quarter_premium }}"
+  data-current-shape="round"
+  data-current-setting="solitaire"
+  data-current-metal="platinum"
+>
+  <div class="jkrb-hero">
+    <div class="jkrb-hero__media" aria-hidden="true">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 2200 | image_tag: loading: 'eager', widths: '900, 1200, 1600, 2200', sizes: '100vw', alt: section.settings.hero_image_alt, class: 'jkrb-hero__image' }}
+      {% else %}
+        <div class="jkrb-hero__fallback">
+          <span class="jkrb-hero__ring"></span>
+          <span class="jkrb-hero__stone"></span>
+          <span class="jkrb-hero__glow jkrb-hero__glow--one"></span>
+          <span class="jkrb-hero__glow jkrb-hero__glow--two"></span>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="jkrb-hero__content">
+      {% if section.settings.eyebrow != blank %}
+        <p class="jkrb-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h1>{{ section.settings.heading }}</h1>
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+      <div class="jkrb-hero__actions">
+        {% if section.settings.primary_label != blank %}
+          <a class="jkrb-button jkrb-button--dark" href="#RingBuilderSteps-{{ section.id }}">{{ section.settings.primary_label }}</a>
+        {% endif %}
+        {% if section.settings.secondary_label != blank %}
+          <a class="jkrb-button jkrb-button--light" href="{{ section.settings.consultation_link | default: '/pages/contact' }}">{{ section.settings.secondary_label }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="jkrb-shell" id="RingBuilderSteps-{{ section.id }}">
+    <div class="jkrb-intro">
+      <p class="jkrb-eyebrow">Private ring studio</p>
+      <h2>Create a first design direction</h2>
+      <p>Refine the silhouette, setting, metal, and carat presence. This demo studio is structured for future live diamond and setting data while keeping the experience calm and premium today.</p>
+    </div>
+
+    <div class="jkrb-layout">
+      <div class="jkrb-controls">
+        <fieldset class="jkrb-step" data-jkrb-step>
+          <legend><span>01</span> Choose shape</legend>
+          <div class="jkrb-choice-grid jkrb-choice-grid--shape">
+            {% assign shapes = 'Round:round,Oval:oval,Pear:pear,Emerald:emerald,Cushion:cushion' | split: ',' %}
+            {% for item in shapes %}
+              {% assign shape = item | split: ':' %}
+              <label class="jkrb-card{% if forloop.first %} is-selected{% endif %}" data-jkrb-card>
+                <input type="radio" name="custom-shape-{{ section.id }}" value="{{ shape[0] }}" data-jkrb-choice data-jkrb-shape="{{ shape[1] }}" data-price-adjustment="0" {% if forloop.first %}checked{% endif %}>
+                <span class="jkrb-stone-icon jkrb-stone-icon--{{ shape[1] }}" aria-hidden="true"></span>
+                <span class="jkrb-card__title">{{ shape[0] }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <fieldset class="jkrb-step" data-jkrb-step>
+          <legend><span>02</span> Choose setting</legend>
+          <div class="jkrb-choice-grid jkrb-choice-grid--setting">
+            <label class="jkrb-card is-selected" data-jkrb-card>
+              <input type="radio" name="custom-setting-{{ section.id }}" value="Solitaire" data-jkrb-choice data-jkrb-setting="solitaire" data-price-adjustment="0" checked>
+              <span class="jkrb-setting-icon jkrb-setting-icon--solitaire" aria-hidden="true"></span>
+              <span class="jkrb-card__title">Solitaire</span>
+              <small>Clean, timeless centre-stone focus.</small>
+            </label>
+            <label class="jkrb-card" data-jkrb-card>
+              <input type="radio" name="custom-setting-{{ section.id }}" value="Hidden Halo" data-jkrb-choice data-jkrb-setting="hidden-halo" data-price-adjustment="35000">
+              <span class="jkrb-setting-icon jkrb-setting-icon--hidden-halo" aria-hidden="true"></span>
+              <span class="jkrb-card__title">Hidden Halo</span>
+              <small>Subtle sparkle tucked below the crown.</small>
+            </label>
+            <label class="jkrb-card" data-jkrb-card>
+              <input type="radio" name="custom-setting-{{ section.id }}" value="Halo" data-jkrb-choice data-jkrb-setting="halo" data-price-adjustment="50000">
+              <span class="jkrb-setting-icon jkrb-setting-icon--halo" aria-hidden="true"></span>
+              <span class="jkrb-card__title">Halo</span>
+              <small>A luminous frame around the stone.</small>
+            </label>
+            <label class="jkrb-card" data-jkrb-card>
+              <input type="radio" name="custom-setting-{{ section.id }}" value="Three Stone" data-jkrb-choice data-jkrb-setting="three-stone" data-price-adjustment="85000">
+              <span class="jkrb-setting-icon jkrb-setting-icon--three-stone" aria-hidden="true"></span>
+              <span class="jkrb-card__title">Three Stone</span>
+              <small>Balanced side-stone presence.</small>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="jkrb-step" data-jkrb-step>
+          <legend><span>03</span> Choose metal</legend>
+          <div class="jkrb-metal-row">
+            <label class="jkrb-metal-button is-selected" data-jkrb-card>
+              <input type="radio" name="custom-metal-{{ section.id }}" value="Platinum" data-jkrb-choice data-jkrb-metal="platinum" data-price-adjustment="60000" checked>
+              <span class="jkrb-metal-swatch jkrb-metal-swatch--platinum" aria-hidden="true"></span>
+              Platinum
+            </label>
+            <label class="jkrb-metal-button" data-jkrb-card>
+              <input type="radio" name="custom-metal-{{ section.id }}" value="18K Yellow Gold" data-jkrb-choice data-jkrb-metal="yellow-gold" data-price-adjustment="0">
+              <span class="jkrb-metal-swatch jkrb-metal-swatch--yellow-gold" aria-hidden="true"></span>
+              18K Yellow Gold
+            </label>
+            <label class="jkrb-metal-button" data-jkrb-card>
+              <input type="radio" name="custom-metal-{{ section.id }}" value="18K White Gold" data-jkrb-choice data-jkrb-metal="white-gold" data-price-adjustment="15000">
+              <span class="jkrb-metal-swatch jkrb-metal-swatch--white-gold" aria-hidden="true"></span>
+              18K White Gold
+            </label>
+            <label class="jkrb-metal-button" data-jkrb-card>
+              <input type="radio" name="custom-metal-{{ section.id }}" value="Rose Gold" data-jkrb-choice data-jkrb-metal="rose-gold" data-price-adjustment="15000">
+              <span class="jkrb-metal-swatch jkrb-metal-swatch--rose-gold" aria-hidden="true"></span>
+              Rose Gold
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="jkrb-step jkrb-step--carat" data-jkrb-step>
+          <div class="jkrb-step__heading">
+            <span>04</span>
+            <label for="CustomCarat-{{ section.id }}">Choose carat presence</label>
+          </div>
+          <div class="jkrb-range">
+            <input id="CustomCarat-{{ section.id }}" type="range" min="0.5" max="5" step="0.25" value="{{ section.settings.base_carat }}" data-jkrb-choice data-jkrb-carat>
+            <output for="CustomCarat-{{ section.id }}" data-jkrb-carat-output>{{ section.settings.base_carat }} ct</output>
+          </div>
+          <p>Estimate updates instantly. Final price depends on live diamond availability, certification, and setting review.</p>
+        </div>
+      </div>
+
+      <aside class="jkrb-preview" aria-label="Luxury live ring preview">
+        <div class="jkrb-preview__media{% if section.settings.preview_image != blank %} jkrb-preview__media--image{% endif %}">
+          {% if section.settings.preview_image != blank %}
+            {{ section.settings.preview_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '500, 700, 900, 1200', sizes: '(min-width: 990px) 460px, 100vw', alt: section.settings.preview_image_alt, class: 'jkrb-preview__image' }}
+          {% endif %}
+          <div class="jkrb-ring-visual" data-jkrb-preview aria-hidden="true">
+            <span class="jkrb-ring-visual__band"></span>
+            <span class="jkrb-ring-visual__side jkrb-ring-visual__side--left"></span>
+            <span class="jkrb-ring-visual__side jkrb-ring-visual__side--right"></span>
+            <span class="jkrb-ring-visual__halo"></span>
+            <span class="jkrb-ring-visual__hidden-halo"></span>
+            <span class="jkrb-ring-visual__stone"></span>
+          </div>
+        </div>
+
+        <div class="jkrb-preview__content">
+          <p class="jkrb-eyebrow">Live preview</p>
+          <h2 data-jkrb-summary>Round solitaire in platinum</h2>
+          <dl class="jkrb-preview-list">
+            <div><dt>Shape</dt><dd data-jkrb-selected-shape>Round</dd></div>
+            <div><dt>Setting</dt><dd data-jkrb-selected-setting>Solitaire</dd></div>
+            <div><dt>Metal</dt><dd data-jkrb-selected-metal>Platinum</dd></div>
+            <div><dt>Carat</dt><dd data-jkrb-selected-carat>{{ section.settings.base_carat }} ct</dd></div>
+          </dl>
+          <div class="jkrb-estimate">
+            <span>Estimated from</span>
+            <strong data-jkrb-price>{{ section.settings.base_price | plus: 60000 | money }}</strong>
+          </div>
+          <p class="jkrb-preview__note">{{ section.settings.estimate_note }}</p>
+          <a class="jkrb-button jkrb-button--dark jkrb-request-button" href="{{ section.settings.request_link | default: '/pages/contact' }}" data-jkrb-request-link>Request This Ring</a>
+          <textarea class="jkrb-payload" aria-hidden="true" tabindex="-1" data-jkrb-payload readonly></textarea>
+        </div>
+      </aside>
+    </div>
+
+    <div class="jkrb-consultation">
+      <p class="jkrb-eyebrow">Consultation</p>
+      <h2>{{ section.settings.consultation_heading }}</h2>
+      <p>{{ section.settings.consultation_text }}</p>
+      <div class="jkrb-consultation__actions">
+        <a class="jkrb-button jkrb-button--dark" href="{{ section.settings.consultation_link | default: '/pages/contact' }}" data-jkrb-consultation-link>{{ section.settings.consultation_label }}</a>
+        <a class="jkrb-button jkrb-button--light" href="{{ section.settings.request_link | default: '/pages/contact' }}" data-jkrb-request-link-secondary>Request This Ring</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="jkrb-sticky-cta" data-jkrb-sticky-cta>
+    <div>
+      <span>Current estimate</span>
+      <strong data-jkrb-sticky-price>{{ section.settings.base_price | plus: 60000 | money }}</strong>
+    </div>
+    <a class="jkrb-button jkrb-button--dark" href="{{ section.settings.request_link | default: '/pages/contact' }}" data-jkrb-sticky-link>Request This Ring</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom ring builder",
+  "tag": "section",
+  "class": "shopify-section--custom-ring-builder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Hero eyebrow",
+      "default": "Joyari Krafted custom design"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Hero heading",
+      "default": "Design Your Ring"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Hero text",
+      "default": "Shape a custom engagement ring with a calm, luxurious first-design experience."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Joyari Krafted custom engagement ring"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Hero primary button",
+      "default": "Start Designing"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Hero secondary button",
+      "default": "Book Consultation"
+    },
+    {
+      "type": "image_picker",
+      "id": "preview_image",
+      "label": "Preview background image"
+    },
+    {
+      "type": "text",
+      "id": "preview_image_alt",
+      "label": "Preview image alt text",
+      "default": "Luxury ring preview"
+    },
+    {
+      "type": "number",
+      "id": "base_price",
+      "label": "Base estimate, in cents",
+      "default": 280000
+    },
+    {
+      "type": "text",
+      "id": "base_carat",
+      "label": "Starting carat",
+      "default": "1.50"
+    },
+    {
+      "type": "number",
+      "id": "carat_quarter_premium",
+      "label": "Estimate increase per 0.25ct above 1ct, in cents",
+      "default": 18500
+    },
+    {
+      "type": "textarea",
+      "id": "estimate_note",
+      "label": "Estimate note",
+      "default": "This is a design estimate using demo data. A Joyari specialist will confirm the final quote after stone selection, certification, and setting review."
+    },
+    {
+      "type": "text",
+      "id": "consultation_heading",
+      "label": "Consultation heading",
+      "default": "Ready to refine the ring privately?"
+    },
+    {
+      "type": "textarea",
+      "id": "consultation_text",
+      "label": "Consultation text",
+      "default": "Send your design direction to Joyari Krafted and our team will guide the stone, setting, proportion, ring size, and final quote."
+    },
+    {
+      "type": "text",
+      "id": "consultation_label",
+      "label": "Consultation button label",
+      "default": "Book Consultation"
+    },
+    {
+      "type": "url",
+      "id": "consultation_link",
+      "label": "Consultation link"
+    },
+    {
+      "type": "url",
+      "id": "request_link",
+      "label": "Request ring link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom ring builder"
+    }
+  ]
+}
+{% endschema %}
