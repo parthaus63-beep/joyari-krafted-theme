@@ -1,0 +1,790 @@
+.shopify-section--joyari-3d-ring-builder {
+  position: relative;
+  z-index: 1;
+  background: #fffdf8;
+}
+
+.jk3d {
+  --jk3d-white: #ffffff;
+  --jk3d-ivory: #fffaf2;
+  --jk3d-cream: #f7efe3;
+  --jk3d-gold: #c7a35a;
+  --jk3d-gold-dark: #8d6d2d;
+  --jk3d-ink: #171512;
+  --jk3d-muted: #746c61;
+  --jk3d-line: rgba(23, 21, 18, .11);
+  --jk3d-shadow: 0 28px 74px rgba(23, 21, 18, .1);
+  --jk3d-metal: #c8ced2;
+  --jk3d-ease: cubic-bezier(.22, 1, .36, 1);
+  position: relative;
+  overflow: clip;
+  color: var(--jk3d-ink);
+  background:
+    radial-gradient(circle at 12% 7%, rgba(199, 163, 90, .12), transparent 27rem),
+    linear-gradient(180deg, #fff 0%, #fffdf8 58%, #fff 100%);
+}
+
+.jk3d[data-metal="yellow-gold"] {
+  --jk3d-metal: #c7a35a;
+}
+
+.jk3d[data-metal="white-gold"] {
+  --jk3d-metal: #ddd9cd;
+}
+
+.jk3d[data-metal="rose-gold"] {
+  --jk3d-metal: #c98f7c;
+}
+
+.jk3d *,
+.jk3d *::before,
+.jk3d *::after {
+  box-sizing: border-box;
+}
+
+.jk3d img {
+  display: block;
+  max-width: 100%;
+}
+
+.jk3d__hero,
+.jk3d__shell {
+  width: min(1480px, calc(100vw - 32px));
+  margin: 0 auto;
+}
+
+.jk3d__hero {
+  display: grid;
+  gap: 16px;
+  padding: 72px 0 34px;
+  text-align: center;
+}
+
+.jk3d__eyebrow {
+  margin: 0;
+  color: var(--jk3d-gold-dark);
+  font-size: .74rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.jk3d h1,
+.jk3d h2,
+.jk3d h3 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.04;
+}
+
+.jk3d__hero h1 {
+  font-size: clamp(2.45rem, 5vw, 5.8rem);
+}
+
+.jk3d__hero p:not(.jk3d__eyebrow) {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  color: var(--jk3d-muted);
+  font-size: 1.04rem;
+  line-height: 1.76;
+}
+
+.jk3d__shell {
+  display: grid;
+  gap: 24px;
+  padding: 24px 0 88px;
+}
+
+.jk3d__media-column,
+.jk3d__builder-column {
+  min-width: 0;
+}
+
+.jk3d-viewer {
+  position: relative;
+  min-height: min(74vh, 720px);
+  overflow: hidden;
+  border: 1px solid rgba(199, 163, 90, .2);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, .98), transparent 13rem),
+    radial-gradient(circle at 72% 34%, rgba(199, 163, 90, .16), transparent 20rem),
+    linear-gradient(145deg, #fff, #fff8ee 58%, #efe0ca);
+  box-shadow: var(--jk3d-shadow);
+  isolation: isolate;
+}
+
+.jk3d-viewer::after {
+  content: "";
+  position: absolute;
+  inset: auto 10% 8% 10%;
+  height: 16%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(23, 21, 18, .18), transparent 68%);
+  filter: blur(16px);
+  pointer-events: none;
+}
+
+.jk3d-model,
+.jk3d-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.jk3d-model {
+  z-index: 2;
+  --poster-color: transparent;
+  background: transparent;
+}
+
+.jk3d-fallback {
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  padding: 34px;
+  transition: opacity .38s var(--jk3d-ease), visibility .38s var(--jk3d-ease);
+}
+
+.jk3d[data-has-model="true"]:not(.is-image-mode):not(.is-model-error) .jk3d-fallback--with-model {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.jk3d.is-image-mode .jk3d-model,
+.jk3d.is-model-error .jk3d-model {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.jk3d-fallback__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transform: scale(1.01);
+  transition: transform .8s var(--jk3d-ease), opacity .3s var(--jk3d-ease);
+}
+
+.jk3d-viewer:hover .jk3d-fallback__image {
+  transform: scale(1.045);
+}
+
+.jk3d-viewer__loading {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+  background: rgba(255, 253, 248, .74);
+  color: var(--jk3d-muted);
+  text-align: center;
+  transition: opacity .32s var(--jk3d-ease), visibility .32s var(--jk3d-ease);
+  backdrop-filter: blur(10px);
+}
+
+.jk3d-viewer__loading span {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(199, 163, 90, .25);
+  border-top-color: var(--jk3d-gold);
+  border-radius: 50%;
+  animation: jk3dSpin 1s linear infinite;
+}
+
+.jk3d-viewer__loading p {
+  margin: 0;
+  font-size: .82rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.jk3d:not([data-has-model="true"]) .jk3d-viewer__loading,
+.jk3d.is-model-loaded .jk3d-viewer__loading,
+.jk3d.is-model-error .jk3d-viewer__loading,
+.jk3d.is-image-mode .jk3d-viewer__loading {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.jk3d-model__progress {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(23, 21, 18, .08);
+}
+
+.jk3d-model__progress span {
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, var(--jk3d-gold), transparent);
+  animation: jk3dProgress 1.2s var(--jk3d-ease) infinite;
+}
+
+.jk3d-ring-art {
+  position: relative;
+  width: min(500px, 78vw);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 38px 60px rgba(23, 21, 18, .18));
+  transition: transform .38s var(--jk3d-ease);
+}
+
+.jk3d-viewer:hover .jk3d-ring-art {
+  transform: translateY(-6px) rotate(-1deg);
+}
+
+.jk3d-ring-art__glow {
+  position: absolute;
+  inset: 6%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, .82), transparent 62%);
+}
+
+.jk3d-ring-art__band {
+  position: absolute;
+  inset: 29% 13% 7%;
+  border: 28px solid var(--jk3d-metal);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .45);
+  transition: border-color .3s var(--jk3d-ease);
+}
+
+.jk3d-ring-art__stone,
+.jk3d-ring-art__side {
+  position: absolute;
+  background: radial-gradient(circle at 32% 24%, #fff, #eff8fa 42%, #b6cbd1 75%, #84989f);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .58), 0 18px 32px rgba(255, 255, 255, .24);
+}
+
+.jk3d-ring-art__stone {
+  top: 12%;
+  left: 50%;
+  width: 104px;
+  height: 104px;
+  border: 1px solid rgba(23, 21, 18, .14);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  transition: width .3s var(--jk3d-ease), height .3s var(--jk3d-ease), border-radius .3s var(--jk3d-ease), clip-path .3s var(--jk3d-ease), transform .3s var(--jk3d-ease);
+}
+
+.jk3d-ring-art__side {
+  top: 25%;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity .3s var(--jk3d-ease), transform .3s var(--jk3d-ease);
+}
+
+.jk3d-ring-art__side--left {
+  left: 29%;
+}
+
+.jk3d-ring-art__side--right {
+  right: 29%;
+}
+
+.jk3d-ring-art__halo,
+.jk3d-ring-art__hidden-halo {
+  position: absolute;
+  left: 50%;
+  border: 5px dotted rgba(255, 255, 255, .92);
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateX(-50%) scale(.86);
+  transition: opacity .3s var(--jk3d-ease), transform .3s var(--jk3d-ease);
+}
+
+.jk3d-ring-art__halo {
+  top: 9%;
+  width: 132px;
+  height: 132px;
+}
+
+.jk3d-ring-art__hidden-halo {
+  top: 30%;
+  width: 110px;
+  height: 26px;
+  border-width: 3px;
+}
+
+.jk3d[data-shape="oval"] .jk3d-ring-art__stone {
+  width: 82px;
+  height: 124px;
+}
+
+.jk3d[data-shape="emerald"] .jk3d-ring-art__stone {
+  width: 86px;
+  height: 118px;
+  border-radius: 5px;
+  clip-path: polygon(18% 0, 82% 0, 100% 18%, 100% 82%, 82% 100%, 18% 100%, 0 82%, 0 18%);
+}
+
+.jk3d[data-shape="pear"] .jk3d-ring-art__stone {
+  width: 90px;
+  height: 116px;
+  border-radius: 50% 50% 50% 8%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.jk3d[data-shape="cushion"] .jk3d-ring-art__stone {
+  width: 104px;
+  height: 104px;
+  border-radius: 24px;
+}
+
+.jk3d[data-setting="halo"] .jk3d-ring-art__halo,
+.jk3d[data-setting="hidden-halo"] .jk3d-ring-art__hidden-halo {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.jk3d[data-setting="three-stone"] .jk3d-ring-art__side {
+  opacity: 1;
+}
+
+.jk3d-thumbs {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.jk3d-thumb {
+  min-height: 76px;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid rgba(23, 21, 18, .1);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--jk3d-ink);
+  cursor: pointer;
+  transition: transform .24s var(--jk3d-ease), border-color .24s var(--jk3d-ease), box-shadow .24s var(--jk3d-ease);
+}
+
+.jk3d-thumb:hover,
+.jk3d-thumb:focus-visible,
+.jk3d-thumb.is-active {
+  border-color: rgba(199, 163, 90, .55);
+  box-shadow: 0 12px 34px rgba(23, 21, 18, .1);
+  transform: translateY(-2px);
+}
+
+.jk3d-thumb__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jk3d-thumb__model,
+.jk3d-thumb__placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 76px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 44% 30%, rgba(255, 255, 255, .9), transparent 2.8rem),
+    linear-gradient(135deg, #fff, #f3e6d3);
+}
+
+.jk3d-thumb__model {
+  color: var(--jk3d-gold-dark);
+  font-weight: 900;
+}
+
+.jk3d-panel {
+  display: grid;
+  gap: 24px;
+  padding: 24px;
+  border: 1px solid rgba(23, 21, 18, .1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 0 20px 58px rgba(23, 21, 18, .08);
+  backdrop-filter: blur(16px);
+}
+
+.jk3d-panel h2 {
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+}
+
+.jk3d-panel__text {
+  margin: 0;
+  color: var(--jk3d-muted);
+  line-height: 1.68;
+}
+
+.jk3d-step {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.jk3d-step legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  color: var(--jk3d-ink);
+  font-size: .84rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.jk3d-step legend span {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(199, 163, 90, .34);
+  border-radius: 50%;
+  color: var(--jk3d-gold-dark);
+  font-size: .72rem;
+}
+
+.jk3d-metal-grid,
+.jk3d-shape-grid,
+.jk3d-setting-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.jk3d-metal-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.jk3d-shape-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.jk3d-setting-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.jk3d-option {
+  min-width: 0;
+  border: 1px solid rgba(23, 21, 18, .1);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--jk3d-ink);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  transition: transform .24s var(--jk3d-ease), border-color .24s var(--jk3d-ease), box-shadow .24s var(--jk3d-ease), background .24s var(--jk3d-ease);
+}
+
+.jk3d-option:hover,
+.jk3d-option:focus-visible,
+.jk3d-option.is-active {
+  border-color: rgba(199, 163, 90, .55);
+  background: linear-gradient(135deg, #fff, #fffaf2);
+  box-shadow: 0 14px 34px rgba(23, 21, 18, .075);
+  transform: translateY(-2px);
+}
+
+.jk3d-option--metal {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  font-weight: 850;
+}
+
+.jk3d-swatch {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(23, 21, 18, .12);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .5);
+}
+
+.jk3d-swatch--platinum {
+  background: linear-gradient(135deg, #fff, #d6dde1 56%, #aeb8bd);
+}
+
+.jk3d-swatch--yellow-gold {
+  background: linear-gradient(135deg, #fff4bf, #c7a35a 56%, #8d6d2d);
+}
+
+.jk3d-swatch--white-gold {
+  background: linear-gradient(135deg, #fff, #e9e7df 54%, #bcb8aa);
+}
+
+.jk3d-swatch--rose-gold {
+  background: linear-gradient(135deg, #ffe1d6, #c98f7c 56%, #8d5b4d);
+}
+
+.jk3d-option--shape {
+  min-height: 82px;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 10px 8px;
+  font-size: .82rem;
+  font-weight: 850;
+  text-align: center;
+}
+
+.jk3d-stone-icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+  border: 1px solid rgba(23, 21, 18, .14);
+  background: radial-gradient(circle at 34% 22%, #fff, #ecf8fb 42%, #b5cbd2);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .6);
+}
+
+.jk3d-stone-icon--round {
+  border-radius: 50%;
+}
+
+.jk3d-stone-icon--oval {
+  width: 22px;
+  height: 34px;
+  border-radius: 50%;
+}
+
+.jk3d-stone-icon--emerald {
+  width: 24px;
+  height: 34px;
+  border-radius: 4px;
+  clip-path: polygon(18% 0, 82% 0, 100% 18%, 100% 82%, 82% 100%, 18% 100%, 0 82%, 0 18%);
+}
+
+.jk3d-stone-icon--pear {
+  width: 24px;
+  height: 32px;
+  border-radius: 50% 50% 50% 8%;
+  transform: rotate(45deg);
+}
+
+.jk3d-stone-icon--cushion {
+  border-radius: 9px;
+}
+
+.jk3d-option--setting {
+  display: grid;
+  gap: 7px;
+  min-height: 96px;
+  padding: 14px;
+}
+
+.jk3d-option--setting strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.jk3d-option--setting span {
+  color: var(--jk3d-muted);
+  font-size: .86rem;
+  line-height: 1.5;
+}
+
+.jk3d-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid rgba(199, 163, 90, .22);
+  border-radius: 12px;
+  background: rgba(199, 163, 90, .18);
+}
+
+.jk3d-details div {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+  padding: 14px;
+  background: rgba(255, 255, 255, .92);
+}
+
+.jk3d-details span {
+  color: var(--jk3d-muted);
+  font-size: .76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.jk3d-details strong {
+  color: var(--jk3d-ink);
+  font-size: .96rem;
+  font-weight: 850;
+}
+
+.jk3d-details [data-jk3d-price] {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.28rem;
+  font-weight: 500;
+}
+
+.jk3d-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.jk3d-button {
+  position: relative;
+  overflow: hidden;
+  min-height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  border: 1px solid rgba(23, 21, 18, .12);
+  border-radius: 999px;
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+  transition: transform .24s var(--jk3d-ease), box-shadow .24s var(--jk3d-ease), background .24s var(--jk3d-ease), color .24s var(--jk3d-ease), border-color .24s var(--jk3d-ease);
+}
+
+.jk3d-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, .34) 46%, transparent 72%);
+  pointer-events: none;
+  transform: translateX(-120%);
+  transition: transform .72s var(--jk3d-ease);
+}
+
+.jk3d-button:hover,
+.jk3d-button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 44px rgba(23, 21, 18, .14);
+}
+
+.jk3d-button:hover::after,
+.jk3d-button:focus-visible::after {
+  transform: translateX(120%);
+}
+
+.jk3d-button--dark {
+  border-color: var(--jk3d-ink);
+  background: var(--jk3d-ink);
+  color: #fffdf8;
+}
+
+.jk3d-button--light {
+  border-color: rgba(199, 163, 90, .34);
+  background: #fff;
+  color: var(--jk3d-ink);
+}
+
+.jk3d-button--outline {
+  border-color: rgba(199, 163, 90, .5);
+  background: transparent;
+  color: var(--jk3d-gold-dark);
+}
+
+@media (min-width: 990px) {
+  .jk3d__shell {
+    grid-template-columns: minmax(0, 1.24fr) minmax(390px, .76fr);
+    align-items: start;
+    gap: 34px;
+  }
+
+  .jk3d__builder-column {
+    position: sticky;
+    top: 116px;
+    align-self: start;
+  }
+}
+
+@media (max-width: 989px) {
+  .jk3d__hero {
+    padding-top: 58px;
+  }
+
+  .jk3d-viewer {
+    min-height: 560px;
+  }
+
+  .jk3d-thumbs {
+    grid-template-columns: repeat(5, minmax(58px, 1fr));
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .jk3d__hero,
+  .jk3d__shell {
+    width: min(100vw - 28px, 560px);
+  }
+
+  .jk3d__hero h1 {
+    font-size: 2.55rem;
+  }
+
+  .jk3d-viewer {
+    min-height: 420px;
+  }
+
+  .jk3d-panel {
+    padding: 18px;
+  }
+
+  .jk3d-metal-grid,
+  .jk3d-setting-grid,
+  .jk3d-details {
+    grid-template-columns: 1fr;
+  }
+
+  .jk3d-shape-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .jk3d-ring-art__band {
+    border-width: 20px;
+  }
+
+  .jk3d-ring-art__stone {
+    width: 78px;
+    height: 78px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jk3d *,
+  .jk3d *::before,
+  .jk3d *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@keyframes jk3dSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes jk3dProgress {
+  from {
+    transform: translateX(-120%);
+  }
+
+  to {
+    transform: translateX(260%);
+  }
+}

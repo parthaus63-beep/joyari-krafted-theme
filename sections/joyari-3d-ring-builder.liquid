@@ -1,0 +1,333 @@
+{{ 'joyari-3d-ring-builder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'joyari-3d-ring-builder.js' | asset_url }}" defer></script>
+{% if section.settings.model_url != blank %}
+  <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
+{% endif %}
+
+<section
+  id="Joyari3DRingBuilder-{{ section.id }}"
+  class="jk3d"
+  data-joyari-3d-ring-builder
+  data-money-format="{{ shop.money_format | escape }}"
+  data-base-price="{{ section.settings.base_price }}"
+  data-metal="platinum"
+  data-shape="round"
+  data-setting="solitaire"
+  data-has-model="{% if section.settings.model_url != blank %}true{% else %}false{% endif %}"
+>
+  <div class="jk3d__hero">
+    <p class="jk3d__eyebrow">{{ section.settings.eyebrow }}</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.subheading }}</p>
+  </div>
+
+  <div class="jk3d__shell">
+    <div class="jk3d__media-column">
+      <div class="jk3d-viewer" data-jk3d-viewer>
+        {% if section.settings.model_url != blank %}
+          <model-viewer
+            class="jk3d-model"
+            data-jk3d-model
+            src="{{ section.settings.model_url | escape }}"
+            {% if section.settings.poster_image != blank %}
+              poster="{{ section.settings.poster_image | image_url: width: 1400 }}"
+            {% endif %}
+            camera-controls
+            auto-rotate
+            auto-rotate-delay="1800"
+            rotation-per-second="18deg"
+            shadow-intensity="0.72"
+            exposure="1"
+            environment-image="neutral"
+            ar
+            loading="eager"
+            reveal="auto"
+            aria-label="{{ section.settings.model_label | escape }}"
+          >
+            <div class="jk3d-model__progress" slot="progress-bar">
+              <span></span>
+            </div>
+          </model-viewer>
+        {% endif %}
+
+        <div class="jk3d-fallback{% if section.settings.model_url != blank %} jk3d-fallback--with-model{% endif %}" data-jk3d-fallback>
+          {% if section.settings.fallback_image != blank %}
+            {{ section.settings.fallback_image | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: section.settings.fallback_image_alt, class: 'jk3d-fallback__image', data-jk3d-main-image: '' }}
+          {% else %}
+            <div class="jk3d-ring-art" data-jk3d-ring-art aria-hidden="true">
+              <span class="jk3d-ring-art__glow"></span>
+              <span class="jk3d-ring-art__band"></span>
+              <span class="jk3d-ring-art__side jk3d-ring-art__side--left"></span>
+              <span class="jk3d-ring-art__side jk3d-ring-art__side--right"></span>
+              <span class="jk3d-ring-art__halo"></span>
+              <span class="jk3d-ring-art__hidden-halo"></span>
+              <span class="jk3d-ring-art__stone"></span>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="jk3d-viewer__loading" data-jk3d-loading>
+          <span></span>
+          <p>Preparing 3D ring preview</p>
+        </div>
+      </div>
+
+      <div class="jk3d-thumbs" aria-label="Ring gallery thumbnails">
+        {% if section.settings.model_url != blank %}
+          <button class="jk3d-thumb is-active" type="button" data-jk3d-thumb data-view="model" aria-label="View 3D model">
+            <span class="jk3d-thumb__model">3D</span>
+          </button>
+        {% endif %}
+
+        {% assign gallery_images = 'gallery_image_1,gallery_image_2,gallery_image_3,gallery_image_4' | split: ',' %}
+        {% for image_id in gallery_images %}
+          {% assign gallery_image = section.settings[image_id] %}
+          <button class="jk3d-thumb{% if section.settings.model_url == blank and forloop.first %} is-active{% endif %}" type="button" data-jk3d-thumb data-view="image" {% if gallery_image != blank %}data-image-url="{{ gallery_image | image_url: width: 1600 }}"{% endif %} aria-label="View ring image {{ forloop.index }}">
+            {% if gallery_image != blank %}
+              {{ gallery_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Joyari ring gallery image', class: 'jk3d-thumb__image' }}
+            {% else %}
+              <span class="jk3d-thumb__placeholder"></span>
+            {% endif %}
+          </button>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="jk3d__builder-column">
+      <div class="jk3d-panel">
+        <p class="jk3d__eyebrow">Custom setting studio</p>
+        <h2 data-jk3d-summary>Round solitaire in platinum</h2>
+        <p class="jk3d-panel__text">Rotate the setting, refine the metal and silhouette, then choose a diamond or request a private quote from Joyari Krafted.</p>
+
+        <fieldset class="jk3d-step">
+          <legend><span>01</span> Metal</legend>
+          <div class="jk3d-metal-grid">
+            <button class="jk3d-option jk3d-option--metal is-active" type="button" data-jk3d-option data-group="metal" data-value="platinum" data-label="Platinum" data-adjustment="60000">
+              <span class="jk3d-swatch jk3d-swatch--platinum"></span>
+              Platinum
+            </button>
+            <button class="jk3d-option jk3d-option--metal" type="button" data-jk3d-option data-group="metal" data-value="yellow-gold" data-label="18K Yellow Gold" data-adjustment="0">
+              <span class="jk3d-swatch jk3d-swatch--yellow-gold"></span>
+              18K Yellow Gold
+            </button>
+            <button class="jk3d-option jk3d-option--metal" type="button" data-jk3d-option data-group="metal" data-value="white-gold" data-label="18K White Gold" data-adjustment="15000">
+              <span class="jk3d-swatch jk3d-swatch--white-gold"></span>
+              18K White Gold
+            </button>
+            <button class="jk3d-option jk3d-option--metal" type="button" data-jk3d-option data-group="metal" data-value="rose-gold" data-label="Rose Gold" data-adjustment="15000">
+              <span class="jk3d-swatch jk3d-swatch--rose-gold"></span>
+              Rose Gold
+            </button>
+          </div>
+        </fieldset>
+
+        <fieldset class="jk3d-step">
+          <legend><span>02</span> Diamond shape</legend>
+          <div class="jk3d-shape-grid">
+            {% assign shapes = 'Round:round:0,Oval:oval:10000,Emerald:emerald:20000,Pear:pear:15000,Cushion:cushion:12000' | split: ',' %}
+            {% for item in shapes %}
+              {% assign shape = item | split: ':' %}
+              <button class="jk3d-option jk3d-option--shape{% if forloop.first %} is-active{% endif %}" type="button" data-jk3d-option data-group="shape" data-value="{{ shape[1] }}" data-label="{{ shape[0] }}" data-adjustment="{{ shape[2] }}">
+                <span class="jk3d-stone-icon jk3d-stone-icon--{{ shape[1] }}"></span>
+                {{ shape[0] }}
+              </button>
+            {% endfor %}
+          </div>
+        </fieldset>
+
+        <fieldset class="jk3d-step">
+          <legend><span>03</span> Setting</legend>
+          <div class="jk3d-setting-grid">
+            <button class="jk3d-option jk3d-option--setting is-active" type="button" data-jk3d-option data-group="setting" data-value="solitaire" data-label="Solitaire" data-adjustment="0">
+              <strong>Solitaire</strong>
+              <span>Pure centre-stone focus.</span>
+            </button>
+            <button class="jk3d-option jk3d-option--setting" type="button" data-jk3d-option data-group="setting" data-value="hidden-halo" data-label="Hidden Halo" data-adjustment="35000">
+              <strong>Hidden Halo</strong>
+              <span>Subtle sparkle beneath the crown.</span>
+            </button>
+            <button class="jk3d-option jk3d-option--setting" type="button" data-jk3d-option data-group="setting" data-value="halo" data-label="Halo" data-adjustment="50000">
+              <strong>Halo</strong>
+              <span>A luminous frame around the stone.</span>
+            </button>
+            <button class="jk3d-option jk3d-option--setting" type="button" data-jk3d-option data-group="setting" data-value="three-stone" data-label="Three Stone" data-adjustment="85000">
+              <strong>Three Stone</strong>
+              <span>Balanced side-stone presence.</span>
+            </button>
+          </div>
+        </fieldset>
+
+        <div class="jk3d-details" aria-label="Selected ring details">
+          <div>
+            <span>Metal</span>
+            <strong data-jk3d-detail="metal">Platinum</strong>
+          </div>
+          <div>
+            <span>Band width</span>
+            <strong>{{ section.settings.band_width }}</strong>
+          </div>
+          <div>
+            <span>Head type</span>
+            <strong>{{ section.settings.head_type }}</strong>
+          </div>
+          <div>
+            <span>Shank type</span>
+            <strong>{{ section.settings.shank_type }}</strong>
+          </div>
+          <div>
+            <span>Side diamonds</span>
+            <strong data-jk3d-detail="side-diamonds">{{ section.settings.side_diamonds }}</strong>
+          </div>
+          <div>
+            <span>Estimated price</span>
+            <strong data-jk3d-price>{{ section.settings.base_price | plus: 60000 | money }}</strong>
+          </div>
+        </div>
+
+        <div class="jk3d-actions">
+          <a class="jk3d-button jk3d-button--dark" href="{{ section.settings.choose_diamond_link | default: '/collections/loose-diamonds' }}" data-jk3d-link>Choose a Diamond</a>
+          <a class="jk3d-button jk3d-button--light" href="{{ section.settings.choose_setting_link | default: '/pages/contact' }}" data-jk3d-link>Choose this Setting</a>
+          <a class="jk3d-button jk3d-button--outline" href="{{ section.settings.request_link | default: '/pages/contact' }}" data-jk3d-link>Request This Ring</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Joyari 3D ring builder",
+  "tag": "section",
+  "class": "shopify-section--joyari-3d-ring-builder",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Joyari Krafted ring studio"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Design Your Ring in 3D"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Explore a refined setting in three dimensions, then choose your diamond or request a private custom quote."
+    },
+    {
+      "type": "text",
+      "id": "model_url",
+      "label": "GLB/GLTF model URL",
+      "info": "Upload a .glb or .gltf file to Shopify Files, then paste the file URL here."
+    },
+    {
+      "type": "text",
+      "id": "model_label",
+      "label": "3D model accessibility label",
+      "default": "Interactive 3D engagement ring model"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster_image",
+      "label": "3D model poster image"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback main image"
+    },
+    {
+      "type": "text",
+      "id": "fallback_image_alt",
+      "label": "Fallback image alt text",
+      "default": "Joyari Krafted engagement ring preview"
+    },
+    {
+      "type": "header",
+      "content": "Gallery images"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_1",
+      "label": "Gallery image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_2",
+      "label": "Gallery image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_3",
+      "label": "Gallery image 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image_4",
+      "label": "Gallery image 4"
+    },
+    {
+      "type": "header",
+      "content": "Ring details"
+    },
+    {
+      "type": "number",
+      "id": "base_price",
+      "label": "Base setting estimate, in cents",
+      "default": 280000
+    },
+    {
+      "type": "text",
+      "id": "band_width",
+      "label": "Band width",
+      "default": "1.8 mm"
+    },
+    {
+      "type": "text",
+      "id": "head_type",
+      "label": "Head type",
+      "default": "Tulip claw basket"
+    },
+    {
+      "type": "text",
+      "id": "shank_type",
+      "label": "Shank type",
+      "default": "Knife-edge comfort shank"
+    },
+    {
+      "type": "text",
+      "id": "side_diamonds",
+      "label": "Side diamonds",
+      "default": "None selected"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "url",
+      "id": "choose_diamond_link",
+      "label": "Choose a Diamond link"
+    },
+    {
+      "type": "url",
+      "id": "choose_setting_link",
+      "label": "Choose this Setting link"
+    },
+    {
+      "type": "url",
+      "id": "request_link",
+      "label": "Request This Ring link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Joyari 3D ring builder"
+    }
+  ]
+}
+{% endschema %}
