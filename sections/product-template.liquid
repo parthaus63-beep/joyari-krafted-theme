@@ -96,6 +96,33 @@
   </figure>
 
 {% endfor %}
+{% for media in product.media %}
+
+<figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}">
+
+{% case media.media_type %}
+
+{% when 'image' %}
+
+  IMAGE CODE
+
+{% when 'video' %}
+
+  VIDEO CODE
+
+{% when 'external_video' %}
+
+  EXTERNAL VIDEO CODE
+
+{% else %}
+
+  <div class="jk-product-placeholder"></div>
+
+{% endcase %}
+
+</figure>
+
+{% endfor %}
           {% else %}
             <figure class="jk-product-media is-active">
               <div class="jk-product-placeholder jk-product-placeholder--large" aria-hidden="true"></div>
