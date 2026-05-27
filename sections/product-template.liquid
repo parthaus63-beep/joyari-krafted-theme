@@ -56,26 +56,24 @@
       <div class="jk-product-gallery" data-product-gallery>
         <div class="jk-product-gallery__main">
 {% if product.media.size > 0 %}
-
   {% for media in product.media %}
-
     <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}">
 
       {% case media.media_type %}
 
-        {% when 'image' %}
+      {% comment %} TEST VIDEO ONLY {% endcomment %}
 
-          {{ media | image_url: width: 1500 | image_tag }}
-
-        {% when 'video' %}
-
-          <div class="jk-product-video-wrapper">
-            {{ media | video_tag:
-              controls: true,
-              autoplay: true,
-              muted: true,
-              loop: true,
-              playsinline: true
+<div class="jk-product-video-wrapper">
+  {{
+    product.media[0] | video_tag:
+    controls: true,
+    autoplay: true,
+    muted: true,
+    loop: true,
+    playsinline: true
+  }}
+</div>
+aysinline: true
             }}
           </div>
 
