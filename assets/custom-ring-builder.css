@@ -573,13 +573,12 @@
 .jkrb-preview-stage {
   position: relative;
   z-index: 1;
+  aspect-ratio: 1 / 1;
   min-height: 520px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, .72);
   border-radius: 12px;
-  background:
-    radial-gradient(circle at 30% 18%, rgba(255, 255, 255, .86), transparent 9rem),
-    linear-gradient(135deg, rgba(255, 255, 255, .84), rgba(248, 241, 231, .82));
+  background: #fff;
   box-shadow: inset 0 0 0 1px rgba(199, 163, 90, .08), 0 20px 54px rgba(23, 21, 18, .12);
 }
 
@@ -664,7 +663,7 @@
 .jkrb-sequence-viewer {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  z-index: 3;
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
@@ -677,9 +676,15 @@
   cursor: grabbing;
 }
 
-.jkrb--has-sequence[data-gallery-view="main"]:not(.jkrb--has-active-model) .jkrb-sequence-viewer {
+.jkrb--has-sequence[data-gallery-view="main"] .jkrb-sequence-viewer {
   opacity: 1;
   visibility: visible;
+}
+
+.jkrb--has-sequence[data-gallery-view="main"] .jkrb-model-shell {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .jkrb-sequence-frame {
@@ -688,8 +693,8 @@
   display: grid;
   place-items: center;
   opacity: 0;
-  transform: scale(1.012);
-  transition: opacity .22s var(--jkrb-ease), transform .5s var(--jkrb-ease);
+  transform: scale(1.006);
+  transition: opacity .18s linear, transform .42s var(--jkrb-ease);
 }
 
 .jkrb-sequence-frame.is-active {
@@ -702,6 +707,7 @@
   height: 100%;
   object-fit: contain;
   padding: clamp(24px, 6vw, 72px);
+  background: #fff;
   filter: drop-shadow(0 34px 52px rgba(23, 21, 18, .16));
   transform: translate3d(0, 0, 0) scale(1);
   transition: transform .6s var(--jkrb-ease), filter .6s var(--jkrb-ease);
@@ -734,7 +740,7 @@
   backdrop-filter: blur(14px);
 }
 
-.jkrb--has-sequence[data-gallery-view="main"]:not(.jkrb--has-active-model) .jkrb-preview-photo--setting.is-active {
+.jkrb--has-sequence[data-gallery-view="main"] .jkrb-preview-photo--setting.is-active {
   opacity: 0;
   visibility: hidden;
 }

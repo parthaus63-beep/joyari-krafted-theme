@@ -20,12 +20,14 @@
   <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
 {% endif %}
 {% assign sequence_count = 0 %}
-{% for index in (1..8) %}
-  {% assign sequence_key = 'sequence_frame_' | append: index %}
-  {% if section.settings[sequence_key] != blank %}
-    {% assign sequence_count = sequence_count | plus: 1 %}
-  {% endif %}
-{% endfor %}
+{% if section.settings.sequence_frame_1 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_2 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_3 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_4 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_5 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_6 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_7 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_8 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
 
 <section
   id="CustomRingBuilder-{{ section.id }}"
@@ -42,6 +44,7 @@
   data-model-pear="{{ section.settings.pear_model_url | escape }}"
   data-model-cushion="{{ section.settings.cushion_model_url | escape }}"
   data-sequence-count="{{ sequence_count }}"
+  data-sequence-interval="120"
   data-gallery-view="main"
   data-current-shape="round"
   data-current-setting="solitaire"
@@ -231,17 +234,62 @@
                   <span>{% if sequence_count > 1 %}Drag to rotate{% else %}Move to inspect{% endif %}</span>
                 </div>
                 {% assign rendered_sequence_index = 0 %}
-                {% for index in (1..8) %}
-                  {% assign sequence_key = 'sequence_frame_' | append: index %}
-                  {% assign sequence_frame = section.settings[sequence_key] %}
-                  {% if sequence_frame != blank %}
-                    {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
-                    {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
-                    <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
-                      {{ sequence_frame | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
-                    </div>
-                  {% endif %}
-                {% endfor %}
+                {% if section.settings.sequence_frame_1 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame is-active" data-jkrb-sequence-frame data-frame-index="0">
+                    {{ section.settings.sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sequence_frame_2 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                    {{ section.settings.sequence_frame_2 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sequence_frame_3 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                    {{ section.settings.sequence_frame_3 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sequence_frame_4 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                    {{ section.settings.sequence_frame_4 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sequence_frame_5 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                    {{ section.settings.sequence_frame_5 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sequence_frame_6 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                    {{ section.settings.sequence_frame_6 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sequence_frame_7 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                    {{ section.settings.sequence_frame_7 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
+                {% if section.settings.sequence_frame_8 != blank %}
+                  {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+                  {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  <div class="jkrb-sequence-frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jkrb-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                    {{ section.settings.sequence_frame_8 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
+                  </div>
+                {% endif %}
               </div>
             {% endif %}
 

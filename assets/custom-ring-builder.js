@@ -109,6 +109,18 @@
     return nextIndex;
   }
 
+  function preloadSequenceFrames(frames) {
+    frames.forEach(function (frame) {
+      var img = frame.querySelector('img');
+      if (!img) return;
+
+      var preload = new Image();
+      if (img.sizes) preload.sizes = img.sizes;
+      if (img.srcset) preload.srcset = img.srcset;
+      preload.src = img.currentSrc || img.src;
+    });
+  }
+
   function initSequence(root) {
     var stage = root.querySelector('[data-jkrb-preview-stage]');
     var viewer = root.querySelector('[data-jkrb-sequence-viewer]');
@@ -120,6 +132,12 @@
 
     if (!stage) return;
     if (frames.length <= 1) root.classList.add('jkrb--single-image-mode');
+    if (frames.length) {
+      root.classList.add('jkrb--sequence-ready');
+      root.classList.remove('jkrb--has-active-model');
+      activeIndex = setSequenceFrame(root, 0);
+      preloadSequenceFrames(frames);
+    }
 
     function rotateBy(deltaX) {
       var threshold = 16;
@@ -155,6 +173,16 @@
     stage.addEventListener('pointerleave', resetParallax);
 
     if (!viewer || !frames.length) return;
+
+    if (frames.length > 1) {
+      var interval = parseInt(root.getAttribute('data-sequence-interval'), 10) || 120;
+      window.setInterval(function () {
+        if (document.hidden) return;
+        if ((root.getAttribute('data-gallery-view') || 'main') !== 'main') return;
+        if (dragging) return;
+        activeIndex = setSequenceFrame(root, activeIndex + 1);
+      }, interval);
+    }
 
     viewer.addEventListener('pointerdown', function (event) {
       dragging = true;
