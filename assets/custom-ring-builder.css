@@ -693,16 +693,19 @@
   inset: 0;
   display: grid;
   place-items: center;
+  z-index: 1;
   opacity: 0;
+  visibility: hidden;
   transform: scale(1.006);
   transition: opacity .18s linear, transform .42s var(--jkrb-ease);
 }
 
 .jkrb-sequence-frame.is-active {
-  opacity: 1;
+  opacity: 0;
   transform: scale(1);
 }
 
+.jkrb-sequence-main,
 .jkrb-sequence-frame__image {
   width: 100%;
   height: 100%;
@@ -714,6 +717,19 @@
   transition: transform .6s var(--jkrb-ease), filter .6s var(--jkrb-ease);
   user-select: none;
   -webkit-user-drag: none;
+}
+
+.jkrb-sequence-main {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity .12s linear, transform .42s var(--jkrb-ease), filter .42s var(--jkrb-ease);
+}
+
+.jkrb-sequence-main.is-rotating {
+  opacity: .86;
+  transform: scale(1.006);
 }
 
 .jkrb-sequence-viewer__hint {

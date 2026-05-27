@@ -177,16 +177,19 @@
   inset: 0;
   display: grid;
   place-items: center;
+  z-index: 1;
   opacity: 0;
+  visibility: hidden;
   transform: scale(1.006);
   transition: opacity .18s linear, transform .42s var(--jk3d-ease);
 }
 
 .jk3d-sequence__frame.is-active {
-  opacity: 1;
+  opacity: 0;
   transform: scale(1);
 }
 
+.jk3d-sequence__main,
 .jk3d-sequence__image {
   width: 100%;
   height: 100%;
@@ -196,6 +199,20 @@
   filter: drop-shadow(0 34px 52px rgba(23, 21, 18, .16));
   user-select: none;
   -webkit-user-drag: none;
+}
+
+.jk3d-sequence__main {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity .12s linear, transform .42s var(--jk3d-ease), filter .42s var(--jk3d-ease);
+}
+
+.jk3d-sequence__main.is-rotating {
+  opacity: .86;
+  transform: scale(1.006);
 }
 
 .jk3d-sequence__hint {

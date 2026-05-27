@@ -105,12 +105,28 @@
 
   function setSequenceFrame(root, index) {
     var frames = Array.prototype.slice.call(root.querySelectorAll('[data-jk3d-sequence-frame]'));
+    var mainImage = root.querySelector('[data-jk3d-sequence-main]');
     if (!frames.length) return 0;
 
     var nextIndex = ((index % frames.length) + frames.length) % frames.length;
     frames.forEach(function (frame, frameIndex) {
       frame.classList.toggle('is-active', frameIndex === nextIndex);
     });
+
+    if (mainImage) {
+      var selectedImage = frames[nextIndex].querySelector('img');
+      if (selectedImage) {
+        if (selectedImage.srcset) mainImage.srcset = selectedImage.srcset;
+        if (selectedImage.sizes) mainImage.sizes = selectedImage.sizes;
+        mainImage.src = selectedImage.currentSrc || selectedImage.src;
+        mainImage.alt = selectedImage.alt || 'Joyari Krafted 360 ring preview';
+        mainImage.classList.add('is-rotating');
+        window.setTimeout(function () {
+          mainImage.classList.remove('is-rotating');
+        }, 90);
+      }
+    }
+
     root.setAttribute('data-sequence-index', String(nextIndex));
     return nextIndex;
   }

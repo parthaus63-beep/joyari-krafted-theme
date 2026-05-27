@@ -39,6 +39,7 @@
             {% assign rendered_sequence_index = 0 %}
             {% if section.settings.sequence_frame_1 != blank %}
               {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+              {{ section.settings.sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: 'Joyari Krafted 360 ring preview', class: 'jk3d-sequence__main', data-jk3d-sequence-main: '' }}
               <div class="jk3d-sequence__frame is-active" data-jk3d-sequence-frame data-frame-index="0">
                 {{ section.settings.sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: 'Joyari Krafted 360 ring frame 1', class: 'jk3d-sequence__image' }}
               </div>

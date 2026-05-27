@@ -237,6 +237,7 @@
                 {% if section.settings.sequence_frame_1 != blank %}
                   {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
                   {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+                  {{ section.settings.sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: 'Joyari Krafted 360 ring preview', class: 'jkrb-sequence-main', data-jkrb-sequence-main: '' }}
                   <div class="jkrb-sequence-frame is-active" data-jkrb-sequence-frame data-frame-index="0">
                     {{ section.settings.sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '600, 900, 1200, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jkrb-sequence-frame__image' }}
                   </div>
