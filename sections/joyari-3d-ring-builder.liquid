@@ -1,19 +1,28 @@
 {{ 'joyari-3d-ring-builder.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'joyari-3d-ring-builder.js' | asset_url }}" defer></script>
-{% if section.settings.model_url != blank %}
+{% assign sequence_count = 0 %}
+{% if section.settings.sequence_frame_1 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_2 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_3 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_4 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_5 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.sequence_frame_6 != blank %}{% assign sequence_count = sequence_count | plus: 1 %}{% endif %}
+{% if section.settings.model_url != blank and sequence_count == 0 %}
   <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
 {% endif %}
 
 <section
   id="Joyari3DRingBuilder-{{ section.id }}"
-  class="jk3d"
+  class="jk3d{% if sequence_count > 0 %} jk3d--has-sequence{% endif %}{% if sequence_count <= 1 %} jk3d--single-sequence-frame{% endif %}"
   data-joyari-3d-ring-builder
   data-money-format="{{ shop.money_format | escape }}"
   data-base-price="{{ section.settings.base_price }}"
   data-metal="platinum"
   data-shape="round"
   data-setting="solitaire"
-  data-has-model="{% if section.settings.model_url != blank %}true{% else %}false{% endif %}"
+  data-has-model="{% if section.settings.model_url != blank and sequence_count == 0 %}true{% else %}false{% endif %}"
+  data-sequence-count="{{ sequence_count }}"
+  data-sequence-interval="120"
 >
   <div class="jk3d__hero">
     <p class="jk3d__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -24,7 +33,55 @@
   <div class="jk3d__shell">
     <div class="jk3d__media-column">
       <div class="jk3d-viewer" data-jk3d-viewer>
-        {% if section.settings.model_url != blank %}
+        {% if sequence_count > 0 %}
+          <div class="jk3d-sequence" data-jk3d-sequence-viewer aria-label="Drag to rotate ring preview" role="img">
+            <span class="jk3d-sequence__hint">{% if sequence_count > 1 %}Drag to rotate{% else %}Move to inspect{% endif %}</span>
+            {% assign rendered_sequence_index = 0 %}
+            {% if section.settings.sequence_frame_1 != blank %}
+              {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+              <div class="jk3d-sequence__frame is-active" data-jk3d-sequence-frame data-frame-index="0">
+                {{ section.settings.sequence_frame_1 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: 'Joyari Krafted 360 ring frame 1', class: 'jk3d-sequence__image' }}
+              </div>
+            {% endif %}
+            {% if section.settings.sequence_frame_2 != blank %}
+              {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+              {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+              <div class="jk3d-sequence__frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jk3d-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                {{ section.settings.sequence_frame_2 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jk3d-sequence__image' }}
+              </div>
+            {% endif %}
+            {% if section.settings.sequence_frame_3 != blank %}
+              {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+              {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+              <div class="jk3d-sequence__frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jk3d-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                {{ section.settings.sequence_frame_3 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jk3d-sequence__image' }}
+              </div>
+            {% endif %}
+            {% if section.settings.sequence_frame_4 != blank %}
+              {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+              {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+              <div class="jk3d-sequence__frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jk3d-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                {{ section.settings.sequence_frame_4 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jk3d-sequence__image' }}
+              </div>
+            {% endif %}
+            {% if section.settings.sequence_frame_5 != blank %}
+              {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+              {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+              <div class="jk3d-sequence__frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jk3d-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                {{ section.settings.sequence_frame_5 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jk3d-sequence__image' }}
+              </div>
+            {% endif %}
+            {% if section.settings.sequence_frame_6 != blank %}
+              {% assign rendered_sequence_index = rendered_sequence_index | plus: 1 %}
+              {% assign sequence_alt = 'Joyari Krafted 360 ring frame ' | append: rendered_sequence_index %}
+              <div class="jk3d-sequence__frame{% if rendered_sequence_index == 1 %} is-active{% endif %}" data-jk3d-sequence-frame data-frame-index="{{ rendered_sequence_index | minus: 1 }}">
+                {{ section.settings.sequence_frame_6 | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: sequence_alt, class: 'jk3d-sequence__image' }}
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.model_url != blank and sequence_count == 0 %}
           <model-viewer
             class="jk3d-model"
             data-jk3d-model
@@ -50,7 +107,7 @@
           </model-viewer>
         {% endif %}
 
-        <div class="jk3d-fallback{% if section.settings.model_url != blank %} jk3d-fallback--with-model{% endif %}" data-jk3d-fallback>
+        <div class="jk3d-fallback{% if section.settings.model_url != blank and sequence_count == 0 %} jk3d-fallback--with-model{% endif %}{% if sequence_count > 0 %} jk3d-fallback--with-sequence{% endif %}" data-jk3d-fallback>
           {% if section.settings.fallback_image != blank %}
             {{ section.settings.fallback_image | image_url: width: 1600 | image_tag: loading: 'eager', widths: '700, 1000, 1300, 1600', sizes: '(min-width: 990px) 58vw, 100vw', alt: section.settings.fallback_image_alt, class: 'jk3d-fallback__image', data-jk3d-main-image: '' }}
           {% else %}
@@ -66,7 +123,7 @@
           {% endif %}
         </div>
 
-        {% if section.settings.model_url != blank %}
+        {% if section.settings.model_url != blank and sequence_count == 0 %}
           <div class="jk3d-viewer__loading" data-jk3d-loading>
             <span></span>
             <p>Preparing 3D ring preview</p>
@@ -75,7 +132,11 @@
       </div>
 
       <div class="jk3d-thumbs" aria-label="Ring gallery thumbnails">
-        {% if section.settings.model_url != blank %}
+        {% if sequence_count > 0 %}
+          <button class="jk3d-thumb is-active" type="button" data-jk3d-thumb data-view="sequence" aria-label="View 360 preview">
+            <span class="jk3d-thumb__model">360</span>
+          </button>
+        {% elsif section.settings.model_url != blank %}
           <button class="jk3d-thumb is-active" type="button" data-jk3d-thumb data-view="model" aria-label="View 3D model">
             <span class="jk3d-thumb__model">3D</span>
           </button>
@@ -84,7 +145,7 @@
         {% assign gallery_images = 'gallery_image_1,gallery_image_2,gallery_image_3,gallery_image_4' | split: ',' %}
         {% for image_id in gallery_images %}
           {% assign gallery_image = section.settings[image_id] %}
-          <button class="jk3d-thumb{% if section.settings.model_url == blank and forloop.first %} is-active{% endif %}" type="button" data-jk3d-thumb data-view="image" {% if gallery_image != blank %}data-image-url="{{ gallery_image | image_url: width: 1600 }}"{% endif %} aria-label="View ring image {{ forloop.index }}">
+          <button class="jk3d-thumb{% if section.settings.model_url == blank and sequence_count == 0 and forloop.first %} is-active{% endif %}" type="button" data-jk3d-thumb data-view="image" {% if gallery_image != blank %}data-image-url="{{ gallery_image | image_url: width: 1600 }}"{% endif %} aria-label="View ring image {{ forloop.index }}">
             {% if gallery_image != blank %}
               {{ gallery_image | image_url: width: 220 | image_tag: loading: 'lazy', widths: '120, 180, 220', sizes: '72px', alt: 'Joyari ring gallery image', class: 'jk3d-thumb__image' }}
             {% else %}
@@ -247,6 +308,40 @@
       "id": "fallback_image_alt",
       "label": "Fallback image alt text",
       "default": "Joyari Krafted engagement ring preview"
+    },
+    {
+      "type": "header",
+      "content": "Free 360 image sequence"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_1",
+      "label": "360 frame 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_2",
+      "label": "360 frame 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_3",
+      "label": "360 frame 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_4",
+      "label": "360 frame 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_5",
+      "label": "360 frame 5"
+    },
+    {
+      "type": "image_picker",
+      "id": "sequence_frame_6",
+      "label": "360 frame 6"
     },
     {
       "type": "header",

@@ -104,14 +104,12 @@
 
 .jk3d-viewer {
   position: relative;
+  aspect-ratio: 1 / 1;
   min-height: min(74vh, 720px);
   overflow: hidden;
   border: 1px solid rgba(199, 163, 90, .2);
   border-radius: 14px;
-  background:
-    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, .98), transparent 13rem),
-    radial-gradient(circle at 72% 34%, rgba(199, 163, 90, .16), transparent 20rem),
-    linear-gradient(145deg, #fff, #fff8ee 58%, #efe0ca);
+  background: #fff;
   box-shadow: var(--jk3d-shadow);
   isolation: isolate;
 }
@@ -148,6 +146,86 @@
   place-items: center;
   padding: 34px;
   transition: opacity .38s var(--jk3d-ease), visibility .38s var(--jk3d-ease);
+}
+
+.jk3d-sequence {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+  cursor: grab;
+  opacity: 0;
+  visibility: hidden;
+  touch-action: pan-y;
+  transition: opacity .32s var(--jk3d-ease), visibility .32s var(--jk3d-ease);
+}
+
+.jk3d--has-sequence:not(.is-image-mode) .jk3d-sequence {
+  opacity: 1;
+  visibility: visible;
+}
+
+.jk3d-sequence.is-dragging {
+  cursor: grabbing;
+}
+
+.jk3d-sequence__frame {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transform: scale(1.006);
+  transition: opacity .18s linear, transform .42s var(--jk3d-ease);
+}
+
+.jk3d-sequence__frame.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.jk3d-sequence__image {
+  width: 100%;
+  height: 100%;
+  padding: clamp(24px, 5vw, 72px);
+  object-fit: contain;
+  background: #fff;
+  filter: drop-shadow(0 34px 52px rgba(23, 21, 18, .16));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.jk3d-sequence__hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  z-index: 4;
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 13px;
+  border: 1px solid rgba(199, 163, 90, .26);
+  border-radius: 999px;
+  background: rgba(255, 253, 248, .82);
+  color: rgba(23, 21, 18, .7);
+  font-size: .68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 0 12px 34px rgba(23, 21, 18, .08);
+  transform: translateX(-50%);
+  pointer-events: none;
+  backdrop-filter: blur(14px);
+}
+
+.jk3d--has-sequence:not(.is-image-mode) .jk3d-model,
+.jk3d--has-sequence:not(.is-image-mode) .jk3d-fallback,
+.jk3d--has-sequence:not(.is-image-mode) .jk3d-viewer__loading {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .jk3d[data-has-model="true"]:not(.is-image-mode):not(.is-model-error) .jk3d-fallback--with-model {
@@ -737,6 +815,14 @@
 
   .jk3d-viewer {
     min-height: 420px;
+  }
+
+  .jk3d-sequence__image {
+    padding: 24px;
+  }
+
+  .jk3d-sequence__hint {
+    bottom: 12px;
   }
 
   .jk3d-panel {

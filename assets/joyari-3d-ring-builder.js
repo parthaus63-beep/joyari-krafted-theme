@@ -79,6 +79,13 @@
 
   function initModel(root) {
     var model = root.querySelector('[data-jk3d-model]');
+    var frames = root.querySelectorAll('[data-jk3d-sequence-frame]');
+
+    if (frames.length) {
+      root.classList.add('is-model-loaded', 'is-sequence-mode');
+      root.classList.remove('is-model-error');
+      return;
+    }
 
     if (!model) {
       root.classList.add('is-model-loaded');
@@ -96,6 +103,92 @@
     });
   }
 
+  function setSequenceFrame(root, index) {
+    var frames = Array.prototype.slice.call(root.querySelectorAll('[data-jk3d-sequence-frame]'));
+    if (!frames.length) return 0;
+
+    var nextIndex = ((index % frames.length) + frames.length) % frames.length;
+    frames.forEach(function (frame, frameIndex) {
+      frame.classList.toggle('is-active', frameIndex === nextIndex);
+    });
+    root.setAttribute('data-sequence-index', String(nextIndex));
+    return nextIndex;
+  }
+
+  function preloadSequenceFrames(frames) {
+    frames.forEach(function (frame) {
+      var img = frame.querySelector('img');
+      if (!img) return;
+
+      var preload = new Image();
+      if (img.sizes) preload.sizes = img.sizes;
+      if (img.srcset) preload.srcset = img.srcset;
+      preload.src = img.currentSrc || img.src;
+    });
+  }
+
+  function initSequence(root) {
+    var viewer = root.querySelector('[data-jk3d-sequence-viewer]');
+    var frames = Array.prototype.slice.call(root.querySelectorAll('[data-jk3d-sequence-frame]'));
+    var activeIndex = 0;
+    var dragging = false;
+    var lastX = 0;
+    var travel = 0;
+
+    if (!viewer || !frames.length) return;
+
+    root.classList.add('is-sequence-mode');
+    activeIndex = setSequenceFrame(root, 0);
+    preloadSequenceFrames(frames);
+
+    function rotateBy(deltaX) {
+      var threshold = 16;
+      travel += deltaX;
+      if (Math.abs(travel) < threshold) return;
+
+      var steps = travel > 0 ? Math.floor(travel / threshold) : Math.ceil(travel / threshold);
+      activeIndex = setSequenceFrame(root, activeIndex + steps);
+      travel -= steps * threshold;
+    }
+
+    if (frames.length > 1) {
+      var interval = parseInt(root.getAttribute('data-sequence-interval'), 10) || 120;
+      window.setInterval(function () {
+        if (document.hidden) return;
+        if (root.classList.contains('is-image-mode')) return;
+        if (dragging) return;
+        activeIndex = setSequenceFrame(root, activeIndex + 1);
+      }, interval);
+    }
+
+    viewer.addEventListener('pointerdown', function (event) {
+      dragging = true;
+      lastX = event.clientX;
+      travel = 0;
+      viewer.classList.add('is-dragging');
+      viewer.setPointerCapture(event.pointerId);
+    });
+
+    viewer.addEventListener('pointermove', function (event) {
+      if (!dragging) return;
+      rotateBy(event.clientX - lastX);
+      lastX = event.clientX;
+    });
+
+    function stopDragging(event) {
+      dragging = false;
+      travel = 0;
+      viewer.classList.remove('is-dragging');
+      if (event && viewer.hasPointerCapture(event.pointerId)) {
+        viewer.releasePointerCapture(event.pointerId);
+      }
+    }
+
+    viewer.addEventListener('pointerup', stopDragging);
+    viewer.addEventListener('pointercancel', stopDragging);
+    viewer.addEventListener('lostpointercapture', stopDragging);
+  }
+
   function initThumbnails(root) {
     var fallback = root.querySelector('[data-jk3d-fallback]');
     var image = root.querySelector('[data-jk3d-main-image]');
@@ -106,12 +199,19 @@
           item.classList.toggle('is-active', item === thumb);
         });
 
-        if (thumb.getAttribute('data-view') === 'model') {
+        if (thumb.getAttribute('data-view') === 'sequence') {
+          root.classList.add('is-sequence-mode');
           root.classList.remove('is-image-mode');
           return;
         }
 
+        if (thumb.getAttribute('data-view') === 'model') {
+          root.classList.remove('is-image-mode', 'is-sequence-mode');
+          return;
+        }
+
         root.classList.add('is-image-mode');
+        root.classList.remove('is-sequence-mode');
 
         if (image && thumb.getAttribute('data-image-url')) {
           image.style.opacity = '0';
@@ -185,6 +285,7 @@
   }
 
   function initBuilder(root) {
+    initSequence(root);
     initModel(root);
     initThumbnails(root);
     initOptions(root);
