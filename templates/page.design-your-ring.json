@@ -9,7 +9,7 @@
  */
 {
   "sections": {
-    "main_custom_ring_builder": {
+    "custom_ring_builder_live": {
       "type": "custom-ring-builder",
       "settings": {
         "eyebrow": "Joyari Krafted custom design",
@@ -32,6 +32,6 @@
     }
   },
   "order": [
-    "main_custom_ring_builder"
+    "custom_ring_builder_live"
   ]
 }
