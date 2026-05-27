@@ -94,19 +94,71 @@
           {% endif %}
         </div>
 
-        {% if product.media.size > 1 %}
-          <div class="jk-product-gallery__thumbs" aria-label="Product media">
-            {% for media in product.media %}
-              <button type="button" class="jk-media-thumb{% if forloop.first %} is-active{% endif %}" data-media-trigger="{{ media.id }}" data-image-trigger="{{ media.preview_image.id | default: media.id }}" aria-label="View media {{ forloop.index }}">
-                {% if media.media_type == 'image' %}
-                  {{ media | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '90px', alt: media.alt | default: product.title }}
-                {% else %}
-                  <span class="jk-thumb-placeholder" aria-hidden="true"></span>
-                {% endif %}
-              </button>
-            {% endfor %}
-          </div>
+      {% if product.media.size > 1 %}
+  <div class="jk-product-gallery__thumbs" aria-label="Product media">
+
+    {% for media in product.media %}
+
+      <button
+        type="button"
+        class="jk-media-thumb{% if forloop.first %} is-active{% endif %}"
+        data-media-trigger="{{ media.id }}"
+        data-image-trigger="{{ media.preview_image.id | default: media.id }}"
+        aria-label="View media {{ forloop.index }}"
+      >
+
+        {% if media.media_type == 'image' %}
+
+          {{
+            media
+            | image_url: width: 180
+            | image_tag:
+            loading: 'lazy',
+            widths: '90, 140, 180',
+            sizes: '90px',
+            alt: media.alt | default: product.title
+          }}
+
+        {% elsif media.media_type == 'video' %}
+
+          {{
+            media.preview_image
+            | image_url: width: 180
+            | image_tag:
+            loading: 'lazy',
+            widths: '90, 140, 180',
+            sizes: '90px',
+            alt: 'Video thumbnail'
+          }}
+
+          <span class="jk-video-badge">VIDEO</span>
+
+        {% elsif media.media_type == 'external_video' %}
+
+          {{
+            media.preview_image
+            | image_url: width: 180
+            | image_tag:
+            loading: 'lazy',
+            widths: '90, 140, 180',
+            sizes: '90px',
+            alt: 'Video thumbnail'
+          }}
+
+          <span class="jk-video-badge">VIDEO</span>
+
+        {% else %}
+
+          <span class="jk-thumb-placeholder" aria-hidden="true"></span>
+
         {% endif %}
+
+      </button>
+
+    {% endfor %}
+
+  </div>
+{% endif %}
       </div>
 
       <div class="jk-product-panel">
