@@ -5697,14 +5697,9 @@ body.jk-menu-lock {
     display: none !important;
   }
 }
-.product-video-wrapper{
-  width:100%;
-  overflow:hidden;
-  border-radius:12px;
-}
-
 .product-video{
   width:100%;
   height:auto;
   display:block;
+  border-radius:12px;
 }
