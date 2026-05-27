@@ -5703,3 +5703,17 @@ body.jk-menu-lock {
   display:block;
   border-radius:12px;
 }
+.product-video,
+.product-video video,
+video.product-video{
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  width:100% !important;
+  height:auto !important;
+  z-index:9;
+}
+
+.jk-product-media video{
+  display:block !important;
+}

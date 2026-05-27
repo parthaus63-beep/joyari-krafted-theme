@@ -564,3 +564,32 @@
     document.querySelectorAll('[data-product-builder]').forEach(initProductBuilder);
   });
 })();
+document.addEventListener("DOMContentLoaded", function () {
+
+  document.querySelectorAll('.jk-media-thumb').forEach(function(thumb){
+
+    thumb.addEventListener('click', function(){
+
+      setTimeout(function(){
+
+        document.querySelectorAll('.product-video').forEach(function(video){
+
+          video.pause();
+
+        });
+
+        const activeVideo = document.querySelector('.jk-product-media.is-active video');
+
+        if(activeVideo){
+
+          activeVideo.play();
+
+        }
+
+      }, 300);
+
+    });
+
+  });
+
+});
