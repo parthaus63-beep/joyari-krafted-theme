@@ -57,36 +57,45 @@
         <div class="jk-product-gallery__main">
           {% if product.media.size > 0 %}
             {% for media in product.media %}
-              <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}" data-image-id="{{ media.preview_image.id | default: media.id }}">
-                {% if media.media_type == 'image' %}
 
-  {{ media | image_url: width: 1500 | image_tag:
-    loading: 'lazy',
-    widths: '480, 720, 960, 1200, 1500',
-    sizes: '(min-width: 990px) 58vw, 100vw',
-    alt: media.alt | default: product.title
-  }}
+  <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}">
 
-{% elsif media.media_type == 'video' %}
+    {% case media.media_type %}
 
-  {{
-    media
-    | video_tag:
-    controls: true,
-    autoplay: true,
-    loop: true,
-    muted: true,
-    playsinline: true,
-    class: 'product-video'
-  }}
+      {% when 'image' %}
 
-{% else %}
+        {{ media | image_url: width: 1500 | image_tag:
+          loading: 'lazy',
+          widths: '480, 720, 960, 1200, 1500',
+          sizes: '(min-width: 990px) 58vw, 100vw',
+          alt: media.alt | default: product.title
+        }}
 
-  <div class="jk-product-placeholder jk-product-placeholder--media" aria-hidden="true"></div>
+      {% when 'video' %}
 
-{% endif %}
-              </figure>
-            {% endfor %}
+        {{
+          media | video_tag:
+          controls: true,
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true,
+          class: 'product-video'
+        }}
+
+      {% when 'external_video' %}
+
+        {{ media | external_video_tag }}
+
+      {% else %}
+
+        <div class="jk-product-placeholder"></div>
+
+    {% endcase %}
+
+  </figure>
+
+{% endfor %}
           {% else %}
             <figure class="jk-product-media is-active">
               <div class="jk-product-placeholder jk-product-placeholder--large" aria-hidden="true"></div>
