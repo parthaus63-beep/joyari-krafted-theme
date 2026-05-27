@@ -55,59 +55,48 @@
     <div class="jk-product-layout jk-product-layout--builder">
       <div class="jk-product-gallery" data-product-gallery>
         <div class="jk-product-gallery__main">
-{% if product.media.size > 0 %}
-  {% for media in product.media %}
-    <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}">
-
-      {% case media.media_type %}
-
- {% comment %} TEST VIDEO ONLY {% endcomment %}
-
-<div class="jk-product-video-wrapper">
-  {{
-    product.media[0] | video_tag:
-    controls: true,
-    autoplay: true,
-    muted: true,
-    loop: true,
-    playsinline: true
-  }}
-</div>
-          </div>
-
-        {% when 'external_video' %}
-
-          {{ media | external_video_tag }}
-
-        {% else %}
-
-          <div class="jk-product-placeholder"></div>
-
-      {% endcase %}
-
-    </figure>
-
-  {% endfor %}
-
-{% else %}
-
-  <figure class="jk-product-media is-active">
-    <div class="jk-product-placeholder jk-product-placeholder--large"></div>
-  </figure>
-
-{% endif %}
-        {% if product.media.size > 1 %}
-          <div class="jk-product-gallery__thumbs" aria-label="Product media">
+          {% if product.media.size > 0 %}
             {% for media in product.media %}
-              {% if media.media_type == 'image' %}
+              <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}" data-image-id="{{ media.preview_image.id | default: media.id }}">
+                {% if media.media_type == 'image' %}
 
-  {{ media | image_url: width: 180 | image_tag: loading: 'lazy' }}
+  {{ media | image_url: width: 1500 | image_tag:
+    loading: 'lazy',
+    widths: '480, 720, 960, 1200, 1500',
+    sizes: '(min-width: 990px) 58vw, 100vw',
+    alt: media.alt | default: product.title
+  }}
 
 {% elsif media.media_type == 'video' %}
 
-  <span class="video-thumb">VIDEO</span>
+  {{
+    media
+    | video_tag:
+    controls: true,
+    autoplay: true,
+    loop: true,
+    muted: true,
+    playsinline: true,
+    class: 'product-video'
+  }}
+
+{% else %}
+
+  <div class="jk-product-placeholder jk-product-placeholder--media" aria-hidden="true"></div>
 
 {% endif %}
+              </figure>
+            {% endfor %}
+          {% else %}
+            <figure class="jk-product-media is-active">
+              <div class="jk-product-placeholder jk-product-placeholder--large" aria-hidden="true"></div>
+            </figure>
+          {% endif %}
+        </div>
+
+        {% if product.media.size > 1 %}
+          <div class="jk-product-gallery__thumbs" aria-label="Product media">
+            {% for media in product.media %}
               <button type="button" class="jk-media-thumb{% if forloop.first %} is-active{% endif %}" data-media-trigger="{{ media.id }}" data-image-trigger="{{ media.preview_image.id | default: media.id }}" aria-label="View media {{ forloop.index }}">
                 {% if media.media_type == 'image' %}
                   {{ media | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '90px', alt: media.alt | default: product.title }}
