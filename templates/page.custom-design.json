@@ -52,7 +52,7 @@
           "type": "shopify://apps/nivoda-connect/blocks/feed/1818f65a-9917-4ef2-bca9-2424a925fc76",
           "settings": {
             "primary_color": "#bdc3c7",
-            "diamond_type_natural": true,
+            "diamond_type_natural": false,
             "diamond_type_lab": true,
             "diamond_type_gem_v2": false,
             "shapes": "ROUND,OVAL,EMERALD,PEAR,PRINCESS,CUSHION,RADIANT,MARQUISE,HEART,SQUARE_EMERALD",
