@@ -1,4 +1,58 @@
 (function () {
+  function loadDiamondScript(section) {
+    var source = section && section.querySelector('script[src*="diamond-selection.js"]');
+    if (!source) return;
+    if (document.querySelector('script[data-joyari-diamond-loader]')) return;
+
+    var script = document.createElement('script');
+    script.src = source.src;
+    script.defer = true;
+    script.setAttribute('data-joyari-diamond-loader', 'true');
+    document.head.appendChild(script);
+  }
+
+  function replaceStaleBuilder() {
+    if (window.location.pathname !== '/pages/custom-design') return;
+    if (document.querySelector('[data-diamond-selection]')) return;
+
+    var builder = document.querySelector('[data-custom-ring-builder]');
+    if (!builder) return;
+
+    var wrapper = builder.closest('.shopify-section') || builder;
+    var sectionId = (wrapper.id || '').replace(/^shopify-section-/, '');
+    if (!sectionId) return;
+
+    fetch(window.location.pathname + '?sections=' + encodeURIComponent(sectionId), {
+      credentials: 'same-origin',
+      headers: { Accept: 'application/json' }
+    })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (payload) {
+        var html = payload && payload[sectionId];
+        if (!html || html.indexOf('data-diamond-selection') === -1) return;
+
+        var template = document.createElement('template');
+        template.innerHTML = html.trim();
+
+        var next = template.content.firstElementChild;
+        if (!next) return;
+
+        wrapper.replaceWith(next);
+        loadDiamondScript(next);
+      })
+      .catch(function () {});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', replaceStaleBuilder);
+  } else {
+    replaceStaleBuilder();
+  }
+})();
+
+(function () {
   'use strict';
 
   var theme = window.JoyariTheme || {};
