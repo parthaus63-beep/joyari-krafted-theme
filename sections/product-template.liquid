@@ -46,7 +46,18 @@
       assign show_ring_size_selector = true
     endif
   endif
+
+  assign has_product_model = false
+  for media in product.media
+    if media.media_type == 'model'
+      assign has_product_model = true
+    endif
+  endfor
 %}
+
+{% if has_product_model %}
+  <script type="module" src="{{ 'model-viewer.min.js' | asset_url }}"></script>
+{% endif %}
 
 <section class="jk-product-template" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
   {% if product != blank %}
@@ -57,12 +68,8 @@
         <div class="jk-product-gallery__main">
           {% if product.media.size > 0 %}
             {% for media in product.media %}
-              <figure class="jk-product-media{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}" data-image-id="{{ media.preview_image.id | default: media.id }}">
-                {% if media.media_type == 'image' %}
-                  {{ media | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1500', sizes: '(min-width: 990px) 58vw, 100vw', alt: media.alt | default: product.title }}
-                {% else %}
-                  <div class="jk-product-placeholder jk-product-placeholder--media" aria-hidden="true"></div>
-                {% endif %}
+              <figure class="jk-product-media jk-product-media--{{ media.media_type }}{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}" data-image-id="{{ media.preview_image.id | default: media.id }}" data-media-type="{{ media.media_type }}">
+                {% render 'product-media', media: media, product: product, mode: 'main' %}
               </figure>
             {% endfor %}
           {% else %}
@@ -75,12 +82,8 @@
         {% if product.media.size > 1 %}
           <div class="jk-product-gallery__thumbs" aria-label="Product media">
             {% for media in product.media %}
-              <button type="button" class="jk-media-thumb{% if forloop.first %} is-active{% endif %}" data-media-trigger="{{ media.id }}" data-image-trigger="{{ media.preview_image.id | default: media.id }}" aria-label="View media {{ forloop.index }}">
-                {% if media.media_type == 'image' %}
-                  {{ media | image_url: width: 180 | image_tag: loading: 'lazy', widths: '90, 140, 180', sizes: '90px', alt: media.alt | default: product.title }}
-                {% else %}
-                  <span class="jk-thumb-placeholder" aria-hidden="true"></span>
-                {% endif %}
+              <button type="button" class="jk-media-thumb jk-media-thumb--{{ media.media_type }}{% if forloop.first %} is-active{% endif %}" data-media-trigger="{{ media.id }}" data-image-trigger="{{ media.preview_image.id | default: media.id }}" aria-label="View media {{ forloop.index }}">
+                {% render 'product-media', media: media, product: product, mode: 'thumbnail' %}
               </button>
             {% endfor %}
           </div>
