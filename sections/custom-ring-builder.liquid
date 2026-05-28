@@ -1,3 +1,8 @@
+{% render 'diamond-selection-markup' %}
+{% comment %}
+Phase 1 is diamond selection first. Keep the previous custom ring builder markup
+parked here so older Shopify templates that still reference this section render
+the diamond selection UI instead of the 3D/pricing builder.
 {% if page.handle == 'custom-design' %}
   {% render 'diamond-selection-markup' %}
 {% else %}
@@ -567,6 +572,7 @@
   </div>
 </section>
 {% endif %}
+{% endcomment %}
 
 {% schema %}
 {
