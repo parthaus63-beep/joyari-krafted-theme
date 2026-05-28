@@ -5756,3 +5756,6 @@ body.jk-menu-lock {
     display: none !important;
   }
 }
+.jk-eyebrow{
+  text-transform: capitalize;
+}
