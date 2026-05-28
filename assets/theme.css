@@ -2129,11 +2129,26 @@ body.jk-menu-lock {
   align-items: start;
 }
 
-.jk-product-layout--builder {
-  grid-template-columns: minmax(0, 1.18fr) minmax(420px, .82fr);
-  gap: 46px;
+.jk-product-layout--builder{
+    display: grid;
+    grid-template-columns: 1.4fr 0.6fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px;
+}
+.jk-product-builder-main,
+.jk-product-layout,
+.jk-product-gallery{
+    width: 100%;
+    max-width: 100%;
 }
 
+.page-width{
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
 .jk-product-gallery__main {
   display: grid;
   gap: 18px;
