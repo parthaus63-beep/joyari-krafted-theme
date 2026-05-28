@@ -1,0 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "diamond_selection": {
+      "type": "diamond-selection",
+      "settings": {
+        "eyebrow": "Phase 1 · Diamond selection",
+        "heading": "Choose Your Diamond",
+        "subheading": "Begin with the stone. Refine shape, carat, colour, clarity, cut, origin, certificate lab, and budget guidance before choosing a Joyari setting.",
+        "search_endpoint": "/apps/diamonds/search",
+        "setting_link": "/pages/custom-design?step=setting"
+      }
+    }
+  },
+  "order": [
+    "diamond_selection"
+  ]
+}
