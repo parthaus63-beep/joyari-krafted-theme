@@ -1,3 +1,6 @@
+{% if page.handle == 'custom-design' %}
+  {% render 'diamond-selection-markup' %}
+{% else %}
 {{ 'custom-ring-builder.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'custom-ring-builder.js' | asset_url }}" defer></script>
 {% assign initial_model_url = section.settings.default_model_url %}
@@ -563,6 +566,7 @@
     </div>
   </div>
 </section>
+{% endif %}
 
 {% schema %}
 {
