@@ -279,7 +279,10 @@
 
   function getStoredDiamond() {
     try {
-      var raw = localStorage.getItem(STORAGE_KEY);
+      var storage = window.localStorage;
+      if (!storage) return null;
+
+      var raw = storage.getItem(STORAGE_KEY);
       return raw ? JSON.parse(raw) : null;
     } catch (error) {
       return null;
@@ -312,7 +315,15 @@
   }
 
   function saveDiamond(root, diamond) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(diamond));
+    try {
+      if (window.localStorage) {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(diamond));
+      }
+    } catch (error) {
+      // The visual selection still updates if browser storage is unavailable.
+    }
+
+    window.JoyariSelectedDiamond = diamond;
     updateSelectedPanel(root, diamond);
   }
 
