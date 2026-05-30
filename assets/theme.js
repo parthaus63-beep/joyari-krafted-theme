@@ -68,6 +68,17 @@
     });
   }
 
+  function playActiveProductVideo(activeMedia) {
+    if (!activeMedia) return;
+    var video = activeMedia.querySelector('video');
+    if (!video) return;
+
+    var playPromise = video.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(function () {});
+    }
+  }
+
   function setText(root, selector, value) {
     root.querySelectorAll(selector).forEach(function (element) {
       element.textContent = value;
@@ -93,6 +104,7 @@
     });
 
     pauseInactiveProductVideos(root, media);
+    playActiveProductVideo(media);
   }
 
   function calculateBuilderAdjustment(root) {

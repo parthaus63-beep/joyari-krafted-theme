@@ -64,7 +64,7 @@
     <script type="application/json" data-product-json>{{ product | json }}</script>
 
     <div class="jk-product-layout jk-product-layout--builder">
-      <div class="jk-product-gallery" data-product-gallery>
+      <div class="jk-product-gallery{% if product.media.size > 1 %} jk-product-gallery--with-thumbs{% endif %}" data-product-gallery>
         <div class="jk-product-gallery__main">
           {% if product.media.size > 0 %}
             {% for media in product.media %}
@@ -94,7 +94,27 @@
         <div class="jk-product-panel__inner jk-product-panel__inner--builder">
           <div class="jk-product-panel__header">
             <p class="jk-eyebrow">Joyari fine jewellery</p>
-            <h4>{{ product.title }}</h4>
+            <h1>{{ product.title }}</h1>
+            <p class="jk-product-subtitle">
+              {% if product.type != blank %}
+                {{ product.type }}
+              {% else %}
+                Made-to-order fine jewellery
+              {% endif %}
+            </p>
+
+            <div class="jk-product-review-placeholder" aria-label="Client review placeholder">
+              <span class="jk-product-review-placeholder__stars" aria-hidden="true">Reviews</span>
+              <span>Client reviews coming soon</span>
+            </div>
+
+            <div class="jk-product-metal-palette" aria-label="Available metal tones">
+              <span class="jk-product-metal-palette__label">Metal tones</span>
+              <span class="jk-product-metal-dot jk-product-metal-dot--platinum" title="Platinum"></span>
+              <span class="jk-product-metal-dot jk-product-metal-dot--yellow" title="18K Yellow Gold"></span>
+              <span class="jk-product-metal-dot jk-product-metal-dot--white" title="18K White Gold"></span>
+              <span class="jk-product-metal-dot jk-product-metal-dot--rose" title="Rose Gold"></span>
+            </div>
 
             <div class="jk-product-price-row">
               <p class="jk-product-price" data-variant-price>{{ selected_variant.price | money }}</p>
@@ -224,6 +244,21 @@
             <span class="jk-trust-badge">Secure checkout</span>
             <span class="jk-trust-badge">Diamond guidance</span>
             <span class="jk-trust-badge">Aftercare support</span>
+          </div>
+
+          <div class="jk-accordions jk-product-info-accordions" aria-label="Product service information">
+            <details open>
+              <summary>Delivery and returns</summary>
+              <p>Each Joyari Krafted piece is prepared with insured delivery and careful presentation. Our team will confirm timing for made-to-order designs before dispatch.</p>
+            </details>
+            <details>
+              <summary>Warranty and care</summary>
+              <p>Enjoy dedicated aftercare guidance, craftsmanship support, and jewellery care advice designed to preserve brilliance for years to come.</p>
+            </details>
+            <details>
+              <summary>Certification</summary>
+              <p>Certified diamond pieces include grading information where applicable, with clear guidance from our team before purchase.</p>
+            </details>
           </div>
         </div>
       </div>
