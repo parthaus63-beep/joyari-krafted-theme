@@ -21,8 +21,7 @@
       <meta name="description" content="{{ settings.meta_description | default: 'Luxury lab-grown diamond jewellery, engagement rings, and made-to-order bridal pieces by Joyari Krafted.' | escape }}">
     {%- endif -%}
 
-    {%- assign joyari_theme_css_url = 'theme.css' | asset_url | split: '?' | first -%}
-    <link rel="stylesheet" href="{{ joyari_theme_css_url }}?joyari_palette=b4b4b61">
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
     <script>
       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       window.JoyariTheme = {
