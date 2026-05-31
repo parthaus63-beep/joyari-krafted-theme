@@ -6,7 +6,7 @@
 
 {% if media_mode == 'thumbnail' %}
   {% if thumbnail != blank %}
-    {{ thumbnail | image_url: width: 220 | image_tag: loading: 'lazy', widths: '90, 140, 180, 220', sizes: '90px', alt: media_alt }}
+    {{ thumbnail | image_url: width: 220 | image_tag: loading: 'eager', widths: '90, 140, 180, 220', sizes: '90px', alt: media_alt }}
   {% else %}
     <span class="jk-thumb-placeholder" aria-hidden="true"></span>
   {% endif %}

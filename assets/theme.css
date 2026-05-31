@@ -8197,6 +8197,45 @@ button[name="add"]:focus-visible {
     overflow-wrap: break-word;
   }
 
+  .jk-product-panel,
+  .jk-product-panel__inner,
+  .jk-product-panel__header,
+  .jk-ring-builder-card,
+  .jk-diamond-select,
+  .jk-diamond-select__hero,
+  .jk-diamond-select__hero-copy,
+  .jkrb,
+  .jkrb-shell,
+  .jkrb-hero {
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .jk-product-panel__inner h1,
+  .jk-diamond-select h1,
+  .jkrb h1,
+  .jkrb-hero h1 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .jk-diamond-select__steps,
+  .jkrb-step-tabs {
+    grid-template-columns: 1fr;
+  }
+
+  .jk-diamond-select__filters,
+  .jk-diamond-select__results,
+  .jkrb-panel,
+  .jkrb-preview {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .jk-section,
   .jk-product-grid-section,
   .jk-brand-promise,

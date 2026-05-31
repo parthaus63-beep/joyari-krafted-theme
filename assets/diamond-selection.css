@@ -743,3 +743,33 @@ input:checked + label {
   background-color: #F8F6F1 !important;
   border-color: rgba(198, 167, 105, .28) !important;
 }
+
+@media (max-width: 720px) {
+  .jk-diamond-select,
+  .jk-diamond-select__hero,
+  .jk-diamond-select__intro,
+  .jk-diamond-select__shell,
+  .jk-diamond-filters,
+  .jk-diamond-results {
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .jk-diamond-select h1 {
+    max-width: 100%;
+    font-size: clamp(2.65rem, 12.5vw, 3.45rem);
+    line-height: .98;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .jk-diamond-select__intro > p:last-child {
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  .jk-diamond-select__steps {
+    min-width: 0;
+  }
+}
