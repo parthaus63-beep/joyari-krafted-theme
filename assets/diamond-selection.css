@@ -1,8 +1,8 @@
 .shopify-section--diamond-selection {
   background:
-    radial-gradient(circle at 18% 4%, rgba(199, 163, 90, .12), transparent 32%),
-    linear-gradient(180deg, #fffdf8 0%, #ffffff 42%, #f8f2e8 100%);
-  color: #211f1c;
+    radial-gradient(circle at 18% 4%, rgba(198, 167, 105, .12), transparent 32%),
+    linear-gradient(180deg, #F8F6F1 0%, #ffffff 42%, #F8F6F1 100%);
+  color: #111111;
 }
 
 .jk-diamond-select {
@@ -17,12 +17,12 @@
   gap: 32px;
   align-items: end;
   padding: clamp(32px, 6vw, 78px);
-  border: 1px solid rgba(199, 163, 90, .18);
+  border: 1px solid rgba(198, 167, 105, .18);
   border-radius: 18px;
   background:
     linear-gradient(135deg, rgba(255, 255, 255, .88), rgba(248, 242, 232, .78)),
     radial-gradient(circle at 74% 18%, rgba(255, 255, 255, .96), transparent 28%);
-  box-shadow: 0 28px 90px rgba(23, 21, 18, .08);
+  box-shadow: 0 28px 90px rgba(17, 17, 17, .08);
 }
 
 .jk-diamond-select__intro {
@@ -31,7 +31,7 @@
 
 .jk-diamond-select__eyebrow {
   margin: 0 0 12px;
-  color: #98783c;
+  color: #0F3D2E;
   font-size: .78rem;
   font-weight: 800;
   letter-spacing: .16em;
@@ -46,7 +46,7 @@
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 500;
   letter-spacing: 0;
-  color: #211f1c;
+  color: #111111;
 }
 
 .jk-diamond-select h1 {
@@ -66,7 +66,7 @@
 }
 
 .jk-diamond-select p {
-  color: #6d665c;
+  color: #5e5a53;
   line-height: 1.74;
 }
 
@@ -80,7 +80,7 @@
   display: grid;
   gap: 10px;
   min-width: 280px;
-  color: #6d665c;
+  color: #5e5a53;
   font-size: .82rem;
   font-weight: 800;
   letter-spacing: .1em;
@@ -90,21 +90,21 @@
 .jk-diamond-select__steps span {
   display: block;
   padding: 13px 16px;
-  border: 1px solid rgba(199, 163, 90, .18);
+  border: 1px solid rgba(198, 167, 105, .18);
   border-radius: 999px;
   background: rgba(255, 255, 255, .72);
 }
 
 .jk-diamond-select__steps .is-active {
-  color: #211f1c;
-  border-color: rgba(199, 163, 90, .44);
-  background: #fffaf0;
+  color: #111111;
+  border-color: rgba(198, 167, 105, .44);
+  background: #F8F6F1;
 }
 
 .jk-diamond-select.has-selected-diamond .jk-diamond-select__steps span:nth-child(2) {
-  color: #211f1c;
-  border-color: rgba(199, 163, 90, .44);
-  background: #fffaf0;
+  color: #111111;
+  border-color: rgba(198, 167, 105, .44);
+  background: #F8F6F1;
 }
 
 .jk-diamond-select__shell {
@@ -117,10 +117,10 @@
 
 .jk-diamond-filters,
 .jk-diamond-results {
-  border: 1px solid rgba(199, 163, 90, .18);
+  border: 1px solid rgba(198, 167, 105, .18);
   border-radius: 18px;
   background: rgba(255, 255, 255, .82);
-  box-shadow: 0 24px 70px rgba(23, 21, 18, .07);
+  box-shadow: 0 24px 70px rgba(17, 17, 17, .07);
 }
 
 .jk-diamond-filters {
@@ -131,7 +131,7 @@
 
 .jk-diamond-filters__heading {
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(199, 163, 90, .15);
+  border-bottom: 1px solid rgba(198, 167, 105, .15);
 }
 
 .jk-diamond-filters__form {
@@ -150,7 +150,7 @@
 
 .jk-filter-group legend,
 .jk-filter-group label {
-  color: #342f28;
+  color: #111111;
   font-size: .76rem;
   font-weight: 800;
   letter-spacing: .12em;
@@ -165,15 +165,15 @@
   border: 1px solid rgba(33, 31, 28, .14);
   border-radius: 4px;
   background: #fff;
-  color: #211f1c;
+  color: #111111;
   font: inherit;
 }
 
 .jk-filter-group input:not([type="checkbox"]):focus,
 .jk-filter-group select:focus {
-  outline: 2px solid rgba(199, 163, 90, .28);
+  outline: 2px solid rgba(198, 167, 105, .28);
   outline-offset: 2px;
-  border-color: rgba(199, 163, 90, .5);
+  border-color: rgba(198, 167, 105, .5);
 }
 
 .jk-filter-grid {
@@ -198,15 +198,15 @@
   padding: 10px;
   border: 1px solid rgba(33, 31, 28, .1);
   border-radius: 6px;
-  background: #fffdf8;
-  color: #342f28;
+  background: #F8F6F1;
+  color: #111111;
   cursor: pointer;
   transition: border-color .24s ease, background .24s ease, transform .24s ease;
 }
 
 .jk-shape-filter:hover {
   transform: translateY(-1px);
-  border-color: rgba(199, 163, 90, .36);
+  border-color: rgba(198, 167, 105, .36);
 }
 
 .jk-shape-filter input {
@@ -217,8 +217,8 @@
 }
 
 .jk-shape-filter:has(input:checked) {
-  border-color: rgba(199, 163, 90, .58);
-  background: #fff7e8;
+  border-color: rgba(198, 167, 105, .58);
+  background: #F8F6F1;
 }
 
 .jk-shape-filter__stone {
@@ -228,7 +228,7 @@
   border: 1px solid rgba(151, 123, 69, .52);
   background:
     radial-gradient(circle at 35% 30%, #fff, rgba(223, 233, 238, .68) 36%, transparent 37%),
-    linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(199, 163, 90, .18));
+    linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(198, 167, 105, .18));
 }
 
 .jk-shape-filter__stone--round {
@@ -275,7 +275,7 @@
   border: 1px solid rgba(33, 31, 28, .22);
   border-radius: 999px;
   background: transparent;
-  color: #211f1c;
+  color: #111111;
   font-size: .78rem;
   font-weight: 800;
   letter-spacing: .13em;
@@ -288,23 +288,23 @@
 .jk-diamond-button:hover,
 .jk-diamond-button:focus-visible {
   transform: translateY(-1px);
-  box-shadow: 0 14px 30px rgba(23, 21, 18, .1);
+  box-shadow: 0 14px 30px rgba(17, 17, 17, .1);
 }
 
 .jk-diamond-button--dark {
-  border-color: #211f1c;
-  background: #211f1c;
+  border-color: #111111;
+  background: #111111;
   color: #fff;
 }
 
 .jk-diamond-button--quiet {
-  border-color: rgba(199, 163, 90, .26);
-  background: #fffaf0;
+  border-color: rgba(198, 167, 105, .26);
+  background: #F8F6F1;
 }
 
 .jk-diamond-button--outline {
   width: 100%;
-  border-color: rgba(199, 163, 90, .52);
+  border-color: rgba(198, 167, 105, .52);
   background: #fff;
 }
 
@@ -327,7 +327,7 @@
 
 .jk-diamond-results__bar {
   padding-bottom: 22px;
-  border-bottom: 1px solid rgba(199, 163, 90, .15);
+  border-bottom: 1px solid rgba(198, 167, 105, .15);
 }
 
 .jk-diamond-results__bar p {
@@ -338,9 +338,9 @@
 .jk-diamond-selected {
   margin-top: 20px;
   padding: 18px;
-  border: 1px solid rgba(199, 163, 90, .22);
+  border: 1px solid rgba(198, 167, 105, .22);
   border-radius: 12px;
-  background: linear-gradient(135deg, #fffdf8, #fff6e7);
+  background: linear-gradient(135deg, #F8F6F1, #F8F6F1);
 }
 
 .jk-diamond-selected h3 {
@@ -359,19 +359,19 @@
   border: 1px solid rgba(33, 31, 28, .09);
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 20px 52px rgba(23, 21, 18, .07);
+  box-shadow: 0 20px 52px rgba(17, 17, 17, .07);
   transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
 }
 
 .jk-diamond-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(199, 163, 90, .34);
-  box-shadow: 0 26px 68px rgba(23, 21, 18, .1);
+  border-color: rgba(198, 167, 105, .34);
+  box-shadow: 0 26px 68px rgba(17, 17, 17, .1);
 }
 
 .jk-diamond-card.is-selected {
   border-color: rgba(151, 123, 69, .72);
-  box-shadow: 0 0 0 2px rgba(199, 163, 90, .18), 0 26px 68px rgba(23, 21, 18, .1);
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .18), 0 26px 68px rgba(17, 17, 17, .1);
 }
 
 .jk-diamond-card__media {
@@ -398,7 +398,7 @@
   position: relative;
   width: 34%;
   aspect-ratio: 1;
-  filter: drop-shadow(0 20px 26px rgba(23, 21, 18, .12));
+  filter: drop-shadow(0 20px 26px rgba(17, 17, 17, .12));
 }
 
 .jk-diamond-placeholder::before {
@@ -408,7 +408,7 @@
   border: 1px solid rgba(151, 123, 69, .44);
   background:
     radial-gradient(circle at 34% 30%, #fff, rgba(224, 238, 244, .76) 34%, transparent 35%),
-    linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(199, 163, 90, .18));
+    linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(198, 167, 105, .18));
 }
 
 .jk-diamond-placeholder--round::before {
@@ -464,17 +464,17 @@
 }
 
 .jk-diamond-card__certificate a {
-  color: #98783c;
+  color: #0F3D2E;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .jk-diamond-card__type {
-  color: #98783c;
+  color: #0F3D2E;
 }
 
 .jk-diamond-card__price {
-  color: #211f1c;
+  color: #111111;
 }
 
 .jk-diamond-specs {
@@ -489,11 +489,11 @@
   gap: 3px;
   padding: 9px;
   border-radius: 6px;
-  background: #fffaf0;
+  background: #F8F6F1;
 }
 
 .jk-diamond-specs dt {
-  color: #8b8378;
+  color: #5e5a53;
   font-size: .68rem;
   font-weight: 800;
   letter-spacing: .1em;
@@ -502,23 +502,23 @@
 
 .jk-diamond-specs dd {
   margin: 0;
-  color: #211f1c;
+  color: #111111;
   font-weight: 700;
 }
 
 .jk-diamond-empty {
   grid-column: 1 / -1;
   padding: 36px;
-  border: 1px solid rgba(199, 163, 90, .18);
+  border: 1px solid rgba(198, 167, 105, .18);
   border-radius: 12px;
-  background: #fffdf8;
+  background: #F8F6F1;
   text-align: center;
 }
 
 .jk-diamond-empty--unavailable {
   background:
     radial-gradient(circle at 50% 0%, rgba(255, 255, 255, .94), transparent 42%),
-    linear-gradient(145deg, #fffdf8, #fff4e5);
+    linear-gradient(145deg, #F8F6F1, #F8F6F1);
 }
 
 @media (max-width: 1120px) {
@@ -571,4 +571,47 @@
   .jk-diamond-button {
     width: 100%;
   }
+}
+
+.shopify-section--diamond-selection {
+  background:
+    radial-gradient(circle at 18% 4%, rgba(198, 167, 105, .1), transparent 32%),
+    radial-gradient(circle at 82% 20%, rgba(15, 61, 46, .05), transparent 34%),
+    linear-gradient(180deg, #F8F6F1 0%, #ffffff 46%, #F8F6F1 100%);
+  color: #111111;
+}
+
+.jk-diamond-select h1,
+.jk-diamond-select h2,
+.jk-diamond-select h3,
+.jk-diamond-specs dd,
+.jk-diamond-card__price {
+  color: #111111;
+}
+
+.jk-diamond-select__eyebrow,
+.jk-diamond-card__type,
+.jk-diamond-card__certificate a,
+.jk-diamond-select.has-selected-diamond .jk-diamond-select__steps span:nth-child(2) {
+  color: #0F3D2E;
+}
+
+.jk-diamond-button--dark {
+  border-color: #C6A769;
+  background: #C6A769;
+  color: #111111;
+}
+
+.jk-diamond-button--dark:hover,
+.jk-diamond-button--dark:focus-visible {
+  border-color: #b99a5b;
+  background: #b99a5b;
+  color: #111111;
+}
+
+.jk-diamond-card.is-selected,
+.jk-shape-filter:has(input:checked),
+.jk-diamond-select__steps .is-active {
+  border-color: #C6A769;
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .16);
 }

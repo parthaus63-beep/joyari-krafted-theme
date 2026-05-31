@@ -15,10 +15,11 @@
     "instagram_url": "https://www.instagram.com/joyari_krafted?igsh=MTNiMmVhZmxtNjUzaw==",
     "support_email": "care@joyarikrafted.com",
     "support_phone": "+61 000 000 000",
-    "color_ivory": "#fbf7ef",
-    "color_champagne": "#c7a35a",
-    "color_ink": "#171512",
-    "color_beige": "#e9dcc8",
+    "color_ivory": "#F8F6F1",
+    "color_champagne": "#C6A769",
+    "color_emerald": "#0F3D2E",
+    "color_ink": "#111111",
+    "color_beige": "#E7DED0",
     "sections": {
       "header": {
         "type": "header",

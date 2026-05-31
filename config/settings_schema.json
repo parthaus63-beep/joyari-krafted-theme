@@ -59,25 +59,31 @@
         "type": "color",
         "id": "color_ivory",
         "label": "Ivory",
-        "default": "#fbf7ef"
+        "default": "#F8F6F1"
       },
       {
         "type": "color",
         "id": "color_champagne",
         "label": "Champagne gold",
-        "default": "#c7a35a"
+        "default": "#C6A769"
+      },
+      {
+        "type": "color",
+        "id": "color_emerald",
+        "label": "Deep emerald",
+        "default": "#0F3D2E"
       },
       {
         "type": "color",
         "id": "color_ink",
-        "label": "Soft black",
-        "default": "#171512"
+        "label": "Rich black",
+        "default": "#111111"
       },
       {
         "type": "color",
         "id": "color_beige",
         "label": "Warm beige",
-        "default": "#e9dcc8"
+        "default": "#E7DED0"
       }
     ]
   }

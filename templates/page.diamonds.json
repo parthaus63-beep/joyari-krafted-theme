@@ -40,7 +40,7 @@
         "nivoda_connect_feed_W4qUXR": {
           "type": "shopify://apps/nivoda-connect/blocks/feed/1818f65a-9917-4ef2-bca9-2424a925fc76",
           "settings": {
-            "primary_color": "#bdc3c7",
+            "primary_color": "#C6A769",
             "diamond_type_natural": true,
             "diamond_type_lab": true,
             "diamond_type_gem_v2": false,
