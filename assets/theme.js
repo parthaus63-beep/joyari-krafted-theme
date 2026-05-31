@@ -3,6 +3,22 @@
 
   var theme = window.JoyariTheme || {};
 
+  function ensureCurrentThemeStylesheet() {
+    var script = document.currentScript || document.querySelector('script[src*="/assets/theme.js"]');
+    if (!script || !script.src || document.querySelector('link[data-joyari-current-theme-css]')) return;
+
+    var stylesheetUrl = script.src.replace('/assets/theme.js', '/assets/theme.css');
+    if (stylesheetUrl === script.src) return;
+
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = stylesheetUrl;
+    link.setAttribute('data-joyari-current-theme-css', 'true');
+    document.head.appendChild(link);
+  }
+
+  ensureCurrentThemeStylesheet();
+
   function stripTags(value) {
     return String(value || '').replace(/<[^>]*>/g, '');
   }
