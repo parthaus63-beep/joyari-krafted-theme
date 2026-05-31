@@ -632,8 +632,61 @@
     });
   }
 
+  function initCollectionFilters() {
+    document.querySelectorAll('[data-collection-shop]').forEach(function (root) {
+      var drawer = root.querySelector('[data-collection-filter-drawer]');
+      var openButton = root.querySelector('[data-collection-filter-open]');
+      var closeButtons = root.querySelectorAll('[data-collection-filter-close]');
+      var form = root.querySelector('[data-collection-filter-form]');
+      var sortSelect = root.querySelector('[data-collection-sort]');
+
+      function lockFilterScroll(isLocked) {
+        document.documentElement.classList.toggle('jk-filter-lock', isLocked);
+        document.body.classList.toggle('jk-filter-lock', isLocked);
+      }
+
+      function setFilterOpen(isOpen) {
+        root.classList.toggle('is-filter-open', isOpen);
+        if (drawer) drawer.classList.toggle('is-open', isOpen);
+        if (openButton) openButton.setAttribute('aria-expanded', String(isOpen));
+        lockFilterScroll(isOpen && window.matchMedia('(max-width: 989px)').matches);
+      }
+
+      if (openButton && drawer) {
+        openButton.addEventListener('click', function () {
+          setFilterOpen(true);
+        });
+      }
+
+      closeButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          setFilterOpen(false);
+        });
+      });
+
+      if (sortSelect && form) {
+        sortSelect.addEventListener('change', function () {
+          form.submit();
+        });
+      }
+
+      if (form) {
+        form.addEventListener('submit', function () {
+          setFilterOpen(false);
+        });
+      }
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth >= 990) {
+          lockFilterScroll(false);
+        }
+      });
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     initNavigation();
+    initCollectionFilters();
     initRingSizeGuides();
     document.querySelectorAll('[data-product-builder]').forEach(initProductBuilder);
   });

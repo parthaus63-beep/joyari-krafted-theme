@@ -200,10 +200,67 @@
                 </div>
               {% endunless %}
 
+              <div class="jk-builder-step jk-builder-step--design-preferences">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
+                  <div>
+                    <h3>Design preferences</h3>
+                    <p>Choose your preferred metal, diamond shape, and carat presence. These details are saved with your order request while Shopify variants stay simple.</p>
+                  </div>
+                </div>
+
+                <fieldset class="jk-option-fieldset jk-option-fieldset--metal">
+                  <legend>Metal selector</legend>
+                  <div class="jk-swatch-row jk-swatch-row--metal">
+                    {% assign metals = 'Platinum,18K Yellow Gold,18K White Gold,Rose Gold' | split: ',' %}
+                    {% for metal in metals %}
+                      {% assign metal_id = 'MetalPreference-' | append: section.id | append: '-' | append: metal | handleize %}
+                      {% liquid
+                        assign metal_swatch = 'platinum'
+                        if metal contains 'Yellow'
+                          assign metal_swatch = 'yellow'
+                        elsif metal contains 'White'
+                          assign metal_swatch = 'white'
+                        elsif metal contains 'Rose'
+                          assign metal_swatch = 'rose'
+                        endif
+                      %}
+                      <input id="{{ metal_id }}" type="radio" name="properties[Metal Preference]" value="{{ metal | escape }}" {% if forloop.first %}checked{% endif %}>
+                      <label for="{{ metal_id }}"><span class="jk-metal-swatch jk-metal-swatch--{{ metal_swatch }}" aria-hidden="true"></span>{{ metal }}</label>
+                    {% endfor %}
+                  </div>
+                </fieldset>
+
+                <fieldset class="jk-option-fieldset jk-option-fieldset--shape">
+                  <legend>Diamond shape selector</legend>
+                  <div class="jk-shape-row">
+                    {% assign shapes = 'Round,Oval,Emerald,Pear,Cushion' | split: ',' %}
+                    {% for shape in shapes %}
+                      {% assign shape_id = 'DiamondShapePreference-' | append: section.id | append: '-' | append: shape | handleize %}
+                      <input id="{{ shape_id }}" type="radio" name="properties[Diamond Shape]" value="{{ shape | escape }}" {% if forloop.first %}checked{% endif %}>
+                      <label for="{{ shape_id }}"><span class="jk-shape-chip"><span class="jk-shape-icon jk-shape-icon--{{ shape | handleize }}" aria-hidden="true"></span>{{ shape }}</span></label>
+                    {% endfor %}
+                  </div>
+                </fieldset>
+
+                <div class="jk-builder-field jk-builder-field--carat-preference">
+                  <label for="CaratPreference-{{ section.id }}">Carat selector</label>
+                  <select id="CaratPreference-{{ section.id }}" name="properties[Carat Preference]">
+                    <option value="0.50 ct">0.50 ct</option>
+                    <option value="1.00 ct" selected>1.00 ct</option>
+                    <option value="1.50 ct">1.50 ct</option>
+                    <option value="2.00 ct">2.00 ct</option>
+                    <option value="2.50 ct">2.50 ct</option>
+                    <option value="3.00 ct">3.00 ct</option>
+                    <option value="Private guidance">Private guidance</option>
+                  </select>
+                </div>
+              </div>
+
               {% if show_ring_size_selector %}
                 <div class="jk-builder-step jk-builder-step--ring-size">
                   <div class="jk-builder-step__header">
-                    <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
+                    <span class="jk-builder-step__number">{% if product.has_only_default_variant %}02{% else %}03{% endif %}</span>
                     <div>
                       <h3>Ring size</h3>
                       <p>Select your preferred fit. This is saved with the order and does not change the Shopify variant.</p>
@@ -222,9 +279,9 @@
                 <div class="jk-builder-step__header">
                   <span class="jk-builder-step__number">
                     {% if show_ring_size_selector %}
-                      {% if product.has_only_default_variant %}02{% else %}03{% endif %}
+                      {% if product.has_only_default_variant %}03{% else %}04{% endif %}
                     {% else %}
-                      {% if product.has_only_default_variant %}01{% else %}02{% endif %}
+                      {% if product.has_only_default_variant %}02{% else %}03{% endif %}
                     {% endif %}
                   </span>
                   <div>
@@ -256,28 +313,32 @@
           {% endform %}
 
           <div class="jk-builder-trust-grid" aria-label="Joyari trust badges">
-            <span class="jk-trust-badge">Insured delivery</span>
-            <span class="jk-trust-badge">Secure checkout</span>
-            <span class="jk-trust-badge">Diamond guidance</span>
-            <span class="jk-trust-badge">Aftercare support</span>
+            <span class="jk-trust-badge">Lab-grown diamonds</span>
+            <span class="jk-trust-badge">Certified stones</span>
+            <span class="jk-trust-badge">Worldwide shipping</span>
+            <span class="jk-trust-badge">Custom handcrafted jewellery</span>
           </div>
 
           <div class="jk-accordions jk-product-info-accordions" aria-label="Product service information">
             <details open>
-              <summary>Details</summary>
-              <p>Review the product description below for setting notes, stone details, metal information, and any included certification guidance.</p>
+              <summary>Product details</summary>
+              <p>Review the product description below for setting notes, metal information, proportions, and the design details that make this piece feel personal.</p>
             </details>
             <details>
-              <summary>Resizing</summary>
-              <p>Ring sizing is saved with your order where available. Our team can guide resizing questions before production or after delivery.</p>
+              <summary>Diamond details</summary>
+              <p>Eligible designs can be paired with certified lab-grown diamonds selected for brilliance, proportion, colour, clarity, and documentation.</p>
             </details>
             <details>
-              <summary>Shipping information</summary>
-              <p>Each Joyari Krafted piece is prepared with insured delivery and careful presentation. Made-to-order timelines are confirmed before dispatch.</p>
+              <summary>Shipping &amp; returns</summary>
+              <p>Each Joyari Krafted piece is prepared with insured delivery and careful presentation. Made-to-order timelines and return eligibility are confirmed before dispatch.</p>
             </details>
             <details>
-              <summary>Contact / appointment</summary>
-              <p>For private diamond guidance, setting changes, or appointment support, contact Joyari Krafted and our team will help refine the piece.</p>
+              <summary>Customisation</summary>
+              <p>For a different metal, diamond shape, engraving, hidden halo, band profile, or private design detail, request a custom version and our team will guide the next step.</p>
+            </details>
+            <details>
+              <summary>Ring size guide</summary>
+              <p>Use the size guide beside the ring-size selector to compare AUS/UK, US/Canada, EU, inside diameter, and circumference. Wider bands may need a half size up.</p>
             </details>
           </div>
         </div>
@@ -301,6 +362,20 @@
           <p>Use this space for diamond specifications, metal details, setting notes, certification information, and the story behind the piece.</p>
         {% endif %}
       </div>
+    </div>
+
+    <div class="jk-mobile-atc" data-mobile-atc>
+      <div>
+        <span>{{ product.title }}</span>
+        <strong data-estimate-total>{{ selected_variant.price | money }}</strong>
+      </div>
+      <button type="submit" name="add" form="{{ product_form_id }}" class="jk-button jk-button--primary" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>
+        {% if selected_variant.available %}
+          {{ 'products.product.add_to_cart' | t }}
+        {% else %}
+          {{ 'products.product.sold_out' | t }}
+        {% endif %}
+      </button>
     </div>
   {% else %}
     <div class="jk-section__header">

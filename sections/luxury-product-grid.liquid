@@ -93,7 +93,201 @@
     </div>
   {% endif %}
 
-  <div class="jk-product-grid">
+  {% if template.name == 'collection' and grid_collection != blank %}
+    {% liquid
+      assign active_filter_count = 0
+      assign current_sort = collection.sort_by | default: collection.default_sort_by
+      for filter in collection.filters
+        assign active_filter_count = active_filter_count | plus: filter.active_values.size
+        if filter.type == 'price_range'
+          if filter.min_value.value != blank or filter.max_value.value != blank
+            assign active_filter_count = active_filter_count | plus: 1
+          endif
+        endif
+      endfor
+    %}
+
+    <div class="jk-collection-shop" data-collection-shop>
+      <div class="jk-collection-toolbar">
+        <div class="jk-collection-toolbar__summary">
+          <button type="button" class="jk-filter-toggle" data-collection-filter-open aria-controls="CollectionFiltersPanel-{{ section.id }}" aria-expanded="false">
+            Filters{% if active_filter_count > 0 %} · {{ active_filter_count }}{% endif %}
+          </button>
+          <span data-collection-count>{{ collection.products_count }} {% if collection.products_count == 1 %}design{% else %}designs{% endif %}</span>
+        </div>
+
+        <label class="jk-collection-sort" for="CollectionSort-{{ section.id }}">
+          <span>Sort</span>
+          <select id="CollectionSort-{{ section.id }}" name="sort_by" form="CollectionFiltersForm-{{ section.id }}" data-collection-sort>
+            {% for sort_option in collection.sort_options %}
+              <option value="{{ sort_option.value }}" {% if sort_option.value == current_sort %}selected{% endif %}>{{ sort_option.name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+      </div>
+
+      {% if active_filter_count > 0 %}
+        <div class="jk-active-filters" aria-label="Active filters">
+          {% for filter in collection.filters %}
+            {% for active_value in filter.active_values %}
+              <a class="jk-filter-chip" href="{{ active_value.url_to_remove }}">{{ filter.label }}: {{ active_value.label }} <span aria-hidden="true">×</span></a>
+            {% endfor %}
+            {% if filter.type == 'price_range' %}
+              {% if filter.min_value.value != blank or filter.max_value.value != blank %}
+                <a class="jk-filter-chip" href="{{ filter.url_to_remove }}">
+                  {{ filter.label }}:
+                  {% if filter.min_value.value != blank %}{{ filter.min_value.value | money }}{% else %}{{ 0 | money }}{% endif %}
+                  –
+                  {% if filter.max_value.value != blank %}{{ filter.max_value.value | money }}{% else %}{{ filter.range_max | money }}{% endif %}
+                  <span aria-hidden="true">×</span>
+                </a>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          <a class="jk-filter-reset" href="{{ collection.url }}">Reset filters</a>
+        </div>
+      {% endif %}
+
+      <div class="jk-collection-shop__layout">
+        <div class="jk-collection-filter-backdrop" data-collection-filter-close></div>
+        <aside id="CollectionFiltersPanel-{{ section.id }}" class="jk-collection-filters" data-collection-filter-drawer aria-label="Collection filters">
+          <div class="jk-collection-filters__header">
+            <div>
+              <p class="jk-eyebrow">Refine</p>
+              <h2>Filters</h2>
+            </div>
+            <button type="button" class="jk-filter-close" data-collection-filter-close aria-label="Close filters">×</button>
+          </div>
+
+          <form id="CollectionFiltersForm-{{ section.id }}" class="jk-collection-filters__form" action="{{ collection.url }}" method="get" data-collection-filter-form>
+            {% if collection.filters.size > 0 %}
+              {% for filter in collection.filters %}
+                <details class="jk-filter-group-panel" open>
+                  <summary>
+                    <span>{{ filter.label }}</span>
+                    {% if filter.active_values.size > 0 %}
+                      <em>{{ filter.active_values.size }}</em>
+                    {% endif %}
+                  </summary>
+
+                  <div class="jk-filter-group-panel__content">
+                    {% case filter.type %}
+                      {% when 'boolean', 'list' %}
+                        {% for filter_value in filter.values %}
+                          {% assign filter_input_id = 'Filter-' | append: section.id | append: '-' | append: filter.param_name | append: '-' | append: forloop.index | handleize %}
+                          <label class="jk-filter-option" for="{{ filter_input_id }}">
+                            <input
+                              id="{{ filter_input_id }}"
+                              type="checkbox"
+                              name="{{ filter_value.param_name }}"
+                              value="{{ filter_value.value }}"
+                              {% if filter_value.active %}checked{% endif %}
+                              {% if filter_value.count == 0 and filter_value.active == false %}disabled{% endif %}
+                            >
+                            <span>{{ filter_value.label }}</span>
+                            <small>{{ filter_value.count }}</small>
+                          </label>
+                        {% endfor %}
+                      {% when 'price_range' %}
+                        <div class="jk-filter-price">
+                          <label>
+                            <span>Min</span>
+                            <input
+                              type="number"
+                              min="0"
+                              inputmode="numeric"
+                              name="{{ filter.min_value.param_name }}"
+                              {% if filter.min_value.value != blank %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                              placeholder="{{ 0 | money_without_currency | replace: ',', '' }}"
+                            >
+                          </label>
+                          <label>
+                            <span>Max</span>
+                            <input
+                              type="number"
+                              min="0"
+                              inputmode="numeric"
+                              name="{{ filter.max_value.param_name }}"
+                              {% if filter.max_value.value != blank %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                              placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            >
+                          </label>
+                        </div>
+                    {% endcase %}
+                  </div>
+                </details>
+              {% endfor %}
+            {% else %}
+              <div class="jk-filter-empty">
+                <p class="jk-eyebrow">Shopify filters</p>
+                <p>Enable filters such as metal, style, stone shape, setting, price, carat, ring size, and availability in Shopify Search & Discovery.</p>
+              </div>
+            {% endif %}
+
+            <div class="jk-collection-filters__actions">
+              <button type="submit" class="jk-button jk-button--primary">Apply filters</button>
+              <a class="jk-button jk-button--secondary" href="{{ collection.url }}">Reset filters</a>
+            </div>
+          </form>
+        </aside>
+
+        <div class="jk-collection-products">
+          {% paginate collection.products by section.settings.product_limit %}
+            <div class="jk-product-grid jk-product-grid--collection">
+              {% if collection.products.size > 0 %}
+                {% for product in collection.products %}
+                  <article class="jk-product-card{% unless product.available %} jk-product-card--sold-out{% endunless %}">
+                    <a class="jk-product-card__media" href="{{ product.url }}">
+                      {% if product.featured_media != blank %}
+                        {{ product.featured_media | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 1280px) 25vw, (min-width: 760px) 33vw, 100vw', alt: product.featured_media.alt | default: product.title }}
+                      {% elsif section.settings.fallback_product_image != blank %}
+                        {% assign fallback_product_alt = section.settings.fallback_product_image_alt | default: product.title %}
+                        {{ section.settings.fallback_product_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 1280px) 25vw, (min-width: 760px) 33vw, 100vw', alt: fallback_product_alt }}
+                      {% else %}
+                        <span class="jk-product-placeholder" aria-hidden="true"></span>
+                      {% endif %}
+                      {% unless product.available %}
+                        <span class="jk-product-card__status">{{ 'products.product.sold_out' | t }}</span>
+                      {% endunless %}
+                      <span class="jk-product-card__quick">View details</span>
+                    </a>
+                    <div class="jk-product-card__content">
+                      {% if product.type != blank %}
+                        <p class="jk-product-card__meta">{{ product.type }}</p>
+                      {% endif %}
+                      <h2 class="jk-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h2>
+                      <p class="jk-product-card__price">
+                        {% if product.price_varies %}
+                          {{ 'products.product.from_price_html' | t: price: product.price_min | money }}
+                        {% else %}
+                          {{ product.price | money }}
+                        {% endif %}
+                      </p>
+                      <a class="jk-product-card__action" href="{{ product.url }}">Select details</a>
+                    </div>
+                  </article>
+                {% endfor %}
+              {% else %}
+                <div class="jk-collection-empty">
+                  <p class="jk-eyebrow">No designs found</p>
+                  <h2>Try a softer filter combination</h2>
+                  <p>Reset filters or widen your metal, style, stone shape, carat, or price preferences.</p>
+                  <a class="jk-button jk-button--secondary" href="{{ collection.url }}">Reset filters</a>
+                </div>
+              {% endif %}
+            </div>
+
+            {% if paginate.pages > 1 %}
+              <nav class="jk-pagination" aria-label="Collection pagination">
+                {{ paginate | default_pagination }}
+              </nav>
+            {% endif %}
+          {% endpaginate %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="jk-product-grid">
     {% if grid_collection != blank and grid_collection.products_count > 0 %}
       {% for product in grid_collection.products limit: section.settings.product_limit %}
         <article class="jk-product-card{% unless product.available %} jk-product-card--sold-out{% endunless %}">
@@ -112,6 +306,9 @@
             <span class="jk-product-card__quick">View piece</span>
           </a>
           <div class="jk-product-card__content">
+            {% if product.type != blank %}
+              <p class="jk-product-card__meta">{{ product.type }}</p>
+            {% endif %}
             <h2 class="jk-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h2>
             <p class="jk-product-card__price">
               {% if product.price_varies %}
@@ -163,6 +360,7 @@
       {% endfor %}
     {% endif %}
   </div>
+  {% endif %}
 </section>
 
 {% schema %}
