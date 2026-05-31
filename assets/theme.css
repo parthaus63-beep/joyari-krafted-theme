@@ -8107,6 +8107,9 @@ button[name="add"]:focus-visible {
   }
 
   .jk-hero {
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
     min-height: 674px;
     padding: 88px 14px 34px;
   }
@@ -8122,7 +8125,8 @@ button[name="add"]:focus-visible {
 
   .jk-hero__content {
     width: 100%;
-    max-width: 100%;
+    max-width: calc(100vw - 28px);
+    min-width: 0;
   }
 
   .jk-hero__content h1,
@@ -8138,14 +8142,59 @@ button[name="add"]:focus-visible {
   .jk-hero__copy,
   .jk-section__header > p:not(.jk-eyebrow) {
     max-width: 100%;
+    min-width: 0;
+    overflow-wrap: break-word;
   }
 
   .jk-hero__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
     width: 100%;
+    max-width: 100%;
   }
 
   .jk-hero__actions .jk-button {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .jk-hero__trust {
+    max-width: 100%;
+    min-width: 0;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .jk-hero__trust p {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  .jk-hero__caption {
+    left: 14px;
+    right: 14px;
+    width: auto;
+    max-width: calc(100vw - 28px);
+  }
+
+  .jk-section__header,
+  .jk-section__header--split {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .jk-section__header > div {
+    min-width: 0;
+  }
+
+  .jk-section__header .jk-text-link,
+  .jk-section__header--split .jk-text-link {
+    max-width: 100%;
+    overflow-wrap: break-word;
   }
 
   .jk-section,
