@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "round_oval": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Brilliance",
+            "title": "Round and oval",
+            "text": "Round diamonds feel classic and bright, while oval diamonds create elongated presence with a softer romantic line."
+          }
+        },
+        "emerald_cushion": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Proportion",
+            "title": "Emerald and cushion",
+            "text": "Emerald cuts feel architectural and calm; cushion cuts bring a softer antique-inspired brilliance."
+          }
+        },
+        "pear_marquise": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Silhouette",
+            "title": "Pear, marquise, princess, and radiant",
+            "text": "Distinctive cuts create a more personal silhouette, from directional pear and marquise shapes to crisp princess and radiant sparkle."
+          }
+        }
+      },
+      "block_order": ["round_oval", "emerald_cushion", "pear_marquise"],
+      "settings": {
+        "eyebrow": "Diamond shape guide",
+        "heading": "Choose the diamond shape that feels like you",
+        "subheading": "Shape changes the character of a ring: brilliance, finger coverage, proportion, and the emotional mood of the piece.",
+        "primary_label": "Design Your Ring",
+        "primary_link": "/pages/custom-design",
+        "secondary_label": "Explore Rings",
+        "secondary_link": "/collections/engagement-rings",
+        "cta_heading": "Need help comparing shapes?",
+        "cta_text": "Joyari can help shortlist shapes by hand profile, setting style, and the kind of brilliance you love.",
+        "cta_label": "Book Shape Guidance",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

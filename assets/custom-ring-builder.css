@@ -1372,7 +1372,7 @@
 }
 
 .jkrb[data-current-metal="white-gold"] .jkrb-ring-visual__band {
-  border-color: #ddd9cd;
+  border-color: rgba(198, 167, 105, .42);
 }
 
 .jkrb[data-current-metal="rose-gold"] .jkrb-ring-visual__band {

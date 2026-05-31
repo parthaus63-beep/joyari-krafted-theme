@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "brief": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Brief",
+            "title": "Share the feeling first",
+            "text": "Shape, metal, stone size, setting inspiration, timing, and budget help the design pathway begin clearly."
+          }
+        },
+        "refine": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Refine",
+            "title": "Balance stone and setting",
+            "text": "A beautiful custom ring depends on proportion, profile, comfort, diamond choice, and how the piece will be worn."
+          }
+        },
+        "confirm": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Confirm",
+            "title": "Approve the details",
+            "text": "Final notes may include ring size, engraving, metal, certificate details, delivery timeline, and presentation."
+          }
+        }
+      },
+      "block_order": ["brief", "refine", "confirm"],
+      "settings": {
+        "eyebrow": "Custom design guide",
+        "heading": "A private path to a personal ring",
+        "subheading": "Understand the decisions that shape a custom engagement ring before beginning your Joyari design journey.",
+        "primary_label": "Start Custom Design",
+        "primary_link": "/pages/custom-design",
+        "secondary_label": "Book Consultation",
+        "secondary_link": "/pages/contact",
+        "cta_heading": "Ready to design privately?",
+        "cta_text": "Share the shape, metal, carat range, and design mood you have in mind. Joyari will guide the next step.",
+        "cta_label": "Request Custom Design",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "platinum": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Cool white",
+            "title": "Platinum",
+            "text": "Platinum feels substantial, naturally white, and enduring for engagement rings made for daily wear."
+          }
+        },
+        "yellow_white": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "18K gold",
+            "title": "Yellow and white gold",
+            "text": "18K yellow gold brings a rich champagne warmth; 18K white gold keeps the look crisp and luminous."
+          }
+        },
+        "rose": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Warm blush",
+            "title": "Rose gold",
+            "text": "Rose gold adds a romantic warmth that can soften modern settings and vintage-inspired silhouettes."
+          }
+        }
+      },
+      "block_order": ["platinum", "yellow_white", "rose"],
+      "settings": {
+        "eyebrow": "Metal guide",
+        "heading": "Choose the tone that frames your diamond",
+        "subheading": "Metal changes the entire mood of a ring, from platinum restraint to the warmth of 18K yellow or rose gold.",
+        "primary_label": "Explore Engagement Rings",
+        "primary_link": "/collections/engagement-rings",
+        "secondary_label": "Ask About Metals",
+        "secondary_link": "/pages/contact",
+        "cta_heading": "Unsure which metal suits your stone?",
+        "cta_text": "Tell us your preferred diamond shape, skin tone preference, and wear habits. We will guide the metal choice.",
+        "cta_label": "Ask Joyari",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

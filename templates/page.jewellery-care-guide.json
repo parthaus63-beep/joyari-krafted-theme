@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "cleaning": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Cleaning",
+            "title": "Keep brilliance clear",
+            "text": "Gentle cleaning and routine checks help remove daily residue and keep diamond sparkle visible."
+          }
+        },
+        "storage": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Storage",
+            "title": "Protect the surface",
+            "text": "Store jewellery separately to reduce rubbing, scratches, and unnecessary wear on polished surfaces."
+          }
+        },
+        "inspection": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Inspection",
+            "title": "Review claws and settings",
+            "text": "Periodic inspection keeps stones secure and helps identify wear before it becomes a concern."
+          }
+        }
+      },
+      "block_order": ["cleaning", "storage", "inspection"],
+      "settings": {
+        "eyebrow": "Jewellery care guide",
+        "heading": "Care for the piece that marks the moment",
+        "subheading": "Simple cleaning, storage, and inspection habits help fine jewellery stay bright and secure.",
+        "primary_label": "Ask About Aftercare",
+        "primary_link": "/pages/contact",
+        "secondary_label": "Explore Jewellery",
+        "secondary_link": "/collections/all",
+        "cta_heading": "Need care advice for a Joyari piece?",
+        "cta_text": "Our team can guide cleaning, storage, inspection, resizing, and warranty support.",
+        "cta_label": "Contact Aftercare",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

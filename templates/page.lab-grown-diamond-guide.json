@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "origin": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Origin",
+            "title": "Modern diamond growth",
+            "text": "Lab-grown diamonds are created through advanced technology and share the optical beauty clients expect from fine diamond jewellery."
+          }
+        },
+        "selection": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Selection",
+            "title": "Brilliance still matters",
+            "text": "Cut quality, proportions, polish, symmetry, colour, clarity, and certification remain important when comparing stones."
+          }
+        },
+        "confidence": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Confidence",
+            "title": "Documentation and guidance",
+            "text": "Certification details help clients compare stones clearly and choose with calm confidence."
+          }
+        }
+      },
+      "block_order": ["origin", "selection", "confidence"],
+      "settings": {
+        "eyebrow": "Lab-grown diamond guide",
+        "heading": "Traceable brilliance for modern fine jewellery",
+        "subheading": "Understand how lab-grown diamonds are selected, compared, certified, and paired with Joyari settings.",
+        "primary_label": "Browse Loose Diamonds",
+        "primary_link": "/collections/loose-diamonds",
+        "secondary_label": "Design Your Ring",
+        "secondary_link": "/pages/custom-design",
+        "cta_heading": "Want a shortlist of stones?",
+        "cta_text": "Share your shape, carat range, and preferred colour or clarity. Joyari can help narrow the search.",
+        "cta_label": "Request Diamond Guidance",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

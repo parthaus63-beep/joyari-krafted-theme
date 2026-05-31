@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "setting": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Setting",
+            "title": "Start with the silhouette",
+            "text": "Solitaire, hidden halo, halo, trilogy, and vintage-inspired settings each create a different emotional presence."
+          }
+        },
+        "wear": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Wearability",
+            "title": "Consider daily comfort",
+            "text": "Profile height, band width, claw style, and wedding-band pairing all influence how the ring feels every day."
+          }
+        },
+        "journey": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Journey",
+            "title": "Choose with calm confidence",
+            "text": "A good engagement ring journey balances emotion, diamond confidence, production timing, and aftercare."
+          }
+        }
+      },
+      "block_order": ["setting", "wear", "journey"],
+      "settings": {
+        "eyebrow": "Engagement ring guide",
+        "heading": "A calmer way to choose the ring",
+        "subheading": "Learn how setting style, diamond shape, metal tone, profile, and daily wear come together in one meaningful piece.",
+        "primary_label": "Explore Engagement Rings",
+        "primary_link": "/collections/engagement-rings",
+        "secondary_label": "Design Your Ring",
+        "secondary_link": "/pages/custom-design",
+        "cta_heading": "Planning a proposal?",
+        "cta_text": "Tell us the style, timeline, and stone preference. Joyari can help shape the next decision.",
+        "cta_label": "Book Proposal Guidance",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

@@ -1,0 +1,221 @@
+{% liquid
+  assign hero_alt = section.settings.hero_image_alt | default: section.settings.heading
+%}
+
+<section class="jk-education-guide">
+  <div class="jk-education-guide__hero">
+    <div class="jk-education-guide__copy">
+      {% if section.settings.eyebrow != blank %}
+        <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h1>{{ section.settings.heading }}</h1>
+      {% if section.settings.subheading != blank %}
+        <p>{{ section.settings.subheading }}</p>
+      {% endif %}
+      {% if section.settings.primary_label != blank or section.settings.secondary_label != blank %}
+        <div class="jk-education-guide__actions">
+          {% if section.settings.primary_label != blank %}
+            <a class="jk-button jk-button--primary" href="{{ section.settings.primary_link | default: '/pages/contact' }}">{{ section.settings.primary_label }}</a>
+          {% endif %}
+          {% if section.settings.secondary_label != blank %}
+            <a class="jk-button jk-button--secondary" href="{{ section.settings.secondary_link | default: '/collections/engagement-rings' }}">{{ section.settings.secondary_label }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="jk-education-guide__media">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '720, 1000, 1300, 1600, 1800', sizes: '(min-width: 990px) 48vw, 100vw', alt: hero_alt }}
+      {% else %}
+        <span class="jk-guide-visual jk-guide-visual--hero" aria-hidden="true"></span>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    <div class="jk-education-guide__grid">
+      {% for block in section.blocks %}
+        {% assign card_alt = block.settings.image_alt | default: block.settings.title %}
+        <article class="jk-education-guide-card" {{ block.shopify_attributes }}>
+          <div class="jk-education-guide-card__media">
+            {% if block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 520, 720, 900', sizes: '(min-width: 990px) 32vw, 100vw', alt: card_alt }}
+            {% else %}
+              <span class="jk-guide-visual jk-guide-visual--{{ forloop.index }}" aria-hidden="true"></span>
+            {% endif %}
+          </div>
+          <div class="jk-education-guide-card__content">
+            {% if block.settings.eyebrow != blank %}
+              <p class="jk-card-badge">{{ block.settings.eyebrow }}</p>
+            {% endif %}
+            <h2>{{ block.settings.title }}</h2>
+            <p>{{ block.settings.text }}</p>
+            {% if block.settings.link_label != blank %}
+              <a class="jk-text-link" href="{{ block.settings.link | default: '/pages/contact' }}">{{ block.settings.link_label }}</a>
+            {% endif %}
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="jk-education-guide__cta">
+    <p class="jk-eyebrow">{{ section.settings.cta_eyebrow }}</p>
+    <h2>{{ section.settings.cta_heading }}</h2>
+    <p>{{ section.settings.cta_text }}</p>
+    <a class="jk-button jk-button--primary" href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label }}</a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Education guide",
+  "tag": "section",
+  "class": "shopify-section--education-guide",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Joyari education"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A refined guide to choosing fine jewellery"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Clear, calm guidance for diamonds, metals, sizing, care, and custom design decisions."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Joyari Krafted education guide"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Book Private Guidance"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Explore Engagement Rings"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_eyebrow",
+      "label": "CTA eyebrow",
+      "default": "Need guidance?"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Choose with confidence"
+    },
+    {
+      "type": "textarea",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Our team can help compare stones, metals, proportions, ring size, care needs, and custom design details."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA button label",
+      "default": "Contact Joyari"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "guide_item",
+      "name": "Guide item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Guide"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Understand the detail"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "A concise explanation that helps clients make a confident jewellery decision."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Guide image"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Education guide",
+      "blocks": [
+        {
+          "type": "guide_item"
+        },
+        {
+          "type": "guide_item"
+        },
+        {
+          "type": "guide_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

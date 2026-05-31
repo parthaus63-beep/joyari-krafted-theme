@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "timing": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Measure well",
+            "title": "Measure at the end of the day",
+            "text": "Fingers are often slightly larger later in the day. Avoid measuring when hands are cold."
+          }
+        },
+        "band": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Band profile",
+            "title": "Consider band width",
+            "text": "Wider bands can feel firmer and may need a half size up for comfort."
+          }
+        },
+        "between": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Fit",
+            "title": "If between sizes, choose larger",
+            "text": "A ring should slide over the knuckle with gentle resistance and sit comfortably once in place."
+          }
+        }
+      },
+      "block_order": ["timing", "band", "between"],
+      "settings": {
+        "eyebrow": "Ring size guide",
+        "heading": "Find a comfortable, confident fit",
+        "subheading": "A refined fit considers temperature, timing, band width, knuckle shape, and how the ring will be worn every day.",
+        "primary_label": "Book Sizing Help",
+        "primary_link": "/pages/contact",
+        "secondary_label": "Explore Rings",
+        "secondary_link": "/collections/engagement-rings",
+        "cta_heading": "Need help choosing a size?",
+        "cta_text": "Joyari can guide sizing before production and note fit preferences with your custom request.",
+        "cta_label": "Request Sizing Guidance",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

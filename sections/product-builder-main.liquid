@@ -123,9 +123,9 @@
               <p class="jk-product-short-description">{{ product_summary }}</p>
             {% endif %}
 
-            <div class="jk-product-review-placeholder" aria-label="Client review placeholder">
-              <span class="jk-product-review-placeholder__stars" aria-hidden="true">Reviews</span>
-              <span>Client reviews coming soon</span>
+            <div class="jk-product-review-placeholder" aria-label="Private product guidance">
+              <span class="jk-product-review-placeholder__stars" aria-hidden="true">Private guidance</span>
+              <span>One-to-one support for sizing, stone selection, and design details.</span>
             </div>
 
             <div class="jk-product-metal-palette" aria-label="Available metal tones">
@@ -239,7 +239,7 @@
                 <fieldset class="jk-option-fieldset jk-option-fieldset--shape">
                   <legend>Diamond shape selector</legend>
                   <div class="jk-shape-row">
-                    {% assign shapes = 'Round,Oval,Emerald,Pear,Cushion' | split: ',' %}
+                    {% assign shapes = 'Round,Oval,Emerald,Pear,Cushion,Princess,Marquise,Radiant' | split: ',' %}
                     {% for shape in shapes %}
                       {% assign shape_id = 'DiamondShapePreference-' | append: section.id | append: '-' | append: shape | handleize %}
                       <input id="{{ shape_id }}" type="radio" name="properties[Diamond Shape]" value="{{ shape | escape }}" {% if forloop.first %}checked{% endif %}>
@@ -364,7 +364,7 @@
         {% if product.description != blank %}
           {{ product.description }}
         {% else %}
-          <p>Use this space for diamond specifications, metal details, setting notes, certification information, and the story behind the piece.</p>
+          <p>This Joyari Krafted piece is presented with attention to diamond presence, metal finish, comfort, and long-term wear. Contact our team for stone documentation, setting guidance, and customisation details before ordering.</p>
         {% endif %}
       </div>
     </div>

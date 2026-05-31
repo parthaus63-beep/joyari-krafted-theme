@@ -2,7 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'joyariSelectedDiamond';
-  var UNAVAILABLE_MESSAGE = 'Diamond inventory is temporarily unavailable. Please contact us for live diamond options.';
+  var UNAVAILABLE_MESSAGE = 'Please contact us for live diamond options from our private stone network.';
   var FALLBACK_LOADED_MESSAGE = 'Certified diamond inventory loaded from Joyari secure feed.';
   var SCRIPT_SRC = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
 
@@ -249,7 +249,7 @@
     grid.textContent = '';
     var empty = document.createElement('div');
     empty.className = 'jk-diamond-empty jk-diamond-empty--unavailable';
-    empty.innerHTML = '<p class="jk-diamond-select__eyebrow">Live inventory unavailable</p><h3>Diamond inventory is temporarily unavailable</h3><p>Please contact us for live diamond options.</p>';
+    empty.innerHTML = '<p class="jk-diamond-select__eyebrow">Private diamond concierge</p><h3>Contact us for live diamond options</h3><p>Our team can share current certified stones from the Joyari network and guide your selection personally.</p>';
     grid.appendChild(empty);
   }
 

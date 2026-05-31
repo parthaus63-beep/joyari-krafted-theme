@@ -1,0 +1,48 @@
+{
+  "sections": {
+    "guide": {
+      "type": "education-guide",
+      "blocks": {
+        "cut": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Cut",
+            "title": "The life of the diamond",
+            "text": "Cut and proportion influence brightness, fire, scintillation, and how lively the diamond feels in motion."
+          }
+        },
+        "colour_clarity": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Colour and clarity",
+            "title": "Balance beauty and value",
+            "text": "Colour and clarity are compared in context with shape, size, setting, and the eye-visible beauty of the stone."
+          }
+        },
+        "carat": {
+          "type": "guide_item",
+          "settings": {
+            "eyebrow": "Carat",
+            "title": "Presence, not just weight",
+            "text": "Carat affects size, but shape and spread determine how much presence the stone has on the hand."
+          }
+        }
+      },
+      "block_order": ["cut", "colour_clarity", "carat"],
+      "settings": {
+        "eyebrow": "Diamond 4Cs guide",
+        "heading": "Understand cut, colour, clarity, and carat",
+        "subheading": "The best diamond choice balances technical details with the way the stone looks, feels, and wears.",
+        "primary_label": "Browse Diamonds",
+        "primary_link": "/collections/loose-diamonds",
+        "secondary_label": "Book Guidance",
+        "secondary_link": "/pages/contact",
+        "cta_heading": "Compare diamonds with a specialist",
+        "cta_text": "Joyari can help you read diamond details and choose a stone that feels luminous, balanced, and right for the setting.",
+        "cta_label": "Compare With Joyari",
+        "cta_link": "/pages/contact"
+      }
+    }
+  },
+  "order": ["guide"]
+}

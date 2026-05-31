@@ -75,7 +75,7 @@
         "c1": {
           "type": "collection_card",
           "settings": {
-            "collection": "engagement-ring",
+            "collection": "engagement-rings",
             "image": "shopify://shop_images/02_engagement_rings.png",
             "image_alt": "",
             "title": "Engagement Rings",
@@ -138,17 +138,17 @@
       "settings": {
         "eyebrow": "The Joyari feeling",
         "heading": "A visual world for the moment, the craft, and the reveal",
-        "subheading": "Large cinematic panels give the homepage a more emotional luxury rhythm while your final imagery is still being prepared.",
+        "subheading": "Cinematic proposal, atelier, and presentation panels give the homepage an emotional luxury rhythm.",
         "proposal_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_21_56_PM.png",
         "proposal_image_alt": "Joyari Krafted proposal moment",
         "proposal_eyebrow": "Proposal story",
         "proposal_heading": "Designed for the moment everything changes",
-        "proposal_text": "A place for ring-on-hand, proposal, or couple imagery that helps clients picture the jewellery in real life.",
+        "proposal_text": "Ring-on-hand and proposal moments help clients picture the jewellery in the life they are building.",
         "craftsmanship_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_23_35_PM.png",
         "craftsmanship_image_alt": "Joyari Krafted atelier craftsmanship",
         "craftsmanship_eyebrow": "Atelier detail",
         "craftsmanship_heading": "Every proportion is considered",
-        "craftsmanship_text": "Use atelier, stone, bench, or finishing imagery to communicate quiet precision.",
+        "craftsmanship_text": "Atelier, stone, bench, and finishing details communicate quiet precision.",
         "packaging_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_24_34_PM.png",
         "packaging_image_alt": "Joyari Krafted packaging and certificate",
         "packaging_eyebrow": "Presentation",
@@ -169,11 +169,11 @@
         "collection_intro_image_alt": "Joyari Krafted collection editorial image",
         "collection_intro_eyebrow": "The edit",
         "collection_intro_heading": "Designed to feel refined from every angle",
-        "collection_intro_text": "Use this visual space for campaign imagery, ring-on-hand detail, or a close-up that explains the mood of the collection.",
+        "collection_intro_text": "Campaign imagery, ring-on-hand detail, and close-up stone moments establish the mood of the collection.",
         "collection_lifestyle_image_alt": "Joyari Krafted luxury lifestyle image",
         "collection_lifestyle_eyebrow": "How it wears",
         "collection_lifestyle_heading": "Fine jewellery made for real moments",
-        "collection_lifestyle_text": "Add lifestyle, proposal, packaging, or editorial imagery to make collection pages feel immersive before the product grid begins.",
+        "collection_lifestyle_text": "Lifestyle, proposal, packaging, and editorial imagery make the collection feel immersive before the product grid begins.",
         "fallback_product_image_alt": "Joyari Krafted diamond jewellery",
         "placeholder_image_1_alt": "",
         "placeholder_image_2_alt": "",
@@ -298,7 +298,7 @@
       "settings": {
         "eyebrow": "The Joyari world",
         "heading": "A visual language for modern diamond luxury",
-        "subheading": "Upload editorial imagery for bridal, diamond, proposal, atelier, and packaging moments."
+        "subheading": "Editorial moments across bridal, diamond, proposal, atelier, and packaging details create a complete luxury world."
       }
     },
     "trust_faq": {
@@ -386,7 +386,7 @@
             "image_alt": "",
             "eyebrow": "Proposal notes",
             "title": "Planning the reveal",
-            "text": "A place for proposal styling, ring-on-hand imagery, and thoughtful milestone guidance."
+            "text": "Proposal styling, ring-on-hand imagery, and thoughtful milestone guidance."
           }
         },
         "j3": {
@@ -395,7 +395,7 @@
             "image_alt": "",
             "eyebrow": "Atelier",
             "title": "Behind the polish",
-            "text": "Show craftsmanship, packaging, certification, and care-led details in an editorial way."
+            "text": "Craftsmanship, packaging, certification, and care-led details told in an editorial way."
           }
         }
       },
@@ -448,10 +448,6 @@
         "heading": "Luxury should feel certain",
         "subheading": "Clear timelines, considered materials, and a support-led buying experience for meaningful jewellery."
       }
-    },
-    "177975965951474988": {
-      "type": "apps",
-      "settings": {}
     }
   },
   "order": [
@@ -467,7 +463,6 @@
     "trust_faq",
     "testimonials",
     "journal",
-    "trust_badges",
-    "177975965951474988"
+    "trust_badges"
   ]
 }
