@@ -23,6 +23,13 @@
   endif
 %}
 
+{%- comment -%}
+  Loads Shopify's versioned stylesheet from the header as a storefront-safe fallback.
+  The layout also uses the versioned asset, but older fixed CSS links can linger in
+  Shopify's storefront cache briefly after GitHub sync.
+{%- endcomment -%}
+{{ 'theme.css' | asset_url | stylesheet_tag }}
+
 {% if section.settings.show_announcement and settings.announcement_text != blank %}
   <div class="jk-announcement" role="status">
     <span>{{ settings.announcement_text }}</span>
