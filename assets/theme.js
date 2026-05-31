@@ -685,9 +685,13 @@
 
       function getSelectedFilters() {
         var groups = {};
+        var seen = {};
         root.querySelectorAll('[data-client-filter]:checked').forEach(function (input) {
           var group = input.getAttribute('data-filter-group') || 'general';
           var mode = input.getAttribute('data-filter-mode') || 'text';
+          var selectedKey = group + '::' + input.value;
+          if (seen[selectedKey]) return;
+          seen[selectedKey] = true;
           if (!groups[group]) groups[group] = [];
           groups[group].push({
             label: input.value,

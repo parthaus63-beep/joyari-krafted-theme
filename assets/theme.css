@@ -7490,7 +7490,10 @@ body.jk-filter-lock {
 
   .jk-collection-filters {
     position: fixed !important;
-    inset: 0 auto 0 0;
+    top: 0 !important;
+    right: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
     z-index: 2147482001;
     display: flex !important;
     flex-direction: column;
@@ -7509,7 +7512,7 @@ body.jk-filter-lock {
   }
 
   .jk-collection-filters.is-open {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0) !important;
   }
 
   .jk-collection-filters__header,
