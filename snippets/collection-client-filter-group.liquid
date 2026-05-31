@@ -1,0 +1,50 @@
+{% liquid
+  assign entries_array = entries | split: ';;'
+  assign mode_prefix = mode | default: 'desktop'
+  assign group_type = group_type | default: 'text'
+  assign group_key = group_key | default: label | handleize
+%}
+
+<details class="jk-filter-dropdown jk-filter-dropdown--{{ mode_prefix }}" data-filter-dropdown>
+  <summary>
+    <span>{{ label }}</span>
+    <em data-filter-summary-count="{{ group_key }}"></em>
+  </summary>
+
+  <div class="jk-filter-dropdown__panel">
+    {% if group_type == 'price' %}
+      <div class="jk-filter-price jk-filter-price--client">
+        <label>
+          <span>Min</span>
+          <input type="number" inputmode="numeric" min="0" placeholder="0" data-client-price-min>
+        </label>
+        <label>
+          <span>Max</span>
+          <input type="number" inputmode="numeric" min="0" placeholder="No limit" data-client-price-max>
+        </label>
+      </div>
+    {% else %}
+      <fieldset class="jk-filter-option-set">
+        <legend class="visually-hidden">{{ label }}</legend>
+        {% for entry in entries_array %}
+          {% assign entry_parts = entry | split: '::' %}
+          {% assign option_label = entry_parts[0] | strip %}
+          {% assign option_terms = entry_parts[1] | default: option_label | strip %}
+          {% assign option_id = 'ClientFilter-' | append: section_id | append: '-' | append: mode_prefix | append: '-' | append: group_key | append: '-' | append: option_label | handleize %}
+          <label class="jk-filter-option jk-filter-option--client" for="{{ option_id }}">
+            <input
+              id="{{ option_id }}"
+              type="checkbox"
+              value="{{ option_label | escape }}"
+              data-client-filter
+              data-filter-group="{{ group_key }}"
+              data-filter-mode="{{ group_type }}"
+              data-filter-terms="{{ option_terms | escape }}"
+            >
+            <span>{{ option_label }}</span>
+          </label>
+        {% endfor %}
+      </fieldset>
+    {% endif %}
+  </div>
+</details>

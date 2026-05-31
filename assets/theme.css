@@ -7252,3 +7252,303 @@ body.jk-filter-lock {
     aspect-ratio: 1 / 1.15 !important;
   }
 }
+
+/* Joyari premium collection filter system */
+.jk-collection-shop__layout {
+  display: block !important;
+}
+
+.jk-collection-filterbar {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 0 18px;
+  border-bottom: 1px solid rgba(198, 167, 105, .24);
+}
+
+.jk-collection-filterbar__groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.jk-filter-dropdown {
+  position: relative;
+}
+
+.jk-filter-dropdown > summary {
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid rgba(198, 167, 105, .42);
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: #111111;
+  cursor: pointer;
+  font-size: .8rem;
+  font-weight: 880;
+  text-transform: uppercase;
+  box-shadow: 0 10px 28px rgba(17, 17, 17, .04);
+  transition: background .22s var(--jk-ease), border-color .22s var(--jk-ease), box-shadow .22s var(--jk-ease), transform .22s var(--jk-ease);
+}
+
+.jk-filter-dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.jk-filter-dropdown > summary::after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform .22s var(--jk-ease);
+}
+
+.jk-filter-dropdown[open] > summary,
+.jk-filter-dropdown > summary:hover,
+.jk-filter-dropdown > summary:focus-visible {
+  border-color: #C6A769;
+  background: rgba(198, 167, 105, .12);
+  color: #111111;
+  box-shadow: 0 18px 42px rgba(198, 167, 105, .16);
+}
+
+.jk-filter-dropdown[open] > summary::after {
+  transform: rotate(225deg) translate(-2px, -1px);
+}
+
+.jk-filter-dropdown > summary em {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #0F3D2E;
+  color: #FFFFFF;
+  font-style: normal;
+  font-size: .66rem;
+}
+
+.jk-filter-dropdown__panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 60;
+  width: min(370px, calc(100vw - 32px));
+  max-height: min(58vh, 520px);
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid rgba(198, 167, 105, .34);
+  border-radius: 8px;
+  background: #FFFFFF;
+  box-shadow: 0 28px 70px rgba(17, 17, 17, .16);
+  animation: jkFilterPanelReveal .22s var(--jk-ease) both;
+}
+
+.jk-filter-option-set {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.jk-filter-option--client {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid rgba(198, 167, 105, .22);
+  border-radius: 6px;
+  background: #FFFFFF;
+  color: #111111;
+  cursor: pointer;
+  transition: background .2s var(--jk-ease), border-color .2s var(--jk-ease), transform .2s var(--jk-ease);
+}
+
+.jk-filter-option--client:hover,
+.jk-filter-option--client:focus-within {
+  border-color: #C6A769;
+  background: #F8F6F1;
+  transform: translateX(2px);
+}
+
+.jk-filter-option--client input {
+  width: 16px;
+  height: 16px;
+  accent-color: #C6A769;
+}
+
+.jk-filter-option--client input:checked + span {
+  color: #0F3D2E;
+  font-weight: 850;
+}
+
+.jk-filter-price--client input {
+  width: 100%;
+}
+
+.jk-filter-clear {
+  align-self: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid rgba(198, 167, 105, .42);
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: #0F3D2E;
+  font-size: .78rem;
+  font-weight: 880;
+  text-transform: uppercase;
+}
+
+.jk-active-filters {
+  min-height: 0;
+}
+
+.jk-active-filters[hidden],
+.jk-filter-clear[hidden],
+.jk-collection-empty--client[hidden] {
+  display: none !important;
+}
+
+.jk-filter-chip {
+  cursor: pointer;
+}
+
+.jk-product-card.is-filter-hidden {
+  display: none !important;
+}
+
+.jk-collection-filters {
+  display: none;
+}
+
+.jk-collection-filter-backdrop {
+  display: none !important;
+}
+
+@keyframes jkFilterPanelReveal {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 989px) {
+  .jk-collection-filterbar,
+  .jk-collection-sort--desktop {
+    display: none !important;
+  }
+
+  .jk-collection-toolbar {
+    position: sticky;
+    top: var(--jk-dropdown-top, 0);
+    z-index: 40;
+    margin-inline: -4px;
+    padding: 12px 4px;
+    background: rgba(248, 246, 241, .96);
+    backdrop-filter: blur(14px);
+  }
+
+  .jk-collection-toolbar__summary {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .jk-collection-filter-backdrop {
+    position: fixed !important;
+    inset: 0;
+    z-index: 2147482000;
+    display: block !important;
+    background: rgba(17, 17, 17, .44);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .26s var(--jk-ease);
+  }
+
+  .jk-collection-shop.is-filter-open .jk-collection-filter-backdrop {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .jk-collection-filters {
+    position: fixed !important;
+    inset: 0 auto 0 0;
+    z-index: 2147482001;
+    display: flex !important;
+    flex-direction: column;
+    width: min(440px, 94vw);
+    height: 100vh;
+    height: 100dvh;
+    max-height: none !important;
+    padding: 18px;
+    border: 0 !important;
+    border-radius: 0 10px 10px 0;
+    background: #FFFFFF !important;
+    box-shadow: 24px 0 80px rgba(17, 17, 17, .28);
+    overflow: hidden;
+    transform: translateX(-105%);
+    transition: transform .32s var(--jk-slow-ease);
+  }
+
+  .jk-collection-filters.is-open {
+    transform: translateX(0);
+  }
+
+  .jk-collection-filters__header,
+  .jk-collection-sort--mobile,
+  .jk-collection-filters__actions {
+    flex: 0 0 auto;
+  }
+
+  .jk-collection-filters__form {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: auto;
+    padding-right: 4px;
+  }
+
+  .jk-filter-dropdown {
+    border-bottom: 1px solid rgba(198, 167, 105, .18);
+    padding: 8px 0;
+  }
+
+  .jk-filter-dropdown > summary {
+    width: 100%;
+    justify-content: space-between;
+    min-height: 46px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    padding-inline: 0;
+  }
+
+  .jk-filter-dropdown__panel {
+    position: static;
+    width: 100%;
+    max-height: none;
+    padding: 8px 0 12px;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    animation: none;
+  }
+}
