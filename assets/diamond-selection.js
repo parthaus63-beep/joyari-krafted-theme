@@ -2,104 +2,124 @@
   'use strict';
 
   var STORAGE_KEY = 'joyariSelectedDiamond';
+  var UNAVAILABLE_MESSAGE = 'Diamond inventory is temporarily unavailable. Please contact us for live diamond options.';
 
-  var mockDiamonds = [
-    {
-      id: 'mock-round-150-d-vs1-igi',
-      shape: 'Round',
-      carat: 1.5,
-      colour: 'D',
-      clarity: 'VS1',
-      cut: 'Excellent',
-      type: 'Lab Grown',
-      certificateLab: 'IGI',
-      certificateNumber: 'JK-LG-15001',
-      priceLabel: 'Price available after review',
-      budgetGuide: 7800
-    },
-    {
-      id: 'mock-oval-180-e-vvs2-gia',
-      shape: 'Oval',
-      carat: 1.8,
-      colour: 'E',
-      clarity: 'VVS2',
-      cut: 'Excellent',
-      type: 'Lab Grown',
-      certificateLab: 'GIA',
-      certificateNumber: 'JK-LG-18024',
-      priceLabel: 'Private quote',
-      budgetGuide: 9800
-    },
-    {
-      id: 'mock-emerald-140-f-vs1-gcal',
-      shape: 'Emerald',
-      carat: 1.4,
-      colour: 'F',
-      clarity: 'VS1',
-      cut: 'Ideal',
-      type: 'Lab Grown',
-      certificateLab: 'GCAL',
-      certificateNumber: 'JK-LG-14077',
-      priceLabel: 'Price available after review',
-      budgetGuide: 7200
-    },
-    {
-      id: 'mock-pear-120-d-vvs1-igi',
-      shape: 'Pear',
-      carat: 1.2,
-      colour: 'D',
-      clarity: 'VVS1',
-      cut: 'Excellent',
-      type: 'Natural',
-      certificateLab: 'IGI',
-      certificateNumber: 'JK-NT-12018',
-      priceLabel: 'Private quote',
-      budgetGuide: 11200
-    },
-    {
-      id: 'mock-cushion-205-g-vs2-gia',
-      shape: 'Cushion',
-      carat: 2.05,
-      colour: 'G',
-      clarity: 'VS2',
-      cut: 'Very Good',
-      type: 'Lab Grown',
-      certificateLab: 'GIA',
-      certificateNumber: 'JK-LG-20542',
-      priceLabel: 'Price available after review',
-      budgetGuide: 10400
-    },
-    {
-      id: 'mock-marquise-110-e-vs1-hrd',
-      shape: 'Marquise',
-      carat: 1.1,
-      colour: 'E',
-      clarity: 'VS1',
-      cut: 'Excellent',
-      type: 'Natural',
-      certificateLab: 'HRD',
-      certificateNumber: 'JK-NT-11009',
-      priceLabel: 'Private quote',
-      budgetGuide: 8900
-    }
-  ];
+  var SHAPE_MAP = {
+    RD: 'Round',
+    ROUND: 'Round',
+    OV: 'Oval',
+    OVAL: 'Oval',
+    PR: 'Pear',
+    PEAR: 'Pear',
+    EM: 'Emerald',
+    EMERALD: 'Emerald',
+    CU: 'Cushion',
+    CUSHION: 'Cushion',
+    PS: 'Princess',
+    PRINCESS: 'Princess',
+    MQ: 'Marquise',
+    MARQUISE: 'Marquise',
+    RAD: 'Radiant',
+    RADIANT: 'Radiant',
+    HT: 'Heart',
+    HEART: 'Heart',
+    AS: 'Asscher',
+    ASSCHER: 'Asscher'
+  };
+
+  var CUT_MAP = {
+    EX: 'Excellent',
+    ID: 'Ideal',
+    I: 'Ideal',
+    VG: 'Very Good',
+    GD: 'Good',
+    G: 'Good',
+    FR: 'Fair',
+    N: '-',
+    'N/A': '-'
+  };
+
+  function clean(value, fallback) {
+    if (value === null || value === undefined) return fallback || '';
+    var text = String(value).trim();
+    return text || fallback || '';
+  }
+
+  function parseNumber(value) {
+    if (value === null || value === undefined || value === '') return 0;
+    var number = Number(String(value).replace(/,/g, ''));
+    return Number.isFinite(number) ? number : 0;
+  }
+
+  function titleCase(value) {
+    return clean(value).toLowerCase().replace(/\b\w/g, function (character) {
+      return character.toUpperCase();
+    });
+  }
+
+  function normaliseShape(value) {
+    var key = clean(value).toUpperCase().replace(/\s+/g, '_');
+    return SHAPE_MAP[key] || titleCase(value || 'Round');
+  }
+
+  function normaliseCut(value) {
+    var key = clean(value).toUpperCase();
+    return CUT_MAP[key] || clean(value, '-');
+  }
+
+  function normaliseColour(raw) {
+    var colour = clean(raw.colour || raw.color);
+    var fancy = [
+      clean(raw.fancy_color_intensity),
+      clean(raw.fancy_color_overtone),
+      clean(raw.fancy_color)
+    ].filter(Boolean).join(' ');
+
+    return colour || fancy || '-';
+  }
+
+  function formatPrice(amount) {
+    if (!amount) return 'Price on request';
+    return 'US$' + amount.toLocaleString(undefined, {
+      minimumFractionDigits: amount % 1 ? 2 : 0,
+      maximumFractionDigits: 2
+    });
+  }
 
   function normaliseDiamond(raw) {
+    var price = parseNumber(raw.total_sales_price || raw.price || raw.priceAmount || raw.price_per_cara);
+    var stockId = clean(raw.stock_num || raw.stockNumber || raw.stock_id || raw.id || raw.diamond_id);
+    var certificateNumber = clean(raw.cert_num || raw.certificateNumber || raw.certNumber || raw.certificate, '-');
+    var diamondType = clean(raw.type || raw.origin || raw.DiamondType || raw.treatment, 'Lab Grown');
+    var availability = clean(raw.availability || raw.status, 'Available');
+
     return {
-      id: String(raw.id || raw.diamond_id || raw.stockNumber || raw.certificateNumber || Date.now()),
-      shape: raw.shape || raw.diamondShape || 'Round',
-      carat: Number(raw.carat || raw.caratWeight || raw.size || 0),
-      colour: raw.colour || raw.color || '-',
-      clarity: raw.clarity || '-',
-      cut: raw.cut || raw.cutGrade || '-',
-      type: raw.type || raw.origin || raw.growthType || 'Lab Grown',
-      certificateLab: raw.certificateLab || raw.certLab || raw.lab || '-',
-      certificateNumber: raw.certificateNumber || raw.certNumber || raw.certificate || '-',
-      priceLabel: raw.priceLabel || raw.price_label || 'Price available after review',
-      budgetGuide: Number(raw.budgetGuide || raw.price || raw.priceAmount || 0),
-      imageUrl: raw.imageUrl || raw.image_url || raw.image || '',
-      videoUrl: raw.videoUrl || raw.video_url || raw.video || ''
+      id: String(stockId || certificateNumber || Date.now()),
+      stockId: stockId || '-',
+      shape: normaliseShape(raw.shape || raw.diamondShape),
+      carat: parseNumber(raw.carat || raw.caratWeight || raw.size),
+      colour: normaliseColour(raw),
+      clarity: clean(raw.clarity, '-'),
+      cut: normaliseCut(raw.cut || raw.cutGrade),
+      type: diamondType.toUpperCase() === 'NATURAL' ? 'Natural' : 'Lab Grown',
+      certificateLab: clean(raw.certificateLab || raw.certLab || raw.lab, '-'),
+      certificateNumber: certificateNumber,
+      priceLabel: clean(raw.priceLabel || raw.price_label) || formatPrice(price),
+      budgetGuide: price,
+      imageUrl: clean(raw.imageUrl || raw.image_url || raw.image),
+      videoUrl: clean(raw.videoUrl || raw.video_url || raw.video),
+      certificateUrl: clean(raw.certificateUrl || raw.cert_url || raw.certificate_url),
+      availability: availability
     };
+  }
+
+  function extractDiamonds(payload) {
+    if (Array.isArray(payload)) return payload;
+    if (payload && Array.isArray(payload.diamonds)) return payload.diamonds;
+    if (payload && Array.isArray(payload.results)) return payload.results;
+    if (payload && Array.isArray(payload.data)) return payload.data;
+    if (payload && payload.data && Array.isArray(payload.data.diamonds)) return payload.data.diamonds;
+    return [];
   }
 
   function debounce(fn, wait) {
@@ -115,7 +135,8 @@
 
   function getFilters(form) {
     var formData = new FormData(form);
-    var filters = {
+
+    return {
       shapes: formData.getAll('shape'),
       caratMin: parseFloat(formData.get('carat_min')) || null,
       caratMax: parseFloat(formData.get('carat_max')) || null,
@@ -128,41 +149,22 @@
       priceMax: parseFloat(formData.get('price_max')) || null,
       sort: formData.get('sort') || 'recommended'
     };
-
-    return filters;
   }
 
-  function toQuery(filters) {
-    var params = new URLSearchParams();
-
-    filters.shapes.forEach(function (shape) {
-      params.append('shape', shape);
-    });
-
-    if (filters.caratMin !== null) params.set('carat_min', filters.caratMin);
-    if (filters.caratMax !== null) params.set('carat_max', filters.caratMax);
-    if (filters.colour) params.set('colour', filters.colour);
-    if (filters.clarity) params.set('clarity', filters.clarity);
-    if (filters.cut) params.set('cut', filters.cut);
-    if (filters.type) params.set('type', filters.type);
-    if (filters.certificateLab) params.set('certificate_lab', filters.certificateLab);
-    if (filters.priceMin !== null) params.set('price_min', filters.priceMin);
-    if (filters.priceMax !== null) params.set('price_max', filters.priceMax);
-    if (filters.sort) params.set('sort', filters.sort);
-
-    return params;
+  function includesText(value, expected) {
+    return String(value || '').toLowerCase() === String(expected || '').toLowerCase();
   }
 
-  function filterMockDiamonds(filters) {
-    var results = mockDiamonds.filter(function (diamond) {
-      if (filters.shapes.length && !filters.shapes.includes(diamond.shape)) return false;
+  function filterDiamonds(diamonds, filters) {
+    var results = diamonds.filter(function (diamond) {
+      if (filters.shapes.length && !filters.shapes.some(function (shape) { return includesText(diamond.shape, shape); })) return false;
       if (filters.caratMin !== null && diamond.carat < filters.caratMin) return false;
       if (filters.caratMax !== null && diamond.carat > filters.caratMax) return false;
-      if (filters.colour && diamond.colour !== filters.colour) return false;
-      if (filters.clarity && diamond.clarity !== filters.clarity) return false;
-      if (filters.cut && diamond.cut !== filters.cut) return false;
-      if (filters.type && diamond.type !== filters.type) return false;
-      if (filters.certificateLab && diamond.certificateLab !== filters.certificateLab) return false;
+      if (filters.colour && !includesText(diamond.colour, filters.colour)) return false;
+      if (filters.clarity && !includesText(diamond.clarity, filters.clarity)) return false;
+      if (filters.cut && !includesText(diamond.cut, filters.cut)) return false;
+      if (filters.type && !includesText(diamond.type, filters.type)) return false;
+      if (filters.certificateLab && !includesText(diamond.certificateLab, filters.certificateLab)) return false;
       if (filters.priceMin !== null && diamond.budgetGuide < filters.priceMin) return false;
       if (filters.priceMax !== null && diamond.budgetGuide > filters.priceMax) return false;
       return true;
@@ -174,19 +176,11 @@
       results.sort(function (a, b) { return a.carat - b.carat; });
     } else if (filters.sort === 'quality') {
       results.sort(function (a, b) {
-        return String(a.colour + a.clarity).localeCompare(String(b.colour + b.clarity));
+        return String(a.colour + a.clarity + a.cut).localeCompare(String(b.colour + b.clarity + b.cut));
       });
     }
 
     return results;
-  }
-
-  function extractDiamonds(payload) {
-    if (Array.isArray(payload)) return payload;
-    if (payload && Array.isArray(payload.diamonds)) return payload.diamonds;
-    if (payload && Array.isArray(payload.results)) return payload.results;
-    if (payload && Array.isArray(payload.data)) return payload.data;
-    return [];
   }
 
   function createPlaceholder(shape) {
@@ -196,19 +190,12 @@
     return placeholder;
   }
 
+  function isDirectVideo(url) {
+    return /\.(mp4|webm|ogg|mov)(\?|#|$)/i.test(url);
+  }
+
   function renderMedia(container, diamond) {
     container.textContent = '';
-
-    if (diamond.videoUrl) {
-      var video = document.createElement('video');
-      video.src = diamond.videoUrl;
-      video.muted = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.controls = true;
-      container.appendChild(video);
-      return;
-    }
 
     if (diamond.imageUrl) {
       var image = document.createElement('img');
@@ -216,6 +203,28 @@
       image.alt = diamond.shape + ' diamond';
       image.loading = 'lazy';
       container.appendChild(image);
+      return;
+    }
+
+    if (diamond.videoUrl && isDirectVideo(diamond.videoUrl)) {
+      var video = document.createElement('video');
+      video.src = diamond.videoUrl;
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.controls = true;
+      video.preload = 'metadata';
+      container.appendChild(video);
+      return;
+    }
+
+    if (diamond.videoUrl) {
+      var iframe = document.createElement('iframe');
+      iframe.src = diamond.videoUrl;
+      iframe.loading = 'lazy';
+      iframe.title = diamond.shape + ' diamond video';
+      iframe.setAttribute('allowfullscreen', 'true');
+      container.appendChild(iframe);
       return;
     }
 
@@ -227,16 +236,29 @@
     if (element) element.textContent = value;
   }
 
+  function renderUnavailable(root) {
+    var grid = root.querySelector('[data-diamond-results]');
+    if (!grid) return;
+
+    grid.textContent = '';
+    var empty = document.createElement('div');
+    empty.className = 'jk-diamond-empty jk-diamond-empty--unavailable';
+    empty.innerHTML = '<p class="jk-diamond-select__eyebrow">Live inventory unavailable</p><h3>Diamond inventory is temporarily unavailable</h3><p>Please contact us for live diamond options.</p>';
+    grid.appendChild(empty);
+  }
+
   function renderDiamonds(root, diamonds) {
     var grid = root.querySelector('[data-diamond-results]');
     var template = root.querySelector('[data-diamond-card-template]');
     var stored = getStoredDiamond();
+    if (!grid || !template) return;
+
     grid.textContent = '';
 
     if (!diamonds.length) {
       var empty = document.createElement('div');
       empty.className = 'jk-diamond-empty';
-      empty.innerHTML = '<p class="jk-diamond-select__eyebrow">No diamonds found</p><h3>Refine your filters</h3><p>Try widening shape, carat, colour, clarity, origin, certificate lab, or budget guidance.</p>';
+      empty.innerHTML = '<p class="jk-diamond-select__eyebrow">No diamonds found</p><h3>Refine your filters</h3><p>Try widening shape, carat, colour, clarity, certificate lab, or budget guidance.</p>';
       grid.appendChild(empty);
       return;
     }
@@ -256,21 +278,43 @@
       setText(fragment, '[data-diamond-type]', diamond.type);
       setText(fragment, '[data-diamond-price]', diamond.priceLabel);
       setText(fragment, '[data-diamond-title]', diamond.carat.toFixed(2) + 'ct ' + diamond.shape + ' Diamond');
+      setText(fragment, '[data-diamond-stock]', diamond.stockId);
       setText(fragment, '[data-diamond-carat]', diamond.carat.toFixed(2));
       setText(fragment, '[data-diamond-shape]', diamond.shape);
       setText(fragment, '[data-diamond-colour]', diamond.colour);
       setText(fragment, '[data-diamond-clarity]', diamond.clarity);
       setText(fragment, '[data-diamond-cut]', diamond.cut);
       setText(fragment, '[data-diamond-lab]', diamond.certificateLab);
-      setText(fragment, '[data-diamond-certificate]', 'Certificate ' + diamond.certificateLab + ' · ' + diamond.certificateNumber);
+      setText(fragment, '[data-diamond-availability]', diamond.availability);
+
+      var certificate = fragment.querySelector('[data-diamond-certificate]');
+      if (certificate) {
+        certificate.textContent = 'Certificate ' + diamond.certificateLab + ' · ' + diamond.certificateNumber;
+        if (diamond.certificateUrl) {
+          var link = document.createElement('a');
+          link.href = diamond.certificateUrl;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          link.textContent = 'View certificate';
+          certificate.appendChild(document.createTextNode(' · '));
+          certificate.appendChild(link);
+        }
+      }
 
       selectButton.addEventListener('click', function () {
         saveDiamond(root, diamond);
+        root.classList.add('has-selected-diamond');
         root.querySelectorAll('.jk-diamond-card').forEach(function (item) {
           item.classList.toggle('is-selected', item.dataset.diamondId === diamond.id);
           var button = item.querySelector('[data-select-diamond]');
           if (button) button.textContent = item.dataset.diamondId === diamond.id ? 'Selected' : 'Select Diamond';
         });
+        setStatus(root, 'Diamond selected. Continue to choose your ring setting.');
+
+        var selectedPanel = root.querySelector('[data-selected-diamond-panel]');
+        if (selectedPanel && typeof selectedPanel.scrollIntoView === 'function') {
+          selectedPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       });
 
       grid.appendChild(fragment);
@@ -302,8 +346,10 @@
     }
 
     panel.hidden = false;
+    root.classList.add('has-selected-diamond');
     setText(panel, '[data-selected-diamond-title]', diamond.carat.toFixed(2) + 'ct ' + diamond.shape + ' Diamond');
     setText(panel, '[data-selected-diamond-meta]', [
+      'Stock ' + diamond.stockId,
       diamond.type,
       diamond.colour + ' colour',
       diamond.clarity + ' clarity',
@@ -320,7 +366,7 @@
         window.localStorage.setItem(STORAGE_KEY, JSON.stringify(diamond));
       }
     } catch (error) {
-      // The visual selection still updates if browser storage is unavailable.
+      // Selection still updates visually if browser storage is unavailable.
     }
 
     window.JoyariSelectedDiamond = diamond;
@@ -335,17 +381,27 @@
     setText(root, '[data-diamond-result-count]', count + (count === 1 ? ' diamond' : ' diamonds'));
   }
 
-  function searchDiamonds(root) {
-    var form = root.querySelector('[data-diamond-filter-form]');
-    var endpoint = root.getAttribute('data-endpoint') || '/apps/diamonds/search';
-    var filters = getFilters(form);
-    var query = toQuery(filters);
-    var url = endpoint + (endpoint.indexOf('?') === -1 ? '?' : '&') + query.toString();
+  function getEndpoint(root) {
+    return clean(root.getAttribute('data-endpoint'), '/apps/diamonds/search');
+  }
 
-    root.classList.add('is-loading');
-    setStatus(root, 'Searching private diamond inventory.');
+  function endpointIsMixedContent(endpoint) {
+    return window.location.protocol === 'https:' && /^http:\/\//i.test(endpoint);
+  }
 
-    fetch(url, {
+  function loadDiamonds(root) {
+    if (root._joyariDiamondPromise) return root._joyariDiamondPromise;
+
+    var endpoint = getEndpoint(root);
+
+    // Temporary supplier URLs that contain API keys should be called by a private app proxy.
+    // Shopify storefront JavaScript cannot safely fetch an http API from an https page.
+    if (!endpoint || endpointIsMixedContent(endpoint)) {
+      root._joyariDiamondPromise = Promise.reject(new Error('Diamond endpoint must be proxied over HTTPS.'));
+      return root._joyariDiamondPromise;
+    }
+
+    root._joyariDiamondPromise = fetch(endpoint, {
       headers: {
         Accept: 'application/json'
       }
@@ -355,31 +411,67 @@
         return response.json();
       })
       .then(function (payload) {
-        var diamonds = extractDiamonds(payload).map(normaliseDiamond);
-        root.classList.remove('is-loading');
-        setStatus(root, 'Live diamond search results.');
-        setCount(root, diamonds.length);
-        renderDiamonds(root, diamonds);
-      })
-      .catch(function () {
-        var mockResults = filterMockDiamonds(filters).map(normaliseDiamond);
-        root.classList.remove('is-loading');
-        setStatus(root, 'Demo diamonds shown while live diamond search connects.');
-        setCount(root, mockResults.length);
-        renderDiamonds(root, mockResults);
+        return extractDiamonds(payload).map(normaliseDiamond).filter(function (diamond) {
+          return diamond.stockId !== '-' || diamond.certificateNumber !== '-';
+        });
       });
+
+    return root._joyariDiamondPromise;
+  }
+
+  function searchDiamonds(root) {
+    var form = root.querySelector('[data-diamond-filter-form]');
+    if (!form) return;
+
+    var filters = getFilters(form);
+    root.classList.add('is-loading');
+    setStatus(root, 'Loading live certified lab-grown diamonds.');
+
+    loadDiamonds(root)
+      .then(function (diamonds) {
+        var filtered = filterDiamonds(diamonds, filters);
+        root.classList.remove('is-loading');
+        setStatus(root, filtered.length ? 'Live diamond inventory loaded.' : 'No diamonds match the current filters.');
+        setCount(root, filtered.length);
+        renderDiamonds(root, filtered);
+      })
+      .catch(function (error) {
+        root.classList.remove('is-loading');
+        root.classList.add('is-unavailable');
+        setStatus(root, UNAVAILABLE_MESSAGE);
+        setCount(root, 0);
+        renderUnavailable(root);
+        if (window.console && console.warn) {
+          console.warn('Joyari diamond inventory unavailable.', error);
+        }
+      });
+  }
+
+  function defaultToLabGrown(form) {
+    var typeSelect = form.querySelector('select[name="type"]');
+    if (!typeSelect || typeSelect.value) return;
+
+    var params = new URLSearchParams(window.location.search);
+    if (!params.has('activeTab') && !params.has('queryLabGrown')) {
+      typeSelect.value = 'Lab Grown';
+      return;
+    }
+
+    if (String(params.get('activeTab') || '').toLowerCase().indexOf('lab') !== -1 || params.get('queryLabGrown') === 'true') {
+      typeSelect.value = 'Lab Grown';
+    }
   }
 
   function initDiamondSelection(root) {
     var form = root.querySelector('[data-diamond-filter-form]');
     if (!form) return;
 
-    var stored = getStoredDiamond();
-    updateSelectedPanel(root, stored);
+    defaultToLabGrown(form);
+    updateSelectedPanel(root, getStoredDiamond());
 
     var debouncedSearch = debounce(function () {
       searchDiamonds(root);
-    }, 280);
+    }, 220);
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -393,6 +485,7 @@
     if (reset) {
       reset.addEventListener('click', function () {
         form.reset();
+        defaultToLabGrown(form);
         searchDiamonds(root);
       });
     }

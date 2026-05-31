@@ -16,8 +16,9 @@
 
     <div class="jk-diamond-select__steps" aria-label="Design your ring steps">
       <span class="is-active">1. Choose diamond</span>
-      <span>2. Choose setting</span>
-      <span>3. Review design</span>
+      <span>2. Choose ring setting</span>
+      <span>3. Metal / ring size</span>
+      <span>4. Review / add to cart</span>
     </div>
   </div>
 
@@ -98,7 +99,7 @@
             <label for="DiamondType-Fallback">Origin</label>
             <select id="DiamondType-Fallback" name="type">
               <option value="">Lab grown or natural</option>
-              <option value="Lab Grown">Lab grown</option>
+              <option value="Lab Grown" selected>Lab grown</option>
               <option value="Natural">Natural</option>
             </select>
           </div>
@@ -150,7 +151,7 @@
           <p class="jk-diamond-select__eyebrow">Available diamonds</p>
           <h2 data-diamond-result-count>Curated selection</h2>
         </div>
-        <p data-diamond-status>Searching private diamond inventory.</p>
+        <p data-diamond-status>Loading live diamond inventory.</p>
       </div>
 
       <div class="jk-diamond-selected" data-selected-diamond-panel hidden>
@@ -174,12 +175,14 @@
             </div>
             <h3 data-diamond-title></h3>
             <dl class="jk-diamond-specs">
+              <div><dt>Stock ID</dt><dd data-diamond-stock></dd></div>
               <div><dt>Carat</dt><dd data-diamond-carat></dd></div>
               <div><dt>Shape</dt><dd data-diamond-shape></dd></div>
               <div><dt>Colour</dt><dd data-diamond-colour></dd></div>
               <div><dt>Clarity</dt><dd data-diamond-clarity></dd></div>
               <div><dt>Cut</dt><dd data-diamond-cut></dd></div>
               <div><dt>Lab</dt><dd data-diamond-lab></dd></div>
+              <div><dt>Status</dt><dd data-diamond-availability></dd></div>
             </dl>
             <p class="jk-diamond-card__certificate" data-diamond-certificate></p>
             <button type="button" class="jk-diamond-button jk-diamond-button--outline" data-select-diamond>Select Diamond</button>

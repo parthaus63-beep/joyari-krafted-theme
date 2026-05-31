@@ -3,9 +3,9 @@
     "diamond_selection": {
       "type": "diamond-selection",
       "settings": {
-        "eyebrow": "Phase 1 · Diamond selection",
-        "heading": "Choose Your Diamond",
-        "subheading": "Begin with the stone. Refine shape, carat, colour, clarity, cut, origin, certificate lab, and budget guidance before choosing a Joyari setting.",
+        "eyebrow": "Step 1 · Diamond first",
+        "heading": "Choose Your Centre Diamond",
+        "subheading": "Filter live certified lab-grown diamonds from our trusted global diamond network before choosing a Joyari setting.",
         "search_endpoint": "/apps/diamonds/search",
         "setting_link": "/pages/custom-design?step=setting"
       }

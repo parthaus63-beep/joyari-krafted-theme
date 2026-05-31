@@ -107,6 +107,21 @@
     playActiveProductVideo(media);
   }
 
+  function selectRelativeMedia(root, direction) {
+    var items = Array.prototype.slice.call(root.querySelectorAll('[data-media-id]'));
+    if (items.length < 2) return;
+
+    var activeIndex = items.findIndex(function (item) {
+      return item.classList.contains('is-active');
+    });
+    var nextIndex = activeIndex + direction;
+
+    if (nextIndex < 0) nextIndex = items.length - 1;
+    if (nextIndex >= items.length) nextIndex = 0;
+
+    selectMedia(root, items[nextIndex].getAttribute('data-media-id'));
+  }
+
   function calculateBuilderAdjustment(root) {
     var adjustment = 0;
 
@@ -255,6 +270,41 @@
       button.addEventListener('click', function () {
         selectMedia(root, button.getAttribute('data-media-trigger'));
       });
+    });
+
+    root.querySelectorAll('[data-media-previous]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        selectRelativeMedia(root, -1);
+      });
+    });
+
+    root.querySelectorAll('[data-media-next]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        selectRelativeMedia(root, 1);
+      });
+    });
+
+    root.querySelectorAll('[data-product-gallery]').forEach(function (gallery) {
+      var startX = null;
+      var startY = null;
+
+      gallery.addEventListener('touchstart', function (event) {
+        if (!event.touches || event.touches.length !== 1) return;
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+      }, { passive: true });
+
+      gallery.addEventListener('touchend', function (event) {
+        if (startX === null || startY === null || !event.changedTouches || event.changedTouches.length !== 1) return;
+
+        var deltaX = event.changedTouches[0].clientX - startX;
+        var deltaY = event.changedTouches[0].clientY - startY;
+        startX = null;
+        startY = null;
+
+        if (Math.abs(deltaX) < 44 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+        selectRelativeMedia(root, deltaX < 0 ? 1 : -1);
+      }, { passive: true });
     });
 
     updateVariantState();
