@@ -44,16 +44,27 @@
     {% endif %}
 
     {% if shown == 0 %}
+      {% liquid
+        assign pathway_titles = 'Engagement Rings||Wedding Bands||Diamond Jewellery||Custom Design' | split: '||'
+        assign pathway_meta = 'Bridal Icons||Forever Pieces||Fine Jewellery||Private Design' | split: '||'
+        assign pathway_links = '/collections/engagement-rings||/collections/wedding-bands||/collections/diamond-jewellery||/pages/custom-design' | split: '||'
+      %}
       {% for index in (1..4) %}
-        <article class="jk-product-card jk-product-card--placeholder">
-          <div class="jk-product-card__media">
+        {% liquid
+          assign pathway_index = index | minus: 1
+          assign pathway_title = pathway_titles[pathway_index]
+          assign pathway_badge = pathway_meta[pathway_index]
+          assign pathway_link = pathway_links[pathway_index]
+        %}
+        <article class="jk-product-card jk-product-card--pathway">
+          <a class="jk-product-card__media" href="{{ pathway_link }}">
             <span class="jk-product-placeholder" aria-hidden="true"></span>
             <span class="jk-product-card__quick">View piece</span>
-          </div>
+          </a>
           <div class="jk-product-card__content">
-            <h3 class="jk-product-card__title">Related Joyari piece {{ index }}</h3>
-            <p class="jk-product-card__price">$1,950.00</p>
-            <span class="jk-product-card__action">Private preview</span>
+            <p class="jk-product-card__meta">{{ pathway_badge }}</p>
+            <h3 class="jk-product-card__title"><a href="{{ pathway_link }}">{{ pathway_title }}</a></h3>
+            <a class="jk-product-card__action" href="{{ pathway_link }}">Explore</a>
           </div>
         </article>
       {% endfor %}

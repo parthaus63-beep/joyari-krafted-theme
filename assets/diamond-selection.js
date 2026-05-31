@@ -443,7 +443,7 @@
 
     var endpoint = getEndpoint(root);
 
-    // Temporary supplier URLs that contain API keys should be called by a private app proxy.
+    // Supplier URLs that contain API keys should be called by a private app proxy.
     // Shopify storefront JavaScript cannot safely fetch an http API from an https page.
     if (!endpoint || endpointIsMixedContent(endpoint)) {
       root._joyariDiamondPromise = loadFallbackDiamonds(root, new Error('Diamond endpoint must be proxied over HTTPS.'));

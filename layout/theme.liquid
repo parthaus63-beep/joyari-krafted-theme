@@ -9,18 +9,21 @@
 
     <link rel="canonical" href="{{ canonical_url }}">
 
+    {% liquid
+      assign joyari_brand_name = settings.brand_name | default: 'Joyari Krafted'
+      assign joyari_page_title = page_title | replace: 'JoyariKrafted', 'Joyari Krafted' | replace: 'Joyari krafted', 'Joyari Krafted'
+      assign joyari_meta_description = page_description | default: settings.meta_description | default: 'Luxury lab-grown diamond jewellery, engagement rings, and made-to-order bridal pieces by Joyari Krafted.'
+      assign joyari_meta_description = joyari_meta_description | replace: 'JoyariKrafted', 'Joyari Krafted' | replace: 'Joyari krafted', 'Joyari Krafted'
+    %}
+
     <title>
-      {{ page_title }}
+      {{ joyari_page_title }}
       {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
       {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+      {%- unless joyari_page_title contains joyari_brand_name %} &ndash; {{ joyari_brand_name }}{% endunless -%}
     </title>
 
-    {%- if page_description -%}
-      <meta name="description" content="{{ page_description | escape }}">
-    {%- else -%}
-      <meta name="description" content="{{ settings.meta_description | default: 'Luxury lab-grown diamond jewellery, engagement rings, and made-to-order bridal pieces by Joyari Krafted.' | escape }}">
-    {%- endif -%}
+    <meta name="description" content="{{ joyari_meta_description | escape }}">
 
     {{ 'theme.css' | asset_url | stylesheet_tag }}
     <script>

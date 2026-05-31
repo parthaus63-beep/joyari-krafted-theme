@@ -15,13 +15,13 @@
         "eyebrow": "Fine lab-grown diamond jewellery",
         "heading": "Joyari Krafted",
         "subheading": "Considered engagement rings and diamond jewellery, crafted with luminous lab-grown stones and an heirloom sense of restraint.",
-        "hero_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_11_51_33_AM.png",
+        "hero_image": "shopify://shop_images/02_engagement_rings.png",
         "hero_video_url": "",
         "hero_image_alt": "Joyari Krafted diamond jewellery editorial image",
         "primary_label": "Explore Fine Jewellery",
-        "primary_link": "",
+        "primary_link": "/collections/engagement-rings",
         "secondary_label": "Begin a Private Design",
-        "secondary_link": "",
+        "secondary_link": "/pages/custom-design",
         "trust_text": "Certified lab-grown diamonds, refined settings, insured delivery, and care-led guidance from selection to aftercare.",
         "caption_label": "Lab-grown centre stones",
         "caption_heading": "Designed for lifetime wear"
@@ -153,7 +153,7 @@
         "packaging_image_alt": "Joyari Krafted packaging and certificate",
         "packaging_eyebrow": "Presentation",
         "packaging_heading": "The reveal is part of the experience",
-        "packaging_text": "Show the box, certificate, care card, or final delivery presentation that makes the purchase feel complete."
+        "packaging_text": "The box, certificate, care card, and final delivery presentation make the purchase feel complete from the first reveal."
       }
     },
     "lab_diamonds": {
@@ -162,7 +162,7 @@
         "eyebrow": "Lab-grown diamond jewellery",
         "heading": "Modern brilliance, timeless restraint",
         "subheading": "A polished edit for clients who value traceable stones, elegant proportions, and enduring design.",
-        "collection": "",
+        "collection": "engagement-rings",
         "collection_banner_image_alt": "",
         "collection_banner_eyebrow": "Joyari collection",
         "grid_heading": "The collection edit",
@@ -407,7 +407,7 @@
       "settings": {
         "eyebrow": "Journal",
         "heading": "Notes on diamonds, design, and meaningful moments",
-        "subheading": "Image-led cards for guidance, storytelling, and the quiet details behind Joyari pieces."
+        "subheading": "Guidance, storytelling, and quiet atelier details for choosing jewellery with confidence."
       }
     },
     "trust_badges": {

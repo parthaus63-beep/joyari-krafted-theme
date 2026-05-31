@@ -312,8 +312,19 @@
         </article>
       {% endfor %}
     {% else %}
+      {% liquid
+        assign pathway_titles = 'Engagement Rings||Wedding Bands||Diamond Jewellery||Custom Design' | split: '||'
+        assign pathway_meta = 'Bridal Icons||Forever Pieces||Fine Jewellery||Private Design' | split: '||'
+        assign pathway_text = 'Explore refined centre-stone rings made for the proposal moment.||Discover elegant bands designed to stack, contour, or shine alone.||Shop luminous diamond pieces for meaningful everyday wear.||Begin a made-to-order ring with personal guidance from Joyari.' | split: '||'
+        assign pathway_links = '/collections/engagement-rings||/collections/wedding-bands||/collections/diamond-jewellery||/pages/custom-design' | split: '||'
+      %}
       {% for index in (1..4) %}
         {% liquid
+          assign pathway_index = index | minus: 1
+          assign pathway_title = pathway_titles[pathway_index]
+          assign pathway_badge = pathway_meta[pathway_index]
+          assign pathway_copy = pathway_text[pathway_index]
+          assign pathway_link = pathway_links[pathway_index]
           assign placeholder_image = blank
           assign placeholder_alt = blank
           case index
@@ -332,19 +343,20 @@
           endcase
           assign placeholder_alt = placeholder_alt | default: 'Joyari Krafted diamond jewellery'
         %}
-        <article class="jk-product-card jk-product-card--placeholder">
-          <div class="jk-product-card__media">
+        <article class="jk-product-card jk-product-card--pathway">
+          <a class="jk-product-card__media" href="{{ pathway_link }}">
             {% if placeholder_image != blank %}
               {{ placeholder_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw', alt: placeholder_alt }}
             {% else %}
               <span class="jk-product-placeholder" aria-hidden="true"></span>
             {% endif %}
             <span class="jk-product-card__quick">View piece</span>
-          </div>
+          </a>
           <div class="jk-product-card__content">
-            <h2 class="jk-product-card__title">Signature diamond piece {{ index }}</h2>
-            <p class="jk-product-card__price">$2,400.00</p>
-            <span class="jk-product-card__action">Private preview</span>
+            <p class="jk-product-card__meta">{{ pathway_badge }}</p>
+            <h2 class="jk-product-card__title"><a href="{{ pathway_link }}">{{ pathway_title }}</a></h2>
+            <p class="jk-product-card__summary">{{ pathway_copy }}</p>
+            <a class="jk-product-card__action" href="{{ pathway_link }}">Explore</a>
           </div>
         </article>
       {% endfor %}
@@ -435,7 +447,7 @@
       "type": "textarea",
       "id": "collection_intro_text",
       "label": "Intro text",
-      "default": "Use this visual space for campaign imagery, ring-on-hand detail, or a close-up that explains the mood of the collection."
+      "default": "Campaign imagery, ring-on-hand detail, and close-up stone moments establish the mood of the collection."
     },
     {
       "type": "image_picker",
@@ -464,7 +476,7 @@
       "type": "textarea",
       "id": "collection_lifestyle_text",
       "label": "Lifestyle text",
-      "default": "Add lifestyle, proposal, packaging, or editorial imagery to make collection pages feel immersive before the product grid begins."
+      "default": "Lifestyle, proposal, packaging, and editorial imagery make the collection feel immersive before the product grid begins."
     },
     {
       "type": "image_picker",

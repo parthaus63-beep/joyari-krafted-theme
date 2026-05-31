@@ -7727,6 +7727,52 @@ button[name="add"]:focus-visible {
   color: #C6A769 !important;
 }
 
+.jk-product-card__summary {
+  display: -webkit-box;
+  margin: 0;
+  color: #5D554B;
+  font-size: .92rem;
+  line-height: 1.58;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.jk-product-card--pathway .jk-product-card__media {
+  position: relative;
+}
+
+.jk-product-card--pathway .jk-product-card__media::after {
+  content: "";
+  position: absolute;
+  inset: auto 18% 18% 18%;
+  height: 32%;
+  border: clamp(10px, 1.5vw, 18px) solid rgba(198, 167, 105, .84);
+  border-radius: 999px;
+  box-shadow: 0 26px 48px rgba(17, 17, 17, .12), inset 0 0 0 1px rgba(255,255,255,.38);
+}
+
+.jk-product-card--pathway .jk-product-card__media::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 26%;
+  z-index: 1;
+  width: clamp(42px, 5vw, 76px);
+  height: clamp(42px, 5vw, 76px);
+  background: linear-gradient(135deg, #FFFFFF, #DCECF0 72%);
+  clip-path: polygon(50% 0, 100% 52%, 50% 100%, 0 52%);
+  filter: drop-shadow(0 18px 28px rgba(17,17,17,.16));
+  transform: translateX(-50%);
+}
+
+.jk-product-card--pathway .jk-product-placeholder {
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,.96), transparent 7rem),
+    radial-gradient(circle at 70% 74%, rgba(198,167,105,.24), transparent 14rem),
+    linear-gradient(145deg, #FFFFFF, #F8F6F1 58%, #F3EEE6) !important;
+}
+
 .jk-metal-swatch,
 .jkrb-metal-swatch {
   position: relative;
@@ -8025,6 +8071,83 @@ button[name="add"]:focus-visible {
 }
 
 @media (max-width: 640px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  .jk-announcement {
+    padding-inline: 18px;
+    font-size: .82rem;
+    line-height: 1.45;
+  }
+
+  .jk-nav-toggle {
+    display: inline-flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: #FFFFFF !important;
+  }
+
+  .jk-nav-toggle span:not(.visually-hidden) {
+    width: 18px;
+    height: 1.5px;
+    margin: 0 !important;
+    background: #111111 !important;
+  }
+
+  .jk-brand--image {
+    max-width: min(150px, 46vw);
+  }
+
+  .jk-brand__logo-image {
+    max-height: 58px;
+  }
+
+  .jk-hero {
+    min-height: 674px;
+    padding: 88px 14px 34px;
+  }
+
+  .jk-hero::before {
+    inset: 14px;
+  }
+
+  .jk-hero__image,
+  .jk-hero__video {
+    object-position: 52% 50%;
+  }
+
+  .jk-hero__content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .jk-hero__content h1,
+  .jk-section__header h1,
+  .jk-section__header h2,
+  .jk-grid-heading,
+  .jk-education-guide__copy h1 {
+    max-width: 100%;
+    overflow-wrap: break-word;
+    line-height: 1.02;
+  }
+
+  .jk-hero__copy,
+  .jk-section__header > p:not(.jk-eyebrow) {
+    max-width: 100%;
+  }
+
+  .jk-hero__actions {
+    width: 100%;
+  }
+
+  .jk-hero__actions .jk-button {
+    width: 100%;
+  }
+
   .jk-section,
   .jk-product-grid-section,
   .jk-brand-promise,
