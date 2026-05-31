@@ -1,4 +1,14 @@
-.shopify-section--diamond-selection {
+/* Joyari luxury colour system */
+:root {
+  --joyari-ivory: #F8F6F1;
+  --joyari-gold: #C6A769;
+  --joyari-black: #111111;
+  --joyari-emerald: #0F3D2E;
+  --joyari-white: #FFFFFF;
+}
+
+.shopify-section--diamond-selection,
+.shopify-section--custom-ring-builder {
   background:
     radial-gradient(circle at 18% 4%, rgba(198, 167, 105, .12), transparent 32%),
     linear-gradient(180deg, #F8F6F1 0%, #ffffff 42%, #F8F6F1 100%);
@@ -614,4 +624,122 @@
 .jk-diamond-select__steps .is-active {
   border-color: #C6A769;
   box-shadow: 0 0 0 2px rgba(198, 167, 105, .16);
+}
+
+/* Joyari luxury colour system */
+.shopify-section--diamond-selection,
+.shopify-section--custom-ring-builder,
+.jk-diamond-select {
+  background:
+    radial-gradient(circle at 18% 4%, rgba(198, 167, 105, .11), transparent 32%),
+    radial-gradient(circle at 82% 18%, rgba(15, 61, 46, .05), transparent 36%),
+    linear-gradient(180deg, #F8F6F1 0%, #FFFFFF 48%, #F8F6F1 100%) !important;
+  color: #111111 !important;
+}
+
+.jk-diamond-select__hero,
+.jk-diamond-filters,
+.jk-diamond-results,
+.jk-diamond-selected,
+.jk-diamond-card,
+.jk-diamond-empty {
+  background-color: #FFFFFF !important;
+  color: #111111 !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+}
+
+.jk-diamond-select h1,
+.jk-diamond-select h2,
+.jk-diamond-select h3,
+.jk-diamond-specs dd,
+.jk-diamond-card__body,
+.jk-diamond-card__price {
+  color: #111111 !important;
+}
+
+.jk-diamond-select p,
+.jk-diamond-specs dt,
+[data-diamond-status] {
+  color: #5e5a53 !important;
+}
+
+.jk-diamond-select__eyebrow,
+.jk-diamond-card__type,
+.jk-diamond-card__certificate a,
+.jk-diamond-select.has-selected-diamond .jk-diamond-select__steps span:nth-child(2) {
+  color: #0F3D2E !important;
+}
+
+.jk-diamond-card__price,
+.jk-diamond-selected h3 {
+  color: #C6A769 !important;
+}
+
+.jk-diamond-button--dark {
+  background: #111111 !important;
+  border-color: #C6A769 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 18px 42px rgba(17, 17, 17, .14) !important;
+}
+
+.jk-diamond-button--dark:hover,
+.jk-diamond-button--dark:focus-visible {
+  background: #C6A769 !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+}
+
+.jk-diamond-button--outline,
+.jk-diamond-button--quiet {
+  background: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+  color: #111111 !important;
+}
+
+.jk-diamond-button--outline:hover,
+.jk-diamond-button--outline:focus-visible,
+.jk-diamond-button--quiet:hover,
+.jk-diamond-button--quiet:focus-visible {
+  background: rgba(198, 167, 105, .12) !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+}
+
+.jk-diamond-card.is-selected,
+.jk-diamond-card.selected,
+.jk-diamond-card.active,
+.jk-diamond-select__steps .is-active,
+.jk-shape-filter:has(input:checked),
+.jk-shape-filter input:checked + .jk-shape-filter__stone,
+.jk-diamond-button[aria-pressed="true"],
+.jk-diamond-button[aria-selected="true"],
+input:checked + label {
+  background-color: rgba(198, 167, 105, .12) !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .16) !important;
+}
+
+.jk-filter-group input,
+.jk-filter-group select,
+.jk-shape-filter {
+  background-color: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+  color: #111111 !important;
+}
+
+.jk-filter-group input:hover,
+.jk-filter-group input:focus,
+.jk-filter-group select:hover,
+.jk-filter-group select:focus,
+.jk-shape-filter:hover,
+.jk-diamond-card:hover {
+  border-color: #C6A769 !important;
+  box-shadow: 0 18px 44px rgba(198, 167, 105, .18) !important;
+}
+
+.jk-diamond-specs div,
+.jk-diamond-placeholder {
+  background-color: #F8F6F1 !important;
+  border-color: rgba(198, 167, 105, .28) !important;
 }

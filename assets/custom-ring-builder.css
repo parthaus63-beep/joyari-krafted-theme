@@ -1879,3 +1879,130 @@
     transform: translateX(260%);
   }
 }
+
+/* Joyari luxury colour system */
+:root {
+  --joyari-ivory: #F8F6F1;
+  --joyari-gold: #C6A769;
+  --joyari-black: #111111;
+  --joyari-emerald: #0F3D2E;
+  --joyari-white: #FFFFFF;
+}
+
+.shopify-section--custom-ring-builder,
+.jkrb {
+  background:
+    radial-gradient(circle at 12% 6%, rgba(198, 167, 105, .12), transparent 30rem),
+    radial-gradient(circle at 88% 18%, rgba(15, 61, 46, .05), transparent 34rem),
+    linear-gradient(180deg, #F8F6F1 0%, #FFFFFF 48%, #F8F6F1 100%) !important;
+  color: #111111 !important;
+}
+
+.jkrb {
+  --jkrb-white: #FFFFFF;
+  --jkrb-ivory: #F8F6F1;
+  --jkrb-cream: #F8F6F1;
+  --jkrb-gold: #C6A769;
+  --jkrb-emerald: #0F3D2E;
+  --jkrb-ink: #111111;
+}
+
+.jkrb h1,
+.jkrb h2,
+.jkrb h3,
+.jkrb-panel,
+.jkrb-preview,
+.jkrb-step,
+.jkrb-estimate,
+.jkrb-consultation,
+.jkrb-choice,
+.jkrb-metal,
+.jkrb-summary-card {
+  color: #111111 !important;
+}
+
+.jkrb-preview,
+.jkrb-preview__media,
+.jkrb-panel,
+.jkrb-step,
+.jkrb-estimate,
+.jkrb-consultation,
+.jkrb-choice,
+.jkrb-metal,
+.jkrb-summary-card,
+.jkrb-gallery-thumb {
+  background-color: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+}
+
+.jkrb-eyebrow,
+.jkrb-panel__eyebrow,
+.jkrb-preview__label,
+.jkrb-spec-card span,
+.jkrb-step__kicker {
+  color: #0F3D2E !important;
+}
+
+.jkrb-estimate__price,
+.jkrb-price,
+.jkrb-total,
+.jkrb-accent {
+  color: #C6A769 !important;
+}
+
+.jkrb-button--primary,
+.jkrb-request,
+.jkrb-sticky-cta .jkrb-button {
+  background: #111111 !important;
+  border-color: #C6A769 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 18px 42px rgba(17, 17, 17, .14) !important;
+}
+
+.jkrb-button--primary:hover,
+.jkrb-button--primary:focus-visible,
+.jkrb-request:hover,
+.jkrb-request:focus-visible,
+.jkrb-sticky-cta .jkrb-button:hover,
+.jkrb-sticky-cta .jkrb-button:focus-visible {
+  background: #C6A769 !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+}
+
+.jkrb-button--secondary,
+.jkrb-button--outline,
+.jkrb-zoom-trigger {
+  background: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+  color: #111111 !important;
+}
+
+.jkrb-option.is-active,
+.jkrb-option.is-selected,
+.jkrb-option.selected,
+.jkrb-option.active,
+.jkrb-option[aria-pressed="true"],
+.jkrb-option[aria-selected="true"],
+.jkrb-metal.is-active,
+.jkrb-metal.is-selected,
+.jkrb-metal[aria-pressed="true"],
+.jkrb-gallery-thumb.is-active,
+.jkrb-gallery-thumb[aria-selected="true"],
+.jkrb input:checked + label,
+.jkrb input:checked + span {
+  background-color: rgba(198, 167, 105, .12) !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .16) !important;
+}
+
+.jkrb-option:hover,
+.jkrb-option:focus-visible,
+.jkrb-metal:hover,
+.jkrb-metal:focus-visible,
+.jkrb-gallery-thumb:hover,
+.jkrb-gallery-thumb:focus-visible {
+  border-color: #C6A769 !important;
+  box-shadow: 0 18px 44px rgba(198, 167, 105, .18) !important;
+}

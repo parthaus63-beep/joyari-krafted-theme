@@ -1,4 +1,10 @@
 :root {
+  /* Joyari luxury colour system */
+  --joyari-ivory: #F8F6F1;
+  --joyari-gold: #C6A769;
+  --joyari-black: #111111;
+  --joyari-emerald: #0F3D2E;
+  --joyari-white: #FFFFFF;
   --jk-ivory: #F8F6F1;
   --jk-porcelain: #ffffff;
   --jk-beige: #E7DED0;
@@ -6310,4 +6316,295 @@ body,
   background:
     linear-gradient(145deg, rgba(15, 61, 46, .96), rgba(17, 17, 17, .98)),
     var(--jk-ink);
+}
+
+/* Joyari luxury colour system */
+:root {
+  --joyari-ivory: #F8F6F1;
+  --joyari-gold: #C6A769;
+  --joyari-black: #111111;
+  --joyari-emerald: #0F3D2E;
+  --joyari-white: #FFFFFF;
+  --jk-ivory: #F8F6F1;
+  --jk-porcelain: #FFFFFF;
+  --jk-cream: #F8F6F1;
+  --jk-champagne: #C6A769;
+  --jk-emerald: #0F3D2E;
+  --jk-ink: #111111;
+}
+
+html,
+body,
+.color-ivory,
+.main-content,
+.shopify-section,
+.jk-section {
+  color: var(--joyari-black) !important;
+}
+
+body,
+.color-ivory,
+.main-content {
+  background:
+    radial-gradient(circle at 16% 0%, rgba(198, 167, 105, .09), transparent 34rem),
+    radial-gradient(circle at 92% 28%, rgba(15, 61, 46, .05), transparent 34rem),
+    linear-gradient(180deg, #F8F6F1 0%, #FFFFFF 44%, #F8F6F1 100%) !important;
+}
+
+.jk-header,
+.jk-announcement,
+.jk-header__assurance,
+.jk-desktop-dropdown-layer .jk-nav-dropdown,
+.jk-mobile-drawer__panel,
+.jk-nav-dropdown,
+.jk-product-panel__inner,
+.jk-product-panel__inner--builder,
+.jk-product-form,
+.jk-builder-panel,
+.jk-builder-card,
+.jk-builder-step,
+.jk-product-description,
+.jk-custom-request,
+.jk-custom-request__panel,
+.jk-product-info-accordions details,
+.jk-product-visual-card,
+.jk-product-card,
+.jk-collection-card,
+.jk-promise-card,
+.jk-testimonial,
+.jk-education-card,
+.jk-cart-item,
+.jk-cart-summary,
+.jk-empty-cart,
+.jk-size-guide-modal__panel,
+.shopify-section--custom-ring-builder .jk-diamond-select__hero,
+.shopify-section--custom-ring-builder .jk-diamond-filters,
+.shopify-section--custom-ring-builder .jk-diamond-results,
+.shopify-section--custom-ring-builder .jk-diamond-selected,
+.shopify-section--diamond-selection .jk-diamond-select__hero,
+.shopify-section--diamond-selection .jk-diamond-filters,
+.shopify-section--diamond-selection .jk-diamond-results,
+.shopify-section--diamond-selection .jk-diamond-selected {
+  background-color: #FFFFFF !important;
+  color: #111111 !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+}
+
+.shopify-section--custom-ring-builder,
+.shopify-section--diamond-selection,
+.shopify-section--product-builder-main,
+.jk-product-builder-main,
+.jk-product-template,
+.jk-brand-promise,
+.jk-featured-collections,
+.jk-luxury-story,
+.jk-diamond-education,
+.jk-related-products,
+.jk-custom-request {
+  background:
+    radial-gradient(circle at 15% 4%, rgba(198, 167, 105, .08), transparent 28rem),
+    linear-gradient(180deg, #F8F6F1 0%, #FFFFFF 52%, #F8F6F1 100%) !important;
+}
+
+.jk-header a,
+.jk-nav__link,
+.jk-nav-dropdown a,
+.jk-mobile-menu-link,
+.jk-product-panel__inner h1,
+.jk-product-panel__inner h2,
+.jk-product-panel__inner h3,
+.jk-product-description h2,
+.jk-custom-request h2,
+.jk-product-card__title,
+.jk-collection-card h3,
+.jk-cart-item__title,
+.jk-size-guide-modal__panel h2 {
+  color: #111111 !important;
+}
+
+.jk-eyebrow,
+.jk-card-badge,
+.jk-product-scarcity,
+.jk-product-review-placeholder__stars,
+.jk-footer__heading,
+.jk-diamond-gateway-card__line,
+.jk-builder-label,
+.jk-builder-field__label-row,
+.jk-product-metal-palette__label,
+.jk-size-guide-trigger,
+.jk-custom-request__eyebrow,
+.jk-product-info-accordions summary,
+.shopify-section--custom-ring-builder .jk-diamond-select__eyebrow,
+.shopify-section--diamond-selection .jk-diamond-select__eyebrow {
+  color: #0F3D2E !important;
+}
+
+.jk-product-price,
+.jk-product-card__price,
+.jk-cart-summary strong,
+.jk-builder-total strong,
+.jk-product-total,
+.jk-price,
+.price,
+.shopify-section--custom-ring-builder .jk-diamond-card__price,
+.shopify-section--diamond-selection .jk-diamond-card__price {
+  color: #C6A769 !important;
+}
+
+.jk-button--primary,
+.jk-add-to-cart,
+button[name="add"],
+.product-form__submit,
+.shopify-payment-button__button,
+.jk-product-actions .jk-button--primary,
+.jk-newsletter-form button,
+.jk-cart-summary .jk-button--primary,
+.shopify-section--custom-ring-builder .jk-diamond-button--dark,
+.shopify-section--diamond-selection .jk-diamond-button--dark {
+  background: #111111 !important;
+  border-color: #C6A769 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 18px 42px rgba(17, 17, 17, .14) !important;
+}
+
+.jk-button--primary:hover,
+.jk-button--primary:focus-visible,
+.jk-add-to-cart:hover,
+.jk-add-to-cart:focus-visible,
+button[name="add"]:hover,
+button[name="add"]:focus-visible,
+.product-form__submit:hover,
+.product-form__submit:focus-visible,
+.shopify-payment-button__button:hover,
+.shopify-payment-button__button:focus-visible,
+.jk-newsletter-form button:hover,
+.jk-newsletter-form button:focus-visible,
+.shopify-section--custom-ring-builder .jk-diamond-button--dark:hover,
+.shopify-section--custom-ring-builder .jk-diamond-button--dark:focus-visible,
+.shopify-section--diamond-selection .jk-diamond-button--dark:hover,
+.shopify-section--diamond-selection .jk-diamond-button--dark:focus-visible {
+  background: #C6A769 !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+}
+
+.jk-button--secondary,
+.jk-button--outline,
+.jk-text-link,
+.jk-size-guide-trigger,
+.shopify-section--custom-ring-builder .jk-diamond-button--outline,
+.shopify-section--custom-ring-builder .jk-diamond-button--quiet,
+.shopify-section--diamond-selection .jk-diamond-button--outline,
+.shopify-section--diamond-selection .jk-diamond-button--quiet {
+  background: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+  color: #111111 !important;
+}
+
+.jk-button--secondary:hover,
+.jk-button--secondary:focus-visible,
+.jk-button--outline:hover,
+.jk-button--outline:focus-visible,
+.jk-text-link:hover,
+.jk-text-link:focus-visible,
+.jk-size-guide-trigger:hover,
+.jk-size-guide-trigger:focus-visible,
+.shopify-section--custom-ring-builder .jk-diamond-button--outline:hover,
+.shopify-section--custom-ring-builder .jk-diamond-button--outline:focus-visible,
+.shopify-section--diamond-selection .jk-diamond-button--outline:hover,
+.shopify-section--diamond-selection .jk-diamond-button--outline:focus-visible {
+  background: rgba(198, 167, 105, .12) !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .16) !important;
+}
+
+.jk-swatch-row input:checked + label,
+.jk-choice-grid input:checked + span,
+.jk-shape-row input:checked + span,
+.jk-metal-choice input:checked + label,
+.jk-builder-field input:checked + label,
+.jk-product-form input:checked + label,
+.jk-media-thumb.is-active,
+.jk-size-option.is-selected,
+.jk-option.is-selected,
+.jk-option.selected,
+.jk-option.active,
+.jk-builder-option.is-selected,
+.jk-builder-option.selected,
+.jk-builder-option.active,
+[aria-pressed="true"],
+button[aria-selected="true"],
+input:checked + label,
+.is-selected,
+.selected,
+.active {
+  border-color: #C6A769 !important;
+  background-color: rgba(198, 167, 105, .12) !important;
+  color: #111111 !important;
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .16) !important;
+}
+
+.jk-swatch-row label,
+.jk-choice-grid span,
+.jk-shape-row span,
+.jk-builder-field select,
+.jk-builder-field input,
+.jk-product-form select,
+.jk-product-form input,
+.jk-product-form textarea,
+.jk-custom-request input,
+.jk-custom-request select,
+.jk-custom-request textarea,
+.jk-newsletter-form input,
+.shopify-section--custom-ring-builder .jk-filter-group input,
+.shopify-section--custom-ring-builder .jk-filter-group select,
+.shopify-section--diamond-selection .jk-filter-group input,
+.shopify-section--diamond-selection .jk-filter-group select {
+  background-color: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+  color: #111111 !important;
+}
+
+.jk-swatch-row label:hover,
+.jk-swatch-row label:focus-within,
+.jk-choice-grid span:hover,
+.jk-shape-row span:hover,
+.jk-builder-field select:hover,
+.jk-builder-field input:hover,
+.jk-product-form select:hover,
+.jk-product-form input:hover,
+.jk-product-card:hover,
+.jk-collection-card:hover,
+.shopify-section--custom-ring-builder .jk-diamond-card:hover,
+.shopify-section--diamond-selection .jk-diamond-card:hover {
+  border-color: #C6A769 !important;
+  box-shadow: 0 18px 44px rgba(198, 167, 105, .18) !important;
+}
+
+.jk-trust-badge,
+.jk-builder-trust-grid > *,
+.jk-product-service,
+.jk-product-service-card,
+.jk-card-badge,
+.jk-diamond-specs div,
+.shopify-section--custom-ring-builder .jk-diamond-specs div,
+.shopify-section--diamond-selection .jk-diamond-specs div {
+  background-color: #F8F6F1 !important;
+  border-color: rgba(198, 167, 105, .28) !important;
+  color: #111111 !important;
+}
+
+.jk-trust-badge::before,
+.jk-hero__trust span,
+.jk-card-badge::before,
+.jk-product-service::before {
+  background-color: #0F3D2E !important;
+}
+
+.jk-footer {
+  background:
+    linear-gradient(145deg, rgba(15, 61, 46, .97), rgba(17, 17, 17, .99)),
+    #111111 !important;
+  color: #FFFFFF !important;
 }

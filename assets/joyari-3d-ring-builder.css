@@ -909,3 +909,102 @@
   background: var(--jk3d-gold);
   color: var(--jk3d-ink);
 }
+
+/* Joyari luxury colour system */
+:root {
+  --joyari-ivory: #F8F6F1;
+  --joyari-gold: #C6A769;
+  --joyari-black: #111111;
+  --joyari-emerald: #0F3D2E;
+  --joyari-white: #FFFFFF;
+}
+
+.shopify-section--joyari-3d-ring-builder,
+.jk3d {
+  background:
+    radial-gradient(circle at 12% 7%, rgba(198, 167, 105, .12), transparent 27rem),
+    radial-gradient(circle at 86% 17%, rgba(15, 61, 46, .05), transparent 32rem),
+    linear-gradient(180deg, #FFFFFF 0%, #F8F6F1 58%, #FFFFFF 100%) !important;
+  color: #111111 !important;
+}
+
+.jk3d {
+  --jk3d-white: #FFFFFF;
+  --jk3d-ivory: #F8F6F1;
+  --jk3d-cream: #F8F6F1;
+  --jk3d-gold: #C6A769;
+  --jk3d-emerald: #0F3D2E;
+  --jk3d-ink: #111111;
+}
+
+.jk3d h1,
+.jk3d h2,
+.jk3d h3,
+.jk3d-panel,
+.jk3d-viewer,
+.jk3d-option,
+.jk3d-detail-card,
+.jk3d-thumbs button {
+  color: #111111 !important;
+}
+
+.jk3d-panel,
+.jk3d-viewer,
+.jk3d-option,
+.jk3d-detail-card,
+.jk3d-thumbs button {
+  background-color: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+}
+
+.jk3d__eyebrow,
+.jk3d-detail-card span,
+.jk3d-panel__eyebrow,
+.jk3d-viewer__label {
+  color: #0F3D2E !important;
+}
+
+.jk3d-estimate,
+.jk3d-price,
+.jk3d-accent {
+  color: #C6A769 !important;
+}
+
+.jk3d-button--dark,
+.jk3d-button--primary {
+  background: #111111 !important;
+  border-color: #C6A769 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 18px 42px rgba(17, 17, 17, .14) !important;
+}
+
+.jk3d-button--dark:hover,
+.jk3d-button--dark:focus-visible,
+.jk3d-button--primary:hover,
+.jk3d-button--primary:focus-visible {
+  background: #C6A769 !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+}
+
+.jk3d-button--light,
+.jk3d-button--outline {
+  background: #FFFFFF !important;
+  border-color: rgba(198, 167, 105, .45) !important;
+  color: #111111 !important;
+}
+
+.jk3d-option.is-selected,
+.jk3d-option.selected,
+.jk3d-option.active,
+.jk3d-option[aria-pressed="true"],
+.jk3d-option[aria-selected="true"],
+.jk3d-thumbs button.is-active,
+.jk3d-thumbs button[aria-selected="true"],
+.jk3d input:checked + label,
+.jk3d input:checked + span {
+  background-color: rgba(198, 167, 105, .12) !important;
+  border-color: #C6A769 !important;
+  color: #111111 !important;
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .16) !important;
+}
