@@ -4,6 +4,7 @@
   var STORAGE_KEY = 'joyariSelectedDiamond';
   var UNAVAILABLE_MESSAGE = 'Diamond inventory is temporarily unavailable. Please contact us for live diamond options.';
   var FALLBACK_LOADED_MESSAGE = 'Certified diamond inventory loaded from Joyari secure feed.';
+  var SCRIPT_SRC = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
 
   var SHAPE_MAP = {
     RD: 'Round',
@@ -391,7 +392,9 @@
   }
 
   function getFallbackFeed(root) {
-    return clean(root.getAttribute('data-fallback-feed'));
+    var configuredFeed = clean(root.getAttribute('data-fallback-feed'));
+    if (configuredFeed) return configuredFeed;
+    return SCRIPT_SRC ? SCRIPT_SRC.split('?')[0].replace(/diamond-selection\.js$/, 'joyari-diamond-feed.json') : '';
   }
 
   function endpointIsMixedContent(endpoint) {
