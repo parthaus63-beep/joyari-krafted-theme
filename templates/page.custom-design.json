@@ -9,58 +9,44 @@
  */
 {
   "sections": {
-    "diamond_selection": {
-      "type": "diamond-selection",
+    "custom_ring_builder": {
+      "type": "custom-ring-builder",
       "settings": {
-        "eyebrow": "Step 1 · Diamond first",
-        "heading": "Choose Your Centre Diamond",
-        "subheading": "Filter live certified lab-grown diamonds from our trusted global diamond network before choosing a Joyari setting.",
-        "search_endpoint": "/apps/diamonds/search",
-        "setting_link": "/pages/custom-design?step=setting"
+        "eyebrow": "Joyari Krafted custom design",
+        "heading": "Design Your Ring",
+        "subheading": "Explore ring shape, setting, metal tone, carat presence, and optional 360 previews in a private Joyari design studio.",
+        "hero_image_alt": "Joyari Krafted custom engagement ring",
+        "primary_label": "Start Designing",
+        "secondary_label": "Book Consultation",
+        "preview_image_alt": "Luxury ring preview",
+        "lifestyle_image_alt": "Joyari Krafted custom ring lifestyle preview",
+        "sequence_frame_1": "shopify://shop_images/lucid-origin_Luxury_round_diamond_floating_on_white_background_ultra_realistic_jewellery_rend-0.jpg",
+        "sequence_frame_2": "shopify://shop_images/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0.jpg",
+        "sequence_frame_3": "shopify://shop_images/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0_83d75022-e1c1-4194-845f-bbe2d78cc139.jpg",
+        "sequence_frame_4": "shopify://shop_images/lucid-origin_Luxury_round_brilliant_diamond_rotated_slightly_to_the_left_visible_crown_and_pa-0.jpg",
+        "sequence_frame_5": "shopify://shop_images/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0_c3f83e97-f71b-475e-9807-e8faf9c838c4.jpg",
+        "sequence_frame_6": "shopify://shop_images/lucid-origin_Luxury_round_brilliant_diamond_side_profile_facing_left_visible_pavilion_depth_a-0.jpg",
+        "default_model_url": "",
+        "round_model_url": "",
+        "oval_model_url": "",
+        "emerald_model_url": "",
+        "pear_model_url": "",
+        "cushion_model_url": "",
+        "base_price": 280000,
+        "base_carat": "1.50",
+        "carat_quarter_premium": 18500,
+        "estimate_note": "This is a design estimate using demo data. A Joyari specialist will confirm the final quote after stone selection, certification, and setting review.",
+        "consultation_heading": "Ready to refine the ring privately?",
+        "consultation_text": "Send your design direction to Joyari Krafted and our team will guide the stone, setting, proportion, ring size, and final quote.",
+        "consultation_label": "Book Consultation",
+        "consultation_link": "/pages/contact",
+        "choose_diamond_link": "/collections/loose-diamonds",
+        "choose_setting_link": "/pages/contact",
+        "request_link": "/pages/contact"
       }
-    },
-    "1779954788f3c7e29e": {
-      "type": "apps",
-      "blocks": {
-        "nivoda_connect_feed_9tVrc3": {
-          "type": "shopify://apps/nivoda-connect/blocks/feed/1818f65a-9917-4ef2-bca9-2424a925fc76",
-          "settings": {
-            "primary_color": "#bdc3c7",
-            "diamond_type_natural": false,
-            "diamond_type_lab": true,
-            "diamond_type_gem_v2": false,
-            "shapes": "ROUND,OVAL,EMERALD,PEAR,PRINCESS,CUSHION,RADIANT,MARQUISE,HEART,SQUARE_EMERALD",
-            "carats_min": 0,
-            "carats_max": 10,
-            "price_min": 1,
-            "price_max": 5000000,
-            "color_min": "J",
-            "color_max": "D",
-            "clarity_min": "VS2",
-            "clarity_max": "FL",
-            "cut_min": "VG",
-            "cut_max": "ID",
-            "polish_min": "GD",
-            "polish_max": "EX",
-            "symmetry_min": "GD",
-            "symmetry_max": "EX",
-            "fluorescence_min": "NON",
-            "fluorescence_max": "VST",
-            "certificate_lab": "GIA,IGI,WISE",
-            "table_min": 0,
-            "table_max": 100,
-            "is_rjc": false
-          }
-        }
-      },
-      "block_order": [
-        "nivoda_connect_feed_9tVrc3"
-      ],
-      "settings": {}
     }
   },
   "order": [
-    "diamond_selection",
-    "1779954788f3c7e29e"
+    "custom_ring_builder"
   ]
 }
