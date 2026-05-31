@@ -6608,3 +6608,31 @@ input:checked + label,
     #111111 !important;
   color: #FFFFFF !important;
 }
+/* JOYARI LUXURY PALETTE */
+
+:root {
+  --joyari-ivory: #F8F6F1;
+  --joyari-gold: #C6A769;
+  --joyari-black: #111111;
+  --joyari-emerald: #0F3D2E;
+}
+
+body {
+  background: #F8F6F1 !important;
+  color: #111111 !important;
+}
+
+button,
+.btn,
+.button {
+  background: #C6A769 !important;
+  color: #111111 !important;
+  border: 1px solid #C6A769 !important;
+}
+
+button:hover,
+.btn:hover,
+.button:hover {
+  background: #111111 !important;
+  color: #F8F6F1 !important;
+}
