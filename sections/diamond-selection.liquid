@@ -5,6 +5,7 @@
   class="jk-diamond-select"
   data-diamond-selection
   data-endpoint="{{ section.settings.search_endpoint | default: '/apps/diamonds/search' }}"
+  data-fallback-feed="{{ 'joyari-diamond-feed.json' | asset_url }}"
   data-setting-url="{{ section.settings.setting_link | default: '/pages/custom-design?step=setting' }}"
 >
   <div class="jk-diamond-select__hero">

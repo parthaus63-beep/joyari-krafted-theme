@@ -3,6 +3,7 @@
 
   var STORAGE_KEY = 'joyariSelectedDiamond';
   var UNAVAILABLE_MESSAGE = 'Diamond inventory is temporarily unavailable. Please contact us for live diamond options.';
+  var FALLBACK_LOADED_MESSAGE = 'Certified diamond inventory loaded from Joyari secure feed.';
 
   var SHAPE_MAP = {
     RD: 'Round',
@@ -116,9 +117,13 @@
   function extractDiamonds(payload) {
     if (Array.isArray(payload)) return payload;
     if (payload && Array.isArray(payload.diamonds)) return payload.diamonds;
+    if (payload && Array.isArray(payload.items)) return payload.items;
     if (payload && Array.isArray(payload.results)) return payload.results;
     if (payload && Array.isArray(payload.data)) return payload.data;
     if (payload && payload.data && Array.isArray(payload.data.diamonds)) return payload.data.diamonds;
+    if (payload && payload.data && Array.isArray(payload.data.items)) return payload.data.items;
+    if (payload && payload.result && Array.isArray(payload.result.diamonds)) return payload.result.diamonds;
+    if (payload && payload.response && Array.isArray(payload.response.diamonds)) return payload.response.diamonds;
     return [];
   }
 
@@ -385,8 +390,49 @@
     return clean(root.getAttribute('data-endpoint'), '/apps/diamonds/search');
   }
 
+  function getFallbackFeed(root) {
+    return clean(root.getAttribute('data-fallback-feed'));
+  }
+
   function endpointIsMixedContent(endpoint) {
     return window.location.protocol === 'https:' && /^http:\/\//i.test(endpoint);
+  }
+
+  function diamondsFromPayload(payload) {
+    return extractDiamonds(payload).map(normaliseDiamond).filter(function (diamond) {
+      return diamond.stockId !== '-' || diamond.certificateNumber !== '-';
+    });
+  }
+
+  function fetchJson(url) {
+    return fetch(url, {
+      headers: {
+        Accept: 'application/json'
+      }
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Diamond backend unavailable: ' + response.status);
+      return response.json();
+    });
+  }
+
+  function loadFallbackDiamonds(root, originalError) {
+    var fallbackFeed = getFallbackFeed(root);
+
+    if (!fallbackFeed) {
+      return Promise.reject(originalError || new Error('No diamond fallback feed configured.'));
+    }
+
+    return fetchJson(fallbackFeed)
+      .then(function (payload) {
+        root._joyariDiamondSource = 'fallback';
+        return diamondsFromPayload(payload);
+      })
+      .catch(function (fallbackError) {
+        if (originalError && window.console && console.warn) {
+          console.warn('Joyari diamond app proxy failed before fallback.', originalError);
+        }
+        throw fallbackError;
+      });
   }
 
   function loadDiamonds(root) {
@@ -397,23 +443,20 @@
     // Temporary supplier URLs that contain API keys should be called by a private app proxy.
     // Shopify storefront JavaScript cannot safely fetch an http API from an https page.
     if (!endpoint || endpointIsMixedContent(endpoint)) {
-      root._joyariDiamondPromise = Promise.reject(new Error('Diamond endpoint must be proxied over HTTPS.'));
+      root._joyariDiamondPromise = loadFallbackDiamonds(root, new Error('Diamond endpoint must be proxied over HTTPS.'));
       return root._joyariDiamondPromise;
     }
 
-    root._joyariDiamondPromise = fetch(endpoint, {
-      headers: {
-        Accept: 'application/json'
-      }
-    })
-      .then(function (response) {
-        if (!response.ok) throw new Error('Diamond backend unavailable');
-        return response.json();
-      })
+    root._joyariDiamondPromise = fetchJson(endpoint)
       .then(function (payload) {
-        return extractDiamonds(payload).map(normaliseDiamond).filter(function (diamond) {
-          return diamond.stockId !== '-' || diamond.certificateNumber !== '-';
-        });
+        root._joyariDiamondSource = 'proxy';
+        return diamondsFromPayload(payload);
+      })
+      .catch(function (error) {
+        if (window.console && console.warn) {
+          console.warn('Joyari diamond app proxy unavailable. Loading storefront feed fallback.', error);
+        }
+        return loadFallbackDiamonds(root, error);
       });
 
     return root._joyariDiamondPromise;
@@ -430,8 +473,10 @@
     loadDiamonds(root)
       .then(function (diamonds) {
         var filtered = filterDiamonds(diamonds, filters);
+        var loadedMessage = root._joyariDiamondSource === 'fallback' ? FALLBACK_LOADED_MESSAGE : 'Live diamond inventory loaded.';
         root.classList.remove('is-loading');
-        setStatus(root, filtered.length ? 'Live diamond inventory loaded.' : 'No diamonds match the current filters.');
+        root.classList.remove('is-unavailable');
+        setStatus(root, filtered.length ? loadedMessage : 'No diamonds match the current filters.');
         setCount(root, filtered.length);
         renderDiamonds(root, filtered);
       })
