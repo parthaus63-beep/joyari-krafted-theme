@@ -125,6 +125,14 @@ h3 {
   contain: none !important;
 }
 
+.shopify-section--luxury-product-grid,
+.shopify-section--product-builder-main,
+.shopify-section--custom-ring-builder,
+.shopify-section--diamond-selection {
+  animation: none !important;
+  transform: none !important;
+}
+
 .visually-hidden,
 .skip-to-content {
   position: absolute;
@@ -4264,7 +4272,7 @@ body.jk-menu-lock {
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
