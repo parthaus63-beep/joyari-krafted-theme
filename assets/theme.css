@@ -7196,7 +7196,7 @@ body.jk-filter-lock {
   .jk-collection-filter-backdrop {
     position: fixed;
     inset: 0;
-    z-index: 2147482000;
+    z-index: 2147483400;
     display: block;
     background: rgba(17, 17, 17, .42);
     opacity: 0;
@@ -7212,7 +7212,7 @@ body.jk-filter-lock {
   .jk-collection-filters {
     position: fixed;
     inset: 0 auto 0 0;
-    z-index: 2147482001;
+    z-index: 2147483401;
     width: min(430px, 92vw);
     max-height: none;
     height: 100vh;
@@ -7483,7 +7483,7 @@ body.jk-filter-lock {
   .jk-collection-filter-backdrop {
     position: fixed !important;
     inset: 0;
-    z-index: 2147482000;
+    z-index: 2147483400;
     display: block !important;
     background: rgba(17, 17, 17, .44);
     opacity: 0;
@@ -7502,7 +7502,7 @@ body.jk-filter-lock {
     right: auto !important;
     bottom: 0 !important;
     left: 0 !important;
-    z-index: 2147482001;
+    z-index: 2147483401;
     display: flex !important;
     flex-direction: column;
     width: min(440px, 94vw);
