@@ -2826,43 +2826,6 @@ body.jk-menu-lock {
   grid-template-columns: auto 1fr;
 }
 
-.jk-shape-icon {
-  display: block;
-  width: 18px;
-  height: 18px;
-  background: linear-gradient(145deg, #ffffff, #dcecf0);
-  border: 1px solid rgba(17, 17, 17, .16);
-  box-shadow: 0 5px 10px rgba(17, 17, 17, .08);
-}
-
-.jk-shape-icon--round {
-  border-radius: 50%;
-}
-
-.jk-shape-icon--oval {
-  border-radius: 50%;
-  transform: scaleX(.7) scaleY(1.1);
-}
-
-.jk-shape-icon--emerald {
-  border-radius: 3px;
-  transform: scaleX(.76) scaleY(1.08);
-}
-
-.jk-shape-icon--pear {
-  border-radius: 50% 50% 50% 4px;
-  transform: rotate(-45deg);
-}
-
-.jk-shape-icon--marquise {
-  border-radius: 50% 0 50% 0;
-  transform: rotate(45deg) scaleX(.72) scaleY(1.15);
-}
-
-.jk-shape-icon--cushion {
-  border-radius: 6px;
-}
-
 .jk-builder-field--split {
   grid-template-columns: 1fr minmax(120px, 180px);
   align-items: center;
@@ -7833,78 +7796,73 @@ button[name="add"]:focus-visible {
   box-shadow: 0 0 0 2px rgba(198, 167, 105, .18), 0 18px 42px rgba(198, 167, 105, .18) !important;
 }
 
-.jk-shape-icon,
-.jk-shape-filter__stone {
-  position: relative;
-  width: 26px;
-  height: 26px;
-  border: 1px solid rgba(198, 167, 105, .58);
-  background:
-    radial-gradient(circle at 32% 28%, #FFFFFF 0 18%, rgba(223, 236, 240, .84) 19% 42%, transparent 43%),
-    conic-gradient(from 135deg, rgba(255, 255, 255, .96), rgba(198, 167, 105, .22), rgba(220, 236, 240, .72), rgba(255, 255, 255, .96));
-  box-shadow: 0 9px 18px rgba(17, 17, 17, .10);
-}
-
-.jk-shape-icon::after,
-.jk-shape-filter__stone::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border: 1px solid rgba(17, 17, 17, .12);
-  clip-path: polygon(50% 0, 100% 48%, 50% 100%, 0 48%);
-}
-
-.jk-shape-icon--round,
-.jk-shape-filter__stone--round {
-  border-radius: 50%;
-}
-
-.jk-shape-icon--oval,
-.jk-shape-filter__stone--oval {
-  border-radius: 50%;
-  transform: scaleX(.72) scaleY(1.08);
-}
-
-.jk-shape-icon--emerald,
-.jk-shape-filter__stone--emerald {
-  border-radius: 4px;
-  transform: scaleX(.78) scaleY(1.08);
-}
-
-.jk-shape-icon--pear,
-.jk-shape-filter__stone--pear {
-  border-radius: 56% 56% 56% 10%;
-  transform: rotate(-45deg);
-}
-
-.jk-shape-icon--cushion,
-.jk-shape-filter__stone--cushion {
-  border-radius: 8px;
-}
-
-.jk-shape-icon--princess,
-.jk-shape-filter__stone--princess {
-  border-radius: 2px;
-  transform: rotate(45deg) scale(.82);
-}
-
-.jk-shape-icon--marquise,
-.jk-shape-filter__stone--marquise {
-  border-radius: 56% 0 56% 0;
-  transform: rotate(45deg) scaleX(.76) scaleY(1.14);
-}
-
-.jk-shape-icon--radiant,
-.jk-shape-filter__stone--radiant {
-  border-radius: 4px;
-  transform: scaleX(.82) scaleY(1.08);
-}
-
 .jk-option-fieldset--shape input:checked + label,
 .jk-shape-filter:has(input:checked) {
   border-color: #C6A769 !important;
   background: rgba(198, 167, 105, .12) !important;
   box-shadow: 0 0 0 2px rgba(198, 167, 105, .16) !important;
+}
+
+/* Joyari diamond shape SVG icons */
+.jk-diamond-shape-icon,
+.jk-shape-filter input:checked + .jk-diamond-shape-icon {
+  display: block !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  color: #0F3D2E !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.45 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.jk-diamond-shape-icon * {
+  vector-effect: non-scaling-stroke;
+}
+
+.jk-shape-icon::after,
+.jk-shape-filter__stone::after {
+  content: none !important;
+}
+
+.jk-option-fieldset--shape .jk-shape-row {
+  gap: 10px;
+}
+
+.jk-option-fieldset--shape .jk-shape-row label {
+  min-height: 56px !important;
+  border-radius: 8px !important;
+  transition: transform .22s var(--jk-ease), border-color .22s var(--jk-ease), box-shadow .22s var(--jk-ease), background .22s var(--jk-ease) !important;
+}
+
+.jk-option-fieldset--shape .jk-shape-chip {
+  display: inline-grid !important;
+  grid-template-columns: 30px minmax(0, 1fr) !important;
+  align-items: center;
+  gap: 10px !important;
+  font-size: .78rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.jk-option-fieldset--shape .jk-shape-row input:checked + label,
+.jk-shape-filter:has(input:checked) {
+  background: #F8F6F1 !important;
+  border-color: #C6A769 !important;
+  box-shadow: 0 12px 28px rgba(198, 167, 105, .18), 0 0 0 2px rgba(198, 167, 105, .18) !important;
+}
+
+.jk-option-fieldset--shape .jk-shape-row label:hover,
+.jk-shape-filter:hover {
+  transform: translateY(-1px) scale(1.01);
+  border-color: #C6A769 !important;
 }
 
 .jk-education-guide {

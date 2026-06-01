@@ -36,10 +36,9 @@
           <div class="jk-shape-filter-grid">
             {% assign shapes = 'Round,Oval,Pear,Emerald,Cushion,Princess,Marquise,Radiant' | split: ',' %}
             {% for shape in shapes %}
-              {% assign shape_handle = shape | handleize %}
               <label class="jk-shape-filter">
                 <input type="checkbox" name="shape" value="{{ shape }}">
-                <span class="jk-shape-filter__stone jk-shape-filter__stone--{{ shape_handle }}" aria-hidden="true"></span>
+                {% render 'diamond-shape-icon', shape: shape, icon_class: 'jk-shape-filter__stone jk-diamond-shape-icon' %}
                 <span>{{ shape }}</span>
               </label>
             {% endfor %}

@@ -195,28 +195,33 @@
 .jk-shape-filter-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px;
+  gap: 10px;
 }
 
 .jk-shape-filter {
   position: relative;
   display: grid;
-  grid-template-columns: 22px 1fr;
-  gap: 9px;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
   align-items: center;
-  min-height: 45px;
-  padding: 10px;
-  border: 1px solid rgba(33, 31, 28, .1);
-  border-radius: 6px;
-  background: #F8F6F1;
+  min-height: 56px;
+  padding: 12px 13px;
+  border: 1px solid rgba(198, 167, 105, .34);
+  border-radius: 8px;
+  background: #FFFFFF;
   color: #111111;
   cursor: pointer;
-  transition: border-color .24s ease, background .24s ease, transform .24s ease;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: border-color .24s ease, background .24s ease, box-shadow .24s ease, transform .24s ease;
 }
 
 .jk-shape-filter:hover {
-  transform: translateY(-1px);
-  border-color: rgba(198, 167, 105, .36);
+  transform: translateY(-1px) scale(1.01);
+  border-color: #C6A769;
+  box-shadow: 0 12px 28px rgba(17, 17, 17, .08);
 }
 
 .jk-shape-filter input {
@@ -227,47 +232,31 @@
 }
 
 .jk-shape-filter:has(input:checked) {
-  border-color: rgba(198, 167, 105, .58);
+  border-color: #C6A769;
   background: #F8F6F1;
+  box-shadow: 0 12px 28px rgba(198, 167, 105, .16), 0 0 0 2px rgba(198, 167, 105, .16);
 }
 
 .jk-shape-filter__stone {
   display: block;
-  width: 22px;
-  aspect-ratio: 1;
-  border: 1px solid rgba(151, 123, 69, .52);
-  background:
-    radial-gradient(circle at 35% 30%, #fff, rgba(223, 233, 238, .68) 36%, transparent 37%),
-    linear-gradient(135deg, rgba(255, 255, 255, .9), rgba(198, 167, 105, .18));
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  color: #0F3D2E;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.45;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
 }
 
-.jk-shape-filter__stone--round {
-  border-radius: 50%;
-}
-
-.jk-shape-filter__stone--oval {
-  border-radius: 50%;
-  transform: scaleX(.72);
-}
-
-.jk-shape-filter__stone--pear {
-  border-radius: 60% 60% 60% 8px;
-  transform: rotate(-45deg);
-}
-
-.jk-shape-filter__stone--emerald,
-.jk-shape-filter__stone--princess,
-.jk-shape-filter__stone--radiant {
-  border-radius: 4px;
-}
-
-.jk-shape-filter__stone--cushion {
-  border-radius: 9px;
-}
-
-.jk-shape-filter__stone--marquise {
-  border-radius: 50% 0 50% 0;
-  transform: rotate(45deg) scaleX(.78);
+.jk-shape-filter__stone * {
+  vector-effect: non-scaling-stroke;
 }
 
 .jk-diamond-filters__actions {
@@ -710,7 +699,6 @@
 .jk-diamond-card.active,
 .jk-diamond-select__steps .is-active,
 .jk-shape-filter:has(input:checked),
-.jk-shape-filter input:checked + .jk-shape-filter__stone,
 .jk-diamond-button[aria-pressed="true"],
 .jk-diamond-button[aria-selected="true"],
 input:checked + label {
@@ -726,6 +714,35 @@ input:checked + label {
   background-color: #FFFFFF !important;
   border-color: rgba(198, 167, 105, .45) !important;
   color: #111111 !important;
+}
+
+.jk-shape-filter:has(input:checked) {
+  background-color: #F8F6F1 !important;
+  border-color: #C6A769 !important;
+  box-shadow: 0 12px 28px rgba(198, 167, 105, .16), 0 0 0 2px rgba(198, 167, 105, .16) !important;
+}
+
+.jk-diamond-shape-icon,
+.jk-shape-filter input:checked + .jk-diamond-shape-icon {
+  display: block !important;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  color: #0F3D2E !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2.45 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.jk-diamond-shape-icon * {
+  vector-effect: non-scaling-stroke;
 }
 
 .jk-filter-group input:hover,
