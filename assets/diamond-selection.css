@@ -758,9 +758,11 @@ input:checked + label {
 
   .jk-diamond-select h1 {
     max-width: 100%;
-    font-size: clamp(2.65rem, 12.5vw, 3.45rem);
-    line-height: .98;
-    overflow-wrap: break-word;
+    width: 100%;
+    font-size: clamp(2.15rem, 10.8vw, 3.1rem);
+    line-height: 1;
+    overflow-wrap: anywhere;
+    word-break: break-word;
     hyphens: auto;
   }
 
