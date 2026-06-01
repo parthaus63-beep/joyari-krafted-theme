@@ -117,7 +117,23 @@
     });
   }
 
+  function reinforceOverlayStacking() {
+    if (document.getElementById('joyari-overlay-polish')) return;
+
+    var style = document.createElement('style');
+    style.id = 'joyari-overlay-polish';
+    style.textContent = [
+      '@media (max-width: 989px) {',
+      '  .jk-collection-filter-backdrop { z-index: 2147483400 !important; }',
+      '  .jk-collection-filters { z-index: 2147483401 !important; }',
+      '  .shopify-section--luxury-product-grid { animation: none !important; transform: none !important; }',
+      '}'
+    ].join('\n');
+    document.head.appendChild(style);
+  }
+
   function init() {
+    reinforceOverlayStacking();
     polishBrandText();
     polishLegacyHeroImage();
     polishFallbackProductCards();
