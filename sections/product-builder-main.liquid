@@ -55,6 +55,31 @@
   endfor
 
   assign product_gallery_media_count = product.media.size
+  assign fallback_product_image_1 = blank
+  assign fallback_product_image_2 = blank
+  assign fallback_product_image_3 = blank
+  assign fallback_product_image_4 = blank
+  assign fallback_product_image_5 = blank
+  assign fallback_product_image_6 = blank
+
+  for media in product.media
+    if media.preview_image != blank
+      if fallback_product_image_1 == blank
+        assign fallback_product_image_1 = media.preview_image
+      elsif fallback_product_image_2 == blank
+        assign fallback_product_image_2 = media.preview_image
+      elsif fallback_product_image_3 == blank
+        assign fallback_product_image_3 = media.preview_image
+      elsif fallback_product_image_4 == blank
+        assign fallback_product_image_4 = media.preview_image
+      elsif fallback_product_image_5 == blank
+        assign fallback_product_image_5 = media.preview_image
+      elsif fallback_product_image_6 == blank
+        assign fallback_product_image_6 = media.preview_image
+      endif
+    endif
+  endfor
+
   if section.settings.gallery_image != blank
     assign product_gallery_media_count = product_gallery_media_count | plus: 1
   endif
@@ -249,6 +274,8 @@
                 <div class="jk-builder-support-card">
                   {% if section.settings.metal_selector_image != blank %}
                     {{ section.settings.metal_selector_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.metal_selector_alt }}
+                  {% elsif fallback_product_image_1 != blank %}
+                    {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
                   {% else %}
                     {% render 'joyari-visual-placeholder', type: 'ring' %}
                   {% endif %}
@@ -257,6 +284,10 @@
                 <div class="jk-builder-support-card">
                   {% if section.settings.diamond_shape_image != blank %}
                     {{ section.settings.diamond_shape_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.diamond_shape_alt }}
+                  {% elsif fallback_product_image_2 != blank %}
+                    {{ fallback_product_image_2 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
+                  {% elsif fallback_product_image_1 != blank %}
+                    {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
                   {% else %}
                     {% render 'joyari-visual-placeholder', type: 'diamond' %}
                   {% endif %}
@@ -265,6 +296,10 @@
                 <div class="jk-builder-support-card">
                   {% if section.settings.carat_size_image != blank %}
                     {{ section.settings.carat_size_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.carat_size_alt }}
+                  {% elsif fallback_product_image_3 != blank %}
+                    {{ fallback_product_image_3 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
+                  {% elsif fallback_product_image_1 != blank %}
+                    {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
                   {% else %}
                     {% render 'joyari-visual-placeholder', type: 'hand' %}
                   {% endif %}
@@ -485,6 +520,10 @@
         <div class="jk-product-editorial-card__media">
           {% if section.settings.craftsmanship_image != blank %}
             {{ section.settings.craftsmanship_image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: section.settings.craftsmanship_alt }}
+          {% elsif fallback_product_image_4 != blank %}
+            {{ fallback_product_image_4 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
+          {% elsif fallback_product_image_1 != blank %}
+            {{ fallback_product_image_1 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
           {% else %}
             {% render 'joyari-visual-placeholder', type: 'craft' %}
           {% endif %}
@@ -500,6 +539,12 @@
         <div class="jk-product-editorial-card__media">
           {% if section.settings.packaging_image != blank %}
             {{ section.settings.packaging_image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: section.settings.packaging_alt }}
+          {% elsif fallback_product_image_5 != blank %}
+            {{ fallback_product_image_5 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
+          {% elsif fallback_product_image_2 != blank %}
+            {{ fallback_product_image_2 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
+          {% elsif fallback_product_image_1 != blank %}
+            {{ fallback_product_image_1 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
           {% else %}
             {% render 'joyari-visual-placeholder', type: 'box' %}
           {% endif %}
@@ -515,6 +560,12 @@
         <div class="jk-product-editorial-card__media">
           {% if section.settings.cta_image != blank %}
             {{ section.settings.cta_image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: section.settings.cta_image_alt }}
+          {% elsif fallback_product_image_6 != blank %}
+            {{ fallback_product_image_6 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
+          {% elsif fallback_product_image_3 != blank %}
+            {{ fallback_product_image_3 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
+          {% elsif fallback_product_image_1 != blank %}
+            {{ fallback_product_image_1 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
           {% else %}
             {% render 'joyari-visual-placeholder', type: 'hand' %}
           {% endif %}
