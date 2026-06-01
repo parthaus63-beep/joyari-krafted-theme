@@ -53,6 +53,20 @@
       assign has_product_model = true
     endif
   endfor
+
+  assign product_gallery_media_count = product.media.size
+  if section.settings.gallery_image != blank
+    assign product_gallery_media_count = product_gallery_media_count | plus: 1
+  endif
+  if section.settings.ring_on_hand_image != blank
+    assign product_gallery_media_count = product_gallery_media_count | plus: 1
+  endif
+  if section.settings.diamond_closeup_image != blank
+    assign product_gallery_media_count = product_gallery_media_count | plus: 1
+  endif
+  if section.settings.product_video_url != blank or section.settings.product_video_file_url != blank
+    assign product_gallery_media_count = product_gallery_media_count | plus: 1
+  endif
 %}
 
 {% if has_product_model %}
@@ -66,20 +80,63 @@
   .jk-option-fieldset--shape .jk-shape-row{gap:10px}.jk-option-fieldset--shape .jk-shape-row label{min-height:56px!important;border-radius:8px!important;transition:transform .22s var(--jk-ease),border-color .22s var(--jk-ease),box-shadow .22s var(--jk-ease),background .22s var(--jk-ease)!important}.jk-option-fieldset--shape .jk-shape-chip{grid-template-columns:30px minmax(0,1fr)!important;gap:10px!important;font-size:.78rem;letter-spacing:.06em}.jk-option-fieldset--shape .jk-shape-row input:checked+label{background:#F8F6F1!important;border-color:#C6A769!important;box-shadow:0 12px 28px rgba(198,167,105,.18),0 0 0 2px rgba(198,167,105,.18)!important}.jk-option-fieldset--shape .jk-shape-row label:hover{transform:translateY(-1px) scale(1.01);border-color:#C6A769!important;box-shadow:0 12px 28px rgba(17,17,17,.08)!important}.jk-diamond-shape-icon{display:block!important;width:30px!important;height:30px!important;min-width:30px!important;color:#0F3D2E!important;fill:none!important;stroke:currentColor!important;stroke-width:2.45!important;stroke-linecap:round!important;stroke-linejoin:round!important;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important}.jk-diamond-shape-icon *{vector-effect:non-scaling-stroke}.jk-shape-icon::after{content:none!important}
 </style>
 
+<style>
+  .jk-product-media--support{background:#FFFFFF!important}.jk-product-media--support img{width:100%;height:100%;object-fit:cover}.jk-product-media--video{display:grid;place-items:center}.jk-product-media--video video,.jk-product-media--video iframe{width:100%;height:100%;border:0;object-fit:cover}.jk-product-media__caption{position:absolute;left:18px;bottom:18px;z-index:3;display:inline-flex;align-items:center;min-height:34px;padding:8px 12px;border:1px solid rgba(198,167,105,.34);border-radius:999px;background:rgba(255,255,255,.82);color:#111111;font-size:.68rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;backdrop-filter:blur(10px)}.jk-product-gallery:not(.jk-product-gallery--with-thumbs) .jk-product-gallery__main{grid-column:1}.jk-product-media .jk-luxury-visual-placeholder{width:100%;height:100%}.jk-luxury-visual-placeholder{position:relative;display:grid;place-items:center;min-height:100%;overflow:hidden;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.96),transparent 9rem),linear-gradient(145deg,#FFFFFF 0%,#F8F6F1 56%,#EEE2D2 100%);isolation:isolate}.jk-luxury-visual-placeholder:before{content:"";position:absolute;inset:14px;border:1px solid rgba(198,167,105,.18);border-radius:inherit;pointer-events:none}.jk-luxury-visual-placeholder svg{position:relative;z-index:1;width:min(42%,220px);height:auto;color:#0F3D2E;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 18px 28px rgba(17,17,17,.10))}.jk-builder-support-visuals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 22px}.jk-builder-support-card{position:relative;min-height:132px;overflow:hidden;border:1px solid rgba(198,167,105,.26);border-radius:8px;background:#F8F6F1}.jk-builder-support-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--jk-ease)}.jk-builder-support-card:hover img{transform:scale(1.045)}.jk-builder-support-card .jk-luxury-visual-placeholder{min-height:132px}.jk-builder-support-card span{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;display:inline-flex;width:fit-content;max-width:calc(100% - 24px);min-height:28px;align-items:center;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.84);color:#111111;font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.jk-builder-card__header{padding-bottom:16px}.jk-builder-card__header h2{font-size:clamp(1.55rem,2vw,2.2rem)}.jk-builder-subcopy{max-width:560px}.jk-builder-step__header{align-items:start}.jk-builder-step__header p{font-size:.82rem;line-height:1.55}.jk-product-editorial-visuals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,26px);width:min(1680px,calc(100vw - 32px));margin:clamp(28px,4vw,60px) auto 0}.jk-product-editorial-card{overflow:hidden;border:1px solid rgba(198,167,105,.24);border-radius:8px;background:#FFFFFF;box-shadow:0 20px 54px rgba(17,17,17,.07)}.jk-product-editorial-card__media{aspect-ratio:4/5;background:#F8F6F1}.jk-product-editorial-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .75s var(--jk-ease)}.jk-product-editorial-card:hover img{transform:scale(1.045)}.jk-product-editorial-card__media .jk-luxury-visual-placeholder{min-height:100%}.jk-product-editorial-card__body{display:grid;gap:8px;padding:18px}.jk-product-editorial-card__body span{color:#0F3D2E;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.jk-product-editorial-card__body h3{color:#111111;font-size:1.25rem}.jk-product-editorial-card__body p{color:#5e5a53;font-size:.9rem;line-height:1.65}.jk-media-thumb--support img{width:100%;height:100%;object-fit:cover}.jk-media-thumb__play{display:grid;place-items:center;width:100%;height:100%;background:linear-gradient(145deg,#FFFFFF,#F8F6F1);color:#0F3D2E;font-size:1.4rem}@media(max-width:1080px){.jk-builder-support-visuals,.jk-product-editorial-visuals{grid-template-columns:1fr 1fr}.jk-builder-support-visuals{margin-top:4px}}@media(max-width:680px){.jk-builder-support-visuals,.jk-product-editorial-visuals{grid-template-columns:1fr}.jk-builder-support-card{min-height:150px}.jk-product-editorial-visuals{width:calc(100vw - 20px)}.jk-product-media__caption{left:12px;bottom:12px}.jk-product-media--video video,.jk-product-media--video iframe{min-height:100%}}
+</style>
+
 <section class="jk-product-template jk-product-builder-main" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
   {% if product != blank %}
     <script type="application/json" data-product-json>{{ product | json }}</script>
 
     <div class="jk-product-layout jk-product-layout--builder">
-      <div class="jk-product-gallery{% if product.media.size > 1 %} jk-product-gallery--with-thumbs{% endif %}" data-product-gallery>
+      <div class="jk-product-gallery{% if product_gallery_media_count > 1 %} jk-product-gallery--with-thumbs{% endif %}" data-product-gallery>
         <div class="jk-product-gallery__main">
-          {% if product.media.size > 0 %}
+          {% if product_gallery_media_count > 0 %}
+            {% if section.settings.gallery_image != blank %}
+              <figure class="jk-product-media jk-product-media--support is-active" data-media-id="joyari-gallery-image" data-media-type="image">
+                {{ section.settings.gallery_image | image_url: width: 1800 | image_tag: loading: 'eager', sizes: '(min-width: 1080px) 62vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.gallery_image_alt }}
+                <figcaption class="jk-product-media__caption">Hero visual</figcaption>
+              </figure>
+            {% endif %}
+
             {% for media in product.media %}
-              <figure class="jk-product-media jk-product-media--{{ media.media_type }}{% if forloop.first %} is-active{% endif %}" data-media-id="{{ media.id }}" data-image-id="{{ media.preview_image.id | default: media.id }}" data-media-type="{{ media.media_type }}">
+              <figure class="jk-product-media jk-product-media--{{ media.media_type }}{% if forloop.first and section.settings.gallery_image == blank %} is-active{% endif %}" data-media-id="{{ media.id }}" data-image-id="{{ media.preview_image.id | default: media.id }}" data-media-type="{{ media.media_type }}">
                 {% render 'product-media', media: media, product: product, mode: 'main' %}
               </figure>
             {% endfor %}
-            {% if product.media.size > 1 %}
+
+            {% assign support_media_index = product.media.size %}
+            {% if section.settings.ring_on_hand_image != blank %}
+              {% assign support_media_index = support_media_index | plus: 1 %}
+              <figure class="jk-product-media jk-product-media--support{% if product.media.size == 0 and section.settings.gallery_image == blank %} is-active{% endif %}" data-media-id="joyari-ring-on-hand" data-media-type="image">
+                {{ section.settings.ring_on_hand_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 62vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.ring_on_hand_alt }}
+                <figcaption class="jk-product-media__caption">Ring on hand</figcaption>
+              </figure>
+            {% endif %}
+
+            {% if section.settings.diamond_closeup_image != blank %}
+              {% assign support_media_index = support_media_index | plus: 1 %}
+              <figure class="jk-product-media jk-product-media--support{% if product.media.size == 0 and section.settings.gallery_image == blank and section.settings.ring_on_hand_image == blank %} is-active{% endif %}" data-media-id="joyari-diamond-closeup" data-media-type="image">
+                {{ section.settings.diamond_closeup_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 62vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.diamond_closeup_alt }}
+                <figcaption class="jk-product-media__caption">Diamond detail</figcaption>
+              </figure>
+            {% endif %}
+
+            {% if section.settings.product_video_url != blank or section.settings.product_video_file_url != blank %}
+              {% assign support_media_index = support_media_index | plus: 1 %}
+              <figure class="jk-product-media jk-product-media--video{% if product.media.size == 0 and section.settings.gallery_image == blank and section.settings.ring_on_hand_image == blank and section.settings.diamond_closeup_image == blank %} is-active{% endif %}" data-media-id="joyari-product-video" data-media-type="video">
+                {% if section.settings.product_video_file_url != blank %}
+                  <video controls playsinline preload="metadata">
+                    <source src="{{ section.settings.product_video_file_url }}" type="video/mp4">
+                  </video>
+                {% else %}
+                  {{ section.settings.product_video_url | external_video_tag }}
+                {% endif %}
+                <figcaption class="jk-product-media__caption">Product video</figcaption>
+              </figure>
+            {% endif %}
+
+            {% if product_gallery_media_count > 1 %}
               <div class="jk-product-gallery__arrows" aria-label="Product media navigation">
                 <button type="button" class="jk-product-gallery__arrow jk-product-gallery__arrow--prev" data-media-previous aria-label="Previous product media">
                   <span aria-hidden="true">&lsaquo;</span>
@@ -91,18 +148,38 @@
             {% endif %}
           {% else %}
             <figure class="jk-product-media is-active">
-              <div class="jk-product-placeholder jk-product-placeholder--large" aria-hidden="true"></div>
+              {% render 'joyari-visual-placeholder', type: 'ring' %}
             </figure>
           {% endif %}
         </div>
 
-        {% if product.media.size > 1 %}
+        {% if product_gallery_media_count > 1 %}
           <div class="jk-product-gallery__thumbs" aria-label="Product media">
+            {% if section.settings.gallery_image != blank %}
+              <button type="button" class="jk-media-thumb jk-media-thumb--support is-active" data-media-trigger="joyari-gallery-image" aria-label="View hero visual">
+                {{ section.settings.gallery_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: section.settings.gallery_image_alt }}
+              </button>
+            {% endif %}
             {% for media in product.media %}
-              <button type="button" class="jk-media-thumb jk-media-thumb--{{ media.media_type }}{% if forloop.first %} is-active{% endif %}" data-media-trigger="{{ media.id }}" data-image-trigger="{{ media.preview_image.id | default: media.id }}" aria-label="View media {{ forloop.index }}">
+              <button type="button" class="jk-media-thumb jk-media-thumb--{{ media.media_type }}{% if forloop.first and section.settings.gallery_image == blank %} is-active{% endif %}" data-media-trigger="{{ media.id }}" data-image-trigger="{{ media.preview_image.id | default: media.id }}" aria-label="View media {{ forloop.index }}">
                 {% render 'product-media', media: media, product: product, mode: 'thumbnail' %}
               </button>
             {% endfor %}
+            {% if section.settings.ring_on_hand_image != blank %}
+              <button type="button" class="jk-media-thumb jk-media-thumb--support{% if product.media.size == 0 and section.settings.gallery_image == blank %} is-active{% endif %}" data-media-trigger="joyari-ring-on-hand" aria-label="View ring on hand visual">
+                {{ section.settings.ring_on_hand_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: section.settings.ring_on_hand_alt }}
+              </button>
+            {% endif %}
+            {% if section.settings.diamond_closeup_image != blank %}
+              <button type="button" class="jk-media-thumb jk-media-thumb--support{% if product.media.size == 0 and section.settings.gallery_image == blank and section.settings.ring_on_hand_image == blank %} is-active{% endif %}" data-media-trigger="joyari-diamond-closeup" aria-label="View diamond close-up visual">
+                {{ section.settings.diamond_closeup_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: section.settings.diamond_closeup_alt }}
+              </button>
+            {% endif %}
+            {% if section.settings.product_video_url != blank or section.settings.product_video_file_url != blank %}
+              <button type="button" class="jk-media-thumb jk-media-thumb--support" data-media-trigger="joyari-product-video" aria-label="View product video">
+                <span class="jk-media-thumb__play" aria-hidden="true">▶</span>
+              </button>
+            {% endif %}
           </div>
         {% endif %}
       </div>
@@ -164,7 +241,34 @@
                 <div>
                   <p class="jk-eyebrow">Simple selection</p>
                   <h2>{{ section.settings.builder_heading }}</h2>
-                  <p class="jk-builder-subcopy">Choose the available Shopify option for checkout. For a different metal, size, diamond shape, engraving, or personal detail, send a custom request below.</p>
+                  <p class="jk-builder-subcopy">Select the available Shopify option for checkout, then add private design preferences for the Joyari team.</p>
+                </div>
+              </div>
+
+              <div class="jk-builder-support-visuals" aria-label="Joyari product visual guidance">
+                <div class="jk-builder-support-card">
+                  {% if section.settings.metal_selector_image != blank %}
+                    {{ section.settings.metal_selector_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.metal_selector_alt }}
+                  {% else %}
+                    {% render 'joyari-visual-placeholder', type: 'ring' %}
+                  {% endif %}
+                  <span>Metal tone</span>
+                </div>
+                <div class="jk-builder-support-card">
+                  {% if section.settings.diamond_shape_image != blank %}
+                    {{ section.settings.diamond_shape_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.diamond_shape_alt }}
+                  {% else %}
+                    {% render 'joyari-visual-placeholder', type: 'diamond' %}
+                  {% endif %}
+                  <span>Diamond shape</span>
+                </div>
+                <div class="jk-builder-support-card">
+                  {% if section.settings.carat_size_image != blank %}
+                    {{ section.settings.carat_size_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.carat_size_alt }}
+                  {% else %}
+                    {% render 'joyari-visual-placeholder', type: 'hand' %}
+                  {% endif %}
+                  <span>Carat &amp; fit</span>
                 </div>
               </div>
 
@@ -174,7 +278,7 @@
                     <span class="jk-builder-step__number">01</span>
                     <div>
                       <h3>Available options</h3>
-                      <p>These are the real Shopify variants for this product, often kept to a simple choice such as carat size.</p>
+                      <p>Select the real Shopify variant for checkout.</p>
                     </div>
                   </div>
 
@@ -212,7 +316,7 @@
                   <span class="jk-builder-step__number">{% if product.has_only_default_variant %}01{% else %}02{% endif %}</span>
                   <div>
                     <h3>Design preferences</h3>
-                    <p>Choose your preferred metal, diamond shape, and carat presence. These details are saved with your order request while Shopify variants stay simple.</p>
+                    <p>Saved with your order request as custom details.</p>
                   </div>
                 </div>
 
@@ -275,7 +379,7 @@
                     <span class="jk-builder-step__number">{% if product.has_only_default_variant %}02{% else %}03{% endif %}</span>
                     <div>
                       <h3>Ring size</h3>
-                      <p>Select your preferred fit. This is saved with the order and does not change the Shopify variant.</p>
+                      <p>Saved as a line item property, not a variant.</p>
                     </div>
                   </div>
 
@@ -376,6 +480,53 @@
       </div>
     </div>
 
+    <div class="jk-product-editorial-visuals" aria-label="Joyari craftsmanship and presentation visuals">
+      <article class="jk-product-editorial-card">
+        <div class="jk-product-editorial-card__media">
+          {% if section.settings.craftsmanship_image != blank %}
+            {{ section.settings.craftsmanship_image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: section.settings.craftsmanship_alt }}
+          {% else %}
+            {% render 'joyari-visual-placeholder', type: 'craft' %}
+          {% endif %}
+        </div>
+        <div class="jk-product-editorial-card__body">
+          <span>The atelier</span>
+          <h3>Crafted with quiet precision</h3>
+          <p>Use this visual slot for bench work, stone setting, polishing, or a close detail of the finished piece.</p>
+        </div>
+      </article>
+
+      <article class="jk-product-editorial-card">
+        <div class="jk-product-editorial-card__media">
+          {% if section.settings.packaging_image != blank %}
+            {{ section.settings.packaging_image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: section.settings.packaging_alt }}
+          {% else %}
+            {% render 'joyari-visual-placeholder', type: 'box' %}
+          {% endif %}
+        </div>
+        <div class="jk-product-editorial-card__body">
+          <span>The reveal</span>
+          <h3>Presented with ceremony</h3>
+          <p>Show the box, certificate, care card, or unboxing moment that helps clients feel confident before purchase.</p>
+        </div>
+      </article>
+
+      <article class="jk-product-editorial-card">
+        <div class="jk-product-editorial-card__media">
+          {% if section.settings.cta_image != blank %}
+            {{ section.settings.cta_image | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: section.settings.cta_image_alt }}
+          {% else %}
+            {% render 'joyari-visual-placeholder', type: 'hand' %}
+          {% endif %}
+        </div>
+        <div class="jk-product-editorial-card__body">
+          <span>Private guidance</span>
+          <h3>Refine the ring with us</h3>
+          <p>Use this space for a proposal, hand model, styling image, or appointment-led custom design moment.</p>
+        </div>
+      </article>
+    </div>
+
     <div class="jk-mobile-atc" data-mobile-atc>
       <div>
         <span>{{ product.title }}</span>
@@ -409,6 +560,131 @@
       "id": "builder_heading",
       "label": "Builder heading",
       "default": "Design your Joyari piece"
+    },
+    {
+      "type": "header",
+      "content": "Product gallery visuals"
+    },
+    {
+      "type": "image_picker",
+      "id": "gallery_image",
+      "label": "Hero/product gallery image"
+    },
+    {
+      "type": "text",
+      "id": "gallery_image_alt",
+      "label": "Hero/product gallery image alt text",
+      "default": "Joyari Krafted diamond ring"
+    },
+    {
+      "type": "image_picker",
+      "id": "ring_on_hand_image",
+      "label": "Ring on hand image"
+    },
+    {
+      "type": "text",
+      "id": "ring_on_hand_alt",
+      "label": "Ring on hand image alt text",
+      "default": "Joyari Krafted ring worn on hand"
+    },
+    {
+      "type": "image_picker",
+      "id": "diamond_closeup_image",
+      "label": "Close-up diamond image"
+    },
+    {
+      "type": "text",
+      "id": "diamond_closeup_alt",
+      "label": "Close-up diamond image alt text",
+      "default": "Close-up diamond detail"
+    },
+    {
+      "type": "video_url",
+      "id": "product_video_url",
+      "label": "External product video",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "url",
+      "id": "product_video_file_url",
+      "label": "Shopify-hosted MP4 video URL"
+    },
+    {
+      "type": "header",
+      "content": "Builder support visuals"
+    },
+    {
+      "type": "image_picker",
+      "id": "metal_selector_image",
+      "label": "Metal selector support image"
+    },
+    {
+      "type": "text",
+      "id": "metal_selector_alt",
+      "label": "Metal selector image alt text",
+      "default": "Joyari Krafted metal tone detail"
+    },
+    {
+      "type": "image_picker",
+      "id": "diamond_shape_image",
+      "label": "Diamond shape support image"
+    },
+    {
+      "type": "text",
+      "id": "diamond_shape_alt",
+      "label": "Diamond shape image alt text",
+      "default": "Diamond shape comparison detail"
+    },
+    {
+      "type": "image_picker",
+      "id": "carat_size_image",
+      "label": "Carat and ring size guide visual"
+    },
+    {
+      "type": "text",
+      "id": "carat_size_alt",
+      "label": "Carat and size visual alt text",
+      "default": "Ring size and diamond proportion guide"
+    },
+    {
+      "type": "header",
+      "content": "Editorial product visuals"
+    },
+    {
+      "type": "image_picker",
+      "id": "craftsmanship_image",
+      "label": "Craftsmanship image"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_alt",
+      "label": "Craftsmanship image alt text",
+      "default": "Joyari Krafted atelier craftsmanship"
+    },
+    {
+      "type": "image_picker",
+      "id": "packaging_image",
+      "label": "Packaging image"
+    },
+    {
+      "type": "text",
+      "id": "packaging_alt",
+      "label": "Packaging image alt text",
+      "default": "Joyari Krafted luxury packaging"
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_image",
+      "label": "CTA image"
+    },
+    {
+      "type": "text",
+      "id": "cta_image_alt",
+      "label": "CTA image alt text",
+      "default": "Joyari Krafted private consultation"
     },
     {
       "type": "checkbox",

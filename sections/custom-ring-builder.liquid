@@ -1,3 +1,116 @@
+<section class="jkc-media-studio" aria-label="Joyari Krafted custom design visuals">
+  <div class="jkc-media-studio__hero">
+    <div class="jkc-media-studio__copy">
+      <p class="jk-diamond-select__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.subheading }}</p>
+      <div class="jkc-media-studio__actions">
+        <a class="jk-diamond-button jk-diamond-button--dark" href="#shopify-section-{{ section.id | default: 'custom_ring_builder' }}">{{ section.settings.primary_label }}</a>
+        <a class="jk-diamond-button jk-diamond-button--outline" href="{{ section.settings.consultation_link | default: '/pages/contact' }}">{{ section.settings.secondary_label }}</a>
+      </div>
+    </div>
+
+    <div class="jkc-media-studio__visual">
+      {% if section.settings.hero_video_file_url != blank %}
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="{{ section.settings.hero_video_file_url }}" type="video/mp4">
+        </video>
+      {% elsif section.settings.hero_video_url != blank %}
+        {{ section.settings.hero_video_url | external_video_tag }}
+      {% elsif section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', sizes: '(min-width: 990px) 48vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.hero_image_alt }}
+      {% elsif section.settings.sequence_frame_1 != blank %}
+        {{ section.settings.sequence_frame_1 | image_url: width: 1800 | image_tag: loading: 'eager', sizes: '(min-width: 990px) 48vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.preview_image_alt }}
+      {% else %}
+        {% render 'joyari-visual-placeholder', type: 'ring' %}
+      {% endif %}
+      <span>Custom engagement ring studio</span>
+    </div>
+  </div>
+
+  <div class="jkc-media-studio__grid">
+    <article>
+      <div>
+        {% if section.settings.metal_selector_image != blank %}
+          {{ section.settings.metal_selector_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.metal_selector_alt }}
+        {% elsif section.settings.metal_platinum_image != blank %}
+          {{ section.settings.metal_platinum_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Platinum ring tone preview' }}
+        {% else %}
+          {% render 'joyari-visual-placeholder', type: 'ring' %}
+        {% endif %}
+      </div>
+      <h2>Metal tone</h2>
+    </article>
+
+    <article>
+      <div>
+        {% if section.settings.diamond_shape_support_image != blank %}
+          {{ section.settings.diamond_shape_support_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.diamond_shape_support_alt }}
+        {% elsif section.settings.shape_round_image != blank %}
+          {{ section.settings.shape_round_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Round diamond preview' }}
+        {% elsif section.settings.sequence_frame_2 != blank %}
+          {{ section.settings.sequence_frame_2 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Diamond shape preview' }}
+        {% else %}
+          {% render 'joyari-visual-placeholder', type: 'diamond' %}
+        {% endif %}
+      </div>
+      <h2>Diamond shape</h2>
+    </article>
+
+    <article>
+      <div>
+        {% if section.settings.carat_size_image != blank %}
+          {{ section.settings.carat_size_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.carat_size_alt }}
+        {% elsif section.settings.sequence_frame_3 != blank %}
+          {{ section.settings.sequence_frame_3 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Diamond carat proportion preview' }}
+        {% else %}
+          {% render 'joyari-visual-placeholder', type: 'hand' %}
+        {% endif %}
+      </div>
+      <h2>Carat &amp; fit</h2>
+    </article>
+
+    <article>
+      <div>
+        {% if section.settings.craftsmanship_image != blank %}
+          {{ section.settings.craftsmanship_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.craftsmanship_alt }}
+        {% elsif section.settings.sequence_frame_4 != blank %}
+          {{ section.settings.sequence_frame_4 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Craftsmanship preview' }}
+        {% else %}
+          {% render 'joyari-visual-placeholder', type: 'craft' %}
+        {% endif %}
+      </div>
+      <h2>Craftsmanship</h2>
+    </article>
+
+    <article>
+      <div>
+        {% if section.settings.packaging_image != blank %}
+          {{ section.settings.packaging_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.packaging_alt }}
+        {% elsif section.settings.sequence_frame_5 != blank %}
+          {{ section.settings.sequence_frame_5 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Luxury packaging preview' }}
+        {% else %}
+          {% render 'joyari-visual-placeholder', type: 'box' %}
+        {% endif %}
+      </div>
+      <h2>Presentation</h2>
+    </article>
+
+    <article>
+      <div>
+        {% if section.settings.cta_image != blank %}
+          {{ section.settings.cta_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.cta_image_alt }}
+        {% elsif section.settings.lifestyle_image != blank %}
+          {{ section.settings.lifestyle_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.lifestyle_image_alt }}
+        {% else %}
+          {% render 'joyari-visual-placeholder', type: 'hand' %}
+        {% endif %}
+      </div>
+      <h2>Private guidance</h2>
+    </article>
+  </div>
+</section>
+
 {% render 'diamond-selection-markup' %}
 {% schema %}
 {
@@ -67,6 +180,90 @@
       "id": "lifestyle_image_alt",
       "label": "Lifestyle image alt text",
       "default": "Joyari Krafted custom ring lifestyle preview"
+    },
+    {
+      "type": "video_url",
+      "id": "hero_video_url",
+      "label": "Hero external video",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "url",
+      "id": "hero_video_file_url",
+      "label": "Hero Shopify-hosted MP4 video URL"
+    },
+    {
+      "type": "header",
+      "content": "Visual support images"
+    },
+    {
+      "type": "image_picker",
+      "id": "metal_selector_image",
+      "label": "Metal selector support image"
+    },
+    {
+      "type": "text",
+      "id": "metal_selector_alt",
+      "label": "Metal selector image alt text",
+      "default": "Joyari Krafted metal tone detail"
+    },
+    {
+      "type": "image_picker",
+      "id": "diamond_shape_support_image",
+      "label": "Diamond shape support image"
+    },
+    {
+      "type": "text",
+      "id": "diamond_shape_support_alt",
+      "label": "Diamond shape support image alt text",
+      "default": "Diamond shape detail"
+    },
+    {
+      "type": "image_picker",
+      "id": "carat_size_image",
+      "label": "Carat and size guide visual"
+    },
+    {
+      "type": "text",
+      "id": "carat_size_alt",
+      "label": "Carat and size visual alt text",
+      "default": "Diamond carat and ring size guide"
+    },
+    {
+      "type": "image_picker",
+      "id": "craftsmanship_image",
+      "label": "Craftsmanship image"
+    },
+    {
+      "type": "text",
+      "id": "craftsmanship_alt",
+      "label": "Craftsmanship image alt text",
+      "default": "Joyari Krafted atelier craftsmanship"
+    },
+    {
+      "type": "image_picker",
+      "id": "packaging_image",
+      "label": "Packaging image"
+    },
+    {
+      "type": "text",
+      "id": "packaging_alt",
+      "label": "Packaging image alt text",
+      "default": "Joyari Krafted luxury packaging"
+    },
+    {
+      "type": "image_picker",
+      "id": "cta_image",
+      "label": "CTA image"
+    },
+    {
+      "type": "text",
+      "id": "cta_image_alt",
+      "label": "CTA image alt text",
+      "default": "Joyari Krafted private consultation"
     },
     {
       "type": "header",
