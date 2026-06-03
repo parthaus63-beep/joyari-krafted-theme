@@ -109,6 +109,189 @@
   .jk-product-media--support{background:#FFFFFF!important}.jk-product-media--support img{width:100%;height:100%;object-fit:cover}.jk-product-media--video{display:grid;place-items:center}.jk-product-media--video video,.jk-product-media--video iframe{width:100%;height:100%;border:0;object-fit:cover}.jk-product-media__caption{position:absolute;left:18px;bottom:18px;z-index:3;display:inline-flex;align-items:center;min-height:34px;padding:8px 12px;border:1px solid rgba(198,167,105,.34);border-radius:999px;background:rgba(255,255,255,.82);color:#111111;font-size:.68rem;font-weight:900;letter-spacing:.11em;text-transform:uppercase;backdrop-filter:blur(10px)}.jk-product-gallery:not(.jk-product-gallery--with-thumbs) .jk-product-gallery__main{grid-column:1}.jk-product-media .jk-luxury-visual-placeholder{width:100%;height:100%}.jk-luxury-visual-placeholder{position:relative;display:grid;place-items:center;min-height:100%;overflow:hidden;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.96),transparent 9rem),linear-gradient(145deg,#FFFFFF 0%,#F8F6F1 56%,#EEE2D2 100%);isolation:isolate}.jk-luxury-visual-placeholder:before{content:"";position:absolute;inset:14px;border:1px solid rgba(198,167,105,.18);border-radius:inherit;pointer-events:none}.jk-luxury-visual-placeholder svg{position:relative;z-index:1;width:min(42%,220px);height:auto;color:#0F3D2E;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 18px 28px rgba(17,17,17,.10))}.jk-builder-support-visuals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 22px}.jk-builder-support-card{position:relative;min-height:132px;overflow:hidden;border:1px solid rgba(198,167,105,.26);border-radius:8px;background:#F8F6F1}.jk-builder-support-card img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--jk-ease)}.jk-builder-support-card:hover img{transform:scale(1.045)}.jk-builder-support-card .jk-luxury-visual-placeholder{min-height:132px}.jk-builder-support-card span{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;display:inline-flex;width:fit-content;max-width:calc(100% - 24px);min-height:28px;align-items:center;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.84);color:#111111;font-size:.62rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.jk-builder-card__header{padding-bottom:16px}.jk-builder-card__header h2{font-size:clamp(1.55rem,2vw,2.2rem)}.jk-builder-subcopy{max-width:560px}.jk-builder-step__header{align-items:start}.jk-builder-step__header p{font-size:.82rem;line-height:1.55}.jk-product-editorial-visuals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,26px);width:min(1680px,calc(100vw - 32px));margin:clamp(28px,4vw,60px) auto 0}.jk-product-editorial-card{overflow:hidden;border:1px solid rgba(198,167,105,.24);border-radius:8px;background:#FFFFFF;box-shadow:0 20px 54px rgba(17,17,17,.07)}.jk-product-editorial-card__media{aspect-ratio:4/5;background:#F8F6F1}.jk-product-editorial-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .75s var(--jk-ease)}.jk-product-editorial-card:hover img{transform:scale(1.045)}.jk-product-editorial-card__media .jk-luxury-visual-placeholder{min-height:100%}.jk-product-editorial-card__body{display:grid;gap:8px;padding:18px}.jk-product-editorial-card__body span{color:#0F3D2E;font-size:.68rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase}.jk-product-editorial-card__body h3{color:#111111;font-size:1.25rem}.jk-product-editorial-card__body p{color:#5e5a53;font-size:.9rem;line-height:1.65}.jk-media-thumb--support img{width:100%;height:100%;object-fit:cover}.jk-media-thumb__play{display:grid;place-items:center;width:100%;height:100%;background:linear-gradient(145deg,#FFFFFF,#F8F6F1);color:#0F3D2E;font-size:1.4rem}@media(max-width:1080px){.jk-builder-support-visuals,.jk-product-editorial-visuals{grid-template-columns:1fr 1fr}.jk-builder-support-visuals{margin-top:4px}}@media(max-width:680px){.jk-builder-support-visuals,.jk-product-editorial-visuals{grid-template-columns:1fr}.jk-builder-support-card{min-height:150px}.jk-product-editorial-visuals{width:calc(100vw - 20px)}.jk-product-media__caption{left:12px;bottom:12px}.jk-product-media--video video,.jk-product-media--video iframe{min-height:100%}}
 </style>
 
+<style>
+  .jk-product-builder-main .jk-product-media {
+    display: none !important;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .32s var(--jk-ease), transform .32s var(--jk-ease);
+  }
+
+  .jk-product-builder-main .jk-product-media.is-active {
+    display: grid !important;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .jk-product-builder-main .jk-product-media img,
+  .jk-product-builder-main .jk-product-media video,
+  .jk-product-builder-main .jk-product-media iframe,
+  .jk-product-builder-main .jk-product-media model-viewer {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+  }
+
+  .jk-product-builder-main .jk-product-gallery__main {
+    min-width: 0;
+  }
+
+  .jk-product-builder-main .jk-media-thumb {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    aspect-ratio: 1;
+    overflow: hidden;
+    border: 1px solid rgba(198, 167, 105, .24);
+    background: #FFFFFF;
+    cursor: pointer;
+  }
+
+  .jk-product-builder-main .jk-product-panel__inner--builder {
+    border: 1px solid rgba(198, 167, 105, .22);
+    box-shadow: 0 24px 70px rgba(17, 17, 17, .06);
+  }
+
+  .jk-product-builder-main .jk-ring-builder-card--product {
+    display: grid;
+    gap: 22px;
+    padding: clamp(18px, 2vw, 28px);
+    border: 1px solid rgba(198, 167, 105, .24);
+    border-radius: 8px;
+  }
+
+  .jk-product-builder-main .jk-builder-step {
+    display: grid;
+    gap: 16px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(198, 167, 105, .24);
+  }
+
+  .jk-product-builder-main .jk-builder-step__header {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .jk-product-builder-main .jk-builder-step__number {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid rgba(198, 167, 105, .5);
+    border-radius: 50%;
+    color: #8A713A;
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .08em;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset legend,
+  .jk-product-builder-main .jk-builder-field label {
+    margin: 0 0 10px;
+    color: #111111;
+    font-size: .78rem;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px !important;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset--shape input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row label {
+    min-height: 68px !important;
+    padding: 10px 12px !important;
+    border: 1px solid rgba(198, 167, 105, .44) !important;
+    border-radius: 8px !important;
+    background: #FFFFFF !important;
+    color: #111111 !important;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-chip {
+    width: 100%;
+    grid-template-columns: 34px minmax(0, 1fr) !important;
+    gap: 10px !important;
+    justify-items: start;
+    color: #111111;
+    font-size: .8rem !important;
+    font-weight: 850;
+    letter-spacing: .04em !important;
+    text-transform: none;
+  }
+
+  .jk-product-builder-main .jk-diamond-shape-icon {
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    color: #0F3D2E !important;
+    stroke-width: 2.35 !important;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row input:checked + label {
+    border-color: #C6A769 !important;
+    background: #F8F6F1 !important;
+    box-shadow: 0 14px 32px rgba(198, 167, 105, .2), inset 0 0 0 1px rgba(198, 167, 105, .28) !important;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row input:focus-visible + label {
+    outline: 2px solid rgba(15, 61, 46, .42);
+    outline-offset: 3px;
+  }
+
+  .jk-product-builder-main .jk-builder-field--carat-preference select {
+    width: 100%;
+    border-radius: 8px !important;
+  }
+
+  @media (max-width: 680px) {
+    .jk-product-builder-main .jk-ring-builder-card--product {
+      padding: 16px;
+    }
+
+    .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px !important;
+    }
+
+    .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row label {
+      min-height: 62px !important;
+      padding: 9px !important;
+    }
+
+    .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-chip {
+      grid-template-columns: 30px minmax(0, 1fr) !important;
+      gap: 8px !important;
+      font-size: .72rem !important;
+    }
+
+    .jk-product-builder-main .jk-diamond-shape-icon {
+      width: 30px !important;
+      height: 30px !important;
+      min-width: 30px !important;
+    }
+  }
+</style>
+
 <section class="jk-product-template jk-product-builder-main" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
   {% if product != blank %}
     <script type="application/json" data-product-json>{{ product | json }}</script>
@@ -383,10 +566,63 @@
                     {% assign shapes = 'Round,Oval,Emerald,Pear,Cushion,Princess,Marquise,Radiant' | split: ',' %}
                     {% for shape in shapes %}
                       {% assign shape_id = 'DiamondShapePreference-' | append: section.id | append: '-' | append: shape | handleize %}
+                      {% assign shape_handle = shape | handleize %}
                       <input id="{{ shape_id }}" type="radio" name="properties[Diamond Shape]" value="{{ shape | escape }}" {% if forloop.first %}checked{% endif %}>
                       <label for="{{ shape_id }}">
                         <span class="jk-shape-chip">
-                          {% render 'diamond-shape-icon', shape: shape, icon_class: 'jk-shape-icon jk-diamond-shape-icon' %}
+                          <svg
+                            class="jk-shape-icon jk-diamond-shape-icon jk-diamond-shape-icon--{{ shape_handle }}"
+                            viewBox="0 0 64 64"
+                            role="img"
+                            aria-label="{{ shape | escape }} diamond cut icon"
+                            focusable="false"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            {% case shape_handle %}
+                              {% when 'round' %}
+                                <circle cx="32" cy="32" r="25"></circle>
+                                <circle cx="32" cy="32" r="13"></circle>
+                                <path d="M32 7v12M32 45v12M7 32h12M45 32h12M14.4 14.4l8.5 8.5M41.1 41.1l8.5 8.5M49.6 14.4l-8.5 8.5M22.9 41.1l-8.5 8.5"></path>
+                                <path d="M19 32l13-13 13 13-13 13Z"></path>
+                              {% when 'oval' %}
+                                <ellipse cx="32" cy="32" rx="20" ry="27"></ellipse>
+                                <ellipse cx="32" cy="32" rx="10" ry="15"></ellipse>
+                                <path d="M32 5v12M32 47v12M14 18l10 8M50 18l-10 8M14 46l10-8M50 46l-10-8M12 32h40"></path>
+                                <path d="M24 26l8-9 8 9-8 21Z"></path>
+                              {% when 'emerald' %}
+                                <path d="M18 7h28l11 11v28L46 57H18L7 46V18Z"></path>
+                                <path d="M22 16h20l6 6v20l-6 6H22l-6-6V22Z"></path>
+                                <path d="M18 7l4 9M46 7l-4 9M57 18l-9 4M57 46l-9-4M46 57l-4-9M18 57l4-9M7 46l9-4M7 18l9 4"></path>
+                                <path d="M22 32h20M32 16v32"></path>
+                              {% when 'pear' %}
+                                <path d="M32 5C18 19 11 31 13 43c1.7 10 9.7 16 19 16s17.3-6 19-16C53 31 46 19 32 5Z"></path>
+                                <path d="M32 5v54M18 40l14-17 14 17M21 50l11-10 11 10"></path>
+                                <path d="M20 24l12 16 12-16"></path>
+                              {% when 'cushion' %}
+                                <path d="M20 7h24c7 0 13 6 13 13v24c0 7-6 13-13 13H20c-7 0-13-6-13-13V20C7 13 13 7 20 7Z"></path>
+                                <path d="M22 16h20c4.5 0 6 1.5 6 6v20c0 4.5-1.5 6-6 6H22c-4.5 0-6-1.5-6-6V22c0-4.5 1.5-6 6-6Z"></path>
+                                <path d="M16 22l16 10 16-10M16 42l16-10 16 10M22 16l10 16 10-16M22 48l10-16 10 16"></path>
+                              {% when 'princess' %}
+                                <path d="M10 10h44v44H10Z"></path>
+                                <path d="M18 18h28v28H18Z"></path>
+                                <path d="M10 10l22 22 22-22M10 54l22-22 22 22M10 10l44 44M54 10L10 54"></path>
+                                <path d="M32 10v44M10 32h44"></path>
+                              {% when 'marquise' %}
+                                <path d="M5 32c8.5-14 17.5-21 27-21s18.5 7 27 21c-8.5 14-17.5 21-27 21S13.5 46 5 32Z"></path>
+                                <path d="M5 32h54M32 11v42M17 22l15 10 15-10M17 42l15-10 15 10"></path>
+                                <path d="M13 32l19-21 19 21-19 21Z"></path>
+                              {% when 'radiant' %}
+                                <path d="M17 7h30l10 10v30L47 57H17L7 47V17Z"></path>
+                                <path d="M20 17h24l3 3v24l-3 3H20l-3-3V20Z"></path>
+                                <path d="M17 7l15 25 15-25M17 57l15-25 15 25M7 17l25 15L57 17M7 47l25-15 25 15"></path>
+                                <path d="M32 7v50M7 32h50"></path>
+                              {% else %}
+                                <circle cx="32" cy="32" r="25"></circle>
+                                <circle cx="32" cy="32" r="13"></circle>
+                                <path d="M32 7v12M32 45v12M7 32h12M45 32h12M14.4 14.4l8.5 8.5M41.1 41.1l8.5 8.5M49.6 14.4l-8.5 8.5M22.9 41.1l-8.5 8.5"></path>
+                                <path d="M19 32l13-13 13 13-13 13Z"></path>
+                            {% endcase %}
+                          </svg>
                           <span>{{ shape }}</span>
                         </span>
                       </label>

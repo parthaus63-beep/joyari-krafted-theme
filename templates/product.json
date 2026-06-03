@@ -4,15 +4,6 @@
       "type": "product-builder-main",
       "settings": {
         "builder_heading": "Design your Joyari piece",
-        "gallery_image": "shopify://shop_images/02_engagement_rings.png",
-        "ring_on_hand_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_21_56_PM.png",
-        "diamond_closeup_image": "shopify://shop_images/lucid-origin_Luxury_round_diamond_floating_on_white_background_ultra_realistic_jewellery_rend-0.jpg",
-        "metal_selector_image": "shopify://shop_images/03_wedding_bands.png",
-        "diamond_shape_image": "shopify://shop_images/lucid-origin_Luxury_round_brilliant_diamond_rotated_slightly_to_the_left_visible_crown_and_pa-0.jpg",
-        "carat_size_image": "shopify://shop_images/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0.jpg",
-        "craftsmanship_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_23_35_PM.png",
-        "packaging_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_24_34_PM.png",
-        "cta_image": "shopify://shop_images/07_custom_design_ring.png",
         "carat_quarter_premium": 18500
       }
     },
