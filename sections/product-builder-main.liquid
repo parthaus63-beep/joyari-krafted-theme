@@ -479,30 +479,15 @@
                   </div>
                 </div>
 
-                <fieldset class="jk-option-fieldset jk-option-fieldset--metal">
-                  <legend>Metal selector</legend>
-                  <div class="jk-swatch-row jk-swatch-row--metal">
+                <div class="jk-builder-field jk-builder-field--metal-select">
+                  <label for="MetalPreference-{{ section.id }}">Metal</label>
+                  <select id="MetalPreference-{{ section.id }}" name="properties[Metal]" data-metal-select>
                     {% assign metals = '10K Yellow Gold,10K White Gold,10K Rose Gold,14K Yellow Gold,14K White Gold,14K Rose Gold,18K Yellow Gold,18K White Gold,18K Rose Gold,Platinum' | split: ',' %}
                     {% for metal in metals %}
-                      {% assign metal_id = 'MetalPreference-' | append: section.id | append: '-' | append: metal | handleize %}
-                      {% liquid
-                        assign metal_swatch = 'yellow'
-                        if metal contains 'Yellow'
-                          assign metal_swatch = 'yellow'
-                        elsif metal contains 'White'
-                          assign metal_swatch = 'white'
-                        elsif metal contains 'Rose'
-                          assign metal_swatch = 'rose'
-                        elsif metal contains 'Platinum'
-                          assign metal_swatch = 'platinum'
-                        endif
-                      %}
-                      <input id="{{ metal_id }}" type="radio" name="properties[Metal]" value="{{ metal | escape }}" {% if forloop.first %}checked{% endif %}>
-                      <label for="{{ metal_id }}" aria-label="{{ metal | escape }}"><span class="jk-metal-swatch jk-metal-swatch--{{ metal_swatch }}" aria-hidden="true"></span><span class="jk-metal-label-text">{{ metal }}</span></label>
+                      <option value="{{ metal | escape }}" {% if forloop.first %}selected{% endif %}>{{ metal }}</option>
                     {% endfor %}
-                  </div>
-                  <p class="jk-selected-metal-label">Selected metal: <strong data-selected-metal-label>10K Yellow Gold</strong></p>
-                </fieldset>
+                  </select>
+                </div>
 
                 {% if show_ring_size_selector %}
                   {% liquid
@@ -513,50 +498,17 @@
                 {% endif %}
               </div>
 
-              <div class="jk-builder-step jk-builder-step--gemstone">
-                <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">02</span>
-                  <div>
-                    <h3>Gemstone</h3>
-                    <p>Choose your preferred centre-stone shape and available gemstone options.</p>
-                  </div>
-                </div>
-
-                <fieldset class="jk-option-fieldset jk-option-fieldset--shape">
-                  <legend>Diamond shape selector</legend>
-                  <div class="jk-shape-row">
-                    {% assign shapes = 'Round,Oval,Emerald,Pear,Cushion,Princess,Marquise,Radiant' | split: ',' %}
-                    {% for shape in shapes %}
-                      {% assign shape_id = 'DiamondShapePreference-' | append: section.id | append: '-' | append: shape | handleize %}
-                      <input id="{{ shape_id }}" type="radio" name="properties[Diamond Shape]" value="{{ shape | escape }}" {% if forloop.first %}checked{% endif %}>
-                      <label for="{{ shape_id }}">
-                        <span class="jk-shape-chip">
-                          {% render 'diamond-shape-icon', shape: shape, icon_class: 'jk-shape-icon jk-diamond-shape-icon' %}
-                          <span>{{ shape }}</span>
-                        </span>
-                      </label>
-                    {% endfor %}
-                  </div>
-                </fieldset>
-
-                {% if product.has_only_default_variant %}
-                  <div class="jk-builder-field jk-builder-field--carat-preference">
-                    <label for="CaratPreference-{{ section.id }}">Carat selector</label>
-                    <select id="CaratPreference-{{ section.id }}" name="properties[Carat Preference]">
-                      <option value="0.50 ct">0.50 ct</option>
-                      <option value="1.00 ct" selected>1.00 ct</option>
-                      <option value="1.50 ct">1.50 ct</option>
-                      <option value="2.00 ct">2.00 ct</option>
-                      <option value="2.50 ct">2.50 ct</option>
-                      <option value="3.00 ct">3.00 ct</option>
-                      <option value="Private guidance">Private guidance</option>
-                    </select>
-                  </div>
-                {% endif %}
-              </div>
-
               {% unless product.has_only_default_variant %}
-                <div class="jk-builder-step jk-product-variant-group">
+                {% liquid
+                  assign visible_variant_option_count = 0
+                  for option in product.options_with_values
+                    assign option_name_downcase = option.name | downcase
+                    unless option_name_downcase contains 'setting' or option_name_downcase contains 'metal' or option_name_downcase contains 'material'
+                      assign visible_variant_option_count = visible_variant_option_count | plus: 1
+                    endunless
+                  endfor
+                %}
+                <div class="jk-builder-step jk-product-variant-group{% if visible_variant_option_count == 0 %} jk-product-variant-group--hidden{% endif %}"{% if visible_variant_option_count == 0 %} hidden aria-hidden="true"{% endif %}>
                   <div class="jk-builder-step__header">
                     <span class="jk-builder-step__number">02</span>
                     <div>
@@ -573,7 +525,7 @@
                     {% if selected_value == blank %}
                       {% assign selected_value = selected_variant[option_key] %}
                     {% endif %}
-                    {% if option_name_downcase contains 'setting' %}
+                    {% if option_name_downcase contains 'setting' or option_name_downcase contains 'metal' or option_name_downcase contains 'material' %}
                       {% assign hide_setting_option = true %}
                     {% endif %}
 
