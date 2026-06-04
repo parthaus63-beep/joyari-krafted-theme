@@ -12,12 +12,27 @@
   <div class="jk-editorial-gallery__grid">
     {% for block in section.blocks %}
       {% assign editorial_image_alt = block.settings.image_alt | default: block.settings.title %}
+      {% liquid
+        assign editorial_asset = 'joyari-product-pear-ring-on-hand.jpg'
+        case forloop.index
+          when 2
+            assign editorial_asset = 'joyari-diamond-macro-pear.jpg'
+          when 3
+            assign editorial_asset = 'joyari-proposal-lifestyle.jpg'
+          when 4
+            assign editorial_asset = 'joyari-atelier-craftsmanship.jpg'
+          when 5
+            assign editorial_asset = 'joyari-packaging-certificate.jpg'
+          when 6
+            assign editorial_asset = 'joyari-private-consultation.jpg'
+        endcase
+      %}
       <article class="jk-editorial-card jk-editorial-card--{{ forloop.index }}" {{ block.shopify_attributes }}>
         <div class="jk-editorial-card__media">
           {% if block.settings.image != blank %}
             {{ block.settings.image | image_url: width: 1300 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100, 1300', sizes: '(min-width: 1100px) 33vw, (min-width: 700px) 50vw, 100vw', alt: editorial_image_alt }}
           {% else %}
-            <span class="jk-editorial-placeholder" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: editorial_asset, alt: editorial_image_alt, class: 'jk-editorial-card__image' %}
           {% endif %}
         </div>
         <div class="jk-editorial-card__content">

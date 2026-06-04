@@ -1,0 +1,18 @@
+{% liquid
+  assign generated_file = file | default: 'joyari-home-hero-ring-on-hand.jpg'
+  assign generated_alt = alt | default: 'Joyari Krafted luxury diamond jewellery'
+  assign generated_class = class | default: 'jk-generated-image'
+  assign generated_loading = loading | default: 'lazy'
+  assign generated_width = width | default: 1600
+  assign generated_height = height | default: 1200
+%}
+
+<img
+  src="{{ generated_file | asset_url }}"
+  alt="{{ generated_alt | escape }}"
+  width="{{ generated_width }}"
+  height="{{ generated_height }}"
+  class="{{ generated_class }}"
+  loading="{{ generated_loading }}"
+  decoding="async"
+>

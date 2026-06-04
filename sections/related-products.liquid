@@ -25,7 +25,7 @@
                 {% if related_product.featured_media != blank %}
                   {{ related_product.featured_media | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 900px) 33vw, 50vw', alt: related_product.featured_media.alt | default: related_product.title }}
                 {% else %}
-                  <span class="jk-product-placeholder" aria-hidden="true"></span>
+                  {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: related_product.title, class: 'jk-product-card__generated-image' %}
                 {% endif %}
                 {% unless related_product.available %}
                   <span class="jk-product-card__status">{{ 'products.product.sold_out' | t }}</span>
@@ -58,7 +58,17 @@
         %}
         <article class="jk-product-card jk-product-card--pathway">
           <a class="jk-product-card__media" href="{{ pathway_link }}">
-            <span class="jk-product-placeholder" aria-hidden="true"></span>
+            {% liquid
+              assign pathway_asset = 'joyari-collection-engagement-rings.jpg'
+              if index == 2
+                assign pathway_asset = 'joyari-collection-wedding-bands.jpg'
+              elsif index == 3
+                assign pathway_asset = 'joyari-collection-diamond-jewellery.jpg'
+              elsif index == 4
+                assign pathway_asset = 'joyari-private-consultation.jpg'
+              endif
+            %}
+            {% render 'joyari-generated-image', file: pathway_asset, alt: pathway_title, class: 'jk-product-card__generated-image' %}
             <span class="jk-product-card__quick">View piece</span>
           </a>
           <div class="jk-product-card__content">

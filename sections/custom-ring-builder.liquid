@@ -1,3 +1,6 @@
+{{ 'custom-ring-builder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'custom-ring-builder.js' | asset_url }}" defer></script>
+
 <section class="jkc-media-studio" aria-label="Joyari Krafted custom design visuals">
   <div class="jkc-media-studio__hero">
     <div class="jkc-media-studio__copy">
@@ -22,7 +25,7 @@
       {% elsif section.settings.sequence_frame_1 != blank %}
         {{ section.settings.sequence_frame_1 | image_url: width: 1800 | image_tag: loading: 'eager', sizes: '(min-width: 990px) 48vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.preview_image_alt }}
       {% else %}
-        {% render 'joyari-visual-placeholder', type: 'ring' %}
+        {% render 'joyari-generated-image', file: 'joyari-home-hero-ring-on-hand.jpg', alt: section.settings.hero_image_alt, loading: 'eager' %}
       {% endif %}
       <span>Custom engagement ring studio</span>
     </div>
@@ -36,7 +39,7 @@
         {% elsif section.settings.metal_platinum_image != blank %}
           {{ section.settings.metal_platinum_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Platinum ring tone preview' }}
         {% else %}
-          {% render 'joyari-visual-placeholder', type: 'ring' %}
+          {% render 'joyari-generated-image', file: 'joyari-collection-wedding-bands.jpg', alt: section.settings.metal_selector_alt %}
         {% endif %}
       </div>
       <h2>Metal tone</h2>
@@ -51,7 +54,7 @@
         {% elsif section.settings.sequence_frame_2 != blank %}
           {{ section.settings.sequence_frame_2 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Diamond shape preview' }}
         {% else %}
-          {% render 'joyari-visual-placeholder', type: 'diamond' %}
+          {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: section.settings.diamond_shape_support_alt %}
         {% endif %}
       </div>
       <h2>Diamond shape</h2>
@@ -64,7 +67,7 @@
         {% elsif section.settings.sequence_frame_3 != blank %}
           {{ section.settings.sequence_frame_3 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Diamond carat proportion preview' }}
         {% else %}
-          {% render 'joyari-visual-placeholder', type: 'hand' %}
+          {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.carat_size_alt %}
         {% endif %}
       </div>
       <h2>Carat &amp; fit</h2>
@@ -77,7 +80,7 @@
         {% elsif section.settings.sequence_frame_4 != blank %}
           {{ section.settings.sequence_frame_4 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Craftsmanship preview' }}
         {% else %}
-          {% render 'joyari-visual-placeholder', type: 'craft' %}
+          {% render 'joyari-generated-image', file: 'joyari-atelier-craftsmanship.jpg', alt: section.settings.craftsmanship_alt %}
         {% endif %}
       </div>
       <h2>Craftsmanship</h2>
@@ -90,7 +93,7 @@
         {% elsif section.settings.sequence_frame_5 != blank %}
           {{ section.settings.sequence_frame_5 | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Luxury packaging preview' }}
         {% else %}
-          {% render 'joyari-visual-placeholder', type: 'box' %}
+          {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: section.settings.packaging_alt %}
         {% endif %}
       </div>
       <h2>Presentation</h2>
@@ -103,7 +106,7 @@
         {% elsif section.settings.lifestyle_image != blank %}
           {{ section.settings.lifestyle_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: section.settings.lifestyle_image_alt }}
         {% else %}
-          {% render 'joyari-visual-placeholder', type: 'hand' %}
+          {% render 'joyari-generated-image', file: 'joyari-private-consultation.jpg', alt: section.settings.cta_image_alt %}
         {% endif %}
       </div>
       <h2>Private guidance</h2>

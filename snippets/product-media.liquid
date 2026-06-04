@@ -8,7 +8,7 @@
   {% if thumbnail != blank %}
     {{ thumbnail | image_url: width: 220 | image_tag: loading: 'eager', widths: '90, 140, 180, 220', sizes: '90px', alt: media_alt }}
   {% else %}
-    <span class="jk-thumb-placeholder" aria-hidden="true"></span>
+    {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: media_alt, class: 'jk-media-thumb__image' %}
   {% endif %}
 
   {% if media.media_type == 'video' or media.media_type == 'external_video' %}
@@ -32,7 +32,7 @@
       {% if thumbnail != blank %}
         {{ thumbnail | image_url: width: 1500 | image_tag: loading: 'lazy', widths: '480, 720, 960, 1200, 1500', sizes: '(min-width: 990px) 58vw, 100vw', alt: media_alt, class: 'jk-product-media__image' }}
       {% else %}
-        <div class="jk-product-placeholder jk-product-placeholder--media" aria-hidden="true"></div>
+        {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: media_alt, class: 'jk-product-media__image' %}
       {% endif %}
   {% endcase %}
 {% endif %}

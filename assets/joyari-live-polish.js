@@ -14,25 +14,6 @@
       .replace(/Joyari krafted/g, 'Joyari Krafted');
   }
 
-  function polishLegacyHeroImage() {
-    var legacyHeroImage = 'ChatGPT_Image_May_25_2026_11_51_33_AM';
-    var refinedHeroImage = 'https://joyarikrafted.com/cdn/shop/files/02_engagement_rings.png?v=1779674447';
-    var widths = [900, 1200, 1600, 2000, 2400];
-
-    document.querySelectorAll('.jk-hero__image').forEach(function (image) {
-      var currentSource = [image.currentSrc, image.src, image.srcset].join(' ');
-      if (currentSource.indexOf(legacyHeroImage) === -1) return;
-
-      image.src = refinedHeroImage + '&width=2400';
-      image.srcset = widths.map(function (width) {
-        return refinedHeroImage + '&width=' + width + ' ' + width + 'w';
-      }).join(', ');
-      image.sizes = '100vw';
-      image.alt = 'Joyari Krafted engagement ring editorial image';
-      image.classList.add('is-luxury-polished');
-    });
-  }
-
   function createTextElement(tagName, className, text) {
     var element = document.createElement(tagName);
     element.className = className;
@@ -135,7 +116,6 @@
   function init() {
     reinforceOverlayStacking();
     polishBrandText();
-    polishLegacyHeroImage();
     polishFallbackProductCards();
   }
 

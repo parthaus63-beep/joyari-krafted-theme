@@ -13,12 +13,21 @@
     {% if section.blocks.size > 0 %}
       {% for block in section.blocks %}
         {% assign education_image_alt = block.settings.image_alt | default: block.settings.title %}
+        {% liquid
+          assign education_asset = 'joyari-diamond-macro-pear.jpg'
+          case forloop.index
+            when 2
+              assign education_asset = 'joyari-atelier-craftsmanship.jpg'
+            when 3
+              assign education_asset = 'joyari-packaging-certificate.jpg'
+          endcase
+        %}
         <article class="jk-education-card" {{ block.shopify_attributes }}>
           <div class="jk-education-card__media">
             {% if block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 760 | image_tag: loading: 'lazy', widths: '240, 360, 520, 760', sizes: '(min-width: 900px) 31vw, 100vw', alt: education_image_alt, class: 'jk-education-card__image' }}
             {% else %}
-              <span>{{ forloop.index | prepend: '0' }}</span>
+              {% render 'joyari-generated-image', file: education_asset, alt: education_image_alt, class: 'jk-education-card__image' %}
             {% endif %}
           </div>
           <h3>{{ block.settings.title }}</h3>
@@ -28,21 +37,21 @@
     {% else %}
       <article class="jk-education-card">
         <div class="jk-education-card__media">
-          <span>01</span>
+          {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: 'Certified Joyari diamond detail', class: 'jk-education-card__image' %}
         </div>
         <h3>Certified stone details</h3>
         <p>Give customers a clear path to understand diamond identity, specifications, and quality.</p>
       </article>
       <article class="jk-education-card">
         <div class="jk-education-card__media">
-          <span>02</span>
+          {% render 'joyari-generated-image', file: 'joyari-atelier-craftsmanship.jpg', alt: 'Joyari lab-grown diamond craftsmanship', class: 'jk-education-card__image' %}
         </div>
         <h3>Lab-grown beauty</h3>
         <p>Lab-grown diamonds are selected for brilliance, proportion, and traceable modern origin.</p>
       </article>
       <article class="jk-education-card">
         <div class="jk-education-card__media">
-          <span>03</span>
+          {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: 'Joyari diamond certificate presentation', class: 'jk-education-card__image' %}
         </div>
         <h3>The 4Cs, refined</h3>
         <p>Cut, colour, clarity, and carat are presented in a calmer, more client-friendly way.</p>

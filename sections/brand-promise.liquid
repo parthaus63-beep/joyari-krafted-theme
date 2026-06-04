@@ -13,12 +13,21 @@
     {% if section.blocks.size > 0 %}
       {% for block in section.blocks %}
         {% assign promise_image_alt = block.settings.image_alt | default: block.settings.title %}
+        {% liquid
+          assign promise_asset = 'joyari-diamond-macro-pear.jpg'
+          case forloop.index
+            when 2
+              assign promise_asset = 'joyari-atelier-craftsmanship.jpg'
+            when 3
+              assign promise_asset = 'joyari-packaging-certificate.jpg'
+          endcase
+        %}
         <article class="jk-promise-card" {{ block.shopify_attributes }}>
           <div class="jk-promise-card__media">
             {% if block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 720 | image_tag: loading: 'lazy', widths: '240, 360, 520, 720', sizes: '(min-width: 900px) 31vw, 100vw', alt: promise_image_alt, class: 'jk-promise-card__image' }}
             {% else %}
-              <span class="jk-promise-card__icon" aria-hidden="true"></span>
+              {% render 'joyari-generated-image', file: promise_asset, alt: promise_image_alt, class: 'jk-promise-card__image' %}
             {% endif %}
           </div>
           <h3>{{ block.settings.title }}</h3>
@@ -28,21 +37,21 @@
     {% else %}
       <article class="jk-promise-card">
         <div class="jk-promise-card__media">
-          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: 'Certified Joyari Krafted diamond', class: 'jk-promise-card__image' %}
         </div>
         <h3>Certified diamonds</h3>
         <p>Selected stones and transparent guidance for confident, informed buying.</p>
       </article>
       <article class="jk-promise-card">
         <div class="jk-promise-card__media">
-          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: 'Joyari Krafted insured delivery presentation', class: 'jk-promise-card__image' %}
         </div>
         <h3>Secure delivery</h3>
         <p>Tracked, insured shipping with responsive support throughout the process.</p>
       </article>
       <article class="jk-promise-card">
         <div class="jk-promise-card__media">
-          <span class="jk-promise-card__icon" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: 'joyari-private-consultation.jpg', alt: 'Joyari Krafted private care consultation', class: 'jk-promise-card__image' %}
         </div>
         <h3>Lifetime care</h3>
         <p>Aftercare guidance to help your jewellery remain luminous for years.</p>

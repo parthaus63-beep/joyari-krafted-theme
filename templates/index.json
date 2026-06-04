@@ -35,7 +35,7 @@
           "settings": {
             "title": "Certified Stones",
             "text": "Every diamond is selected for brilliance, traceability, and confidence at the moment of purchase.",
-            "image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_16_39_PM.png",
+            "image": "",
             "image_alt": ""
           }
         },
@@ -44,7 +44,7 @@
           "settings": {
             "title": "Atelier Finish",
             "text": "Settings are considered for balance, comfort, and the quiet detail expected of fine jewellery.",
-            "image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_18_30_PM.png",
+            "image": "",
             "image_alt": ""
           }
         },
@@ -53,7 +53,7 @@
           "settings": {
             "title": "Care-Led Delivery",
             "text": "Secure presentation, tracked delivery, and responsive support before and after your milestone.",
-            "image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_19_28_PM.png",
+            "image": "",
             "image_alt": ""
           }
         }
@@ -76,7 +76,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "engagement-rings",
-            "image": "shopify://shop_images/02_engagement_rings.png",
+            "image": "",
             "image_alt": "",
             "title": "Engagement Rings",
             "text": "Solitaire, hidden halo, trilogy, and bespoke-inspired settings with refined diamond presence.",
@@ -87,7 +87,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/03_wedding_bands.png",
+            "image": "",
             "image_alt": "",
             "title": "Wedding Bands",
             "text": "Elegant bands designed to stack, contour, or stand beautifully on their own.",
@@ -98,7 +98,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/04_diamond_jewellery_necklace.png",
+            "image": "",
             "image_alt": "",
             "title": "Diamond Jewellery",
             "text": "Everyday diamond necklaces, earrings, and bracelets with a quiet luxury finish.",
@@ -109,7 +109,7 @@
           "type": "collection_card",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/07_custom_design_ring.png",
+            "image": "",
             "image_alt": "",
             "title": "Custom Design",
             "text": "A private design pathway for clients who want a more personal diamond piece.",
@@ -139,17 +139,17 @@
         "eyebrow": "The Joyari feeling",
         "heading": "A visual world for the moment, the craft, and the reveal",
         "subheading": "Cinematic proposal, atelier, and presentation panels give the homepage an emotional luxury rhythm.",
-        "proposal_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_21_56_PM.png",
+        "proposal_image": "",
         "proposal_image_alt": "Joyari Krafted proposal moment",
         "proposal_eyebrow": "Proposal story",
         "proposal_heading": "Designed for the moment everything changes",
         "proposal_text": "Ring-on-hand and proposal moments help clients picture the jewellery in the life they are building.",
-        "craftsmanship_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_23_35_PM.png",
+        "craftsmanship_image": "",
         "craftsmanship_image_alt": "Joyari Krafted atelier craftsmanship",
         "craftsmanship_eyebrow": "Atelier detail",
         "craftsmanship_heading": "Every proportion is considered",
         "craftsmanship_text": "Atelier, stone, bench, and finishing details communicate quiet precision.",
-        "packaging_image": "shopify://shop_images/ChatGPT_Image_May_25_2026_12_24_34_PM.png",
+        "packaging_image": "",
         "packaging_image_alt": "Joyari Krafted packaging and certificate",
         "packaging_eyebrow": "Presentation",
         "packaging_heading": "The reveal is part of the experience",

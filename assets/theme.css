@@ -28,6 +28,29 @@
   --jk-slow-ease: cubic-bezier(.16, 1, .3, 1);
 }
 
+/* Joyari generated luxury media assets */
+.jk-generated-image,
+.jk-product-card__generated-image,
+.jk-promise-card__image,
+.jk-editorial-card__image,
+.jk-education-card__image,
+.jk-journal-card__image,
+.jk-testimonial__image,
+.jk-footer__image img,
+.jk-footer__background-image,
+.jk-cart-item__image,
+.jk-media-thumb__image,
+.jk-product-editorial-card__image,
+.jk-builder-support-card__image,
+.jk-education-guide__image,
+.jk-education-guide-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 *,
 *::before,
 *::after {

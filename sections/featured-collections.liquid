@@ -33,6 +33,15 @@
           assign category_image = block.settings.image
         endif
         assign card_image_alt = category_image_alt | default: block.settings.image_alt | default: block.settings.title
+        assign category_asset = 'joyari-collection-engagement-rings.jpg'
+        case forloop.index
+          when 2
+            assign category_asset = 'joyari-collection-wedding-bands.jpg'
+          when 3
+            assign category_asset = 'joyari-collection-diamond-jewellery.jpg'
+          when 4
+            assign category_asset = 'joyari-private-consultation.jpg'
+        endcase
       %}
       <article class="jk-collection-card" {{ block.shopify_attributes }}>
         <a class="jk-collection-card__media" href="{{ card_collection.url | default: routes.all_products_collection_url }}" aria-label="{{ block.settings.title | escape }}">
@@ -41,7 +50,7 @@
           {% elsif card_collection.featured_image != blank %}
             {{ card_collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 33vw, 100vw', alt: block.settings.title }}
           {% else %}
-            <span class="jk-placeholder-ring jk-placeholder-ring--{{ forloop.index }}" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: category_asset, alt: card_image_alt, class: 'jk-collection-card__image' %}
           {% endif %}
         </a>
         <div class="jk-collection-card__content">

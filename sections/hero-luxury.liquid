@@ -1,5 +1,5 @@
 {% liquid
-  assign has_hero_media = false
+  assign has_hero_media = true
   if section.settings.hero_video != blank or section.settings.hero_video_url != blank or section.settings.hero_image != blank
     assign has_hero_media = true
   endif
@@ -14,27 +14,12 @@
     {% elsif section.settings.hero_image != blank %}
       {{ section.settings.hero_image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.hero_image_alt, class: 'jk-hero__image' }}
     {% else %}
-      <div class="jk-hero__fallback">
-        <svg class="jk-ring-svg" viewBox="0 0 620 620" role="img" aria-label="">
-          <defs>
-            <linearGradient id="ringGold-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fff6d7"></stop>
-              <stop offset="45%" stop-color="#C6A769"></stop>
-              <stop offset="100%" stop-color="#8A733E"></stop>
-            </linearGradient>
-            <radialGradient id="diamondGlow-{{ section.id }}" cx="50%" cy="42%" r="50%">
-              <stop offset="0%" stop-color="#ffffff"></stop>
-              <stop offset="55%" stop-color="#dcecf0"></stop>
-              <stop offset="100%" stop-color="#8fa7af"></stop>
-            </radialGradient>
-          </defs>
-          <circle cx="310" cy="360" r="180" fill="none" stroke="url(#ringGold-{{ section.id }})" stroke-width="34"></circle>
-          <circle cx="310" cy="360" r="130" fill="none" stroke="rgba(255,255,255,.38)" stroke-width="2"></circle>
-          <path d="M252 192 310 112l58 80-58 74-58-74Z" fill="url(#diamondGlow-{{ section.id }})"></path>
-          <path d="M252 192h116M310 112v154M252 192l116 0M282 192l28 74 28-74" fill="none" stroke="rgba(17, 17, 17,.28)" stroke-width="2"></path>
-          <path d="M236 220c48 44 100 44 148 0" fill="none" stroke="url(#ringGold-{{ section.id }})" stroke-width="12" stroke-linecap="round"></path>
-        </svg>
-      </div>
+      {% render 'joyari-generated-image',
+        file: 'joyari-home-hero-ring-on-hand.jpg',
+        alt: section.settings.hero_image_alt,
+        class: 'jk-hero__image',
+        loading: 'eager'
+      %}
     {% endif %}
   </div>
 

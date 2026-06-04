@@ -28,13 +28,22 @@
         assign collection_banner = grid_collection.image
       endif
       assign collection_banner_alt = section.settings.collection_banner_image_alt | default: grid_heading | default: 'Joyari collection'
+      assign collection_key = grid_heading | append: ' ' | append: grid_collection.handle | append: ' ' | append: grid_collection.title | downcase
+      assign collection_asset = 'joyari-collection-engagement-rings.jpg'
+      if collection_key contains 'wedding' or collection_key contains 'band'
+        assign collection_asset = 'joyari-collection-wedding-bands.jpg'
+      elsif collection_key contains 'diamond' or collection_key contains 'earring' or collection_key contains 'bracelet' or collection_key contains 'necklace'
+        assign collection_asset = 'joyari-collection-diamond-jewellery.jpg'
+      elsif collection_key contains 'custom' or collection_key contains 'design'
+        assign collection_asset = 'joyari-private-consultation.jpg'
+      endif
     %}
     <div class="jk-collection-hero">
       <div class="jk-collection-hero__media">
         {% if collection_banner != blank %}
           {{ collection_banner | image_url: width: 2200 | image_tag: loading: 'eager', widths: '720, 1000, 1400, 1800, 2200', sizes: '100vw', alt: collection_banner_alt, class: 'jk-collection-hero__image' }}
         {% else %}
-          <span class="jk-collection-visual-placeholder jk-collection-visual-placeholder--wide" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: collection_asset, alt: collection_banner_alt, class: 'jk-collection-hero__image', loading: 'eager' %}
         {% endif %}
       </div>
       <div class="jk-collection-hero__content">
@@ -77,7 +86,7 @@
           {% if section.settings.collection_intro_image != blank %}
             {{ section.settings.collection_intro_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 45vw, 100vw', alt: section.settings.collection_intro_image_alt, class: 'jk-collection-editorial__image' }}
           {% else %}
-            <span class="jk-collection-visual-placeholder" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.collection_intro_image_alt, class: 'jk-collection-editorial__image' %}
           {% endif %}
         </div>
         <div>
@@ -92,7 +101,7 @@
           {% if section.settings.collection_lifestyle_image != blank %}
             {{ section.settings.collection_lifestyle_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 45vw, 100vw', alt: section.settings.collection_lifestyle_image_alt, class: 'jk-collection-editorial__image' }}
           {% else %}
-            <span class="jk-collection-visual-placeholder jk-collection-visual-placeholder--box" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: 'joyari-proposal-lifestyle.jpg', alt: section.settings.collection_lifestyle_image_alt, class: 'jk-collection-editorial__image' %}
           {% endif %}
         </div>
         <div>
@@ -228,7 +237,7 @@
                         {% assign fallback_product_alt = section.settings.fallback_product_image_alt | default: product.title %}
                         {{ section.settings.fallback_product_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900, 1100', sizes: '(min-width: 1280px) 25vw, (min-width: 760px) 33vw, 100vw', alt: fallback_product_alt }}
                       {% else %}
-                        <span class="jk-product-placeholder" aria-hidden="true"></span>
+                        {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: product.title, class: 'jk-product-card__generated-image' %}
                       {% endif %}
                       {% unless product.available %}
                         <span class="jk-product-card__status">{{ 'products.product.sold_out' | t }}</span>
@@ -288,7 +297,7 @@
               {% assign fallback_product_alt = section.settings.fallback_product_image_alt | default: product.title %}
               {{ section.settings.fallback_product_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw', alt: fallback_product_alt }}
             {% else %}
-              <span class="jk-product-placeholder" aria-hidden="true"></span>
+              {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: product.title, class: 'jk-product-card__generated-image' %}
             {% endif %}
             {% unless product.available %}
               <span class="jk-product-card__status">{{ 'products.product.sold_out' | t }}</span>
@@ -327,6 +336,7 @@
           assign pathway_link = pathway_links[pathway_index]
           assign placeholder_image = blank
           assign placeholder_alt = blank
+          assign pathway_asset = 'joyari-collection-engagement-rings.jpg'
           case index
             when 1
               assign placeholder_image = section.settings.placeholder_image_1
@@ -334,12 +344,15 @@
             when 2
               assign placeholder_image = section.settings.placeholder_image_2
               assign placeholder_alt = section.settings.placeholder_image_2_alt
+              assign pathway_asset = 'joyari-collection-wedding-bands.jpg'
             when 3
               assign placeholder_image = section.settings.placeholder_image_3
               assign placeholder_alt = section.settings.placeholder_image_3_alt
+              assign pathway_asset = 'joyari-collection-diamond-jewellery.jpg'
             when 4
               assign placeholder_image = section.settings.placeholder_image_4
               assign placeholder_alt = section.settings.placeholder_image_4_alt
+              assign pathway_asset = 'joyari-private-consultation.jpg'
           endcase
           assign placeholder_alt = placeholder_alt | default: 'Joyari Krafted diamond jewellery'
         %}
@@ -348,7 +361,7 @@
             {% if placeholder_image != blank %}
               {{ placeholder_image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 540, 720, 1000', sizes: '(min-width: 1000px) 33vw, (min-width: 640px) 50vw, 100vw', alt: placeholder_alt }}
             {% else %}
-              <span class="jk-product-placeholder" aria-hidden="true"></span>
+              {% render 'joyari-generated-image', file: pathway_asset, alt: placeholder_alt, class: 'jk-product-card__generated-image' %}
             {% endif %}
             <span class="jk-product-card__quick">View piece</span>
           </a>

@@ -74,7 +74,7 @@
             {% endfor %}
           {% else %}
             <figure class="jk-product-media is-active">
-              <div class="jk-product-placeholder jk-product-placeholder--large" aria-hidden="true"></div>
+              {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: product.title, class: 'jk-product-media__image', loading: 'eager' %}
             </figure>
           {% endif %}
         </div>

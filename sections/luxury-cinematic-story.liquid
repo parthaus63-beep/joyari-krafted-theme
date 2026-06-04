@@ -18,7 +18,7 @@
           {% elsif section.settings.proposal_image != blank %}
             {{ section.settings.proposal_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '720, 1000, 1300, 1600, 1800', sizes: '(min-width: 990px) 62vw, 100vw', alt: section.settings.proposal_image_alt, class: 'jk-cinematic-panel__image' }}
           {% else %}
-            <span class="jk-cinematic-placeholder jk-cinematic-placeholder--proposal" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: 'joyari-proposal-lifestyle.jpg', alt: section.settings.proposal_image_alt, class: 'jk-cinematic-panel__image' %}
           {% endif %}
         </div>
         <div class="jk-cinematic-panel__content">
@@ -33,7 +33,7 @@
           {% if section.settings.craftsmanship_image != blank %}
             {{ section.settings.craftsmanship_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 990px) 34vw, 100vw', alt: section.settings.craftsmanship_image_alt, class: 'jk-cinematic-panel__image' }}
           {% else %}
-            <span class="jk-cinematic-placeholder jk-cinematic-placeholder--craft" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: 'joyari-atelier-craftsmanship.jpg', alt: section.settings.craftsmanship_image_alt, class: 'jk-cinematic-panel__image' %}
           {% endif %}
         </div>
         <div class="jk-cinematic-panel__content">
@@ -48,7 +48,7 @@
           {% if section.settings.packaging_image != blank %}
             {{ section.settings.packaging_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 990px) 34vw, 100vw', alt: section.settings.packaging_image_alt, class: 'jk-cinematic-panel__image' }}
           {% else %}
-            <span class="jk-cinematic-placeholder jk-cinematic-placeholder--packaging" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: section.settings.packaging_image_alt, class: 'jk-cinematic-panel__image' %}
           {% endif %}
         </div>
         <div class="jk-cinematic-panel__content">

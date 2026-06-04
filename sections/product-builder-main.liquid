@@ -89,6 +89,14 @@
   if section.settings.diamond_closeup_image != blank
     assign product_gallery_media_count = product_gallery_media_count | plus: 1
   endif
+  assign has_generated_ring_on_hand = true
+  assign has_generated_diamond_closeup = true
+  if section.settings.ring_on_hand_image == blank
+    assign product_gallery_media_count = product_gallery_media_count | plus: 1
+  endif
+  if section.settings.diamond_closeup_image == blank
+    assign product_gallery_media_count = product_gallery_media_count | plus: 1
+  endif
   if section.settings.product_video_url != blank or section.settings.product_video_file_url != blank
     assign product_gallery_media_count = product_gallery_media_count | plus: 1
   endif
@@ -314,18 +322,26 @@
             {% endfor %}
 
             {% assign support_media_index = product.media.size %}
-            {% if section.settings.ring_on_hand_image != blank %}
+            {% if section.settings.ring_on_hand_image != blank or has_generated_ring_on_hand %}
               {% assign support_media_index = support_media_index | plus: 1 %}
               <figure class="jk-product-media jk-product-media--support{% if product.media.size == 0 and section.settings.gallery_image == blank %} is-active{% endif %}" data-media-id="joyari-ring-on-hand" data-media-type="image">
-                {{ section.settings.ring_on_hand_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 62vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.ring_on_hand_alt }}
+                {% if section.settings.ring_on_hand_image != blank %}
+                  {{ section.settings.ring_on_hand_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 62vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.ring_on_hand_alt }}
+                {% else %}
+                  {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.ring_on_hand_alt, class: 'jk-product-media__image' %}
+                {% endif %}
                 <figcaption class="jk-product-media__caption">Ring on hand</figcaption>
               </figure>
             {% endif %}
 
-            {% if section.settings.diamond_closeup_image != blank %}
+            {% if section.settings.diamond_closeup_image != blank or has_generated_diamond_closeup %}
               {% assign support_media_index = support_media_index | plus: 1 %}
-              <figure class="jk-product-media jk-product-media--support{% if product.media.size == 0 and section.settings.gallery_image == blank and section.settings.ring_on_hand_image == blank %} is-active{% endif %}" data-media-id="joyari-diamond-closeup" data-media-type="image">
-                {{ section.settings.diamond_closeup_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 62vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.diamond_closeup_alt }}
+              <figure class="jk-product-media jk-product-media--support" data-media-id="joyari-diamond-closeup" data-media-type="image">
+                {% if section.settings.diamond_closeup_image != blank %}
+                  {{ section.settings.diamond_closeup_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 62vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.diamond_closeup_alt }}
+                {% else %}
+                  {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: section.settings.diamond_closeup_alt, class: 'jk-product-media__image' %}
+                {% endif %}
                 <figcaption class="jk-product-media__caption">Diamond detail</figcaption>
               </figure>
             {% endif %}
@@ -356,7 +372,7 @@
             {% endif %}
           {% else %}
             <figure class="jk-product-media is-active">
-              {% render 'joyari-visual-placeholder', type: 'ring' %}
+              {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: product.title, class: 'jk-product-media__image', loading: 'eager' %}
             </figure>
           {% endif %}
         </div>
@@ -373,14 +389,22 @@
                 {% render 'product-media', media: media, product: product, mode: 'thumbnail' %}
               </button>
             {% endfor %}
-            {% if section.settings.ring_on_hand_image != blank %}
+            {% if section.settings.ring_on_hand_image != blank or has_generated_ring_on_hand %}
               <button type="button" class="jk-media-thumb jk-media-thumb--support{% if product.media.size == 0 and section.settings.gallery_image == blank %} is-active{% endif %}" data-media-trigger="joyari-ring-on-hand" aria-label="View ring on hand visual">
-                {{ section.settings.ring_on_hand_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: section.settings.ring_on_hand_alt }}
+                {% if section.settings.ring_on_hand_image != blank %}
+                  {{ section.settings.ring_on_hand_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: section.settings.ring_on_hand_alt }}
+                {% else %}
+                  {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.ring_on_hand_alt, class: 'jk-media-thumb__image' %}
+                {% endif %}
               </button>
             {% endif %}
-            {% if section.settings.diamond_closeup_image != blank %}
-              <button type="button" class="jk-media-thumb jk-media-thumb--support{% if product.media.size == 0 and section.settings.gallery_image == blank and section.settings.ring_on_hand_image == blank %} is-active{% endif %}" data-media-trigger="joyari-diamond-closeup" aria-label="View diamond close-up visual">
-                {{ section.settings.diamond_closeup_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: section.settings.diamond_closeup_alt }}
+            {% if section.settings.diamond_closeup_image != blank or has_generated_diamond_closeup %}
+              <button type="button" class="jk-media-thumb jk-media-thumb--support" data-media-trigger="joyari-diamond-closeup" aria-label="View diamond close-up visual">
+                {% if section.settings.diamond_closeup_image != blank %}
+                  {{ section.settings.diamond_closeup_image | image_url: width: 240 | image_tag: loading: 'lazy', widths: '120, 180, 240', alt: section.settings.diamond_closeup_alt }}
+                {% else %}
+                  {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: section.settings.diamond_closeup_alt, class: 'jk-media-thumb__image' %}
+                {% endif %}
               </button>
             {% endif %}
             {% if section.settings.product_video_url != blank or section.settings.product_video_file_url != blank %}
@@ -460,7 +484,7 @@
                   {% elsif fallback_product_image_1 != blank %}
                     {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
                   {% else %}
-                    {% render 'joyari-visual-placeholder', type: 'ring' %}
+                    {% render 'joyari-generated-image', file: 'joyari-collection-wedding-bands.jpg', alt: section.settings.metal_selector_alt, class: 'jk-builder-support-card__image' %}
                   {% endif %}
                   <span>Metal tone</span>
                 </div>
@@ -472,7 +496,7 @@
                   {% elsif fallback_product_image_1 != blank %}
                     {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
                   {% else %}
-                    {% render 'joyari-visual-placeholder', type: 'diamond' %}
+                    {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: section.settings.diamond_shape_alt, class: 'jk-builder-support-card__image' %}
                   {% endif %}
                   <span>Diamond shape</span>
                 </div>
@@ -484,7 +508,7 @@
                   {% elsif fallback_product_image_1 != blank %}
                     {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
                   {% else %}
-                    {% render 'joyari-visual-placeholder', type: 'hand' %}
+                    {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.carat_size_alt, class: 'jk-builder-support-card__image' %}
                   {% endif %}
                   <span>Carat &amp; fit</span>
                 </div>
@@ -761,7 +785,7 @@
           {% elsif fallback_product_image_1 != blank %}
             {{ fallback_product_image_1 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
           {% else %}
-            {% render 'joyari-visual-placeholder', type: 'craft' %}
+            {% render 'joyari-generated-image', file: 'joyari-atelier-craftsmanship.jpg', alt: section.settings.craftsmanship_alt, class: 'jk-product-editorial-card__image' %}
           {% endif %}
         </div>
         <div class="jk-product-editorial-card__body">
@@ -782,7 +806,7 @@
           {% elsif fallback_product_image_1 != blank %}
             {{ fallback_product_image_1 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
           {% else %}
-            {% render 'joyari-visual-placeholder', type: 'box' %}
+            {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: section.settings.packaging_alt, class: 'jk-product-editorial-card__image' %}
           {% endif %}
         </div>
         <div class="jk-product-editorial-card__body">
@@ -803,7 +827,7 @@
           {% elsif fallback_product_image_1 != blank %}
             {{ fallback_product_image_1 | image_url: width: 1100 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 31vw, 100vw', widths: '480, 720, 960, 1100', alt: product.title }}
           {% else %}
-            {% render 'joyari-visual-placeholder', type: 'hand' %}
+            {% render 'joyari-generated-image', file: 'joyari-private-consultation.jpg', alt: section.settings.cta_image_alt, class: 'jk-product-editorial-card__image' %}
           {% endif %}
         </div>
         <div class="jk-product-editorial-card__body">

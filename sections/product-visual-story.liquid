@@ -17,7 +17,7 @@
         {% if section.settings.lifestyle_image != blank %}
           {{ section.settings.lifestyle_image | image_url: width: 1600 | image_tag: loading: 'lazy', widths: '640, 900, 1200, 1600', sizes: '(min-width: 900px) 58vw, 100vw', alt: section.settings.lifestyle_image_alt, class: 'jk-product-visual-card__image' }}
         {% else %}
-          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--lifestyle" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.lifestyle_image_alt, class: 'jk-product-visual-card__image' %}
         {% endif %}
       </div>
       <div class="jk-product-visual-card__content">
@@ -32,7 +32,7 @@
         {% if section.settings.craftsmanship_image != blank %}
           {{ section.settings.craftsmanship_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 33vw, 100vw', alt: section.settings.craftsmanship_image_alt, class: 'jk-product-visual-card__image' }}
         {% else %}
-          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--craft" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: 'joyari-atelier-craftsmanship.jpg', alt: section.settings.craftsmanship_image_alt, class: 'jk-product-visual-card__image' %}
         {% endif %}
       </div>
       <div class="jk-product-visual-card__content">
@@ -47,7 +47,7 @@
         {% if section.settings.packaging_image != blank %}
           {{ section.settings.packaging_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 33vw, 100vw', alt: section.settings.packaging_image_alt, class: 'jk-product-visual-card__image' }}
         {% else %}
-          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--packaging" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: section.settings.packaging_image_alt, class: 'jk-product-visual-card__image' %}
         {% endif %}
       </div>
       <div class="jk-product-visual-card__content">
@@ -62,7 +62,7 @@
         {% if section.settings.trust_image != blank %}
           {{ section.settings.trust_image | image_url: width: 1100 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100', sizes: '(min-width: 900px) 33vw, 100vw', alt: section.settings.trust_image_alt, class: 'jk-product-visual-card__image' }}
         {% else %}
-          <span class="jk-product-visual-placeholder jk-product-visual-placeholder--certificate" aria-hidden="true"></span>
+          {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: section.settings.trust_image_alt, class: 'jk-product-visual-card__image' %}
         {% endif %}
       </div>
       <div class="jk-product-visual-card__content">

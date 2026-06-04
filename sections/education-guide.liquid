@@ -28,7 +28,7 @@
       {% if section.settings.hero_image != blank %}
         {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', widths: '720, 1000, 1300, 1600, 1800', sizes: '(min-width: 990px) 48vw, 100vw', alt: hero_alt }}
       {% else %}
-        <span class="jk-guide-visual jk-guide-visual--hero" aria-hidden="true"></span>
+        {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: hero_alt, class: 'jk-education-guide__image', loading: 'eager' %}
       {% endif %}
     </div>
   </div>
@@ -37,12 +37,23 @@
     <div class="jk-education-guide__grid">
       {% for block in section.blocks %}
         {% assign card_alt = block.settings.image_alt | default: block.settings.title %}
+        {% liquid
+          assign guide_asset = 'joyari-diamond-macro-pear.jpg'
+          case forloop.index
+            when 2
+              assign guide_asset = 'joyari-product-pear-ring-on-hand.jpg'
+            when 3
+              assign guide_asset = 'joyari-atelier-craftsmanship.jpg'
+            when 4
+              assign guide_asset = 'joyari-packaging-certificate.jpg'
+          endcase
+        %}
         <article class="jk-education-guide-card" {{ block.shopify_attributes }}>
           <div class="jk-education-guide-card__media">
             {% if block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 520, 720, 900', sizes: '(min-width: 990px) 32vw, 100vw', alt: card_alt }}
             {% else %}
-              <span class="jk-guide-visual jk-guide-visual--{{ forloop.index }}" aria-hidden="true"></span>
+              {% render 'joyari-generated-image', file: guide_asset, alt: card_alt, class: 'jk-education-guide-card__image' %}
             {% endif %}
           </div>
           <div class="jk-education-guide-card__content">

@@ -14,12 +14,21 @@
   <div class="jk-journal__grid">
     {% for block in section.blocks %}
       {% assign journal_image_alt = block.settings.image_alt | default: block.settings.title %}
+      {% liquid
+        assign journal_asset = 'joyari-diamond-macro-pear.jpg'
+        case forloop.index
+          when 2
+            assign journal_asset = 'joyari-proposal-lifestyle.jpg'
+          when 3
+            assign journal_asset = 'joyari-atelier-craftsmanship.jpg'
+        endcase
+      %}
       <article class="jk-journal-card" {{ block.shopify_attributes }}>
         <div class="jk-journal-card__media">
           {% if block.settings.image != blank %}
             {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1200', sizes: '(min-width: 900px) 33vw, 100vw', alt: journal_image_alt, class: 'jk-journal-card__image' }}
           {% else %}
-            <span class="jk-journal-placeholder jk-journal-placeholder--{{ forloop.index }}" aria-hidden="true"></span>
+            {% render 'joyari-generated-image', file: journal_asset, alt: journal_image_alt, class: 'jk-journal-card__image' %}
           {% endif %}
         </div>
         <div class="jk-journal-card__content">

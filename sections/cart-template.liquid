@@ -14,7 +14,7 @@
               {% if item.image != blank %}
                 {{ item.image | image_url: width: 320 | image_tag: loading: 'lazy', widths: '160, 240, 320', sizes: '120px', alt: item.image.alt | default: item.product.title }}
               {% else %}
-                <span class="jk-product-placeholder" aria-hidden="true"></span>
+                {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: item.product.title, class: 'jk-cart-item__image' %}
               {% endif %}
             </a>
             <div class="jk-cart-item__details">

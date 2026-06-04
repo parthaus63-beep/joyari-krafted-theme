@@ -10,10 +10,14 @@
   endif
 %}
 
-<footer class="jk-footer{% if section.settings.background_image != blank %} jk-footer--image-bg{% endif %}">
+<footer class="jk-footer jk-footer--image-bg">
   {% if section.settings.background_image != blank %}
     <div class="jk-footer__background" aria-hidden="true">
       {{ section.settings.background_image | image_url: width: 1800 | image_tag: loading: 'lazy', widths: '720, 1000, 1400, 1800', sizes: '100vw', alt: '', class: 'jk-footer__background-image' }}
+    </div>
+  {% else %}
+    <div class="jk-footer__background" aria-hidden="true">
+      {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: '', class: 'jk-footer__background-image' %}
     </div>
   {% endif %}
 
@@ -26,6 +30,10 @@
       {% if section.settings.brand_image != blank %}
         <div class="jk-footer__image">
           {{ section.settings.brand_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 34vw, 100vw', alt: section.settings.brand_image_alt }}
+        </div>
+      {% else %}
+        <div class="jk-footer__image">
+          {% render 'joyari-generated-image', file: 'joyari-packaging-certificate.jpg', alt: section.settings.brand_image_alt %}
         </div>
       {% endif %}
       <p>{{ section.settings.brand_text }}</p>
