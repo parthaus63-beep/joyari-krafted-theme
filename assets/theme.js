@@ -282,9 +282,9 @@
       input.addEventListener('input', updateVariantState);
     });
 
-    root.querySelectorAll('input[name="properties[Metal Preference]"]').forEach(function (input) {
+    root.querySelectorAll('input[name="properties[Metal]"], input[name="properties[Metal Preference]"]').forEach(function (input) {
       var updateSelectedMetal = function () {
-        setText(root, '[data-selected-metal-label]', input.value || '18K Yellow Gold');
+        setText(root, '[data-selected-metal-label]', input.value || '10K Yellow Gold');
       };
 
       if (input.checked) updateSelectedMetal();

@@ -463,19 +463,26 @@
             <input type="hidden" name="id" value="{{ selected_variant.id }}" data-variant-id-input>
 
             <div class="jk-ring-builder-card jk-ring-builder-card--product">
+              <nav class="jk-builder-flow-tabs" aria-label="Build your ring flow">
+                <span>Timeline</span>
+                <span class="is-active">Setting</span>
+                <span>Gemstone</span>
+                <span>Personalise</span>
+              </nav>
+
               <div class="jk-builder-step jk-builder-step--design-preferences">
                 <div class="jk-builder-step__header">
                   <span class="jk-builder-step__number">01</span>
                   <div>
-                    <h3>Choose your metal and diamond shape</h3>
-                    <p>These selections are saved with your order as Joyari custom details.</p>
+                    <h3>Setting</h3>
+                    <p>Choose your metal and ring size. These selections are saved with your order as Joyari custom details.</p>
                   </div>
                 </div>
 
                 <fieldset class="jk-option-fieldset jk-option-fieldset--metal">
                   <legend>Metal selector</legend>
                   <div class="jk-swatch-row jk-swatch-row--metal">
-                    {% assign metals = '18K Yellow Gold,18K White Gold,18K Rose Gold,Platinum' | split: ',' %}
+                    {% assign metals = '10K Yellow Gold,10K White Gold,10K Rose Gold,14K Yellow Gold,14K White Gold,14K Rose Gold,18K Yellow Gold,18K White Gold,18K Rose Gold,Platinum' | split: ',' %}
                     {% for metal in metals %}
                       {% assign metal_id = 'MetalPreference-' | append: section.id | append: '-' | append: metal | handleize %}
                       {% liquid
@@ -490,12 +497,30 @@
                           assign metal_swatch = 'platinum'
                         endif
                       %}
-                      <input id="{{ metal_id }}" type="radio" name="properties[Metal Preference]" value="{{ metal | escape }}" {% if forloop.first %}checked{% endif %}>
+                      <input id="{{ metal_id }}" type="radio" name="properties[Metal]" value="{{ metal | escape }}" {% if forloop.first %}checked{% endif %}>
                       <label for="{{ metal_id }}" aria-label="{{ metal | escape }}"><span class="jk-metal-swatch jk-metal-swatch--{{ metal_swatch }}" aria-hidden="true"></span><span class="jk-metal-label-text">{{ metal }}</span></label>
                     {% endfor %}
                   </div>
-                  <p class="jk-selected-metal-label">Selected metal: <strong data-selected-metal-label>18K Yellow Gold</strong></p>
+                  <p class="jk-selected-metal-label">Selected metal: <strong data-selected-metal-label>10K Yellow Gold</strong></p>
                 </fieldset>
+
+                {% if show_ring_size_selector %}
+                  {% liquid
+                    assign ring_size_select_id = 'RingSize-' | append: section.id
+                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
+                  %}
+                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
+                {% endif %}
+              </div>
+
+              <div class="jk-builder-step jk-builder-step--gemstone">
+                <div class="jk-builder-step__header">
+                  <span class="jk-builder-step__number">02</span>
+                  <div>
+                    <h3>Gemstone</h3>
+                    <p>Choose your preferred centre-stone shape and available gemstone options.</p>
+                  </div>
+                </div>
 
                 <fieldset class="jk-option-fieldset jk-option-fieldset--shape">
                   <legend>Diamond shape selector</legend>
@@ -543,11 +568,16 @@
                   {% for option in product.options_with_values %}
                     {% assign selected_value = option.selected_value %}
                     {% assign option_key = 'option' | append: forloop.index %}
+                    {% assign option_name_downcase = option.name | downcase %}
+                    {% assign hide_setting_option = false %}
                     {% if selected_value == blank %}
                       {% assign selected_value = selected_variant[option_key] %}
                     {% endif %}
+                    {% if option_name_downcase contains 'setting' %}
+                      {% assign hide_setting_option = true %}
+                    {% endif %}
 
-                    <fieldset class="jk-option-fieldset" data-option-position="{{ forloop.index }}" data-option-name="{{ option.name | escape }}">
+                    <fieldset class="jk-option-fieldset{% if hide_setting_option %} jk-option-fieldset--hidden-setting{% endif %}" data-option-position="{{ forloop.index }}" data-option-name="{{ option.name | escape }}"{% if hide_setting_option %} hidden aria-hidden="true"{% endif %}>
                       <legend>{{ option.name }}</legend>
                       <div class="jk-swatch-row">
                         {% for value in option.values %}
@@ -569,35 +599,11 @@
                 </div>
               {% endunless %}
 
-              {% if show_ring_size_selector %}
-                <div class="jk-builder-step jk-builder-step--ring-size">
-                  <div class="jk-builder-step__header">
-                    <span class="jk-builder-step__number">{% if product.has_only_default_variant %}02{% else %}03{% endif %}</span>
-                    <div>
-                      <h3>Ring size</h3>
-                      <p>Saved as a line item property, not a variant.</p>
-                    </div>
-                  </div>
-
-                  {% liquid
-                    assign ring_size_select_id = 'RingSize-' | append: section.id
-                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
-                  %}
-                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
-                </div>
-              {% endif %}
-
               <div class="jk-builder-step jk-builder-step--custom-nudge">
                 <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">
-                    {% if show_ring_size_selector %}
-                      {% if product.has_only_default_variant %}03{% else %}04{% endif %}
-                    {% else %}
-                      {% if product.has_only_default_variant %}02{% else %}03{% endif %}
-                    {% endif %}
-                  </span>
+                  <span class="jk-builder-step__number">03</span>
                   <div>
-                    <h3>Need a custom version?</h3>
+                    <h3>Personalise</h3>
                     <p>Prefer a different metal, size, diamond shape or personal detail? Share your vision and our team will guide you.</p>
                   </div>
                 </div>

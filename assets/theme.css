@@ -8553,9 +8553,31 @@ button[name="add"]:focus-visible {
 }
 
 .jk-product-builder-main .jk-builder-card__header,
-.jk-product-builder-main .jk-builder-support-visuals,
-.jk-product-builder-main .jk-builder-step__header {
+.jk-product-builder-main .jk-builder-support-visuals {
   display: none !important;
+}
+
+.jk-product-builder-main .jk-builder-flow-tabs {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin: 0 0 26px !important;
+}
+
+.jk-product-builder-main .jk-builder-flow-tabs span {
+  display: block !important;
+  padding-top: 10px !important;
+  border-top: 2px solid rgba(15, 61, 46, .55) !important;
+  color: #0F3D2E !important;
+  font-size: .78rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+}
+
+.jk-product-builder-main .jk-builder-flow-tabs span.is-active {
+  border-top-color: #C6A769 !important;
+  color: #111111 !important;
 }
 
 .jk-product-builder-main .jk-builder-step {
@@ -8573,6 +8595,24 @@ button[name="add"]:focus-visible {
   background: #FFFFFF !important;
 }
 
+.jk-product-builder-main .jk-builder-step__header {
+  display: grid !important;
+  grid-template-columns: 38px minmax(0, 1fr) !important;
+  gap: 12px !important;
+  margin-bottom: 18px !important;
+}
+
+.jk-product-builder-main .jk-builder-step__header h3 {
+  color: #111111 !important;
+  font-size: clamp(1.45rem, 2vw, 2rem) !important;
+}
+
+.jk-product-builder-main .jk-builder-step__header p {
+  color: #5e5a53 !important;
+  font-size: .92rem !important;
+  line-height: 1.58 !important;
+}
+
 .jk-product-builder-main .jk-option-fieldset legend,
 .jk-product-builder-main .jk-builder-field label {
   color: #111111 !important;
@@ -8584,8 +8624,8 @@ button[name="add"]:focus-visible {
 
 .jk-product-builder-main .jk-swatch-row--metal {
   display: grid !important;
-  grid-template-columns: repeat(4, 58px) !important;
-  gap: 18px !important;
+  grid-template-columns: repeat(5, 58px) !important;
+  gap: 16px !important;
   align-items: center !important;
   justify-content: start !important;
 }
@@ -8702,6 +8742,50 @@ button[name="add"]:focus-visible {
 .jk-product-builder-main .jk-builder-field--carat-preference select {
   min-height: 50px !important;
   border-radius: 4px !important;
+}
+
+.jk-product-builder-main .jk-option-fieldset--hidden-setting {
+  display: none !important;
+}
+
+.jk-product-builder-main .jk-builder-field--ring-size {
+  margin-top: 22px !important;
+}
+
+.jk-product-builder-main .jk-builder-field__label-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+  margin-bottom: 10px !important;
+}
+
+.jk-product-builder-main .jk-size-guide-trigger {
+  min-height: 36px !important;
+  padding: 0 13px !important;
+  border: 1px solid rgba(198, 167, 105, .45) !important;
+  border-radius: 999px !important;
+  background: #FFFFFF !important;
+  color: #0F3D2E !important;
+  font-size: .72rem !important;
+  font-weight: 900 !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+}
+
+.jk-product-builder-main .jk-ring-size-control select {
+  width: 100% !important;
+  min-height: 54px !important;
+  padding-inline: 16px !important;
+  border: 1px solid rgba(198, 167, 105, .45) !important;
+  background: #FFFFFF !important;
+  color: #111111 !important;
+}
+
+.jk-product-builder-main .jk-ring-size-assurance {
+  margin-top: 9px !important;
+  color: #5e5a53 !important;
+  font-size: .86rem !important;
 }
 
 .jk-product-builder-main .jk-product-actions {
@@ -8838,10 +8922,27 @@ button[name="add"]:focus-visible {
     min-height: 0 !important;
   }
 
-  .jk-product-builder-main .jk-swatch-row--metal,
-  .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row {
-    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  .jk-product-builder-main .jk-swatch-row--metal {
+    grid-template-columns: repeat(5, minmax(0, 52px)) !important;
     gap: 9px !important;
+  }
+
+  .jk-product-builder-main .jk-option-fieldset--shape .jk-shape-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-flow-tabs {
+    gap: 8px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-flow-tabs span {
+    font-size: .62rem !important;
+    letter-spacing: .08em !important;
+  }
+
+  .jk-product-builder-main .jk-builder-step__header {
+    grid-template-columns: 34px minmax(0, 1fr) !important;
   }
 
   .jk-product-builder-main .jk-swatch-row--metal label {
