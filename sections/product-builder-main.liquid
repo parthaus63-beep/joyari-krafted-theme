@@ -464,18 +464,16 @@
 
             <div class="jk-ring-builder-card jk-ring-builder-card--product">
               <nav class="jk-builder-flow-tabs" aria-label="Build your ring flow">
-                <span>Timeline</span>
-                <span class="is-active">Setting</span>
+                <span class="is-active" aria-current="step">Setting</span>
                 <span>Gemstone</span>
                 <span>Personalise</span>
               </nav>
 
               <div class="jk-builder-step jk-builder-step--design-preferences">
                 <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">01</span>
                   <div>
                     <h3>Setting</h3>
-                    <p>Choose your metal and ring size. These selections are saved with your order as Joyari custom details.</p>
+                    <p>Select the metal and size details for your setting. These choices are saved privately with your order.</p>
                   </div>
                 </div>
 
@@ -496,6 +494,8 @@
                   %}
                   {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
                 {% endif %}
+
+                <a class="jk-button jk-button--primary jk-builder-continue-button" href="/pages/custom-design?activeTab=Lab+Grown&amp;queryLabGrown=true">Choose Your Stone</a>
               </div>
 
               {% unless product.has_only_default_variant %}
@@ -550,17 +550,6 @@
                   {% endfor %}
                 </div>
               {% endunless %}
-
-              <div class="jk-builder-step jk-builder-step--custom-nudge">
-                <div class="jk-builder-step__header">
-                  <span class="jk-builder-step__number">03</span>
-                  <div>
-                    <h3>Personalise</h3>
-                    <p>Prefer a different metal, size, diamond shape or personal detail? Share your vision and our team will guide you.</p>
-                  </div>
-                </div>
-                <a class="jk-text-link" href="#JoyariCustomRequest-{{ section.id }}">Request a Custom Version</a>
-              </div>
 
               <div class="jk-product-actions">
                 <button type="submit" name="add" class="jk-button jk-button--primary jk-add-to-cart" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>

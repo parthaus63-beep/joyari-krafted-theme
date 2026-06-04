@@ -9033,3 +9033,227 @@ button[name="add"]:focus-visible {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* Joyari Cullen-inspired product builder refinement */
+.jk-product-builder-main .jk-ring-builder-card--product {
+  padding: clamp(22px, 2.6vw, 34px) 0 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+.jk-product-builder-main .jk-builder-flow-tabs {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: clamp(14px, 1.5vw, 22px) !important;
+  margin: 0 0 clamp(28px, 3vw, 42px) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+.jk-product-builder-main .jk-builder-flow-tabs span {
+  position: relative !important;
+  display: block !important;
+  min-height: 26px !important;
+  padding: 9px 0 0 !important;
+  border: 0 !important;
+  border-top: 1px solid rgba(15, 61, 46, .35) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: rgba(17, 17, 17, .56) !important;
+  font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+  font-size: .68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .16em !important;
+  line-height: 1.15 !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+}
+
+.jk-product-builder-main .jk-builder-flow-tabs span.is-active {
+  border-top-color: #0F3D2E !important;
+  color: #0F3D2E !important;
+}
+
+.jk-product-builder-main .jk-builder-step {
+  padding: 0 0 clamp(22px, 2.5vw, 34px) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: #FFFFFF !important;
+  box-shadow: none !important;
+}
+
+.jk-product-builder-main .jk-builder-step__header {
+  display: block !important;
+  margin: 0 0 22px !important;
+}
+
+.jk-product-builder-main .jk-builder-step__number {
+  display: none !important;
+}
+
+.jk-product-builder-main .jk-builder-step__header h3 {
+  margin: 0 0 9px !important;
+  color: #111111 !important;
+  font-family: var(--jk-font-heading, Georgia, "Times New Roman", serif) !important;
+  font-size: clamp(1.8rem, 2.2vw, 2.55rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.08 !important;
+  text-transform: none !important;
+}
+
+.jk-product-builder-main .jk-builder-step__header p {
+  max-width: 560px !important;
+  margin: 0 !important;
+  color: rgba(17, 17, 17, .68) !important;
+  font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+  font-size: .96rem !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+}
+
+.jk-product-builder-main .jk-builder-field--metal-select,
+.jk-product-builder-main .jk-builder-field--ring-size {
+  gap: 8px !important;
+  margin-top: 18px !important;
+}
+
+.jk-product-builder-main .jk-builder-field--metal-select label,
+.jk-product-builder-main .jk-builder-field--ring-size label {
+  color: rgba(17, 17, 17, .64) !important;
+  font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+  font-size: .68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+}
+
+.jk-product-builder-main .jk-builder-field--metal-select select,
+.jk-product-builder-main .jk-ring-size-control select {
+  min-height: 48px !important;
+  padding: 0 13px !important;
+  border: 1px solid rgba(17, 17, 17, .22) !important;
+  border-radius: 2px !important;
+  background: #FFFFFF !important;
+  color: #111111 !important;
+  font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+  font-size: .94rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  box-shadow: none !important;
+}
+
+.jk-product-builder-main .jk-builder-field--metal-select select:hover,
+.jk-product-builder-main .jk-builder-field--metal-select select:focus-visible,
+.jk-product-builder-main .jk-ring-size-control select:hover,
+.jk-product-builder-main .jk-ring-size-control select:focus-visible {
+  border-color: #C6A769 !important;
+  box-shadow: 0 0 0 2px rgba(198, 167, 105, .11) !important;
+}
+
+.jk-product-builder-main .jk-builder-field__label-row {
+  margin-bottom: 8px !important;
+}
+
+.jk-product-builder-main .jk-size-guide-trigger {
+  min-height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: #0F3D2E !important;
+  font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+  font-size: .72rem !important;
+  font-weight: 500 !important;
+  letter-spacing: .04em !important;
+  text-transform: none !important;
+  text-decoration: underline !important;
+  text-decoration-color: rgba(198, 167, 105, .75) !important;
+  text-underline-offset: 5px !important;
+  box-shadow: none !important;
+}
+
+.jk-product-builder-main .jk-ring-size-links {
+  margin-top: 9px !important;
+}
+
+.jk-product-builder-main .jk-ring-size-links a {
+  color: #0F3D2E !important;
+  font-size: .76rem !important;
+  font-weight: 500 !important;
+  letter-spacing: .04em !important;
+  text-transform: none !important;
+}
+
+.jk-product-builder-main .jk-ring-size-assurance {
+  margin-top: 8px !important;
+  color: rgba(17, 17, 17, .55) !important;
+  font-size: .8rem !important;
+  font-weight: 400 !important;
+  line-height: 1.45 !important;
+}
+
+.jk-product-builder-main .jk-builder-continue-button {
+  margin-top: 24px !important;
+}
+
+.jk-product-builder-main .jk-product-actions .jk-button,
+.jk-product-builder-main .jk-mobile-atc .jk-button,
+.jk-product-builder-main .jk-builder-continue-button {
+  min-height: 52px !important;
+  border-radius: 2px !important;
+  font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+  font-size: .76rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .08em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+}
+
+.jk-product-builder-main .jk-product-actions .jk-button--primary,
+.jk-product-builder-main .jk-mobile-atc .jk-button--primary,
+.jk-product-builder-main .jk-builder-continue-button,
+.jk-product-builder-main button[name="add"] {
+  background: #0F3D2E !important;
+  border: 1px solid #0F3D2E !important;
+  color: #FFFFFF !important;
+}
+
+.jk-product-builder-main .jk-product-actions .jk-button--primary:hover,
+.jk-product-builder-main .jk-product-actions .jk-button--primary:focus-visible,
+.jk-product-builder-main .jk-mobile-atc .jk-button--primary:hover,
+.jk-product-builder-main .jk-mobile-atc .jk-button--primary:focus-visible,
+.jk-product-builder-main .jk-builder-continue-button:hover,
+.jk-product-builder-main .jk-builder-continue-button:focus-visible {
+  background: #123f31 !important;
+  border-color: #C6A769 !important;
+  color: #FFFFFF !important;
+}
+
+.jk-product-builder-main .jk-product-enquiry-button {
+  border: 1px solid rgba(15, 61, 46, .5) !important;
+  border-radius: 2px !important;
+}
+
+@media (max-width: 680px) {
+  .jk-product-builder-main .jk-ring-builder-card--product {
+    padding-top: 18px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-flow-tabs {
+    gap: 10px !important;
+    margin-bottom: 24px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-flow-tabs span {
+    font-size: .6rem !important;
+    letter-spacing: .1em !important;
+  }
+
+  .jk-product-builder-main .jk-builder-step__header h3 {
+    font-size: 1.75rem !important;
+  }
+}
