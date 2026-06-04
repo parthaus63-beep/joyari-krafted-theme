@@ -59,13 +59,13 @@
         <article class="jk-product-card jk-product-card--pathway">
           <a class="jk-product-card__media" href="{{ pathway_link }}">
             {% liquid
-              assign pathway_asset = 'joyari-collection-engagement-rings.jpg'
+              assign pathway_asset = 'joyari-collection-engagement-rings-v2.jpg'
               if index == 2
-                assign pathway_asset = 'joyari-collection-wedding-bands.jpg'
+                assign pathway_asset = 'joyari-collection-wedding-bands-v2.jpg'
               elsif index == 3
                 assign pathway_asset = 'joyari-collection-diamond-jewellery.jpg'
               elsif index == 4
-                assign pathway_asset = 'joyari-private-consultation.jpg'
+                assign pathway_asset = 'joyari-custom-design-atelier-v2.jpg'
               endif
             %}
             {% render 'joyari-generated-image', file: pathway_asset, alt: pathway_title, class: 'jk-product-card__generated-image' %}

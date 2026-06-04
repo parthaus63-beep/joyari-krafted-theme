@@ -24,18 +24,21 @@
   {% if template.name == 'collection' %}
     {% liquid
       assign collection_banner = section.settings.collection_banner_image
-      if collection_banner == blank and grid_collection.image != blank
-        assign collection_banner = grid_collection.image
-      endif
       assign collection_banner_alt = section.settings.collection_banner_image_alt | default: grid_heading | default: 'Joyari collection'
       assign collection_key = grid_heading | append: ' ' | append: grid_collection.handle | append: ' ' | append: grid_collection.title | downcase
-      assign collection_asset = 'joyari-collection-engagement-rings.jpg'
-      if collection_key contains 'wedding' or collection_key contains 'band'
-        assign collection_asset = 'joyari-collection-wedding-bands.jpg'
-      elsif collection_key contains 'diamond' or collection_key contains 'earring' or collection_key contains 'bracelet' or collection_key contains 'necklace'
-        assign collection_asset = 'joyari-collection-diamond-jewellery.jpg'
+      assign collection_asset = 'joyari-collection-engagement-rings-v2.jpg'
+      if collection_key contains 'earring'
+        assign collection_asset = 'joyari-collection-earrings-v1.jpg'
+      elsif collection_key contains 'bracelet'
+        assign collection_asset = 'joyari-collection-bracelets-v1.jpg'
+      elsif collection_key contains 'necklace' or collection_key contains 'pendant'
+        assign collection_asset = 'joyari-collection-necklaces-v1.jpg'
+      elsif collection_key contains 'wedding' or collection_key contains 'band'
+        assign collection_asset = 'joyari-collection-wedding-bands-v2.jpg'
       elsif collection_key contains 'custom' or collection_key contains 'design'
-        assign collection_asset = 'joyari-private-consultation.jpg'
+        assign collection_asset = 'joyari-custom-design-atelier-v2.jpg'
+      elsif collection_key contains 'diamond'
+        assign collection_asset = 'joyari-collection-diamond-jewellery.jpg'
       endif
     %}
     <div class="jk-collection-hero">
@@ -336,7 +339,7 @@
           assign pathway_link = pathway_links[pathway_index]
           assign placeholder_image = blank
           assign placeholder_alt = blank
-          assign pathway_asset = 'joyari-collection-engagement-rings.jpg'
+          assign pathway_asset = 'joyari-collection-engagement-rings-v2.jpg'
           case index
             when 1
               assign placeholder_image = section.settings.placeholder_image_1
@@ -344,7 +347,7 @@
             when 2
               assign placeholder_image = section.settings.placeholder_image_2
               assign placeholder_alt = section.settings.placeholder_image_2_alt
-              assign pathway_asset = 'joyari-collection-wedding-bands.jpg'
+              assign pathway_asset = 'joyari-collection-wedding-bands-v2.jpg'
             when 3
               assign placeholder_image = section.settings.placeholder_image_3
               assign placeholder_alt = section.settings.placeholder_image_3_alt
@@ -352,7 +355,7 @@
             when 4
               assign placeholder_image = section.settings.placeholder_image_4
               assign placeholder_alt = section.settings.placeholder_image_4_alt
-              assign pathway_asset = 'joyari-private-consultation.jpg'
+              assign pathway_asset = 'joyari-custom-design-atelier-v2.jpg'
           endcase
           assign placeholder_alt = placeholder_alt | default: 'Joyari Krafted diamond jewellery'
         %}

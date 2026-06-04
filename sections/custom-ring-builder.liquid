@@ -25,7 +25,7 @@
       {% elsif section.settings.sequence_frame_1 != blank %}
         {{ section.settings.sequence_frame_1 | image_url: width: 1800 | image_tag: loading: 'eager', sizes: '(min-width: 990px) 48vw, 100vw', widths: '640, 900, 1200, 1600, 1800', alt: section.settings.preview_image_alt }}
       {% else %}
-        {% render 'joyari-generated-image', file: 'joyari-home-hero-ring-on-hand.jpg', alt: section.settings.hero_image_alt, loading: 'eager' %}
+        {% render 'joyari-generated-image', file: 'joyari-custom-design-atelier-v2.jpg', alt: section.settings.hero_image_alt, loading: 'eager' %}
       {% endif %}
       <span>Custom engagement ring studio</span>
     </div>
@@ -39,7 +39,7 @@
         {% elsif section.settings.metal_platinum_image != blank %}
           {{ section.settings.metal_platinum_image | image_url: width: 760 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 16vw, 50vw', widths: '360, 540, 760', alt: 'Platinum ring tone preview' }}
         {% else %}
-          {% render 'joyari-generated-image', file: 'joyari-collection-wedding-bands.jpg', alt: section.settings.metal_selector_alt %}
+          {% render 'joyari-generated-image', file: 'joyari-collection-wedding-bands-v2.jpg', alt: section.settings.metal_selector_alt %}
         {% endif %}
       </div>
       <h2>Metal tone</h2>

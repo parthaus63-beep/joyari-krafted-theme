@@ -484,7 +484,7 @@
                   {% elsif fallback_product_image_1 != blank %}
                     {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
                   {% else %}
-                    {% render 'joyari-generated-image', file: 'joyari-collection-wedding-bands.jpg', alt: section.settings.metal_selector_alt, class: 'jk-builder-support-card__image' %}
+                    {% render 'joyari-generated-image', file: 'joyari-collection-wedding-bands-v2.jpg', alt: section.settings.metal_selector_alt, class: 'jk-builder-support-card__image' %}
                   {% endif %}
                   <span>Metal tone</span>
                 </div>

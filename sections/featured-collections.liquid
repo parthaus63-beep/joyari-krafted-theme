@@ -33,14 +33,14 @@
           assign category_image = block.settings.image
         endif
         assign card_image_alt = category_image_alt | default: block.settings.image_alt | default: block.settings.title
-        assign category_asset = 'joyari-collection-engagement-rings.jpg'
+        assign category_asset = 'joyari-collection-engagement-rings-v2.jpg'
         case forloop.index
           when 2
-            assign category_asset = 'joyari-collection-wedding-bands.jpg'
+            assign category_asset = 'joyari-collection-wedding-bands-v2.jpg'
           when 3
             assign category_asset = 'joyari-collection-diamond-jewellery.jpg'
           when 4
-            assign category_asset = 'joyari-private-consultation.jpg'
+            assign category_asset = 'joyari-custom-design-atelier-v2.jpg'
         endcase
       %}
       <article class="jk-collection-card" {{ block.shopify_attributes }}>
