@@ -47,8 +47,6 @@
         <a class="jk-collection-card__media" href="{{ card_collection.url | default: routes.all_products_collection_url }}" aria-label="{{ block.settings.title | escape }}">
           {% if category_image != blank %}
             {{ category_image | image_url: width: 1300 | image_tag: loading: 'lazy', widths: '420, 640, 820, 1100, 1300', sizes: '(min-width: 1100px) 25vw, (min-width: 700px) 50vw, 100vw', alt: card_image_alt }}
-          {% elsif card_collection.featured_image != blank %}
-            {{ card_collection.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 900px) 33vw, 100vw', alt: block.settings.title }}
           {% else %}
             {% render 'joyari-generated-image', file: category_asset, alt: card_image_alt, class: 'jk-collection-card__image' %}
           {% endif %}

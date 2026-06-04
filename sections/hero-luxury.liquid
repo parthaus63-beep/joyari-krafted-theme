@@ -1,18 +1,29 @@
 {% liquid
   assign has_hero_media = true
+  assign use_generated_home_hero = false
   if section.settings.hero_video != blank or section.settings.hero_video_url != blank or section.settings.hero_image != blank
     assign has_hero_media = true
+  endif
+  if request.page_type == 'index' and section.settings.hero_image == blank
+    assign use_generated_home_hero = true
   endif
 %}
 
 <section class="jk-hero section-{{ section.id }}{% if has_hero_media %} jk-hero--image-led{% endif %}">
   <div class="jk-hero__media" aria-hidden="true">
-    {% if section.settings.hero_video != blank %}
+    {% if section.settings.hero_image != blank %}
+      {{ section.settings.hero_image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.hero_image_alt, class: 'jk-hero__image' }}
+    {% elsif use_generated_home_hero %}
+      {% render 'joyari-generated-image',
+        file: 'joyari-home-hero-bright-ring-hand-v2.jpg',
+        alt: section.settings.hero_image_alt,
+        class: 'jk-hero__image',
+        loading: 'eager'
+      %}
+    {% elsif section.settings.hero_video != blank %}
       {{ section.settings.hero_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2200x', class: 'jk-hero__video' }}
     {% elsif section.settings.hero_video_url != blank %}
       {{ section.settings.hero_video_url | external_video_tag: class: 'jk-hero__video jk-hero__video--external' }}
-    {% elsif section.settings.hero_image != blank %}
-      {{ section.settings.hero_image | image_url: width: 2400 | image_tag: loading: 'eager', widths: '900, 1200, 1600, 2000, 2400', sizes: '100vw', alt: section.settings.hero_image_alt, class: 'jk-hero__image' }}
     {% else %}
       {% render 'joyari-generated-image',
         file: 'joyari-home-hero-bright-ring-hand-v2.jpg',
