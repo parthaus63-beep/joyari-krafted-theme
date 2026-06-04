@@ -463,51 +463,6 @@
             <input type="hidden" name="id" value="{{ selected_variant.id }}" data-variant-id-input>
 
             <div class="jk-ring-builder-card jk-ring-builder-card--product">
-              <div class="jk-builder-card__header">
-                <div>
-                  <p class="jk-eyebrow">Simple selection</p>
-                  <h2>{{ section.settings.builder_heading }}</h2>
-                  <p class="jk-builder-subcopy">Select the available Shopify option for checkout, then add private design preferences for the Joyari team.</p>
-                </div>
-              </div>
-
-              <div class="jk-builder-support-visuals" aria-label="Joyari product visual guidance">
-                <div class="jk-builder-support-card">
-                  {% if section.settings.metal_selector_image != blank %}
-                    {{ section.settings.metal_selector_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.metal_selector_alt }}
-                  {% elsif fallback_product_image_1 != blank %}
-                    {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
-                  {% else %}
-                    {% render 'joyari-generated-image', file: 'joyari-collection-wedding-bands-v2.jpg', alt: section.settings.metal_selector_alt, class: 'jk-builder-support-card__image' %}
-                  {% endif %}
-                  <span>Metal tone</span>
-                </div>
-                <div class="jk-builder-support-card">
-                  {% if section.settings.diamond_shape_image != blank %}
-                    {{ section.settings.diamond_shape_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.diamond_shape_alt }}
-                  {% elsif fallback_product_image_2 != blank %}
-                    {{ fallback_product_image_2 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
-                  {% elsif fallback_product_image_1 != blank %}
-                    {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
-                  {% else %}
-                    {% render 'joyari-generated-image', file: 'joyari-diamond-macro-pear.jpg', alt: section.settings.diamond_shape_alt, class: 'jk-builder-support-card__image' %}
-                  {% endif %}
-                  <span>Diamond shape</span>
-                </div>
-                <div class="jk-builder-support-card">
-                  {% if section.settings.carat_size_image != blank %}
-                    {{ section.settings.carat_size_image | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: section.settings.carat_size_alt }}
-                  {% elsif fallback_product_image_3 != blank %}
-                    {{ fallback_product_image_3 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
-                  {% elsif fallback_product_image_1 != blank %}
-                    {{ fallback_product_image_1 | image_url: width: 680 | image_tag: loading: 'lazy', sizes: '(min-width: 1080px) 12vw, 50vw', widths: '320, 480, 680', alt: product.title }}
-                  {% else %}
-                    {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.carat_size_alt, class: 'jk-builder-support-card__image' %}
-                  {% endif %}
-                  <span>Carat &amp; fit</span>
-                </div>
-              </div>
-
               <div class="jk-builder-step jk-builder-step--design-preferences">
                 <div class="jk-builder-step__header">
                   <span class="jk-builder-step__number">01</span>
@@ -536,9 +491,10 @@
                         endif
                       %}
                       <input id="{{ metal_id }}" type="radio" name="properties[Metal Preference]" value="{{ metal | escape }}" {% if forloop.first %}checked{% endif %}>
-                      <label for="{{ metal_id }}"><span class="jk-metal-swatch jk-metal-swatch--{{ metal_swatch }}" aria-hidden="true"></span>{{ metal }}</label>
+                      <label for="{{ metal_id }}" aria-label="{{ metal | escape }}"><span class="jk-metal-swatch jk-metal-swatch--{{ metal_swatch }}" aria-hidden="true"></span><span class="jk-metal-label-text">{{ metal }}</span></label>
                     {% endfor %}
                   </div>
+                  <p class="jk-selected-metal-label">Selected metal: <strong data-selected-metal-label>18K Yellow Gold</strong></p>
                 </fieldset>
 
                 <fieldset class="jk-option-fieldset jk-option-fieldset--shape">
@@ -664,6 +620,10 @@
                   {% endif %}
                 </p>
                 <a class="jk-button jk-button--secondary jk-product-enquiry-button" href="/pages/contact">Enquire or book appointment</a>
+                <div class="jk-product-text-links" aria-label="Product enquiry links">
+                  <a href="/pages/contact">Send a hint</a>
+                  <a href="/pages/contact">Make an enquiry</a>
+                </div>
               </div>
             </div>
           {% endform %}
@@ -680,14 +640,6 @@
             <span class="jk-trust-badge">
               <span class="jk-trust-badge__icon" aria-hidden="true">✓</span>
               Free Express &amp; Insured Delivery
-            </span>
-            <span class="jk-trust-badge">
-              <span class="jk-trust-badge__icon" aria-hidden="true">◇</span>
-              Certified Stones
-            </span>
-            <span class="jk-trust-badge">
-              <span class="jk-trust-badge__icon" aria-hidden="true">✦</span>
-              Ethical Lab-Grown Diamonds
             </span>
           </div>
 

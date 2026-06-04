@@ -282,6 +282,17 @@
       input.addEventListener('input', updateVariantState);
     });
 
+    root.querySelectorAll('input[name="properties[Metal Preference]"]').forEach(function (input) {
+      var updateSelectedMetal = function () {
+        setText(root, '[data-selected-metal-label]', input.value || '18K Yellow Gold');
+      };
+
+      if (input.checked) updateSelectedMetal();
+      input.addEventListener('change', function () {
+        if (input.checked) updateSelectedMetal();
+      });
+    });
+
     root.querySelectorAll('[data-media-trigger]').forEach(function (button) {
       button.addEventListener('click', function () {
         selectMedia(root, button.getAttribute('data-media-trigger'));
