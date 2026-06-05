@@ -9116,13 +9116,15 @@ button[name="add"]:focus-visible {
 }
 
 .jk-product-builder-main .jk-builder-field--metal-select,
-.jk-product-builder-main .jk-builder-field--ring-size {
+.jk-product-builder-main .jk-builder-field--ring-size,
+.jk-product-builder-main .jk-builder-field--quality-select {
   gap: 8px !important;
   margin-top: 18px !important;
 }
 
 .jk-product-builder-main .jk-builder-field--metal-select label,
-.jk-product-builder-main .jk-builder-field--ring-size label {
+.jk-product-builder-main .jk-builder-field--ring-size label,
+.jk-product-builder-main .jk-builder-field--quality-select label {
   color: rgba(17, 17, 17, .64) !important;
   font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
   font-size: .68rem !important;
@@ -9132,7 +9134,8 @@ button[name="add"]:focus-visible {
 }
 
 .jk-product-builder-main .jk-builder-field--metal-select select,
-.jk-product-builder-main .jk-ring-size-control select {
+.jk-product-builder-main .jk-ring-size-control select,
+.jk-product-builder-main .jk-builder-field--quality-select select {
   min-height: 48px !important;
   padding: 0 13px !important;
   border: 1px solid rgba(17, 17, 17, .22) !important;
@@ -9149,9 +9152,21 @@ button[name="add"]:focus-visible {
 .jk-product-builder-main .jk-builder-field--metal-select select:hover,
 .jk-product-builder-main .jk-builder-field--metal-select select:focus-visible,
 .jk-product-builder-main .jk-ring-size-control select:hover,
-.jk-product-builder-main .jk-ring-size-control select:focus-visible {
+.jk-product-builder-main .jk-ring-size-control select:focus-visible,
+.jk-product-builder-main .jk-builder-field--quality-select select:hover,
+.jk-product-builder-main .jk-builder-field--quality-select select:focus-visible {
   border-color: #C6A769 !important;
   box-shadow: 0 0 0 2px rgba(198, 167, 105, .11) !important;
+}
+
+.jk-product-builder-main .jk-builder-quality-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+}
+
+.jk-product-builder-main .jk-builder-quality-grid .jk-builder-field--quality-select {
+  margin-top: 18px !important;
 }
 
 .jk-product-builder-main .jk-builder-field__label-row {
@@ -9255,5 +9270,10 @@ button[name="add"]:focus-visible {
 
   .jk-product-builder-main .jk-builder-step__header h3 {
     font-size: 1.75rem !important;
+  }
+
+  .jk-product-builder-main .jk-builder-quality-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
   }
 }
