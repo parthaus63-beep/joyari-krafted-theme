@@ -9672,3 +9672,75 @@ button[name="add"]:focus-visible {
     gap: 6px 12px !important;
   }
 }
+
+/* Joyari clean media treatment: remove photo-wide dark banner overlays */
+.jk-hero::after,
+.jk-collection-hero__media::after,
+.jk-collection-hero::before,
+.jk-collection-hero::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+}
+
+.jk-hero,
+.jk-collection-hero {
+  background: #F8F6F1 !important;
+}
+
+.jk-hero__media,
+.jk-collection-hero__media {
+  background: #F8F6F1 !important;
+}
+
+.jk-hero__media img,
+.jk-hero__media video,
+.jk-collection-hero__image {
+  filter: none !important;
+}
+
+.jk-hero__content,
+.jk-collection-hero__content {
+  border: 1px solid rgba(198, 167, 105, .28) !important;
+  background: rgba(255, 255, 255, .82) !important;
+  color: #111111 !important;
+  text-shadow: none !important;
+  box-shadow: 0 18px 52px rgba(17, 17, 17, .065) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.jk-hero__content h1,
+.jk-collection-hero__content h1,
+.jk-hero__copy,
+.jk-collection-hero__content p:not(.jk-eyebrow) {
+  color: #111111 !important;
+  text-shadow: none !important;
+}
+
+.jk-hero__content .jk-eyebrow,
+.jk-collection-hero__content .jk-eyebrow {
+  color: #0F3D2E !important;
+}
+
+.jk-cinematic-panel::after,
+.jk-product-visual-card__media::after,
+.jk-editorial-card__media::after {
+  inset: auto 0 0 !important;
+  height: 34% !important;
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0), rgba(17, 17, 17, .24)) !important;
+}
+
+@media (max-width: 740px) {
+  .jk-hero::after,
+  .jk-collection-hero__media::after {
+    content: none !important;
+    display: none !important;
+    background: none !important;
+  }
+
+  .jk-hero__content,
+  .jk-collection-hero__content {
+    background: rgba(255, 255, 255, .88) !important;
+  }
+}

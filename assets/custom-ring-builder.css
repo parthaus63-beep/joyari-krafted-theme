@@ -2185,3 +2185,35 @@
     gap: 10px;
   }
 }
+
+/* Joyari clean media treatment: keep custom-design visuals bright and premium */
+.jkrb-hero::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  opacity: 0 !important;
+}
+
+.jkrb-hero {
+  background: #F8F6F1 !important;
+}
+
+.jkrb-hero__content,
+.jkrb-hero__copy {
+  color: #111111 !important;
+  text-shadow: none !important;
+}
+
+.jkc-media-studio__visual:after,
+.jkc-media-studio__visual::after {
+  inset: auto 0 0 !important;
+  height: 28% !important;
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0), rgba(17, 17, 17, .18)) !important;
+}
+
+.jkc-media-studio__visual > span {
+  background: rgba(255, 255, 255, .86) !important;
+  color: #111111 !important;
+  text-shadow: none !important;
+  backdrop-filter: blur(8px);
+}
