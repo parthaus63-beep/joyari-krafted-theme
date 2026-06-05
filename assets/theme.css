@@ -9405,3 +9405,270 @@ button[name="add"]:focus-visible {
     padding: 13px !important;
   }
 }
+
+/* Joyari luxury mobile drawer polish */
+@media (max-width: 1360px) {
+  body .jk-header {
+    z-index: 2147482500 !important;
+  }
+
+  body .jk-header__inner {
+    min-height: 62px !important;
+    padding: 0 16px !important;
+    grid-template-columns: 40px minmax(0, 1fr) auto !important;
+    gap: 8px !important;
+  }
+
+  body .jk-nav-toggle {
+    width: 38px !important;
+    height: 38px !important;
+    border: 0 !important;
+    background: transparent !important;
+  }
+
+  body .jk-nav-toggle span:not(.visually-hidden) {
+    width: 20px !important;
+    height: 1.5px !important;
+    background: #111111 !important;
+  }
+
+  body .jk-brand {
+    justify-self: center !important;
+    max-width: min(150px, 46vw) !important;
+  }
+
+  body .jk-brand__name {
+    font-size: clamp(1.05rem, 5vw, 1.42rem) !important;
+    letter-spacing: .03em !important;
+  }
+
+  body .jk-brand__mark {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: .72rem !important;
+  }
+
+  body .jk-brand__logo-image {
+    width: auto !important;
+    max-width: min(136px, 42vw) !important;
+    max-height: 46px !important;
+    object-fit: contain !important;
+  }
+
+  body .jk-header__actions {
+    gap: 4px !important;
+  }
+
+  body .jk-header__actions .jk-header-icon-link:not(.jk-cart-link),
+  body .jk-header__actions .jk-currency-selector {
+    display: none !important;
+  }
+
+  body .jk-mobile-drawer[hidden] {
+    display: none !important;
+  }
+
+  body .jk-mobile-drawer:not([hidden]) {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 2147483002 !important;
+    display: block !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow: hidden !important;
+    pointer-events: auto !important;
+  }
+
+  body .jk-mobile-drawer__backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    border: 0 !important;
+    background: rgba(17, 17, 17, .24) !important;
+    opacity: 0 !important;
+    transition: opacity .28s ease !important;
+  }
+
+  body .jk-mobile-drawer.is-open .jk-mobile-drawer__backdrop {
+    opacity: 1 !important;
+  }
+
+  body .jk-mobile-drawer__panel {
+    position: fixed !important;
+    inset: 0 auto 0 0 !important;
+    z-index: 1 !important;
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    width: min(100vw, 430px) !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    padding: 14px 18px calc(16px + env(safe-area-inset-bottom)) !important;
+    overflow: hidden !important;
+    border: 0 !important;
+    border-right: 1px solid rgba(198, 167, 105, .28) !important;
+    border-radius: 0 !important;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8F6F1 100%) !important;
+    box-shadow: 24px 0 70px rgba(17, 17, 17, .14) !important;
+    transform: translateX(-104%) !important;
+    transition: transform .36s cubic-bezier(.22, .61, .36, 1) !important;
+    will-change: transform !important;
+  }
+
+  body .jk-mobile-drawer.is-open .jk-mobile-drawer__panel {
+    transform: translateX(0) !important;
+  }
+
+  body .jk-mobile-drawer__header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    min-height: 52px !important;
+    margin: 0 !important;
+    padding: 0 0 10px !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(198, 167, 105, .28) !important;
+    gap: 14px !important;
+  }
+
+  body .jk-mobile-drawer__title {
+    min-width: 0 !important;
+    color: #111111 !important;
+    font-family: Georgia, "Times New Roman", serif !important;
+    font-size: 1.08rem !important;
+    font-weight: 400 !important;
+    letter-spacing: .05em !important;
+    line-height: 1.1 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  body .jk-mobile-drawer__logo {
+    display: block !important;
+    width: auto !important;
+    max-width: 126px !important;
+    max-height: 42px !important;
+    object-fit: contain !important;
+  }
+
+  body .jk-mobile-drawer__close {
+    display: grid !important;
+    place-items: center !important;
+    flex: 0 0 auto !important;
+    width: 34px !important;
+    height: 34px !important;
+    border: 1px solid rgba(198, 167, 105, .36) !important;
+    border-radius: 50% !important;
+    background: #FFFFFF !important;
+    color: #111111 !important;
+    font-size: 20px !important;
+    font-weight: 300 !important;
+    line-height: 1 !important;
+    box-shadow: 0 8px 20px rgba(17, 17, 17, .05) !important;
+  }
+
+  body .jk-mobile-drawer__close span {
+    display: block !important;
+    transform: translateY(-1px) !important;
+  }
+
+  body .jk-mobile-menu {
+    display: block !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 10px 0 12px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    background: transparent !important;
+    scrollbar-width: thin !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  body .jk-mobile-menu--curated .jk-mobile-menu__link,
+  body .jk-mobile-menu__link {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 44px !important;
+    margin: 0 !important;
+    padding: 8px 0 !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(198, 167, 105, .18) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #111111 !important;
+    font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+    font-size: 19px !important;
+    font-weight: 450 !important;
+    letter-spacing: .01em !important;
+    line-height: 1.22 !important;
+    text-transform: none !important;
+    box-shadow: none !important;
+  }
+
+  body .jk-mobile-menu--curated .jk-mobile-menu__link:hover,
+  body .jk-mobile-menu--curated .jk-mobile-menu__link:focus-visible,
+  body .jk-mobile-menu__link:hover,
+  body .jk-mobile-menu__link:focus-visible {
+    color: #0F3D2E !important;
+    padding-left: 4px !important;
+  }
+
+  body .jk-mobile-menu-group,
+  body .jk-mobile-submenu,
+  body .jk-mobile-menu__toggle {
+    border-color: rgba(198, 167, 105, .18) !important;
+    background: transparent !important;
+  }
+
+  body .jk-mobile-drawer__utility {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px 14px !important;
+    margin: 0 !important;
+    padding: 12px 0 0 !important;
+    border: 0 !important;
+    border-top: 1px solid rgba(198, 167, 105, .28) !important;
+    background: transparent !important;
+  }
+
+  body .jk-mobile-drawer__utility a,
+  body .jk-mobile-drawer__utility span {
+    display: inline-flex !important;
+    align-items: center !important;
+    width: fit-content !important;
+    min-height: 28px !important;
+    border: 0 !important;
+    color: rgba(17, 17, 17, .68) !important;
+    font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
+    font-size: 13px !important;
+    font-weight: 450 !important;
+    letter-spacing: .03em !important;
+    line-height: 1.2 !important;
+    text-transform: none !important;
+  }
+
+  body .jk-mobile-drawer__utility a:hover,
+  body .jk-mobile-drawer__utility a:focus-visible {
+    color: #0F3D2E !important;
+  }
+}
+
+@media (max-width: 380px) {
+  body .jk-mobile-drawer__panel {
+    padding-inline: 16px !important;
+  }
+
+  body .jk-mobile-menu--curated .jk-mobile-menu__link,
+  body .jk-mobile-menu__link {
+    min-height: 41px !important;
+    padding-block: 7px !important;
+    font-size: 18px !important;
+  }
+
+  body .jk-mobile-drawer__utility {
+    gap: 6px 12px !important;
+  }
+}
