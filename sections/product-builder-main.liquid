@@ -300,6 +300,225 @@
   }
 </style>
 
+<style>
+  /* Joyari final product split layout */
+  .shopify-section--product-builder-main {
+    background: #FFFFFF !important;
+  }
+
+  .jk-product-builder-main.jk-product-template {
+    width: min(1840px, calc(100vw - 40px)) !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    padding: clamp(28px, 3vw, 52px) 0 clamp(70px, 7vw, 110px) !important;
+    background: #FFFFFF !important;
+  }
+
+  .jk-product-builder-main .jk-product-layout--builder {
+    display: grid !important;
+    grid-template-columns: minmax(0, 58%) minmax(420px, 42%) !important;
+    gap: clamp(36px, 4vw, 76px) !important;
+    align-items: start !important;
+    width: 100% !important;
+  }
+
+  .jk-product-builder-main .jk-product-gallery--with-thumbs {
+    display: grid !important;
+    grid-template-columns: clamp(72px, 5vw, 94px) minmax(0, 1fr) !important;
+    gap: clamp(14px, 1.5vw, 22px) !important;
+    align-items: start !important;
+  }
+
+  .jk-product-builder-main .jk-product-gallery__main {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .jk-product-builder-main .jk-product-gallery:not(.jk-product-gallery--with-thumbs) .jk-product-gallery__main {
+    grid-column: 1 !important;
+  }
+
+  .jk-product-builder-main .jk-product-gallery--with-thumbs .jk-product-gallery__thumbs {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: clamp(72px, 5vw, 94px) !important;
+    gap: 12px !important;
+    max-height: calc(100vh - 132px) !important;
+    overflow: auto !important;
+    position: sticky !important;
+    top: 112px !important;
+    padding: 1px 3px 1px 1px !important;
+  }
+
+  .jk-product-builder-main .jk-product-media {
+    aspect-ratio: 1 / 1 !important;
+    min-height: min(760px, calc(100vh - 128px)) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #FAFAF8 !important;
+    box-shadow: none !important;
+  }
+
+  .jk-product-builder-main .jk-product-media img,
+  .jk-product-builder-main .jk-product-media video,
+  .jk-product-builder-main .jk-product-media iframe,
+  .jk-product-builder-main .jk-product-media model-viewer {
+    object-fit: contain !important;
+    background: #FAFAF8 !important;
+  }
+
+  .jk-product-builder-main .jk-product-panel {
+    position: sticky !important;
+    top: 104px !important;
+    min-width: 0 !important;
+  }
+
+  .jk-product-builder-main .jk-product-panel__inner--builder {
+    display: grid !important;
+    gap: 22px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+  }
+
+  .jk-product-builder-main .jk-product-panel__header {
+    gap: 10px !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .jk-product-builder-main .jk-product-panel__inner h1 {
+    max-width: 760px !important;
+    color: #111111 !important;
+    font-size: clamp(2.15rem, 2.55vw, 3rem) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.08 !important;
+  }
+
+  .jk-product-builder-main .jk-product-price {
+    color: #111111 !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .06em !important;
+  }
+
+  .jk-product-builder-main .jk-product-review-placeholder,
+  .jk-product-builder-main .jk-product-short-description,
+  .jk-product-builder-main .jk-product-subtitle,
+  .jk-product-builder-main .jk-availability {
+    color: rgba(17, 17, 17, .68) !important;
+    font-weight: 400 !important;
+  }
+
+  .jk-product-builder-main .jk-ring-builder-card--product {
+    display: grid !important;
+    gap: 18px !important;
+    padding: 20px 0 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: #FFFFFF !important;
+    box-shadow: none !important;
+  }
+
+  .jk-product-builder-main .jk-builder-step {
+    padding: 0 0 20px !important;
+    border: 0 !important;
+    background: #FFFFFF !important;
+  }
+
+  .jk-product-builder-main .jk-product-actions {
+    gap: 10px !important;
+    padding-top: 2px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-continue-button,
+  .jk-product-builder-main .jk-product-actions .jk-button,
+  .jk-product-builder-main .jk-mobile-atc .jk-button {
+    min-height: 50px !important;
+    border-radius: 0 !important;
+    font-size: .74rem !important;
+    font-weight: 600 !important;
+    letter-spacing: .08em !important;
+  }
+
+  .jk-product-builder-main .jk-product-enquiry-button {
+    background: #FFFFFF !important;
+    border-color: #0F3D2E !important;
+    color: #0F3D2E !important;
+  }
+
+  @media (max-width: 1180px) {
+    .jk-product-builder-main .jk-product-layout--builder {
+      grid-template-columns: minmax(0, 56%) minmax(390px, 44%) !important;
+      gap: clamp(28px, 3vw, 44px) !important;
+    }
+  }
+
+  @media (max-width: 940px) {
+    .jk-product-builder-main.jk-product-template {
+      width: min(760px, calc(100vw - 24px)) !important;
+      padding-top: 20px !important;
+    }
+
+    .jk-product-builder-main .jk-product-layout--builder {
+      grid-template-columns: 1fr !important;
+      gap: 28px !important;
+    }
+
+    .jk-product-builder-main .jk-product-panel {
+      position: static !important;
+    }
+
+    .jk-product-builder-main .jk-product-gallery--with-thumbs {
+      grid-template-columns: 1fr !important;
+    }
+
+    .jk-product-builder-main .jk-product-gallery__main,
+    .jk-product-builder-main .jk-product-gallery--with-thumbs .jk-product-gallery__main {
+      grid-column: 1 !important;
+      grid-row: 1 !important;
+    }
+
+    .jk-product-builder-main .jk-product-gallery--with-thumbs .jk-product-gallery__thumbs {
+      grid-column: 1 !important;
+      grid-row: 2 !important;
+      grid-template-columns: repeat(5, minmax(66px, 1fr)) !important;
+      grid-auto-rows: auto !important;
+      max-height: none !important;
+      overflow-x: auto !important;
+      position: static !important;
+      padding-bottom: 6px !important;
+    }
+
+    .jk-product-builder-main .jk-product-media {
+      min-height: 0 !important;
+      aspect-ratio: 1 / 1 !important;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .jk-product-builder-main.jk-product-template {
+      width: calc(100vw - 20px) !important;
+    }
+
+    .jk-product-builder-main .jk-product-panel__inner h1 {
+      font-size: clamp(1.8rem, 7.4vw, 1.875rem) !important;
+      line-height: 1.12 !important;
+    }
+
+    .jk-product-builder-main .jk-product-gallery--with-thumbs .jk-product-gallery__thumbs {
+      grid-template-columns: repeat(4, minmax(64px, 1fr)) !important;
+      gap: 8px !important;
+    }
+  }
+</style>
+
 <section class="jk-product-template jk-product-builder-main" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
   {% if product != blank %}
     <script type="application/json" data-product-json>{{ product | json }}</script>
@@ -430,9 +649,9 @@
             </p>
 
             <div class="jk-product-price-row">
-              <p class="jk-product-price" data-variant-price>{{ selected_variant.price | money }}</p>
+              <p class="jk-product-price" data-variant-price>AUD ${{ selected_variant.price | money_without_currency | replace: '.00', '' }}</p>
               {% if selected_variant.compare_at_price > selected_variant.price %}
-                <p class="jk-product-compare" data-variant-compare>{{ selected_variant.compare_at_price | money }}</p>
+                <p class="jk-product-compare" data-variant-compare>AUD ${{ selected_variant.compare_at_price | money_without_currency | replace: '.00', '' }}</p>
               {% else %}
                 <p class="jk-product-compare is-hidden" data-variant-compare></p>
               {% endif %}
@@ -701,7 +920,7 @@
     <div class="jk-mobile-atc" data-mobile-atc>
       <div>
         <span>{{ product.title }}</span>
-        <strong data-estimate-total>{{ selected_variant.price | money }}</strong>
+        <strong data-estimate-total>AUD ${{ selected_variant.price | money_without_currency | replace: '.00', '' }}</strong>
       </div>
       <button type="submit" name="add" form="{{ product_form_id }}" class="jk-button jk-button--primary" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>
         {% if selected_variant.available %}

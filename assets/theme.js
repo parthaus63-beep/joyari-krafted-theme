@@ -67,6 +67,10 @@
     return stripTags(format.replace(/\{\{\s*\w+\s*\}\}/, amount));
   }
 
+  function formatAudMoney(cents) {
+    return 'AUD $' + formatWithDelimiters(cents, 0);
+  }
+
   function escapeAttributeValue(value) {
     return String(value || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
   }
@@ -219,9 +223,9 @@
       var basePrice = variant ? variant.price : 0;
       var adjustment = calculateBuilderAdjustment(root);
       var estimate = Math.max(0, basePrice + adjustment);
-      var formattedEstimate = formatMoney(estimate);
+      var formattedEstimate = root.matches('[data-product-builder]') ? formatAudMoney(estimate) : formatMoney(estimate);
 
-      setText(root, '[data-builder-adjustment]', formatMoney(adjustment));
+      setText(root, '[data-builder-adjustment]', root.matches('[data-product-builder]') ? formatAudMoney(adjustment) : formatMoney(adjustment));
       setText(root, '[data-estimate-total]', formattedEstimate);
 
       root.querySelectorAll('[data-builder-estimate-property]').forEach(function (input) {
@@ -239,13 +243,13 @@
       });
 
       if (variant) {
-        setText(root, '[data-variant-price]', formatMoney(variant.price));
+        setText(root, '[data-variant-price]', formatAudMoney(variant.price));
         setText(root, '[data-variant-sku]', variant.sku || 'Made to order');
 
         var compareElements = root.querySelectorAll('[data-variant-compare]');
         compareElements.forEach(function (element) {
           if (variant.compare_at_price && variant.compare_at_price > variant.price) {
-            element.textContent = formatMoney(variant.compare_at_price);
+            element.textContent = formatAudMoney(variant.compare_at_price);
             element.classList.remove('is-hidden');
           } else {
             element.textContent = '';
