@@ -108,6 +108,7 @@
 
 {% liquid
   assign show_gemstone_step = section.settings.enable_gemstone_step
+  assign show_builder_flow = false
 %}
 
 <style>
@@ -528,13 +529,15 @@
     gap: 14px !important;
   }
 
-  .jk-product-builder-main .jk-builder-field--quality-select {
+  .jk-product-builder-main .jk-builder-field--quality-select,
+  .jk-product-builder-main .jk-builder-field--engraving {
     display: grid !important;
     gap: 8px !important;
     margin-top: 18px !important;
   }
 
-  .jk-product-builder-main .jk-builder-field--quality-select label {
+  .jk-product-builder-main .jk-builder-field--quality-select label,
+  .jk-product-builder-main .jk-builder-field--engraving label {
     color: rgba(17, 17, 17, .64) !important;
     font-family: var(--jk-font-body, Inter, Arial, sans-serif) !important;
     font-size: .68rem !important;
@@ -543,7 +546,8 @@
     text-transform: uppercase !important;
   }
 
-  .jk-product-builder-main .jk-builder-field--quality-select select {
+  .jk-product-builder-main .jk-builder-field--quality-select select,
+  .jk-product-builder-main .jk-builder-field--engraving input {
     width: 100% !important;
     min-height: 48px !important;
     padding: 0 13px !important;
@@ -728,14 +732,16 @@
             <input type="hidden" name="id" value="{{ selected_variant.id }}" data-variant-id-input>
 
             <div class="jk-ring-builder-card jk-ring-builder-card--product">
-              <nav class="jk-builder-flow-tabs" aria-label="Build your ring flow">
-                <span class="is-active" aria-current="step">Setting</span>
-                {% if show_gemstone_step %}
-                  <span>Gemstone</span>
-                {% endif %}
-                <span>Personalise</span>
-                <span>Add To Cart</span>
-              </nav>
+              {% if show_builder_flow %}
+                <nav class="jk-builder-flow-tabs" aria-label="Build your ring flow">
+                  <span class="is-active" aria-current="step">Setting</span>
+                  {% if show_gemstone_step %}
+                    <span>Gemstone</span>
+                  {% endif %}
+                  <span>Personalise</span>
+                  <span>Add To Cart</span>
+                </nav>
+              {% endif %}
 
               <div class="jk-builder-step jk-builder-step--design-preferences">
                 <div class="jk-builder-step__header">
@@ -755,11 +761,28 @@
                   </select>
                 </div>
 
+                {% if show_ring_size_selector %}
+                  {% liquid
+                    assign ring_size_select_id = 'RingSize-' | append: section.id
+                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
+                  %}
+                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
+                {% endif %}
+
+                <div class="jk-builder-field jk-builder-field--quality-select jk-builder-field--stone-type">
+                  <label for="StoneTypePreference-{{ section.id }}">Stone type</label>
+                  <select id="StoneTypePreference-{{ section.id }}" name="properties[Stone Type]" data-stone-type-select>
+                    <option value="Lab-Grown Diamond" selected>Lab-Grown Diamond</option>
+                    <option value="Moissanite">Moissanite</option>
+                    <option value="Coloured Lab-Grown Diamond">Coloured Lab-Grown Diamond</option>
+                  </select>
+                </div>
+
                 {% if show_gemstone_step == false %}
-                  <div class="jk-builder-quality-grid" aria-label="Stone quality preferences">
+                  <div class="jk-builder-quality-grid" aria-label="Stone quality preferences" data-stone-quality-fields>
                     <div class="jk-builder-field jk-builder-field--quality-select">
                       <label for="ColourPreference-{{ section.id }}">Colour</label>
-                      <select id="ColourPreference-{{ section.id }}" name="properties[Colour]">
+                      <select id="ColourPreference-{{ section.id }}" name="properties[Colour]" data-colour-select>
                         {% assign colour_options = 'D,E,F,G' | split: ',' %}
                         {% for colour in colour_options %}
                           <option value="{{ colour | escape }}" {% if forloop.first %}selected{% endif %}>{{ colour }}</option>
@@ -779,13 +802,16 @@
                   </div>
                 {% endif %}
 
-                {% if show_ring_size_selector %}
-                  {% liquid
-                    assign ring_size_select_id = 'RingSize-' | append: section.id
-                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
-                  %}
-                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
-                {% endif %}
+                <div class="jk-builder-field jk-builder-field--engraving">
+                  <label for="EngravingPreference-{{ section.id }}">Free engraving</label>
+                  <input
+                    id="EngravingPreference-{{ section.id }}"
+                    type="text"
+                    name="properties[Engraving]"
+                    maxlength="40"
+                    placeholder="Initials, date, or short message"
+                  >
+                </div>
 
                 {% if show_gemstone_step %}
                   <a class="jk-button jk-button--primary jk-builder-continue-button" href="/pages/custom-design?activeTab=Lab+Grown&amp;queryLabGrown=true">Choose Your Stone</a>
@@ -860,7 +886,7 @@
                     This configuration is currently unavailable
                   {% endif %}
                 </p>
-                <a class="jk-button jk-button--secondary jk-product-enquiry-button" href="/pages/contact">Enquire or book appointment</a>
+                <a class="jk-button jk-button--secondary jk-product-enquiry-button" href="/pages/contact">Enquire or Book Appointment</a>
                 <div class="jk-product-text-links" aria-label="Product enquiry links">
                   <a href="/pages/contact">Send a hint</a>
                   <a href="/pages/contact">Make an enquiry</a>

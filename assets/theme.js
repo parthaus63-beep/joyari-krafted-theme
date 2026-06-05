@@ -167,7 +167,7 @@
     return adjustment;
   }
 
-  function updateStonePreview(root) {
+    function updateStonePreview(root) {
     var selectedShape = root.querySelector('[data-shape-choice]:checked');
     var shape = selectedShape ? selectedShape.getAttribute('data-shape-choice') : '';
     if (!shape) return;
@@ -187,6 +187,28 @@
     } catch (error) {
       console.warn('Joyari product JSON could not be parsed.', error);
       return;
+    }
+
+    function updateStoneColourOptions() {
+      var stoneSelect = root.querySelector('[data-stone-type-select]');
+      var colourSelect = root.querySelector('[data-colour-select]');
+      if (!stoneSelect || !colourSelect) return;
+
+      var optionsByStone = {
+        'Lab-Grown Diamond': ['D', 'E', 'F', 'G'],
+        'Moissanite': ['Colourless', 'Near Colourless'],
+        'Coloured Lab-Grown Diamond': ['Pink', 'Yellow', 'Blue', 'Champagne']
+      };
+      var colours = optionsByStone[stoneSelect.value] || optionsByStone['Lab-Grown Diamond'];
+
+      colourSelect.innerHTML = '';
+      colours.forEach(function (colour, index) {
+        var option = document.createElement('option');
+        option.value = colour;
+        option.textContent = colour;
+        option.selected = index === 0;
+        colourSelect.appendChild(option);
+      });
     }
 
     var variants = product.variants || [];
@@ -285,6 +307,11 @@
       input.addEventListener('change', updateVariantState);
       input.addEventListener('input', updateVariantState);
     });
+
+    root.querySelectorAll('[data-stone-type-select]').forEach(function (select) {
+      select.addEventListener('change', updateStoneColourOptions);
+    });
+    updateStoneColourOptions();
 
     root.querySelectorAll('input[name="properties[Metal]"], input[name="properties[Metal Preference]"]').forEach(function (input) {
       var updateSelectedMetal = function () {
