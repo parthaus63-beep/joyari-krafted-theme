@@ -567,6 +567,128 @@
       gap: 0 !important;
     }
   }
+
+  .jk-product-builder-main .jk-ring-builder-card--product {
+    gap: 0 !important;
+    padding: clamp(18px, 2vw, 24px) !important;
+    border: 1px solid rgba(198, 167, 105, .22) !important;
+    border-radius: 10px !important;
+    background: linear-gradient(180deg, #FCFBF8 0%, #F8F6F1 100%) !important;
+  }
+
+  .jk-product-builder-main .jk-builder-step--design-preferences {
+    gap: 14px !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .jk-product-builder-main .jk-builder-step__header {
+    margin: 0 0 4px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-step__header h3 {
+    font-size: clamp(1.45rem, 1.7vw, 1.95rem) !important;
+  }
+
+  .jk-product-builder-main .jk-builder-step__header p {
+    font-size: .86rem !important;
+  }
+
+  .jk-product-builder-main .jk-builder-field--metal-select,
+  .jk-product-builder-main .jk-builder-field--ring-size,
+  .jk-product-builder-main .jk-builder-field--quality-select,
+  .jk-product-builder-main .jk-builder-field--engraving {
+    position: relative !important;
+    display: grid !important;
+    gap: 9px !important;
+    margin-top: 0 !important;
+    padding: 14px !important;
+    border: 1px solid rgba(198, 167, 105, .22) !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, .92) !important;
+    box-shadow: 0 14px 34px rgba(17, 17, 17, .035) !important;
+    transition: border-color .22s var(--jk-ease), box-shadow .22s var(--jk-ease), transform .22s var(--jk-ease) !important;
+  }
+
+  .jk-product-builder-main .jk-builder-field--metal-select:hover,
+  .jk-product-builder-main .jk-builder-field--ring-size:hover,
+  .jk-product-builder-main .jk-builder-field--quality-select:hover,
+  .jk-product-builder-main .jk-builder-field--engraving:hover {
+    border-color: rgba(198, 167, 105, .55) !important;
+    box-shadow: 0 18px 42px rgba(17, 17, 17, .055) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .jk-product-builder-main .jk-builder-field--metal-select label,
+  .jk-product-builder-main .jk-builder-field--ring-size label,
+  .jk-product-builder-main .jk-builder-field--quality-select label,
+  .jk-product-builder-main .jk-builder-field--engraving label {
+    margin: 0 !important;
+    color: #0F3D2E !important;
+    font-size: .64rem !important;
+    font-weight: 650 !important;
+    letter-spacing: .12em !important;
+  }
+
+  .jk-product-builder-main .jk-builder-field--metal-select select,
+  .jk-product-builder-main .jk-ring-size-control select,
+  .jk-product-builder-main .jk-builder-field--quality-select select,
+  .jk-product-builder-main .jk-builder-field--engraving input {
+    min-height: 46px !important;
+    padding: 0 38px 0 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    color: #111111 !important;
+    font-size: 1rem !important;
+    box-shadow: none !important;
+  }
+
+  .jk-product-builder-main .jk-builder-field--metal-select select,
+  .jk-product-builder-main .jk-ring-size-control select,
+  .jk-product-builder-main .jk-builder-field--quality-select select {
+    appearance: none !important;
+    background-image: linear-gradient(45deg, transparent 50%, #0F3D2E 50%), linear-gradient(135deg, #0F3D2E 50%, transparent 50%) !important;
+    background-position: calc(100% - 16px) 50%, calc(100% - 10px) 50% !important;
+    background-size: 6px 6px, 6px 6px !important;
+    background-repeat: no-repeat !important;
+  }
+
+  .jk-product-builder-main .jk-builder-field--metal-select select:focus-visible,
+  .jk-product-builder-main .jk-ring-size-control select:focus-visible,
+  .jk-product-builder-main .jk-builder-field--quality-select select:focus-visible,
+  .jk-product-builder-main .jk-builder-field--engraving input:focus-visible {
+    outline: 2px solid rgba(198, 167, 105, .32) !important;
+    outline-offset: 4px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-quality-grid {
+    gap: 14px !important;
+  }
+
+  .jk-product-builder-main .jk-builder-field-note {
+    margin: -2px 0 0 !important;
+    color: rgba(17, 17, 17, .58) !important;
+    font-size: .78rem !important;
+    line-height: 1.45 !important;
+  }
+
+  .jk-product-builder-main .jk-ring-size-assurance {
+    display: none !important;
+  }
+
+  @media (max-width: 680px) {
+    .jk-product-builder-main .jk-ring-builder-card--product {
+      padding: 14px !important;
+    }
+
+    .jk-product-builder-main .jk-builder-field--metal-select,
+    .jk-product-builder-main .jk-builder-field--ring-size,
+    .jk-product-builder-main .jk-builder-field--quality-select,
+    .jk-product-builder-main .jk-builder-field--engraving {
+      padding: 13px !important;
+    }
+  }
 </style>
 
 <section class="jk-product-template jk-product-builder-main" data-product-builder data-quarter-premium="{{ section.settings.carat_quarter_premium }}" data-base-carat="1">
@@ -754,20 +876,12 @@
                 <div class="jk-builder-field jk-builder-field--metal-select">
                   <label for="MetalPreference-{{ section.id }}">Metal</label>
                   <select id="MetalPreference-{{ section.id }}" name="properties[Metal]" data-metal-select>
-                    {% assign metals = '10K Yellow Gold,10K White Gold,10K Rose Gold,14K Yellow Gold,14K White Gold,14K Rose Gold,18K Yellow Gold,18K White Gold,18K Rose Gold,Platinum' | split: ',' %}
+                    {% assign metals = '10K Yellow Gold,10K White Gold,10K Rose Gold,14K Yellow Gold,14K White Gold,14K Rose Gold,18K Yellow Gold,18K White Gold,18K Rose Gold,Silver' | split: ',' %}
                     {% for metal in metals %}
                       <option value="{{ metal | escape }}" {% if forloop.first %}selected{% endif %}>{{ metal }}</option>
                     {% endfor %}
                   </select>
                 </div>
-
-                {% if show_ring_size_selector %}
-                  {% liquid
-                    assign ring_size_select_id = 'RingSize-' | append: section.id
-                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
-                  %}
-                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
-                {% endif %}
 
                 <div class="jk-builder-field jk-builder-field--quality-select jk-builder-field--stone-type">
                   <label for="StoneTypePreference-{{ section.id }}">Stone type</label>
@@ -775,6 +889,16 @@
                     <option value="Lab-Grown Diamond" selected>Lab-Grown Diamond</option>
                     <option value="Moissanite">Moissanite</option>
                     <option value="Coloured Lab-Grown Diamond">Coloured Lab-Grown Diamond</option>
+                  </select>
+                </div>
+
+                <div class="jk-builder-field jk-builder-field--quality-select jk-builder-field--carat">
+                  <label for="CaratPreference-{{ section.id }}">Carat</label>
+                  <select id="CaratPreference-{{ section.id }}" name="properties[Carat]">
+                    {% assign carat_options = '1.5ct,2.0ct,2.5ct,3.0ct' | split: ',' %}
+                    {% for carat in carat_options %}
+                      <option value="{{ carat | escape }}" {% if forloop.first %}selected{% endif %}>{{ carat }}</option>
+                    {% endfor %}
                   </select>
                 </div>
 
@@ -802,6 +926,14 @@
                   </div>
                 {% endif %}
 
+                {% if show_ring_size_selector %}
+                  {% liquid
+                    assign ring_size_select_id = 'RingSize-' | append: section.id
+                    assign ring_size_modal_id = 'RingSizeGuide-' | append: section.id
+                  %}
+                  {% render 'ring-size-selector', select_id: ring_size_select_id, modal_id: ring_size_modal_id %}
+                {% endif %}
+
                 <div class="jk-builder-field jk-builder-field--engraving">
                   <label for="EngravingPreference-{{ section.id }}">Free engraving</label>
                   <input
@@ -811,6 +943,7 @@
                     maxlength="40"
                     placeholder="Initials, date, or short message"
                   >
+                  <p class="jk-builder-field-note">Complimentary engraving included by Joyari Krafted.</p>
                 </div>
 
                 {% if show_gemstone_step %}
