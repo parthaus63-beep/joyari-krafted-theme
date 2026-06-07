@@ -1,27 +1,20 @@
 {% liquid
   assign hero_alt = section.settings.hero_image_alt | default: section.settings.heading
+  assign engagement_rings_url = routes.collections_url | append: '/engagement-rings'
 %}
 
-<section class="jk-education-guide">
+<section class="jk-education-guide jk-education-guide--complete">
   <div class="jk-education-guide__hero">
     <div class="jk-education-guide__copy">
-      {% if section.settings.eyebrow != blank %}
-        <p class="jk-eyebrow">{{ section.settings.eyebrow }}</p>
-      {% endif %}
-      <h1>{{ section.settings.heading }}</h1>
-      {% if section.settings.subheading != blank %}
-        <p>{{ section.settings.subheading }}</p>
-      {% endif %}
-      {% if section.settings.primary_label != blank or section.settings.secondary_label != blank %}
-        <div class="jk-education-guide__actions">
-          {% if section.settings.primary_label != blank %}
-            <a class="jk-button jk-button--primary" href="{{ section.settings.primary_link | default: '/pages/contact' }}">{{ section.settings.primary_label }}</a>
-          {% endif %}
-          {% if section.settings.secondary_label != blank %}
-            <a class="jk-button jk-button--secondary" href="{{ section.settings.secondary_link | default: '/collections/engagement-rings' }}">{{ section.settings.secondary_label }}</a>
-          {% endif %}
-        </div>
-      {% endif %}
+      <p class="jk-eyebrow">Jewellery education</p>
+      <h1>Jewellery Education</h1>
+      <p>A clear guide to diamonds, moissanite, metals, and fine jewellery choices.</p>
+      <p class="jk-education-guide__seo">Learn the essentials of lab grown diamonds Australia clients ask about most, compare moissanite vs diamond, understand the diamond 4Cs, and choose between 10K vs 14K vs 18K gold with confidence.</p>
+      <div class="jk-education-guide__actions">
+        <a class="jk-button jk-button--primary" href="{{ engagement_rings_url }}">Explore Lab-Grown Diamonds</a>
+        <a class="jk-button jk-button--secondary" href="/pages/custom-design">Start a Custom Design</a>
+        <a class="jk-text-link" href="/pages/contact">Book a Consultation</a>
+      </div>
     </div>
 
     <div class="jk-education-guide__media">
@@ -33,49 +26,159 @@
     </div>
   </div>
 
-  {% if section.blocks.size > 0 %}
-    <div class="jk-education-guide__grid">
-      {% for block in section.blocks %}
-        {% assign card_alt = block.settings.image_alt | default: block.settings.title %}
-        {% liquid
-          assign guide_asset = 'joyari-diamond-macro-pear.jpg'
-          case forloop.index
-            when 2
-              assign guide_asset = 'joyari-product-pear-ring-on-hand.jpg'
-            when 3
-              assign guide_asset = 'joyari-atelier-craftsmanship.jpg'
-            when 4
-              assign guide_asset = 'joyari-packaging-certificate.jpg'
-          endcase
-        %}
-        <article class="jk-education-guide-card" {{ block.shopify_attributes }}>
-          <div class="jk-education-guide-card__media">
-            {% if block.settings.image != blank %}
-              {{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 520, 720, 900', sizes: '(min-width: 990px) 32vw, 100vw', alt: card_alt }}
-            {% else %}
-              {% render 'joyari-generated-image', file: guide_asset, alt: card_alt, class: 'jk-education-guide-card__image' %}
-            {% endif %}
-          </div>
-          <div class="jk-education-guide-card__content">
-            {% if block.settings.eyebrow != blank %}
-              <p class="jk-card-badge">{{ block.settings.eyebrow }}</p>
-            {% endif %}
-            <h2>{{ block.settings.title }}</h2>
-            <p>{{ block.settings.text }}</p>
-            {% if block.settings.link_label != blank %}
-              <a class="jk-text-link" href="{{ block.settings.link | default: '/pages/contact' }}">{{ block.settings.link_label }}</a>
-            {% endif %}
-          </div>
-        </article>
-      {% endfor %}
-    </div>
-  {% endif %}
+  <div class="jk-education-pillars" aria-label="Stone education">
+    <article>
+      <span>01</span>
+      <h2>Lab-Grown Diamonds</h2>
+      <p>Lab-grown diamonds are chemically and physically real diamonds. They have the same carbon crystal structure and diamond brilliance as mined diamonds, but are grown through advanced technology instead of being extracted from the earth.</p>
+      <p>They are often better value than comparable natural diamonds, making them ideal for engagement rings, custom jewellery, and clients who want a larger or higher quality stone within a considered budget. Where available, Joyari recommends certification from recognised laboratories such as IGI or GIA.</p>
+    </article>
 
-  <div class="jk-education-guide__cta">
-    <p class="jk-eyebrow">{{ section.settings.cta_eyebrow }}</p>
-    <h2>{{ section.settings.cta_heading }}</h2>
-    <p>{{ section.settings.cta_text }}</p>
-    <a class="jk-button jk-button--primary" href="{{ section.settings.cta_link | default: '/pages/contact' }}">{{ section.settings.cta_label }}</a>
+    <article>
+      <span>02</span>
+      <h2>Natural Diamonds</h2>
+      <p>Natural diamonds form deep within the earth over millions of years. They carry traditional rarity, heritage value, and a long-standing place in fine jewellery culture.</p>
+      <p>Because natural diamonds usually cost more than lab-grown diamonds of similar visible quality, certification is especially important. A trusted certificate helps confirm cut, colour, clarity, carat weight, and identity.</p>
+    </article>
+
+    <article>
+      <span>03</span>
+      <h2>Moissanite</h2>
+      <p>Moissanite is not diamond. It is a separate gemstone with very high sparkle, strong durability, and more rainbow-like fire than diamond.</p>
+      <p>It can be a beautiful choice for budget-friendly jewellery, but it should always be clearly disclosed as moissanite rather than diamond. Joyari presents moissanite as its own stone category for clients who want sparkle at a lower price point.</p>
+    </article>
+  </div>
+
+  <div class="jk-education-compare">
+    <div class="jk-section__header">
+      <p class="jk-eyebrow">Compare your centre stone</p>
+      <h2>Lab-Grown vs Natural vs Moissanite</h2>
+      <p>A simple comparison for choosing the right stone for engagement rings, anniversary jewellery, and custom pieces.</p>
+    </div>
+
+    <div class="jk-education-table-wrap">
+      <table class="jk-education-table">
+        <thead>
+          <tr>
+            <th>Material</th>
+            <th>Is it a diamond?</th>
+            <th>Sparkle</th>
+            <th>Durability</th>
+            <th>Price</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Lab-grown diamond</td>
+            <td>Yes</td>
+            <td>Classic diamond brilliance</td>
+            <td>Excellent daily wear</td>
+            <td>Usually better value</td>
+            <td>Real diamond beauty, custom engagement rings, modern value</td>
+          </tr>
+          <tr>
+            <td>Natural diamond</td>
+            <td>Yes</td>
+            <td>Classic diamond brilliance</td>
+            <td>Excellent daily wear</td>
+            <td>Usually highest</td>
+            <td>Traditional rarity, heritage value, investment-minded clients</td>
+          </tr>
+          <tr>
+            <td>Moissanite</td>
+            <td>No</td>
+            <td>Very bright with rainbow fire</td>
+            <td>Very durable</td>
+            <td>More accessible</td>
+            <td>Budget-friendly sparkle and statement jewellery</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="jk-education-split">
+    <div>
+      <p class="jk-eyebrow">Diamond 4Cs</p>
+      <h2>The four details that shape a diamond</h2>
+      <p>Cut, colour, clarity, and carat help describe how a diamond looks, feels, and is valued. The best choice is not always the highest grade on paper; it is the balance that creates beauty within your design and budget.</p>
+    </div>
+    <div class="jk-education-accordion-list">
+      <details open>
+        <summary>Cut</summary>
+        <p>Cut describes how well a diamond is proportioned and polished. It has the greatest impact on brightness, fire, and sparkle.</p>
+      </details>
+      <details>
+        <summary>Colour</summary>
+        <p>Colour grades show how white or warm a diamond appears. D is very colourless, while near-colourless grades can still look beautiful once set.</p>
+      </details>
+      <details>
+        <summary>Clarity</summary>
+        <p>Clarity describes tiny natural or growth features inside the stone. Many clarity characteristics are not visible without magnification.</p>
+      </details>
+      <details>
+        <summary>Carat</summary>
+        <p>Carat is a weight measurement, not just size. Shape, cut, and setting style all influence how large a diamond appears on the hand.</p>
+      </details>
+    </div>
+  </div>
+
+  <div class="jk-education-metal-grid">
+    <div class="jk-section__header">
+      <p class="jk-eyebrow">Gold education</p>
+      <h2>10K vs 14K vs 18K gold</h2>
+      <p>Gold purity affects colour, strength, price, and long-term care. Choose the metal that fits your lifestyle as much as your jewellery mood.</p>
+    </div>
+    <article>
+      <h3>10K Gold</h3>
+      <p>10K gold has lower gold content, making it stronger and more affordable. It can be useful for everyday wear where durability and budget matter.</p>
+    </article>
+    <article>
+      <h3>14K Gold</h3>
+      <p>14K gold offers a strong balance of durability, colour, and value. It is a practical choice for daily engagement rings and fine jewellery.</p>
+    </article>
+    <article>
+      <h3>18K Gold</h3>
+      <p>18K gold has a richer gold colour and a more premium feel. It is softer than 14K, so it benefits from thoughtful wear and care.</p>
+    </article>
+    <article>
+      <h3>Gold Colours</h3>
+      <p>Yellow gold feels warm and classic, white gold feels bright and modern, and rose gold has a soft romantic tone. White gold may need rhodium plating refreshed over time.</p>
+    </article>
+  </div>
+
+  <div class="jk-education-split jk-education-split--reverse">
+    <div>
+      <p class="jk-eyebrow">Platinum vs gold</p>
+      <h2>Choosing a luxury metal</h2>
+      <p>Platinum is naturally white, dense, and luxurious. It feels heavier than gold and is a beautiful choice for bridal jewellery, though it may cost more. Gold offers more colour options and can be selected in 10K, 14K, or 18K depending on your preference.</p>
+    </div>
+    <div>
+      <p class="jk-eyebrow">Ring care</p>
+      <h2>Protect the piece over time</h2>
+      <ul class="jk-education-care-list">
+        <li>Avoid harsh chemicals, chlorine, and abrasive cleaners.</li>
+        <li>Clean gently with mild soap, warm water, and a soft brush.</li>
+        <li>Remove rings during heavy work, gym training, or impact-prone activity.</li>
+        <li>Check prongs and settings regularly, especially on fine bridal jewellery.</li>
+        <li>Book a professional clean and setting check periodically.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="jk-education-choice">
+    <p class="jk-eyebrow">Choosing the right stone</p>
+    <h2>Which stone should you choose?</h2>
+    <div class="jk-education-choice__grid">
+      <p><strong>Choose lab-grown diamond</strong> for the best value and real diamond beauty.</p>
+      <p><strong>Choose natural diamond</strong> for traditional rarity and heritage significance.</p>
+      <p><strong>Choose moissanite</strong> for budget-friendly sparkle and more rainbow fire.</p>
+    </div>
+    <div class="jk-education-guide__actions">
+      <a class="jk-button jk-button--primary" href="/pages/custom-design">Start a Custom Design</a>
+      <a class="jk-button jk-button--secondary" href="/pages/contact">Book a Consultation</a>
+    </div>
   </div>
 </section>
 
@@ -86,24 +189,6 @@
   "class": "shopify-section--education-guide",
   "settings": [
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "Joyari education"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "A refined guide to choosing fine jewellery"
-    },
-    {
-      "type": "textarea",
-      "id": "subheading",
-      "label": "Subheading",
-      "default": "Clear, calm guidance for diamonds, metals, sizing, care, and custom design decisions."
-    },
-    {
       "type": "image_picker",
       "id": "hero_image",
       "label": "Hero image"
@@ -112,120 +197,12 @@
       "type": "text",
       "id": "hero_image_alt",
       "label": "Hero image alt text",
-      "default": "Joyari Krafted education guide"
-    },
-    {
-      "type": "text",
-      "id": "primary_label",
-      "label": "Primary button label",
-      "default": "Book Private Guidance"
-    },
-    {
-      "type": "url",
-      "id": "primary_link",
-      "label": "Primary button link"
-    },
-    {
-      "type": "text",
-      "id": "secondary_label",
-      "label": "Secondary button label",
-      "default": "Explore Engagement Rings"
-    },
-    {
-      "type": "url",
-      "id": "secondary_link",
-      "label": "Secondary button link"
-    },
-    {
-      "type": "text",
-      "id": "cta_eyebrow",
-      "label": "CTA eyebrow",
-      "default": "Need guidance?"
-    },
-    {
-      "type": "text",
-      "id": "cta_heading",
-      "label": "CTA heading",
-      "default": "Choose with confidence"
-    },
-    {
-      "type": "textarea",
-      "id": "cta_text",
-      "label": "CTA text",
-      "default": "Our team can help compare stones, metals, proportions, ring size, care needs, and custom design details."
-    },
-    {
-      "type": "text",
-      "id": "cta_label",
-      "label": "CTA button label",
-      "default": "Contact Joyari"
-    },
-    {
-      "type": "url",
-      "id": "cta_link",
-      "label": "CTA link"
-    }
-  ],
-  "blocks": [
-    {
-      "type": "guide_item",
-      "name": "Guide item",
-      "settings": [
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Eyebrow",
-          "default": "Guide"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Understand the detail"
-        },
-        {
-          "type": "textarea",
-          "id": "text",
-          "label": "Text",
-          "default": "A concise explanation that helps clients make a confident jewellery decision."
-        },
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Guide image"
-        },
-        {
-          "type": "text",
-          "id": "image_alt",
-          "label": "Image alt text"
-        },
-        {
-          "type": "text",
-          "id": "link_label",
-          "label": "Link label"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "Link"
-        }
-      ]
+      "default": "Joyari Krafted jewellery education guide"
     }
   ],
   "presets": [
     {
-      "name": "Education guide",
-      "blocks": [
-        {
-          "type": "guide_item"
-        },
-        {
-          "type": "guide_item"
-        },
-        {
-          "type": "guide_item"
-        }
-      ]
+      "name": "Education guide"
     }
   ]
 }

@@ -2,63 +2,12 @@
   "sections": {
     "guide": {
       "type": "education-guide",
-      "blocks": {
-        "shape": {
-          "type": "guide_item",
-          "settings": {
-            "eyebrow": "Diamond shapes",
-            "title": "Choose the silhouette",
-            "text": "Compare round, oval, emerald, pear, cushion, princess, marquise, and radiant cuts by proportion, sparkle pattern, and mood.",
-            "link_label": "Read the Shape Guide",
-            "link": "/pages/diamond-shape-guide"
-          }
-        },
-        "metal": {
-          "type": "guide_item",
-          "settings": {
-            "eyebrow": "Metals",
-            "title": "Find your metal tone",
-            "text": "Understand platinum, 18K yellow gold, 18K white gold, and rose gold through colour, care, and long-term wear.",
-            "link_label": "Read the Metal Guide",
-            "link": "/pages/metal-guide"
-          }
-        },
-        "size": {
-          "type": "guide_item",
-          "settings": {
-            "eyebrow": "Ring size",
-            "title": "Measure with confidence",
-            "text": "Learn how timing, temperature, band width, and fit preference influence the final ring size.",
-            "link_label": "Read the Ring Size Guide",
-            "link": "/pages/ring-size-guide"
-          }
-        },
-        "care": {
-          "type": "guide_item",
-          "settings": {
-            "eyebrow": "Care",
-            "title": "Protect the finish",
-            "text": "Simple cleaning, storage, and inspection rituals help fine jewellery stay luminous over time.",
-            "link_label": "Read the Care Guide",
-            "link": "/pages/jewellery-care-guide"
-          }
-        }
-      },
-      "block_order": ["shape", "metal", "size", "care"],
       "settings": {
-        "eyebrow": "Education centre",
-        "heading": "Guidance for diamonds, metals, sizing, and care",
-        "subheading": "A calm library for choosing a ring, comparing stones, understanding lab-grown diamonds, and caring for meaningful jewellery.",
-        "primary_label": "Book Private Guidance",
-        "primary_link": "/pages/contact",
-        "secondary_label": "Explore Engagement Rings",
-        "secondary_link": "/collections/engagement-rings",
-        "cta_heading": "Prefer a private recommendation?",
-        "cta_text": "Share your preferred shape, metal, budget, and timing. Joyari can guide the next step with care.",
-        "cta_label": "Contact Joyari",
-        "cta_link": "/pages/contact"
+        "hero_image_alt": "Joyari Krafted jewellery education guide"
       }
     }
   },
-  "order": ["guide"]
+  "order": [
+    "guide"
+  ]
 }

@@ -9744,3 +9744,244 @@ button[name="add"]:focus-visible {
     background: rgba(255, 255, 255, .88) !important;
   }
 }
+
+/* Joyari complete jewellery education page */
+.jk-education-guide--complete {
+  width: min(1680px, calc(100vw - 32px)) !important;
+  padding-top: clamp(28px, 4vw, 64px) !important;
+}
+
+.jk-education-guide--complete .jk-education-guide__hero {
+  grid-template-columns: minmax(0, .9fr) minmax(380px, .95fr);
+  min-height: clamp(500px, 42vw, 680px);
+}
+
+.jk-education-guide__seo {
+  color: rgba(17, 17, 17, .64) !important;
+  font-size: .95rem !important;
+}
+
+.jk-education-pillars,
+.jk-education-metal-grid,
+.jk-education-choice {
+  display: grid;
+  gap: clamp(16px, 2vw, 26px);
+  margin-top: clamp(28px, 4vw, 64px);
+}
+
+.jk-education-pillars {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.jk-education-pillars article,
+.jk-education-metal-grid article,
+.jk-education-split,
+.jk-education-compare,
+.jk-education-choice,
+.jk-education-accordion-list details {
+  border: 1px solid rgba(198, 167, 105, .28);
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: #111111;
+  box-shadow: 0 18px 52px rgba(17, 17, 17, .055);
+}
+
+.jk-education-pillars article,
+.jk-education-metal-grid article {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: clamp(22px, 2.8vw, 38px);
+}
+
+.jk-education-pillars article span {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(198, 167, 105, .42);
+  border-radius: 50%;
+  color: #0F3D2E;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+.jk-education-pillars h2,
+.jk-education-metal-grid h3,
+.jk-education-split h2,
+.jk-education-choice h2,
+.jk-education-compare h2 {
+  color: #111111 !important;
+}
+
+.jk-education-pillars p,
+.jk-education-metal-grid p,
+.jk-education-split p,
+.jk-education-choice p,
+.jk-education-table,
+.jk-education-care-list {
+  color: #5D554B !important;
+  line-height: 1.72;
+}
+
+.jk-education-compare {
+  display: grid;
+  gap: clamp(18px, 2.8vw, 34px);
+  margin-top: clamp(28px, 4vw, 64px);
+  padding: clamp(22px, 3.4vw, 46px);
+}
+
+.jk-education-table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(198, 167, 105, .24);
+  border-radius: 8px;
+  background: #FFFFFF;
+}
+
+.jk-education-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  font-size: .94rem;
+}
+
+.jk-education-table th,
+.jk-education-table td {
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(198, 167, 105, .18);
+  text-align: left;
+  vertical-align: top;
+}
+
+.jk-education-table th {
+  background: #F8F6F1;
+  color: #0F3D2E;
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.jk-education-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.jk-education-split {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
+  gap: clamp(22px, 4vw, 58px);
+  align-items: start;
+  margin-top: clamp(28px, 4vw, 64px);
+  padding: clamp(24px, 4vw, 56px);
+  background: linear-gradient(135deg, #FFFFFF, #F8F6F1);
+}
+
+.jk-education-split--reverse {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.jk-education-accordion-list {
+  display: grid;
+  gap: 10px;
+}
+
+.jk-education-accordion-list details {
+  padding: 0;
+  box-shadow: none;
+}
+
+.jk-education-accordion-list summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 18px;
+  color: #0F3D2E;
+  font-weight: 750;
+}
+
+.jk-education-accordion-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.jk-education-accordion-list summary::after {
+  content: "+";
+  float: right;
+  color: #C6A769;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.jk-education-accordion-list details[open] summary::after {
+  content: "-";
+}
+
+.jk-education-accordion-list details p {
+  padding: 0 18px 18px;
+}
+
+.jk-education-metal-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.jk-education-metal-grid .jk-section__header {
+  grid-column: 1 / -1;
+  max-width: 920px;
+}
+
+.jk-education-care-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.jk-education-choice {
+  justify-items: center;
+  padding: clamp(26px, 4vw, 58px);
+  text-align: center;
+}
+
+.jk-education-choice__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.jk-education-choice__grid p {
+  margin: 0;
+  padding: 18px;
+  border: 1px solid rgba(198, 167, 105, .22);
+  border-radius: 8px;
+  background: #F8F6F1;
+}
+
+.jk-education-choice__grid strong {
+  color: #0F3D2E;
+}
+
+@media (max-width: 1080px) {
+  .jk-education-guide--complete .jk-education-guide__hero,
+  .jk-education-pillars,
+  .jk-education-split,
+  .jk-education-split--reverse,
+  .jk-education-metal-grid,
+  .jk-education-choice__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .jk-education-guide--complete {
+    width: calc(100vw - 20px) !important;
+  }
+
+  .jk-education-guide--complete .jk-education-guide__hero {
+    padding: 20px;
+  }
+
+  .jk-education-table th,
+  .jk-education-table td {
+    padding: 13px 14px;
+  }
+}

@@ -136,7 +136,7 @@
     "cinematic_story": {
       "type": "luxury-cinematic-story",
       "settings": {
-        "eyebrow": "The Joyari feeling",
+        "eyebrow": "Proposal, craft, and care",
         "heading": "A visual world for the moment, the craft, and the reveal",
         "subheading": "Cinematic proposal, atelier, and presentation panels give the homepage an emotional luxury rhythm.",
         "proposal_image": "",
@@ -296,7 +296,7 @@
         "e5"
       ],
       "settings": {
-        "eyebrow": "The Joyari world",
+        "eyebrow": "Editorial jewellery guidance",
         "heading": "A visual language for modern diamond luxury",
         "subheading": "Editorial moments across bridal, diamond, proposal, atelier, and packaging details create a complete luxury world."
       }
@@ -454,15 +454,10 @@
     "hero",
     "promise",
     "engagement",
-    "cinematic_story",
     "lab_diamonds",
     "design_process",
     "ethical",
-    "story",
-    "editorial_gallery",
     "trust_faq",
-    "testimonials",
-    "journal",
     "trust_badges"
   ]
 }

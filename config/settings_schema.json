@@ -42,13 +42,13 @@
         "type": "text",
         "id": "support_email",
         "label": "Support email",
-        "default": "care@joyarikrafted.com"
+        "default": ""
       },
       {
         "type": "text",
         "id": "support_phone",
         "label": "Support phone",
-        "default": "+61 000 000 000"
+        "default": ""
       }
     ]
   },
