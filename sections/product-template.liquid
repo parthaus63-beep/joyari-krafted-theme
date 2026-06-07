@@ -110,6 +110,8 @@
               {% endif %}
             </div>
 
+            {% render 'product-estimated-delivery' %}
+
             {% if section.settings.show_sku %}
               <p class="jk-sku">SKU: <span data-variant-sku>{{ selected_variant.sku | default: 'Made to order' }}</span></p>
             {% endif %}

@@ -1,0 +1,28 @@
+{% liquid
+  assign now_seconds = 'now' | date: '%s' | plus: 0
+  assign four_weeks_seconds = 2419200
+  assign five_weeks_seconds = 3024000
+  assign estimate_start = now_seconds | plus: four_weeks_seconds | date: '%d %B %Y'
+  assign estimate_end = now_seconds | plus: five_weeks_seconds | date: '%d %B %Y'
+%}
+
+<div class="jk-estimated-delivery" aria-label="Estimated delivery">
+  <span class="jk-estimated-delivery__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false">
+      <path d="M7 3v3M17 3v3M4.75 9.25h14.5M6.5 5.25h11A2.25 2.25 0 0 1 19.75 7.5v10A2.25 2.25 0 0 1 17.5 19.75h-11A2.25 2.25 0 0 1 4.25 17.5v-10A2.25 2.25 0 0 1 6.5 5.25Z" />
+      <path d="M8 12.5h2.25M13.75 12.5H16M8 15.75h2.25M13.75 15.75H16" />
+    </svg>
+  </span>
+
+  <div class="jk-estimated-delivery__copy">
+    <span>Estimated delivery</span>
+    <strong>{{ estimate_start }} – {{ estimate_end }}</strong>
+  </div>
+
+  <details class="jk-estimated-delivery__tooltip">
+    <summary aria-label="More information about estimated delivery">i</summary>
+    <div role="tooltip">
+      Each Joyari Krafted piece is made to order and crafted specifically for you. Delivery estimates are approximate and may vary slightly depending on stone availability, customisation requirements, and shipping conditions.
+    </div>
+  </details>
+</div>

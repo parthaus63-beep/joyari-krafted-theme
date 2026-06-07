@@ -10361,6 +10361,128 @@ body.jk-template-index .shopify-section--luxury-journal {
   color: #5D554B !important;
 }
 
+/* Product estimated delivery component */
+.jk-estimated-delivery {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 44px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  margin: 8px 0 2px !important;
+  padding: 13px 14px !important;
+  border: 1px solid rgba(198, 167, 105, .34) !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, .88) !important;
+  color: #111111 !important;
+  box-shadow: 0 14px 36px rgba(17, 17, 17, .045) !important;
+}
+
+.jk-estimated-delivery__icon {
+  display: grid !important;
+  place-items: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  border: 1px solid rgba(198, 167, 105, .42) !important;
+  border-radius: 50% !important;
+  background: #F8F6F1 !important;
+  color: #0F3D2E !important;
+}
+
+.jk-estimated-delivery__icon svg {
+  width: 22px !important;
+  height: 22px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 1.7 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+.jk-estimated-delivery__copy {
+  display: grid !important;
+  gap: 3px !important;
+  min-width: 0 !important;
+}
+
+.jk-estimated-delivery__copy span {
+  color: #0F3D2E !important;
+  font-size: .68rem !important;
+  font-weight: 850 !important;
+  letter-spacing: .12em !important;
+  line-height: 1.2 !important;
+  text-transform: uppercase !important;
+}
+
+.jk-estimated-delivery__copy strong {
+  color: #111111 !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: clamp(1rem, 1.05vw, 1.16rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+}
+
+.jk-estimated-delivery__tooltip {
+  position: relative !important;
+  justify-self: end !important;
+}
+
+.jk-estimated-delivery__tooltip summary {
+  display: grid !important;
+  place-items: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  border: 1px solid rgba(198, 167, 105, .5) !important;
+  border-radius: 50% !important;
+  background: #FFFFFF !important;
+  color: #0F3D2E !important;
+  cursor: pointer !important;
+  font-size: .78rem !important;
+  font-weight: 850 !important;
+  line-height: 1 !important;
+  list-style: none !important;
+}
+
+.jk-estimated-delivery__tooltip summary::-webkit-details-marker {
+  display: none !important;
+}
+
+.jk-estimated-delivery__tooltip summary:hover,
+.jk-estimated-delivery__tooltip summary:focus-visible {
+  border-color: #0F3D2E !important;
+  box-shadow: 0 0 0 3px rgba(15, 61, 46, .1) !important;
+  outline: none !important;
+}
+
+.jk-estimated-delivery__tooltip div {
+  position: absolute !important;
+  z-index: 20 !important;
+  top: calc(100% + 10px) !important;
+  right: 0 !important;
+  width: min(340px, calc(100vw - 40px)) !important;
+  padding: 14px 15px !important;
+  border: 1px solid rgba(198, 167, 105, .38) !important;
+  border-radius: 8px !important;
+  background: #FFFFFF !important;
+  color: #4D4942 !important;
+  box-shadow: 0 18px 50px rgba(17, 17, 17, .14) !important;
+  font-size: .86rem !important;
+  line-height: 1.58 !important;
+}
+
+.jk-estimated-delivery__tooltip div::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -6px !important;
+  right: 12px !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-left: 1px solid rgba(198, 167, 105, .38) !important;
+  border-top: 1px solid rgba(198, 167, 105, .38) !important;
+  background: #FFFFFF !important;
+  transform: rotate(45deg) !important;
+}
+
 @media (max-width: 980px) {
   .jk-cart-form {
     grid-template-columns: 1fr !important;
@@ -10399,5 +10521,19 @@ body.jk-template-index .shopify-section--luxury-journal {
 
   .jk-cart-summary {
     padding: 18px !important;
+  }
+
+  .jk-estimated-delivery {
+    grid-template-columns: 40px minmax(0, 1fr) auto !important;
+    padding: 12px !important;
+  }
+
+  .jk-estimated-delivery__icon {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .jk-estimated-delivery__tooltip div {
+    right: -4px !important;
   }
 }
