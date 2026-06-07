@@ -18,10 +18,16 @@
               {% endif %}
             </a>
             <div class="jk-cart-item__details">
+              <p class="jk-cart-item__eyebrow">Joyari Krafted</p>
               <h2><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
-              {% unless item.product.has_only_default_variant %}
-                <p>{{ item.variant.title }}</p>
-              {% endunless %}
+              <div class="jk-cart-item__meta">
+                {% unless item.product.has_only_default_variant %}
+                  <span>{{ item.variant.title }}</span>
+                {% endunless %}
+                {% if item.selling_plan_allocation != blank %}
+                  <span>{{ item.selling_plan_allocation.selling_plan.name }}</span>
+                {% endif %}
+              </div>
               {% if item.properties.size > 0 %}
                 <dl class="jk-cart-properties">
                   {% for property in item.properties %}
@@ -35,11 +41,12 @@
                   {% endfor %}
                 </dl>
               {% endif %}
-              <a class="jk-text-link" href="{{ item.url_to_remove }}">{{ 'general.cart.remove' | t }}</a>
+              <a class="jk-cart-item__remove" href="{{ item.url_to_remove }}" aria-label="Remove {{ item.product.title | escape }}">{{ 'general.cart.remove' | t }}</a>
             </div>
             <div class="jk-cart-item__quantity">
               <label for="CartQuantity-{{ item.index | plus: 1 }}">Quantity</label>
-              <input id="CartQuantity-{{ item.index | plus: 1 }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+              <input id="CartQuantity-{{ item.index | plus: 1 }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" inputmode="numeric">
+              <button type="submit" name="update" class="jk-cart-item__update">Update</button>
             </div>
             <p class="jk-cart-item__price">{{ item.final_line_price | money }}</p>
           </article>
@@ -47,12 +54,31 @@
       </div>
 
       <aside class="jk-cart-summary">
-        <div>
+        <div class="jk-cart-summary__header">
+          <p class="jk-eyebrow">Order summary</p>
+          <h2>Prepared with care</h2>
+        </div>
+
+        <div class="jk-cart-summary__subtotal">
           <span>Subtotal</span>
           <strong>{{ cart.total_price | money }}</strong>
         </div>
-        <p>Shipping, duties, and taxes are calculated at checkout. Secure payment and order support are included.</p>
-        <button type="submit" name="checkout" class="jk-button jk-button--primary">{{ 'general.cart.checkout' | t }}</button>
+
+        <p class="jk-cart-summary__copy">Shipping, duties, taxes, and available discounts are calculated at checkout. Your payment remains protected through Shopify checkout.</p>
+
+        <label class="jk-cart-note" for="CartNote">
+          <span>Order note <em>optional</em></span>
+          <textarea id="CartNote" name="note" rows="4" placeholder="Share sizing notes, delivery timing, or presentation requests.">{{ cart.note }}</textarea>
+        </label>
+
+        <div class="jk-cart-trust" aria-label="Cart confidence">
+          <span>Secure checkout</span>
+          <span>Insured delivery</span>
+          <span>Custom made with care</span>
+        </div>
+
+        <button type="submit" name="checkout" class="jk-button jk-button--primary jk-cart-checkout">{{ 'general.cart.checkout' | t }}</button>
+        <a class="jk-cart-continue" href="{{ routes.all_products_collection_url }}">Continue Shopping</a>
       </aside>
     </form>
   {% else %}
