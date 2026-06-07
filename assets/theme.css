@@ -9985,3 +9985,12 @@ button[name="add"]:focus-visible {
     padding: 13px 14px;
   }
 }
+
+/* Homepage launch cleanup: hide repeated demo/editorial blocks if Shopify keeps old template order */
+body.jk-template-index .shopify-section--luxury-cinematic-story,
+body.jk-template-index .shopify-section--luxury-story,
+body.jk-template-index .shopify-section--editorial-image-gallery,
+body.jk-template-index .shopify-section--testimonials,
+body.jk-template-index .shopify-section--luxury-journal {
+  display: none !important;
+}
