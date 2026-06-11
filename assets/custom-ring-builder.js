@@ -52,23 +52,28 @@
     updateProperty(root, 'Estimated Total', formatted);
   }
 
+  function updateMainImage(root, image, alt) {
+    var previewImage = root.querySelector('[data-preview-image]');
+    if (!image || !previewImage) return;
+
+    previewImage.classList.add('is-changing');
+    window.setTimeout(function () {
+      previewImage.src = image;
+      previewImage.removeAttribute('srcset');
+      previewImage.removeAttribute('sizes');
+      previewImage.alt = alt || 'Joyari custom ring preview';
+      previewImage.classList.remove('is-changing');
+    }, 120);
+  }
+
   function updatePreview(root, button) {
     var image = button.getAttribute('data-image');
     var handle = button.getAttribute('data-handle') || '';
     var group = button.getAttribute('data-group');
     var value = button.getAttribute('data-value');
-    var previewImage = root.querySelector('[data-preview-image]');
     var tone = root.querySelector('[data-preview-tone]');
 
-    if (image && previewImage) {
-      previewImage.classList.add('is-changing');
-      window.setTimeout(function () {
-        previewImage.src = image;
-        previewImage.removeAttribute('srcset');
-        previewImage.alt = value + ' preview';
-        previewImage.classList.remove('is-changing');
-      }, 120);
-    }
+    updateMainImage(root, image, value + ' preview');
 
     if (group === 'Metal' && tone) {
       tone.className = 'jkrb__preview-tone jkrb__preview-tone--' + handle;
@@ -124,6 +129,21 @@
         selectDropdown(root, select);
       });
       selectDropdown(root, select);
+    });
+
+    root.querySelectorAll('[data-gallery-thumb]').forEach(function (thumb) {
+      var image = thumb.getAttribute('data-image');
+      if (image) {
+        var preload = new Image();
+        preload.src = image;
+      }
+
+      thumb.addEventListener('click', function () {
+        root.querySelectorAll('[data-gallery-thumb]').forEach(function (candidate) {
+          candidate.classList.toggle('is-active', candidate === thumb);
+        });
+        updateMainImage(root, image, thumb.getAttribute('data-alt'));
+      });
     });
 
     root.querySelectorAll('[data-option-button].is-selected').forEach(function (button) {

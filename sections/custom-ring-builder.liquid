@@ -8,6 +8,7 @@
     assign selected_variant = builder_product.selected_or_first_available_variant
   endif
 
+  assign checkout_variant_id = section.settings.checkout_variant_id | strip
   assign base_price = section.settings.base_price | default: 280000
   assign hero_alt = section.settings.hero_image_alt | default: 'Joyari Krafted custom engagement ring'
 %}
@@ -19,6 +20,12 @@
   data-money-format="{{ shop.money_format | escape }}"
   data-section-id="{{ section.id }}"
 >
+  <nav class="jkrb__progress" aria-label="Custom engagement ring progress">
+    <span class="is-active"><strong>1</strong> Choose Setting</span>
+    <span><strong>2</strong> Choose Diamond</span>
+    <span><strong>3</strong> Complete Ring</span>
+  </nav>
+
   <div class="jkrb__hero">
     <div class="jkrb__hero-copy">
       <p class="jkrb__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -52,6 +59,37 @@
 
   <div id="JoyariRingBuilder-{{ section.id }}" class="jkrb__shell">
     <div class="jkrb__visual-column">
+      <div class="jkrb__gallery" aria-label="Custom ring media gallery">
+        <div class="jkrb__gallery-thumbs" aria-label="Preview thumbnails">
+          {% if section.settings.preview_image != blank %}
+            {% assign default_thumb_url = section.settings.preview_image | image_url: width: 1500 %}
+            <button type="button" class="jkrb__thumb is-active" data-gallery-thumb data-image="{{ default_thumb_url }}" data-alt="{{ section.settings.preview_image_alt | escape }}" aria-label="View custom ring preview">
+              {{ section.settings.preview_image | image_url: width: 180 | image_tag: loading: 'eager', width: 90, height: 110, alt: section.settings.preview_image_alt }}
+            </button>
+          {% endif %}
+          {% if section.settings.sequence_frame_1 != blank %}
+            {% assign frame_thumb_url = section.settings.sequence_frame_1 | image_url: width: 1500 %}
+            <button type="button" class="jkrb__thumb{% if section.settings.preview_image == blank %} is-active{% endif %}" data-gallery-thumb data-image="{{ frame_thumb_url }}" data-alt="{{ section.settings.preview_image_alt | escape }}" aria-label="View ring rotation frame">
+              {{ section.settings.sequence_frame_1 | image_url: width: 180 | image_tag: loading: 'eager', width: 90, height: 110, alt: section.settings.preview_image_alt }}
+            </button>
+          {% endif %}
+          {% if section.settings.setting_solitaire_image != blank %}
+            {% assign setting_thumb_url = section.settings.setting_solitaire_image | image_url: width: 1500 %}
+            <button type="button" class="jkrb__thumb" data-gallery-thumb data-image="{{ setting_thumb_url }}" data-alt="Solitaire engagement ring setting" aria-label="View solitaire ring setting">
+              {{ section.settings.setting_solitaire_image | image_url: width: 180 | image_tag: loading: 'lazy', width: 90, height: 110, alt: 'Solitaire engagement ring setting' }}
+            </button>
+          {% endif %}
+          {% if section.settings.shape_round_image != blank %}
+            {% assign shape_thumb_url = section.settings.shape_round_image | image_url: width: 1500 %}
+            <button type="button" class="jkrb__thumb" data-gallery-thumb data-image="{{ shape_thumb_url }}" data-alt="Round diamond preview" aria-label="View round diamond preview">
+              {{ section.settings.shape_round_image | image_url: width: 180 | image_tag: loading: 'lazy', width: 90, height: 110, alt: 'Round diamond preview' }}
+            </button>
+          {% endif %}
+          <button type="button" class="jkrb__thumb jkrb__thumb--fallback" data-gallery-thumb data-image="{{ 'joyari-product-pear-ring-on-hand.jpg' | asset_url }}" data-alt="Joyari Krafted ring on hand" aria-label="View ring on hand">
+            <img src="{{ 'joyari-product-pear-ring-on-hand.jpg' | asset_url }}" width="90" height="110" loading="lazy" alt="Joyari Krafted ring on hand">
+          </button>
+        </div>
+
       <div class="jkrb__preview" data-preview-stage>
         <div class="jkrb__preview-media">
           {% if section.settings.preview_image != blank %}
@@ -61,7 +99,7 @@
           {% elsif section.settings.sequence_frame_1 != blank %}
             {{ section.settings.sequence_frame_1 | image_url: width: 1500 | image_tag: class: 'jkrb__preview-image', loading: 'eager', sizes: '(min-width: 990px) 48vw, 100vw', widths: '600, 900, 1200, 1500', alt: section.settings.preview_image_alt, data-preview-image: '' }}
           {% else %}
-            {% render 'joyari-generated-image', file: 'joyari-product-pear-ring-on-hand.jpg', alt: section.settings.preview_image_alt, class: 'jkrb__preview-image', loading: 'eager' %}
+            <img src="{{ 'joyari-product-pear-ring-on-hand.jpg' | asset_url }}" class="jkrb__preview-image" data-preview-image loading="eager" width="1500" height="1688" alt="{{ section.settings.preview_image_alt | escape }}">
           {% endif %}
           <div class="jkrb__preview-shine" aria-hidden="true"></div>
           <div class="jkrb__preview-tone" data-preview-tone></div>
@@ -73,6 +111,7 @@
           <span data-preview-metal>18K Yellow Gold</span>
         </div>
       </div>
+      </div>
 
       <div class="jkrb__trust" aria-label="Joyari trust badges">
         <span>IGI Certified</span>
@@ -83,18 +122,26 @@
     </div>
 
     <div class="jkrb__builder-column">
-      <div class="jkrb__steps" aria-label="Custom ring builder steps">
-        {% assign steps = '1 Choose setting|2 Choose metal|3 Diamond type|4 Shape|5 Carat|6 Colour|7 Clarity|8 Ring size|9 Engraving|10 Review|11 Add to cart' | split: '|' %}
-        {% for step in steps %}
-          <span>{{ step }}</span>
-        {% endfor %}
+      <div class="jkrb__product-head">
+        <p class="jkrb__eyebrow">Custom engagement ring setting</p>
+        <h2>Joyari custom engagement ring</h2>
+        <p>Begin with a refined setting, then pair it with a certified centre stone and personal finishing details.</p>
+        <div class="jkrb__head-price">
+          <span>Estimated from</span>
+          <strong data-estimate-price>{{ base_price | money }}</strong>
+        </div>
+        <ul class="jkrb__quick-details" aria-label="Ring details">
+          <li>Made to order in 12–15 business days</li>
+          <li>Certificate and CAD preview placeholders included</li>
+          <li>Private consultation available before production</li>
+        </ul>
       </div>
 
       <div class="jkrb__panel">
         <div class="jkrb__panel-heading">
-          <p class="jkrb__eyebrow">Build your ring</p>
-          <h2>Choose every detail</h2>
-          <p>Start with the setting, then refine the stone profile, size, and personal details.</p>
+          <p class="jkrb__eyebrow">1 Choose Setting</p>
+          <h2>Select your setting</h2>
+          <p>Choose the ring architecture, metal, and sizing details before moving into centre-stone preferences.</p>
         </div>
 
         <div class="jkrb__options">
@@ -330,8 +377,8 @@
 
     <aside class="jkrb__summary" aria-label="Final ring review">
       <div class="jkrb__summary-card">
-        <p class="jkrb__eyebrow">Review final ring</p>
-        <h2>Your Joyari ring</h2>
+        <p class="jkrb__eyebrow">3 Complete Ring</p>
+        <h2>Review final ring</h2>
         <dl class="jkrb__summary-list">
           <div><dt>Setting</dt><dd data-summary="Setting">Solitaire</dd></div>
           <div><dt>Metal</dt><dd data-summary="Metal">18K Yellow Gold</dd></div>
@@ -367,12 +414,29 @@
             <input type="hidden" name="properties[Engraving]" value="" data-property-input="Engraving">
             <input type="hidden" name="properties[Estimated Production Time]" value="Made to order in 12–15 business days">
             <input type="hidden" name="properties[Estimated Total]" value="{{ base_price | money }}" data-property-input="Estimated Total">
-            <button type="submit" name="add" class="jkrb__button jkrb__button--dark jkrb__add">Add to cart</button>
+            <button type="submit" name="add" class="jkrb__button jkrb__button--dark jkrb__add">Select This Setting</button>
           {% endform %}
+        {% elsif checkout_variant_id != blank %}
+          <form method="post" action="{{ routes.cart_add_url }}" class="jkrb__form" data-builder-form>
+            <input type="hidden" name="id" value="{{ checkout_variant_id | escape }}">
+            <input type="hidden" name="quantity" value="1">
+            <input type="hidden" name="properties[Setting]" value="Solitaire" data-property-input="Setting">
+            <input type="hidden" name="properties[Metal]" value="18K Yellow Gold" data-property-input="Metal">
+            <input type="hidden" name="properties[Diamond Type]" value="Lab-Grown Diamond" data-property-input="Diamond Type">
+            <input type="hidden" name="properties[Diamond Shape]" value="Round" data-property-input="Diamond Shape">
+            <input type="hidden" name="properties[Carat]" value="1.50 ct" data-property-input="Carat">
+            <input type="hidden" name="properties[Colour]" value="G" data-property-input="Colour">
+            <input type="hidden" name="properties[Clarity]" value="VS2" data-property-input="Clarity">
+            <input type="hidden" name="properties[Ring Size]" value="Help Me Later" data-property-input="Ring Size">
+            <input type="hidden" name="properties[Engraving]" value="" data-property-input="Engraving">
+            <input type="hidden" name="properties[Estimated Production Time]" value="Made to order in 12–15 business days">
+            <input type="hidden" name="properties[Estimated Total]" value="{{ base_price | money }}" data-property-input="Estimated Total">
+            <button type="submit" name="add" class="jkrb__button jkrb__button--dark jkrb__add">Select This Setting</button>
+          </form>
         {% else %}
           <div class="jkrb__form">
-            <button type="button" class="jkrb__button jkrb__button--dark jkrb__add" disabled>Add to cart</button>
-            <p class="jkrb__setup-note">Select a checkout product in this section’s Shopify customizer settings to enable Add to Cart.</p>
+            <button type="button" class="jkrb__button jkrb__button--dark jkrb__add" disabled>Select This Setting</button>
+            <p class="jkrb__setup-note">Select a checkout product or enter a checkout variant ID in this section’s Shopify customizer settings to enable Add to Cart.</p>
           </div>
         {% endif %}
 
@@ -381,12 +445,79 @@
     </aside>
   </div>
 
+  <div class="jkrb__below">
+    <section class="jkrb__accordions" aria-label="Product specifications">
+      <details open>
+        <summary>Product specifications</summary>
+        <div>
+          <p>Made-to-order engagement ring setting with your chosen metal, ring size, diamond shape, stone type, carat, colour, clarity, and optional engraving saved with the order.</p>
+          <dl>
+            <div><dt>Band profile</dt><dd>Refined bridal profile, finished by Joyari Krafted</dd></div>
+            <div><dt>Centre stone</dt><dd data-summary="Diamond Shape">Round</dd></div>
+            <div><dt>Metal</dt><dd data-summary="Metal">18K Yellow Gold</dd></div>
+            <div><dt>Production</dt><dd>Made to order in 12–15 business days</dd></div>
+          </dl>
+        </div>
+      </details>
+      <details>
+        <summary>Setting details</summary>
+        <p>The setting is prepared for your chosen centre-stone style, then reviewed before production for proportion, security, and wearability.</p>
+      </details>
+      <details>
+        <summary>Diamond and certificate</summary>
+        <p>Certificate information can be attached once the centre stone is confirmed. IGI/GIA details can be stored here when available.</p>
+      </details>
+      <details>
+        <summary>CAD preview and consultation</summary>
+        <p>A CAD preview placeholder is reserved for final design approval. Book a consultation if you would like guidance before selecting your setting.</p>
+      </details>
+    </section>
+
+    <section class="jkrb__set-with" aria-labelledby="CanBeSetWith-{{ section.id }}">
+      <div>
+        <p class="jkrb__eyebrow">2 Choose Diamond</p>
+        <h2 id="CanBeSetWith-{{ section.id }}">Can be set with</h2>
+        <p>Choose a centre-stone silhouette now, then confirm availability and certificate details with Joyari Krafted.</p>
+      </div>
+      <div class="jkrb__compatible-shapes">
+        {% assign compatible_shapes = 'Round|Oval|Pear|Emerald|Cushion|Princess|Marquise|Radiant' | split: '|' %}
+        {% assign compatible_handles = 'round|oval|pear|emerald|cushion|princess|marquise|radiant' | split: '|' %}
+        {% for shape in compatible_shapes %}
+          {% assign handle = compatible_handles[forloop.index0] %}
+          <button type="button" class="jkrb__compat-card" data-option-button data-group="Diamond Shape" data-value="{{ shape }}" data-handle="{{ handle }}" data-price="0">
+            <svg viewBox="0 0 64 64" aria-hidden="true" class="jkrb__shape-icon jkrb__shape-icon--{{ handle }}">
+              {% case handle %}
+                {% when 'round' %}<circle cx="32" cy="32" r="20"></circle><path d="M18 18 46 46M46 18 18 46M32 12v40M12 32h40"></path>
+                {% when 'oval' %}<ellipse cx="32" cy="32" rx="16" ry="23"></ellipse><path d="M22 14 42 50M42 14 22 50M32 10v44"></path>
+                {% when 'emerald' %}<path d="M22 10h20l12 12v20L42 54H22L10 42V22Z"></path><path d="M22 10v44M42 10v44M10 22h44M10 42h44"></path>
+                {% when 'pear' %}<path d="M32 8C20 20 15 29 16 39c1 10 8 17 16 17s15-7 16-17C49 29 44 20 32 8Z"></path><path d="M32 8v48M21 26l22 22M43 26 21 48"></path>
+                {% when 'cushion' %}<rect x="13" y="13" width="38" height="38" rx="12"></rect><path d="M20 20h24v24H20zM32 13v38M13 32h38"></path>
+                {% when 'princess' %}<rect x="14" y="14" width="36" height="36"></rect><path d="M14 14 50 50M50 14 14 50M32 14v36M14 32h36"></path>
+                {% when 'marquise' %}<path d="M6 32s13-20 26-20 26 20 26 20-13 20-26 20S6 32 6 32Z"></path><path d="M6 32h52M22 16l20 32M42 16 22 48"></path>
+                {% else %}<path d="M20 10h24l10 10v24L44 54H20L10 44V20Z"></path><path d="M20 10 44 54M44 10 20 54M10 20h44M10 44h44"></path>
+              {% endcase %}
+            </svg>
+            <span>{{ shape }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="jkrb__service-blocks" aria-label="Joyari service promises">
+      <article><span>01</span><h3>Insured delivery</h3><p>Secure, tracked delivery for finished pieces.</p></article>
+      <article><span>02</span><h3>Lifetime warranty</h3><p>Craftsmanship support for your Joyari Krafted piece.</p></article>
+      <article><span>03</span><h3>Free resizing</h3><p>Guidance and resizing support for bridal rings.</p></article>
+      <article><span>04</span><h3>Consultation</h3><p>Private support for metal, stone, and design choices.</p></article>
+      <article><span>05</span><h3>Certification</h3><p>IGI/GIA certificate placeholder ready for selected stones.</p></article>
+    </section>
+  </div>
+
   <div class="jkrb__mobile-bar" data-mobile-summary>
     <div>
       <span>Estimated total</span>
       <strong data-estimate-price>{{ base_price | money }}</strong>
     </div>
-    <a href="#JoyariRingBuilder-{{ section.id }}" class="jkrb__button jkrb__button--dark">Review ring</a>
+    <a href="#JoyariRingBuilder-{{ section.id }}" class="jkrb__button jkrb__button--dark">Select Setting</a>
   </div>
 
   <div class="jkrb__placeholders">
@@ -424,6 +555,7 @@
     { "type": "text", "id": "heading", "label": "Hero heading", "default": "Design Your Ring" },
     { "type": "textarea", "id": "subheading", "label": "Hero text", "default": "Create a made-to-order engagement ring by choosing your setting, diamond profile, metal, size, and personal engraving." },
     { "type": "product", "id": "checkout_product", "label": "Checkout product for Add to Cart", "info": "Choose a Shopify product used as the cart item. Builder selections are saved as line item properties." },
+    { "type": "text", "id": "checkout_variant_id", "label": "Fallback checkout variant ID", "info": "Optional. Used only if no checkout product is selected. The custom selections are still saved as line item properties." },
     { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
     { "type": "text", "id": "hero_image_alt", "label": "Hero image alt text", "default": "Joyari Krafted custom engagement ring" },
     { "type": "video_url", "id": "hero_video_url", "label": "Hero external video", "accept": ["youtube", "vimeo"] },
