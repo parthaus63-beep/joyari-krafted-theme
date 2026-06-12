@@ -49,7 +49,7 @@
       element.textContent = formatted;
     });
 
-    updateProperty(root, 'Estimated Total', formatted);
+    updateProperty(root, 'Configured Price', formatted);
   }
 
   function updateMainImage(root, image, alt) {
@@ -116,6 +116,14 @@
     updateProperty(root, 'Engraving', value);
   }
 
+  function setProgress(root, step) {
+    root.querySelectorAll('[data-progress-step]').forEach(function (item) {
+      var itemStep = parseInt(item.getAttribute('data-progress-step'), 10);
+      item.classList.toggle('is-active', itemStep === step);
+      item.classList.toggle('is-complete', itemStep < step);
+    });
+  }
+
   function initBuilder(root) {
     root.querySelectorAll('[data-option-button]').forEach(function (button) {
       button.setAttribute('aria-pressed', button.classList.contains('is-selected') ? 'true' : 'false');
@@ -143,6 +151,12 @@
           candidate.classList.toggle('is-active', candidate === thumb);
         });
         updateMainImage(root, image, thumb.getAttribute('data-alt'));
+      });
+    });
+
+    root.querySelectorAll('[data-next-step]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setProgress(root, parseInt(link.getAttribute('data-next-step'), 10));
       });
     });
 
