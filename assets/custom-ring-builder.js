@@ -57,7 +57,84 @@
     if (navigator.clipboard) navigator.clipboard.writeText(window.location.href).catch(function () {});
   }
 
+  function initViewer(viewer) {
+    var image = viewer.querySelector('.jkb__viewer-image');
+    var stage = viewer.querySelector('[data-360-stage]');
+    var frames = Array.prototype.map.call(viewer.querySelectorAll('[data-360-frame]'), function (frame) {
+      return frame.getAttribute('data-360-frame');
+    }).filter(Boolean);
+    if (!image || !stage) return;
+
+    if (!frames.length && image.currentSrc) frames.push(image.currentSrc);
+    if (!frames.length && image.src) frames.push(image.src);
+
+    frames.forEach(function (source) {
+      var preload = new Image();
+      preload.src = source;
+    });
+
+    var index = 0;
+    var dragging = false;
+    var startX = 0;
+    var lastStep = 0;
+
+    function showFrame(nextIndex) {
+      if (!frames.length) return;
+      index = (nextIndex + frames.length) % frames.length;
+      viewer.classList.add('is-changing');
+      image.src = frames[index];
+      window.setTimeout(function () {
+        viewer.classList.remove('is-changing');
+      }, 90);
+    }
+
+    function moveFrame(direction) {
+      showFrame(index + direction);
+    }
+
+    var previous = viewer.querySelector('[data-360-previous]');
+    var next = viewer.querySelector('[data-360-next]');
+    if (previous) previous.addEventListener('click', function () { moveFrame(-1); });
+    if (next) next.addEventListener('click', function () { moveFrame(1); });
+
+    stage.addEventListener('pointerdown', function (event) {
+      if (event.target.closest('button')) return;
+      dragging = true;
+      startX = event.clientX;
+      lastStep = 0;
+      stage.setPointerCapture(event.pointerId);
+    });
+
+    stage.addEventListener('pointermove', function (event) {
+      if (!dragging || frames.length < 2) return;
+      var step = Math.trunc((event.clientX - startX) / 26);
+      if (step !== lastStep) {
+        showFrame(index + step - lastStep);
+        lastStep = step;
+      }
+    });
+
+    function stopDragging() {
+      dragging = false;
+      lastStep = 0;
+    }
+
+    stage.addEventListener('pointerup', stopDragging);
+    stage.addEventListener('pointercancel', stopDragging);
+    stage.addEventListener('lostpointercapture', stopDragging);
+
+    if (frames.length < 2) {
+      viewer.classList.add('is-static');
+      var instruction = viewer.querySelector('[data-360-instruction]');
+      if (instruction) instruction.textContent = 'Interactive view';
+    }
+
+    showFrame(0);
+  }
+
   function initBuilder(root) {
+    root.querySelectorAll('[data-360-viewer]').forEach(initViewer);
+
     root.querySelectorAll('[data-option-button]').forEach(function (button) {
       button.setAttribute('aria-pressed', button.classList.contains('is-selected') ? 'true' : 'false');
       button.addEventListener('click', function () {
