@@ -166,7 +166,25 @@
           {% assign head_titles = '4-Prong Nouveau|6-Prong Nouveau|Classic Basket|Diamond Basket|Surprise Diamond|6-Prong Diamond|Diamond Tulip|Classic Halo|Floral Halo|Hidden Halo|Dual Halo|Fancy Halo|Clustered Diamond|Vintage Trefoil|Classic Bezel' | split: '|' %}
           {% for title in head_titles %}
             <button type="button" class="jkb__visual-card jkb__style-card{% if title == 'Diamond Tulip' %} is-selected{% endif %}" data-option-button data-group="Head Style" data-value="{{ title }}" data-price="{% if title contains 'Halo' or title contains 'Diamond' %}28000{% else %}0{% endif %}">
-              <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M17 19 32 9l15 10-5 19-10 15-10-15Z"></path><path d="M17 19h30M22 38h20M24 19l8 34 8-34"></path>{% if title contains 'Halo' or title contains 'Diamond' %}<circle cx="15" cy="25" r="2"></circle><circle cx="49" cy="25" r="2"></circle><circle cx="32" cy="7" r="2"></circle>{% endif %}</svg>
+              <svg viewBox="0 0 72 72" aria-hidden="true">
+                {% case title %}
+                  {% when '4-Prong Nouveau' %}<path d="M18 24 36 12l18 12-8 27H26Z"></path><path d="M18 24h36M27 24l9 27 9-27M23 18l5 9M49 18l-5 9"></path><circle cx="36" cy="12" r="3"></circle>
+                  {% when '6-Prong Nouveau' %}<path d="M17 25 36 11l19 14-8 27H25Z"></path><path d="M17 25h38M26 18l5 12M46 18l-5 12M28 25l8 27 8-27"></path><circle cx="36" cy="11" r="3"></circle><circle cx="18" cy="25" r="2"></circle><circle cx="54" cy="25" r="2"></circle>
+                  {% when 'Classic Basket' %}<path d="M16 26h40l-7 22H23Z"></path><path d="M21 32h30M26 26v22M46 26v22M30 18 36 9l6 9"></path><path d="M24 20h24"></path>
+                  {% when 'Diamond Basket' %}<path d="M15 27h42l-8 22H23Z"></path><path d="M22 34h28M27 27v22M45 27v22M29 19 36 9l7 10"></path><circle cx="20" cy="32" r="2"></circle><circle cx="52" cy="32" r="2"></circle><circle cx="36" cy="48" r="2"></circle>
+                  {% when 'Surprise Diamond' %}<path d="M18 25h36l-7 25H25Z"></path><path d="M26 25l10 25 10-25M29 18 36 9l7 9"></path><circle cx="36" cy="34" r="4"></circle><path d="m33 34 3-3 3 3-3 3Z"></path>
+                  {% when '6-Prong Diamond' %}<path d="M17 25 36 11l19 14-8 26H25Z"></path><path d="M24 19l7 11M48 19l-7 11M28 25l8 26 8-26"></path><circle cx="17" cy="25" r="2"></circle><circle cx="55" cy="25" r="2"></circle><circle cx="36" cy="50" r="2"></circle>
+                  {% when 'Diamond Tulip' %}<path d="M17 24c8 1 13 7 19 27 6-20 11-26 19-27"></path><path d="M24 18c5 5 9 10 12 33 3-23 7-28 12-33M24 18 36 9l12 9"></path><circle cx="19" cy="26" r="2"></circle><circle cx="53" cy="26" r="2"></circle><circle cx="36" cy="50" r="2"></circle>
+                  {% when 'Classic Halo' %}<ellipse cx="36" cy="31" rx="20" ry="17"></ellipse><ellipse cx="36" cy="31" rx="13" ry="11"></ellipse><path d="M26 48 36 61l10-13"></path><circle cx="16" cy="31" r="2"></circle><circle cx="56" cy="31" r="2"></circle><circle cx="36" cy="14" r="2"></circle>
+                  {% when 'Floral Halo' %}<path d="M36 10c4 7 8 10 15 8-2 7 1 11 8 14-7 3-10 7-8 14-7-2-11 1-15 8-4-7-8-10-15-8 2-7-1-11-8-14 7-3 10-7 8-14 7 2 11-1 15-8Z"></path><ellipse cx="36" cy="32" rx="11" ry="14"></ellipse>
+                  {% when 'Hidden Halo' %}<path d="M18 22h36M22 27c4 5 8 12 14 25 6-13 10-20 14-25"></path><ellipse cx="36" cy="22" rx="18" ry="6"></ellipse><path d="M25 16 36 8l11 8"></path><circle cx="22" cy="23" r="1.8"></circle><circle cx="50" cy="23" r="1.8"></circle>
+                  {% when 'Dual Halo' %}<ellipse cx="36" cy="31" rx="22" ry="19"></ellipse><ellipse cx="36" cy="31" rx="16" ry="13"></ellipse><ellipse cx="36" cy="31" rx="10" ry="8"></ellipse><path d="M28 50 36 61l8-11"></path>
+                  {% when 'Fancy Halo' %}<path d="M36 8 56 23l-7 27-13 12-13-12-7-27Z"></path><path d="M36 16 48 26l-4 17-8 8-8-8-4-17Z"></path><circle cx="36" cy="8" r="2"></circle><circle cx="55" cy="24" r="2"></circle><circle cx="17" cy="24" r="2"></circle>
+                  {% when 'Clustered Diamond' %}<circle cx="36" cy="29" r="10"></circle><circle cx="24" cy="25" r="6"></circle><circle cx="48" cy="25" r="6"></circle><circle cx="29" cy="40" r="6"></circle><circle cx="43" cy="40" r="6"></circle><path d="M29 47 36 61l7-14"></path>
+                  {% when 'Vintage Trefoil' %}<circle cx="36" cy="24" r="10"></circle><circle cx="25" cy="32" r="8"></circle><circle cx="47" cy="32" r="8"></circle><path d="M28 40 36 59l8-19M21 45h30"></path><circle cx="36" cy="24" r="3"></circle>
+                  {% else %}<path d="M25 11h22l11 11v20L47 53H25L14 42V22Z"></path><path d="M28 17h16l8 8v14l-8 8H28l-8-8V25Z"></path><path d="M29 53 36 62l7-9"></path>
+                {% endcase %}
+              </svg>
               <span>{{ title }}</span>
             </button>
           {% endfor %}
@@ -201,17 +219,37 @@
           {% assign band_titles = 'Solitaire|Knife Edge Solitaire|Split Ring Solitaire|French Pavé|Cathedral Pavé|Triple Row Pavé|Round Channel|Baguette Channel|Floating Station|Alternating Marquise|Three Stone|Knife Edge Pavé|Floral Bypass|Twist Pavé|Alternating Baguette' | split: '|' %}
           {% for title in band_titles %}
             <button type="button" class="jkb__visual-card jkb__style-card jkb__band-card{% if title == 'Knife Edge Solitaire' %} is-selected{% endif %}" data-option-button data-group="Band Style" data-value="{{ title }}" data-price="{% if title contains 'Pavé' or title contains 'Channel' or title contains 'Baguette' or title contains 'Three Stone' %}32000{% else %}0{% endif %}">
-              <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M7 49c12-28 38-28 50 0"></path><path d="M13 49c10-20 28-20 38 0"></path>{% if title contains 'Pavé' or title contains 'Channel' or title contains 'Baguette' %}<path d="M18 36h28" stroke-dasharray="3 4"></path>{% endif %}{% if title contains 'Split' or title contains 'Triple' %}<path d="M11 45c13-20 29-20 42 0"></path>{% endif %}</svg>
+              <svg viewBox="0 0 72 72" aria-hidden="true">
+                {% case title %}
+                  {% when 'Solitaire' %}<path d="M8 56c10-36 46-36 56 0"></path><path d="M15 56c9-25 33-25 42 0"></path><path d="M34 26h4"></path>
+                  {% when 'Knife Edge Solitaire' %}<path d="M8 57c11-38 45-38 56 0"></path><path d="M15 57c9-25 33-25 42 0"></path><path d="M36 24v33M30 28l6-7 6 7"></path>
+                  {% when 'Split Ring Solitaire' %}<path d="M7 57c9-35 37-39 58-5"></path><path d="M15 57c7-23 27-29 42-5M12 50c13-23 34-26 49-4"></path><path d="M34 24h4"></path>
+                  {% when 'French Pavé' %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0"></path><path d="M20 43h32" stroke-dasharray="1 5"></path><path d="m23 40 3 6 3-6 3 6 3-6 3 6 3-6 3 6"></path>
+                  {% when 'Cathedral Pavé' %}<path d="M7 57c10-35 47-35 58 0M15 57c8-23 34-23 42 0"></path><path d="M20 46c4-13 10-19 16-22 6 3 12 9 16 22"></path><path d="M23 44h26" stroke-dasharray="1 5"></path>
+                  {% when 'Triple Row Pavé' %}<path d="M7 58c10-38 48-38 58 0M12 58c10-31 38-31 48 0M17 58c9-23 29-23 38 0"></path><path d="M20 45h32" stroke-dasharray="1 4"></path>
+                  {% when 'Round Channel' %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0"></path><circle cx="23" cy="43" r="2"></circle><circle cx="30" cy="38" r="2"></circle><circle cx="36" cy="37" r="2"></circle><circle cx="42" cy="38" r="2"></circle><circle cx="49" cy="43" r="2"></circle>
+                  {% when 'Baguette Channel' %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0"></path><path d="m21 42 4-2 2 5-4 2Zm9-5h5v6h-5Zm10 0h5v6h-5Zm7 3 4 2-2 5-4-2Z"></path>
+                  {% when 'Floating Station' %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0"></path><circle cx="21" cy="45" r="3"></circle><circle cx="36" cy="36" r="3"></circle><circle cx="51" cy="45" r="3"></circle>
+                  {% when 'Alternating Marquise' %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0"></path><path d="M20 45s4-5 7 0c-3 5-7 0-7 0Zm12-8s4-5 8 0c-4 5-8 0-8 0Zm13 8s4-5 7 0c-3 5-7 0-7 0Z"></path>
+                  {% when 'Three Stone' %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0"></path><circle cx="27" cy="32" r="5"></circle><circle cx="36" cy="27" r="7"></circle><circle cx="45" cy="32" r="5"></circle>
+                  {% when 'Knife Edge Pavé' %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0M36 25v32"></path><path d="M20 44h32" stroke-dasharray="1 5"></path>
+                  {% when 'Floral Bypass' %}<path d="M8 57c14-35 29-20 38-35M64 57C50 22 35 37 26 22"></path><path d="M28 25c2-8 14-8 16 0-2 8-14 8-16 0Z"></path><circle cx="36" cy="25" r="3"></circle>
+                  {% when 'Twist Pavé' %}<path d="M8 57c16-34 38-13 56-35M8 22c18 22 40 2 56 35"></path><path d="M18 43c8-7 12-8 20-4" stroke-dasharray="1 4"></path>
+                  {% else %}<path d="M8 57c10-36 46-36 56 0M15 57c9-25 33-25 42 0"></path><path d="m20 44 5-3 3 6 5-5 4 6 5-6 4 6 5-5"></path>
+                {% endcase %}
+              </svg>
               <span>{{ title }}</span>
             </button>
           {% endfor %}
         </div>
       </section>
 
-      <div class="jkb__service-lines">
-        <p><strong>Made to order in 12–15 business days</strong></p>
-        <p>Insured delivery · Free resizing</p>
-        <p>IGI/GIA certificate available with eligible stones</p>
+      <div class="jkb__trust-list" aria-label="Joyari service assurances">
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v12H4zM8 7V5h8v2M4 11h16"></path></svg><span><strong>12–15 business days</strong>Made to order for you</span></div>
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path></svg><span><strong>Insured delivery</strong>Tracked from atelier to arrival</span></div>
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M12 7v5l3 2M18 3v5h5"></path></svg><span><strong>Free resizing</strong>Thoughtful aftercare included</span></div>
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM15 3v4h4M9 12l2 2 4-4"></path></svg><span><strong>IGI/GIA certificate</strong>Available with eligible stones</span></div>
+        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v14H4zM8 9h8M8 13h5M16 16l2 2 3-4"></path></svg><span><strong>CAD preview</strong>Approve proportions before production</span></div>
       </div>
 
       {% if builder_product != blank and selected_variant != blank %}
