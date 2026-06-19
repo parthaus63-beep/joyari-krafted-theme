@@ -281,49 +281,49 @@
       </button>
     </div>
 
-    <nav class="jk-mobile-menu jk-mobile-menu--curated" aria-label="Mobile navigation links">
-      {% liquid
-        assign mobile_titles = 'Engagement Rings|Wedding Bands|Earrings|Bracelets|Necklaces|Custom Design|Education|About|Contact' | split: '|'
-      %}
+    <nav class="jk-mobile-menu" aria-label="Mobile navigation links">
+      {% if primary_menu.links.size > 0 %}
+        {% for link in primary_menu.links %}
+          {% liquid
+            assign mobile_submenu_id = 'JoyariMobileSubmenu-' | append: section.id | append: '-' | append: forloop.index
+          %}
 
-      {% for mobile_title in mobile_titles %}
-        {% liquid
-          assign mobile_title_handle = mobile_title | handleize
-          assign mobile_url = blank
+          {% if link.links.size > 0 %}
+            <div class="jk-mobile-menu-group" data-mobile-menu-group>
+              <button
+                type="button"
+                class="jk-mobile-menu__link jk-mobile-menu__link--parent"
+                aria-expanded="false"
+                aria-controls="{{ mobile_submenu_id }}"
+                data-mobile-submenu-toggle
+              >
+                <span>{{ link.title }}</span>
+                <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
+              </button>
 
-          for link in primary_menu.links
-            assign link_handle = link.title | handleize
-            if link_handle == mobile_title_handle
-              assign mobile_url = link.url
-            endif
-          endfor
-
-          if mobile_url == blank
-            case mobile_title_handle
-              when 'engagement-rings'
-                assign mobile_url = '/collections/engagement-rings'
-              when 'wedding-bands'
-                assign mobile_url = '/collections/wedding-bands'
-              when 'earrings'
-                assign mobile_url = '/collections/earrings'
-              when 'bracelets'
-                assign mobile_url = '/collections/bracelets'
-              when 'necklaces'
-                assign mobile_url = '/collections/necklaces'
-              when 'custom-design'
-                assign mobile_url = '/pages/custom-design'
-              when 'education'
-                assign mobile_url = '/pages/education'
-              when 'about'
-                assign mobile_url = '/pages/about-us'
-              when 'contact'
-                assign mobile_url = '/pages/contact'
-            endcase
-          endif
-        %}
-
-        <a href="{{ mobile_url }}" class="jk-mobile-menu__link" data-nav-link data-menu-link>{{ mobile_title }}</a>
-      {% endfor %}
+              <div id="{{ mobile_submenu_id }}" class="jk-mobile-submenu" hidden data-mobile-submenu>
+                <a class="jk-mobile-submenu__all" href="{{ link.url }}" data-nav-link data-menu-link>View all {{ link.title }}</a>
+                {% for child_link in link.links %}
+                  {% if child_link.links.size > 0 %}
+                    <div class="jk-mobile-submenu__group">
+                      <a class="jk-mobile-submenu__heading" href="{{ child_link.url }}" data-nav-link data-menu-link>{{ child_link.title }}</a>
+                      <div class="jk-mobile-submenu__children">
+                        {% for grandchild_link in child_link.links %}
+                          <a href="{{ grandchild_link.url }}" data-nav-link data-menu-link>{{ grandchild_link.title }}</a>
+                        {% endfor %}
+                      </div>
+                    </div>
+                  {% else %}
+                    <a href="{{ child_link.url }}" data-nav-link data-menu-link>{{ child_link.title }}</a>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <a href="{{ link.url }}" class="jk-mobile-menu__link" data-nav-link data-menu-link>{{ link.title }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     </nav>
 
     <div class="jk-mobile-drawer__utility">
