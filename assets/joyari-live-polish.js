@@ -27,19 +27,19 @@
         title: 'Engagement Rings',
         badge: 'Bridal Icons',
         summary: 'Explore refined centre-stone rings made for the proposal moment.',
-        href: '/collections/engagement-rings'
+        href: '/collections/engagement-ring'
       },
       {
         title: 'Wedding Bands',
         badge: 'Forever Pieces',
         summary: 'Discover elegant bands designed to stack, contour, or shine alone.',
-        href: '/collections/wedding-bands'
+        href: '/collections/wedding-rings'
       },
       {
         title: 'Diamond Jewellery',
         badge: 'Fine Jewellery',
         summary: 'Shop luminous diamond pieces for meaningful everyday wear.',
-        href: '/collections/diamond-jewellery'
+        href: '/collections/fine-jewelry'
       },
       {
         title: 'Custom Design',

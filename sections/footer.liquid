@@ -1,9 +1,12 @@
 {% liquid
-  assign engagement_rings_url = routes.collections_url | append: '/engagement-rings'
-  assign wedding_bands_url = routes.collections_url | append: '/wedding-bands'
-  assign jewellery_url = routes.collections_url | append: '/jewellery'
-  assign loose_diamonds_url = routes.collections_url | append: '/loose-diamonds'
-  assign design_ring_page = pages['design-your-ring']
+  assign engagement_rings_url = routes.collections_url | append: '/engagement-ring'
+  assign wedding_bands_url = routes.collections_url | append: '/wedding-rings'
+  assign jewellery_url = routes.collections_url | append: '/fine-jewelry'
+  assign loose_diamonds_url = pages['custom-design'].url
+  if loose_diamonds_url == blank
+    assign loose_diamonds_url = routes.all_products_collection_url
+  endif
+  assign design_ring_page = pages['custom-design']
   assign design_ring_url = design_ring_page.url
   if design_ring_url == blank
     assign design_ring_url = routes.all_products_collection_url
@@ -87,13 +90,13 @@
         <a href="{{ loose_diamonds_url }}">Diamonds</a>
         <a href="{{ loose_diamonds_url }}">Loose Diamonds</a>
         <a href="{{ design_ring_url }}">Custom Design</a>
-        <a href="/pages/about">The Atelier</a>
+        <a href="/pages/about-us">The Atelier</a>
       {% endif %}
     </div>
     <div>
       <h3>Client Care</h3>
       <a href="/pages/contact">Contact</a>
-      <a href="/pages/shipping-returns">Shipping & Returns</a>
+      <a href="/pages/contact">Shipping & Returns</a>
       <span>Sizing and care guidance</span>
     </div>
     <div>
