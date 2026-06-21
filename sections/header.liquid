@@ -7,6 +7,18 @@
     assign primary_menu = linklists['main-menu']
   endif
 
+  assign has_about_nav = false
+  assign has_contact_nav = false
+  for menu_link in primary_menu.links
+    assign menu_link_handle = menu_link.title | handleize
+    if menu_link_handle == 'about' or menu_link_handle == 'about-us'
+      assign has_about_nav = true
+    endif
+    if menu_link_handle == 'contact' or menu_link_handle == 'contact-us'
+      assign has_contact_nav = true
+    endif
+  endfor
+
   assign brand_label = section.settings.logo_text | default: settings.brand_name | default: shop.name
   assign wishlist_url = routes.root_url
   assign has_wishlist_link = false
@@ -172,6 +184,12 @@
           {% endif %}
         {% endfor %}
       {% endif %}
+      {% unless has_about_nav %}
+        <a href="/pages/about-us" class="jk-nav__link" data-menu-link>About</a>
+      {% endunless %}
+      {% unless has_contact_nav %}
+        <a href="/pages/contact" class="jk-nav__link" data-menu-link>Contact</a>
+      {% endunless %}
     </nav>
 
     <div class="jk-header__actions">
@@ -338,6 +356,12 @@
           {% endif %}
         {% endfor %}
       {% endif %}
+      {% unless has_about_nav %}
+        <a href="/pages/about-us" class="jk-mobile-menu__link" data-nav-link data-menu-link>About</a>
+      {% endunless %}
+      {% unless has_contact_nav %}
+        <a href="/pages/contact" class="jk-mobile-menu__link" data-nav-link data-menu-link>Contact</a>
+      {% endunless %}
     </nav>
 
     <div class="jk-mobile-drawer__utility">
