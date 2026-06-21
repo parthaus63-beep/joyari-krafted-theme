@@ -1,0 +1,147 @@
+{% doc %}
+Outputs a storefront-safe URL for a Shopify navigation link, with Joyari fallbacks for stale collection and page handles.
+
+@param {link} link - Shopify navigation link object
+
+@example
+{% render 'joyari-safe-nav-url', link: link %}
+{% enddoc %}
+{%- liquid
+  assign resolved_url = link.url
+  assign link_title_handle = link.title | handleize
+  assign needs_fallback = false
+
+  if resolved_url == blank or resolved_url == '#' or resolved_url contains 'javascript:'
+    assign needs_fallback = true
+  endif
+
+  if resolved_url contains '/collections/'
+    assign collection_handle = resolved_url | split: '/collections/' | last | split: '?' | first | split: '/' | first
+    if collections[collection_handle] == blank
+      assign needs_fallback = true
+    endif
+  endif
+
+  if resolved_url contains '/pages/'
+    assign page_handle = resolved_url | split: '/pages/' | last | split: '?' | first | split: '/' | first
+    if pages[page_handle] == blank
+      assign needs_fallback = true
+    endif
+  endif
+
+  if needs_fallback
+    case link_title_handle
+      when 'engagement-rings'
+        assign resolved_url = '/collections/engagement-ring'
+      when 'solitaire-rings'
+        assign resolved_url = '/collections/solitaire-moissanite-engagement-rings'
+      when 'hidden-halo-rings'
+        assign resolved_url = '/collections/halo-moissanite-engagement-rings'
+      when 'halo-rings'
+        assign resolved_url = '/collections/halo-moissanite-engagement-rings'
+      when 'three-stone-rings'
+        assign resolved_url = '/collections/three-stone-moissanite-engagement-ring'
+      when 'oval-engagement-rings'
+        assign resolved_url = '/collections/engagement-ring'
+      when 'emerald-cut-engagement-rings'
+        assign resolved_url = '/collections/engagement-ring'
+      when 'custom-engagement-rings'
+        assign resolved_url = '/pages/custom-design'
+      when 'wedding-bands'
+        assign resolved_url = '/collections/wedding-rings'
+      when 'womens-wedding-bands'
+        assign resolved_url = '/collections/classic-wedding-bands'
+      when 'men-s-wedding-bands'
+        assign resolved_url = '/collections/mens-moissanite-wedding-bands'
+      when 'diamond-wedding-bands'
+        assign resolved_url = '/collections/classic-wedding-bands'
+      when 'plain-gold-bands'
+        assign resolved_url = '/collections/classic-wedding-bands'
+      when 'eternity-bands'
+        assign resolved_url = '/collections/moissanite-eternity-wedding-bands'
+      when 'earrings'
+        assign resolved_url = '/collections/moissanite-earrings'
+      when 'stud-earrings'
+        assign resolved_url = '/collections/moissanite-earrings'
+      when 'hoop-earrings'
+        assign resolved_url = '/collections/moissanite-earrings'
+      when 'drop-earrings'
+        assign resolved_url = '/collections/moissanite-earrings'
+      when 'huggie-earrings'
+        assign resolved_url = '/collections/moissanite-earrings'
+      when 'bracelets'
+        assign resolved_url = '/collections/moissanite-bracelet'
+      when 'tennis-bracelets'
+        assign resolved_url = '/collections/moissanite-bracelet'
+      when 'bangles'
+        assign resolved_url = '/collections/moissanite-bracelet'
+      when 'cuban-link-bracelets'
+        assign resolved_url = '/collections/moissanite-bracelet'
+      when 'diamond-bracelets'
+        assign resolved_url = '/collections/lab-grown-diamond-bracelets'
+      when 'necklaces'
+        assign resolved_url = '/collections/moissanite-pendants'
+      when 'solitaire-pendants'
+        assign resolved_url = '/collections/moissanite-pendants'
+      when 'tennis-necklaces'
+        assign resolved_url = '/collections/moissanite-pendants'
+      when 'chain-necklaces'
+        assign resolved_url = '/collections/moissanite-pendants'
+      when 'initial-necklaces'
+        assign resolved_url = '/collections/moissanite-pendants'
+      when 'diamonds'
+        assign resolved_url = '/pages/custom-design'
+      when 'loose-diamonds'
+        assign resolved_url = '/pages/custom-design'
+      when 'lab-grown-diamonds'
+        assign resolved_url = '/pages/custom-design'
+      when 'natural-diamonds'
+        assign resolved_url = '/pages/custom-design'
+      when 'coloured-diamonds'
+        assign resolved_url = '/pages/custom-design'
+      when 'diamond-shapes'
+        assign resolved_url = '/pages/education'
+      when 'diamond-education'
+        assign resolved_url = '/pages/education'
+      when 'custom-design'
+        assign resolved_url = '/pages/custom-design'
+      when 'design-your-ring'
+        assign resolved_url = '/pages/custom-design'
+      when 'bespoke-jewellery'
+        assign resolved_url = '/pages/custom-design'
+      when 'book-consultation'
+        assign resolved_url = '/pages/contact'
+      when 'request-a-quote'
+        assign resolved_url = '/pages/contact'
+      when 'education'
+        assign resolved_url = '/pages/education'
+      when 'lab-grown-vs-natural-diamonds'
+        assign resolved_url = '/pages/education'
+      when '4cs-guide'
+        assign resolved_url = '/pages/education'
+      when 'ring-size-guide'
+        assign resolved_url = '/pages/ring-size-guide'
+      when 'metal-guide'
+        assign resolved_url = '/pages/metal-guide'
+      when 'jewellery-care'
+        assign resolved_url = '/pages/education'
+      when 'faqs'
+        assign resolved_url = '/pages/contact'
+      when 'about'
+        assign resolved_url = '/pages/about-us'
+      when 'the-atelier'
+        assign resolved_url = '/pages/about-us'
+      when 'contact'
+        assign resolved_url = '/pages/contact'
+      else
+        if resolved_url contains '/pages/'
+          assign resolved_url = '/pages/education'
+        elsif resolved_url contains '/collections/'
+          assign resolved_url = routes.all_products_collection_url
+        else
+          assign resolved_url = routes.root_url
+        endif
+    endcase
+  endif
+-%}
+{{- resolved_url -}}

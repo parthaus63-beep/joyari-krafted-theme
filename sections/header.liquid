@@ -154,11 +154,13 @@
           {% liquid
             assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
           %}
+          {% capture safe_link_url %}{% render 'joyari-safe-nav-url', link: link %}{% endcapture %}
+          {% assign safe_link_url = safe_link_url | strip %}
 
           {% if link.links.size > 0 %}
             <div class="jk-nav__item jk-nav__item--dropdown" data-desktop-dropdown data-desktop-dropdown-target="{{ desktop_dropdown_id }}">
               <div class="jk-nav__parent">
-                <a href="{{ link.url }}" class="jk-nav__link" data-desktop-dropdown-link data-menu-link>{{ link.title }}</a>
+                <a href="{{ safe_link_url }}" class="jk-nav__link" data-desktop-dropdown-link data-menu-link>{{ link.title }}</a>
                 <button class="jk-nav__dropdown-toggle" type="button" aria-expanded="false" aria-controls="{{ desktop_dropdown_id }}" data-desktop-dropdown-toggle>
                   <span class="visually-hidden">Open {{ link.title }} menu</span>
                   <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5l5-5"></path></svg>
@@ -166,7 +168,7 @@
               </div>
             </div>
           {% else %}
-            <a href="{{ link.url }}" class="jk-nav__link" data-menu-link>{{ link.title }}</a>
+            <a href="{{ safe_link_url }}" class="jk-nav__link" data-menu-link>{{ link.title }}</a>
           {% endif %}
         {% endfor %}
       {% endif %}
@@ -234,27 +236,33 @@
         {% liquid
           assign desktop_dropdown_id = 'JoyariDesktopNav-' | append: section.id | append: '-' | append: forloop.index
         %}
+        {% capture safe_link_url %}{% render 'joyari-safe-nav-url', link: link %}{% endcapture %}
+        {% assign safe_link_url = safe_link_url | strip %}
 
         <div id="{{ desktop_dropdown_id }}" class="jk-nav-dropdown" aria-label="{{ link.title }} menu" aria-hidden="true" data-desktop-dropdown-panel>
           <div class="jk-nav-dropdown__panel">
             <div class="jk-nav-dropdown__header">
               <span class="jk-nav-dropdown__eyebrow">Joyari Krafted</span>
-              <a class="jk-nav-dropdown__title" href="{{ link.url }}" data-menu-link>View all {{ link.title }}</a>
+              <a class="jk-nav-dropdown__title" href="{{ safe_link_url }}" data-menu-link>View all {{ link.title }}</a>
             </div>
 
             <div class="jk-nav-dropdown__inner">
               {% for child_link in link.links %}
+                {% capture safe_child_link_url %}{% render 'joyari-safe-nav-url', link: child_link %}{% endcapture %}
+                {% assign safe_child_link_url = safe_child_link_url | strip %}
                 {% if child_link.links.size > 0 %}
                   <div class="jk-nav-dropdown__group">
-                    <a class="jk-nav-dropdown__heading" href="{{ child_link.url }}" data-menu-link>{{ child_link.title }}</a>
+                    <a class="jk-nav-dropdown__heading" href="{{ safe_child_link_url }}" data-menu-link>{{ child_link.title }}</a>
                     <div class="jk-nav-dropdown__children">
                       {% for grandchild_link in child_link.links %}
-                        <a class="jk-nav-dropdown__link" href="{{ grandchild_link.url }}" data-menu-link>{{ grandchild_link.title }}</a>
+                        {% capture safe_grandchild_link_url %}{% render 'joyari-safe-nav-url', link: grandchild_link %}{% endcapture %}
+                        {% assign safe_grandchild_link_url = safe_grandchild_link_url | strip %}
+                        <a class="jk-nav-dropdown__link" href="{{ safe_grandchild_link_url }}" data-menu-link>{{ grandchild_link.title }}</a>
                       {% endfor %}
                     </div>
                   </div>
                 {% else %}
-                  <a class="jk-nav-dropdown__link" href="{{ child_link.url }}" data-menu-link>{{ child_link.title }}</a>
+                  <a class="jk-nav-dropdown__link" href="{{ safe_child_link_url }}" data-menu-link>{{ child_link.title }}</a>
                 {% endif %}
               {% endfor %}
             </div>
@@ -287,6 +295,8 @@
           {% liquid
             assign mobile_submenu_id = 'JoyariMobileSubmenu-' | append: section.id | append: '-' | append: forloop.index
           %}
+          {% capture safe_link_url %}{% render 'joyari-safe-nav-url', link: link %}{% endcapture %}
+          {% assign safe_link_url = safe_link_url | strip %}
 
           {% if link.links.size > 0 %}
             <div class="jk-mobile-menu-group" data-mobile-menu-group>
@@ -302,25 +312,29 @@
               </button>
 
               <div id="{{ mobile_submenu_id }}" class="jk-mobile-submenu" hidden data-mobile-submenu>
-                <a class="jk-mobile-submenu__all" href="{{ link.url }}" data-nav-link data-menu-link>View all {{ link.title }}</a>
+                <a class="jk-mobile-submenu__all" href="{{ safe_link_url }}" data-nav-link data-menu-link>View all {{ link.title }}</a>
                 {% for child_link in link.links %}
+                  {% capture safe_child_link_url %}{% render 'joyari-safe-nav-url', link: child_link %}{% endcapture %}
+                  {% assign safe_child_link_url = safe_child_link_url | strip %}
                   {% if child_link.links.size > 0 %}
                     <div class="jk-mobile-submenu__group">
-                      <a class="jk-mobile-submenu__heading" href="{{ child_link.url }}" data-nav-link data-menu-link>{{ child_link.title }}</a>
+                      <a class="jk-mobile-submenu__heading" href="{{ safe_child_link_url }}" data-nav-link data-menu-link>{{ child_link.title }}</a>
                       <div class="jk-mobile-submenu__children">
                         {% for grandchild_link in child_link.links %}
-                          <a href="{{ grandchild_link.url }}" data-nav-link data-menu-link>{{ grandchild_link.title }}</a>
+                          {% capture safe_grandchild_link_url %}{% render 'joyari-safe-nav-url', link: grandchild_link %}{% endcapture %}
+                          {% assign safe_grandchild_link_url = safe_grandchild_link_url | strip %}
+                          <a href="{{ safe_grandchild_link_url }}" data-nav-link data-menu-link>{{ grandchild_link.title }}</a>
                         {% endfor %}
                       </div>
                     </div>
                   {% else %}
-                    <a href="{{ child_link.url }}" data-nav-link data-menu-link>{{ child_link.title }}</a>
+                    <a href="{{ safe_child_link_url }}" data-nav-link data-menu-link>{{ child_link.title }}</a>
                   {% endif %}
                 {% endfor %}
               </div>
             </div>
           {% else %}
-            <a href="{{ link.url }}" class="jk-mobile-menu__link" data-nav-link data-menu-link>{{ link.title }}</a>
+            <a href="{{ safe_link_url }}" class="jk-mobile-menu__link" data-nav-link data-menu-link>{{ link.title }}</a>
           {% endif %}
         {% endfor %}
       {% endif %}
