@@ -21,8 +21,11 @@
 
   function normaliseStaleStorefrontLinks() {
     var routeMap = {
-      '/collections/engagement-rings': '/collections/engagement-ring',
-      '/collections/wedding-bands': '/collections/wedding-rings',
+      '/collections/engagement-ring': '/collections/engagement-rings',
+      '/collections/wedding-rings': '/collections/wedding-bands',
+      '/collections/moissanite-earrings': '/collections/earrings',
+      '/collections/moissanite-bracelet': '/collections/bracelets',
+      '/collections/moissanite-pendants': '/collections/necklaces',
       '/collections/diamond-jewellery': '/collections/fine-jewelry',
       '/collections/jewellery': '/collections/fine-jewelry',
       '/collections/loose-diamonds': '/pages/custom-design',
@@ -1087,13 +1090,13 @@
         title: 'Engagement Rings',
         badge: 'Bridal Icons',
         summary: 'Explore refined centre-stone rings made for the proposal moment.',
-        href: '/collections/engagement-ring'
+        href: '/collections/engagement-rings'
       },
       {
         title: 'Wedding Bands',
         badge: 'Forever Pieces',
         summary: 'Discover elegant bands designed to stack, contour, or shine alone.',
-        href: '/collections/wedding-rings'
+        href: '/collections/wedding-bands'
       },
       {
         title: 'Diamond Jewellery',
