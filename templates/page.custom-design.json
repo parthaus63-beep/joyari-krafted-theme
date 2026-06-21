@@ -11,18 +11,7 @@
   "sections": {
     "custom_ring_builder": {
       "type": "custom-ring-builder",
-      "settings": {
-        "checkout_variant_id": "44134959317035",
-        "base_price": 280000,
-        "back_link": "/collections/engagement-rings",
-        "consultation_link": "/pages/contact",
-        "request_link": "/pages/contact",
-        "preview_image_alt": "Joyari Krafted custom engagement ring",
-        "sequence_frame_1": "shopify://shop_images/lucid-origin_Luxury_round_diamond_floating_on_white_background_ultra_realistic_jewellery_rend-0.jpg",
-        "sequence_frame_2": "shopify://shop_images/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0.jpg",
-        "sequence_frame_3": "shopify://shop_images/lucid-origin_Luxury_round_diamond_tilted_sideways_visible_crown_and_pavilion_realistic_perspe-0_83d75022-e1c1-4194-845f-bbe2d78cc139.jpg",
-        "sequence_frame_4": "shopify://shop_images/lucid-origin_Luxury_round_brilliant_diamond_rotated_slightly_to_the_left_visible_crown_and_pa-0.jpg"
-      }
+      "settings": {}
     }
   },
   "order": [

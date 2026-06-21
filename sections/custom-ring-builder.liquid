@@ -1,312 +1,43 @@
 {{ 'custom-ring-builder.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'custom-ring-builder.js' | asset_url }}" defer></script>
 
-{% liquid
-  assign builder_product = section.settings.checkout_product
-  assign selected_variant = blank
-  if builder_product != blank
-    assign selected_variant = builder_product.selected_or_first_available_variant
-  endif
-  assign checkout_variant_id = section.settings.checkout_variant_id | strip
-  assign base_price = section.settings.base_price | default: 280000
-%}
-
-<section
-  class="jkb"
-  data-custom-ring-builder
-  data-base-price="{{ base_price }}"
-  data-money-format="{{ shop.money_format | escape }}"
-  data-section-id="{{ section.id }}"
->
-  <div class="jkb__workspace" id="JoyariRingBuilder-{{ section.id }}">
-    <div class="jkb__gallery-column" aria-label="Ring Gallery">
-      <div class="jkb__gallery-tools">
-        <a href="{{ section.settings.back_link | default: routes.all_products_collection_url }}" class="jkb__back-link">
-          <span aria-hidden="true">‹</span> Back to Gallery
-        </a>
-        <button type="button" class="jkb__share" data-builder-share aria-label="Share this ring design">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m0 0L7 8m5-5 5 5M5 13v7h14v-7"></path></svg>
-          Share
-        </button>
-      </div>
-
-      <div class="jkb__viewer" data-ring-viewer aria-label="Selected ring preview">
-        <div class="jkb__viewer-stage" data-viewer-stage>
-          <img
-            class="jkb__viewer-image"
-            src="{{ 'joyari-ring-360-01.webp' | asset_url }}"
-            width="1200"
-            height="1200"
-            loading="eager"
-            alt="{{ section.settings.preview_image_alt | escape }}"
-            data-viewer-image
-          >
-          <video class="jkb__viewer-video" data-viewer-video playsinline controls preload="metadata" hidden></video>
-
-          <div class="jkb__viewer-frames" hidden data-360-frames>
-            {% for index in (1..36) %}
-              {% if index < 10 %}
-                {% assign frame_number = index | prepend: '0' %}
-              {% else %}
-                {% assign frame_number = index %}
-              {% endif %}
-              {% capture frame_asset %}joyari-ring-360-{{ frame_number }}.webp{% endcapture %}
-              <span data-360-frame="{{ frame_asset | asset_url }}"></span>
-            {% endfor %}
-          </div>
-
-          <span class="jkb__viewer-badge" aria-hidden="true">360°</span>
-          <button type="button" class="jkb__viewer-arrow jkb__viewer-arrow--previous" data-360-previous aria-label="Previous angle">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"></path></svg>
-          </button>
-          <button type="button" class="jkb__viewer-arrow jkb__viewer-arrow--next" data-360-next aria-label="Next angle">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"></path></svg>
-          </button>
-        </div>
-      </div>
-
-      <div class="jkb__media-thumbnails" aria-label="Ring media">
-        <button type="button" class="jkb__media-thumbnail is-active" data-gallery-media="360" aria-pressed="true">
-          <img src="{{ 'joyari-ring-360-01.webp' | asset_url }}" width="320" height="320" loading="eager" alt="Interactive ring view">
-          <span>360°</span>
-        </button>
-        {% assign detail_assets = 'joyari-ring-detail-side.webp|joyari-ring-detail-three-quarter.webp|joyari-ring-detail-profile.webp|joyari-ring-set-front.webp|joyari-ring-set-three-quarter.webp|joyari-ring-set-rear.webp' | split: '|' %}
-        {% assign detail_alts = 'Side profile|Three-quarter view|Band profile|Front view|Set view|Rear view' | split: '|' %}
-        {% for detail_asset in detail_assets %}
-          <button type="button" class="jkb__media-thumbnail" data-gallery-media="image" data-media-source="{{ detail_asset | asset_url }}" data-media-alt="{{ detail_alts[forloop.index0] }}" aria-pressed="false">
-            <img src="{{ detail_asset | asset_url }}" width="320" height="320" loading="lazy" alt="{{ detail_alts[forloop.index0] }}">
-          </button>
-        {% endfor %}
-        <button type="button" class="jkb__media-thumbnail" data-gallery-media="video" data-media-source="{{ 'joyari-ring-360-video.mp4' | asset_url }}" aria-pressed="false">
-          <img src="{{ 'joyari-ring-detail-side.webp' | asset_url }}" width="320" height="320" loading="lazy" alt="Ring video">
-          <span class="jkb__thumbnail-play" aria-hidden="true">▶</span>
-        </button>
-      </div>
+<section class="jkb jkb--enquiry" aria-labelledby="CustomRingEnquiryTitle">
+  <div class="jkb-enquiry__inner">
+    <div class="jkb-enquiry__hero">
+      <p class="jkb-enquiry__eyebrow">Joyari Krafted bespoke design</p>
+      <h1 id="CustomRingEnquiryTitle">Custom Engagement Rings</h1>
+      <p class="jkb-enquiry__subtitle">Share your dream ring with us. Our team will guide you through diamond selection, metal choice, CAD design and final crafting.</p>
+      <a class="jkb-enquiry__primary" href="#custom-ring-enquiry">Request a Custom Ring Quote</a>
     </div>
 
-    <aside class="jkb__panel" aria-label="Custom ring options">
-      <header class="jkb__product-head">
-        <p class="jkb__eyebrow">Joyari Krafted custom design</p>
-        <h1>Design Your Engagement Ring</h1>
-        <p>Create a refined made-to-order ring with the essentials selected first.</p>
-      </header>
-
-      <div class="jkb__options">
-        <section class="jkb__group" aria-labelledby="DiamondShape-{{ section.id }}">
-          <div class="jkb__group-heading">
-            <h2 id="DiamondShape-{{ section.id }}">Diamond Shape</h2>
-            <span data-selected-label="Diamond Shape">Round</span>
-          </div>
-          <div class="jkb__shape-grid">
-            {% assign shape_titles = 'Round|Oval|Pear|Emerald|Cushion|Princess|Radiant|Marquise|Heart' | split: '|' %}
-            {% assign shape_handles = 'round|oval|pear|emerald|cushion|princess|radiant|marquise|heart' | split: '|' %}
-            {% for title in shape_titles %}
-              {% assign handle = shape_handles[forloop.index0] %}
-              {% liquid
-                assign shape_media = 'joyari-ring-360-01.webp'
-                if handle == 'pear'
-                  assign shape_media = 'joyari-product-pear-ring-on-hand.jpg'
-                elsif handle == 'oval'
-                  assign shape_media = 'joyari-ring-detail-side.webp'
-                elsif handle == 'emerald'
-                  assign shape_media = 'joyari-ring-detail-three-quarter.webp'
-                elsif handle == 'cushion'
-                  assign shape_media = 'joyari-ring-set-front.webp'
-                elsif handle == 'princess'
-                  assign shape_media = 'joyari-ring-set-three-quarter.webp'
-                elsif handle == 'radiant'
-                  assign shape_media = 'joyari-ring-set-rear.webp'
-                elsif handle == 'marquise'
-                  assign shape_media = 'joyari-diamond-macro-pear.jpg'
-                elsif handle == 'heart'
-                  assign shape_media = 'joyari-home-hero-ring-on-hand.jpg'
-                endif
-              %}
-              <button
-                type="button"
-                class="jkb__shape-card{% if forloop.first %} is-selected{% endif %}"
-                data-option-button
-                data-shape-button
-                data-group="Diamond Shape"
-                data-value="{{ title }}"
-                data-price="0"
-                data-media-source="{{ shape_media | asset_url }}"
-              >
-                <svg viewBox="0 0 64 64" aria-hidden="true">
-                  {% case handle %}
-                    {% when 'round' %}<circle cx="32" cy="32" r="21"></circle><path d="M17 17l30 30M47 17 17 47M32 11v42M11 32h42"></path>
-                    {% when 'oval' %}<ellipse cx="32" cy="32" rx="16" ry="24"></ellipse><path d="M22 12l20 40M42 12 22 52M32 8v48"></path>
-                    {% when 'pear' %}<path d="M32 7C19 20 14 30 16 41c2 10 8 16 16 16s14-6 16-16C50 30 45 20 32 7Z"></path><path d="M32 7v50M21 27l22 22M43 27 21 49"></path>
-                    {% when 'emerald' %}<path d="M21 9h22l12 12v22L43 55H21L9 43V21Z"></path><path d="M21 9v46M43 9v46M9 21h46M9 43h46"></path>
-                    {% when 'cushion' %}<rect x="12" y="12" width="40" height="40" rx="12"></rect><path d="M20 20h24v24H20zM32 12v40M12 32h40"></path>
-                    {% when 'princess' %}<path d="M13 13h38v38H13z"></path><path d="M13 13l38 38M51 13 13 51M32 13v38M13 32h38"></path>
-                    {% when 'radiant' %}<path d="M20 9h24l11 11v24L44 55H20L9 44V20Z"></path><path d="M20 9l24 46M44 9 20 55M9 20h46M9 44h46"></path>
-                    {% when 'marquise' %}<path d="M6 32s13-21 26-21 26 21 26 21-13 21-26 21S6 32 6 32Z"></path><path d="M6 32h52M22 16l20 32M42 16 22 48"></path>
-                    {% else %}<path d="M32 55 12 34C1 22 9 8 21 10c5 1 9 5 11 9 2-4 6-8 11-9 12-2 20 12 9 24Z"></path><path d="M12 20h40M20 12l12 43M44 12 32 55"></path>
-                  {% endcase %}
-                </svg>
-                <span>{{ title }}</span>
-              </button>
-            {% endfor %}
-          </div>
-        </section>
-
-        <section class="jkb__group" aria-labelledby="MetalHeading-{{ section.id }}">
-          <label class="jkb__select-label" for="BuilderMetal-{{ section.id }}">Metal</label>
-          <div class="jkb__select-wrap">
-            <select id="BuilderMetal-{{ section.id }}" data-option-select data-group="Metal">
-              {% assign metal_titles = 'Silver|10K Yellow Gold|10K White Gold|10K Rose Gold|14K Yellow Gold|14K White Gold|14K Rose Gold|18K Yellow Gold|18K White Gold|18K Rose Gold' | split: '|' %}
-              {% assign metal_prices = '-45000|-20000|-12000|-8000|-8000|0|4000|12000|18000|22000' | split: '|' %}
-              {% for title in metal_titles %}
-                <option value="{{ title }}" data-price="{{ metal_prices[forloop.index0] }}" {% if title == '14K White Gold' %}selected{% endif %}>{{ title }}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </section>
-
-        <section class="jkb__group jkb__group--split" aria-label="Carat and ring size">
-          <div>
-            <label class="jkb__select-label" for="BuilderCarat-{{ section.id }}">Carat</label>
-            <div class="jkb__select-wrap">
-              <select id="BuilderCarat-{{ section.id }}" data-option-select data-group="Carat">
-                {% assign carat_titles = '1.5 ct|2.0 ct|2.5 ct|3.0 ct' | split: '|' %}
-                {% assign carat_prices = '-65000|0|135000|260000' | split: '|' %}
-                {% for title in carat_titles %}
-                  <option value="{{ title }}" data-price="{{ carat_prices[forloop.index0] }}" {% if title == '2.0 ct' %}selected{% endif %}>{{ title }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-          <div>
-            <div class="jkb__label-row">
-              <label class="jkb__select-label" for="BuilderRingSize-{{ section.id }}">Ring Size</label>
-              <a href="/pages/ring-size-guide">Size guide</a>
-            </div>
-            <div class="jkb__select-wrap">
-              <select id="BuilderRingSize-{{ section.id }}" data-option-select data-group="Ring Size">
-                {% assign ring_sizes = 'F|F 1/2|G|G 1/2|H|H 1/2|I|I 1/2|J|J 1/2|K|K 1/2|L|L 1/2|M|M 1/2|N|N 1/2|O|O 1/2|P|P 1/2|Q|Q 1/2|R|R 1/2|S|S 1/2|T|T 1/2|U|U 1/2|V|V 1/2|W|W 1/2|X|X 1/2|Y|Y 1/2|Z|Help Me Later' | split: '|' %}
-                {% for size in ring_sizes %}
-                  <option value="{{ size }}" {% if size == 'Help Me Later' %}selected{% endif %}>{{ size }}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </div>
-        </section>
-
-        <details class="jkb__more-options">
-          <summary>More Options</summary>
-          <div class="jkb__more-options-panel">
-            <section class="jkb__group jkb__group--compact" aria-label="Head style">
-              <label class="jkb__select-label" for="BuilderHead-{{ section.id }}">Head style</label>
-              <div class="jkb__select-wrap">
-                <select id="BuilderHead-{{ section.id }}" data-option-select data-group="Head Style">
-                  {% assign head_titles = '4-Prong Nouveau|6-Prong Nouveau|Classic Basket|Diamond Basket|Surprise Diamond|6-Prong Diamond|Diamond Tulip|Classic Halo|Floral Halo|Hidden Halo|Dual Halo|Fancy Halo|Clustered Diamond|Vintage Trefoil|Classic Bezel' | split: '|' %}
-                  {% for title in head_titles %}
-                    <option value="{{ title }}" data-price="{% if title contains 'Halo' or title contains 'Diamond' %}28000{% else %}0{% endif %}" {% if title == 'Diamond Tulip' %}selected{% endif %}>{{ title }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </section>
-            <section class="jkb__group jkb__group--compact" aria-label="Band style">
-              <label class="jkb__select-label" for="BuilderBand-{{ section.id }}">Band style</label>
-              <div class="jkb__select-wrap">
-                <select id="BuilderBand-{{ section.id }}" data-option-select data-group="Band Style">
-                  {% assign band_titles = 'Solitaire|Knife Edge Solitaire|Split Ring Solitaire|French Pavé|Cathedral Pavé|Triple Row Pavé|Round Channel|Baguette Channel|Floating Station|Alternating Marquise|Three Stone|Knife Edge Pavé|Floral Bypass|Twist Pavé|Alternating Baguette' | split: '|' %}
-                  {% for title in band_titles %}
-                    <option value="{{ title }}" data-price="{% if title contains 'Pavé' or title contains 'Channel' or title contains 'Baguette' or title contains 'Three Stone' %}32000{% else %}0{% endif %}" {% if title == 'Knife Edge Solitaire' %}selected{% endif %}>{{ title }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </section>
-            <section class="jkb__group jkb__group--compact" aria-label="Engraving">
-              <label class="jkb__select-label" for="BuilderEngraving-{{ section.id }}">Engraving</label>
-              <input id="BuilderEngraving-{{ section.id }}" class="jkb__text-input" type="text" maxlength="24" placeholder="Optional message" data-property-text="Engraving">
-            </section>
-          </div>
-        </details>
+    <div class="jkb-enquiry__panel" id="custom-ring-enquiry">
+      <div class="jkb-enquiry__copy">
+        <h2>Private Guidance</h2>
+        <p>For custom designs, quotes, CAD requests or private guidance, please email us.</p>
+        <div class="jkb-enquiry__email">
+          <span>Email</span>
+          <strong>[PUT EMAIL HERE LATER]</strong>
+        </div>
+        <a class="jkb-enquiry__secondary" href="#custom-ring-enquiry" aria-label="Email Joyari Krafted for a custom ring enquiry">Email Us</a>
       </div>
 
-      <div class="jkb__price-card">
-        <span>Estimated setting price</span>
-        <strong data-estimate-price>{{ base_price | money }}</strong>
-        <p>Made to order in 12–15 business days with insured delivery.</p>
-      </div>
-
-      {% if builder_product != blank and selected_variant != blank %}
-        {% form 'product', builder_product, class: 'jkb__form', data-builder-form: '' %}
-          <input type="hidden" name="id" value="{{ selected_variant.id }}">
-          <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="properties[Diamond Shape]" value="Round" data-property-input="Diamond Shape">
-          <input type="hidden" name="properties[Metal]" value="14K White Gold" data-property-input="Metal">
-          <input type="hidden" name="properties[Carat]" value="2.0 ct" data-property-input="Carat">
-          <input type="hidden" name="properties[Ring Size]" value="Help Me Later" data-property-input="Ring Size">
-          <input type="hidden" name="properties[Head Style]" value="Diamond Tulip" data-property-input="Head Style">
-          <input type="hidden" name="properties[Band Style]" value="Knife Edge Solitaire" data-property-input="Band Style">
-          <input type="hidden" name="properties[Engraving]" value="" data-property-input="Engraving">
-          <input type="hidden" name="properties[Production Time]" value="12–15 business days">
-          <input type="hidden" name="properties[Configured Price]" value="{{ base_price | money }}" data-property-input="Configured Price">
-          <button type="submit" name="add" class="jkb__primary-cta">Add to Cart</button>
-        {% endform %}
-      {% elsif checkout_variant_id != blank %}
-        <form method="post" action="{{ routes.cart_add_url }}" class="jkb__form" data-builder-form>
-          <input type="hidden" name="id" value="{{ checkout_variant_id | escape }}">
-          <input type="hidden" name="quantity" value="1">
-          <input type="hidden" name="properties[Diamond Shape]" value="Round" data-property-input="Diamond Shape">
-          <input type="hidden" name="properties[Metal]" value="14K White Gold" data-property-input="Metal">
-          <input type="hidden" name="properties[Carat]" value="2.0 ct" data-property-input="Carat">
-          <input type="hidden" name="properties[Ring Size]" value="Help Me Later" data-property-input="Ring Size">
-          <input type="hidden" name="properties[Head Style]" value="Diamond Tulip" data-property-input="Head Style">
-          <input type="hidden" name="properties[Band Style]" value="Knife Edge Solitaire" data-property-input="Band Style">
-          <input type="hidden" name="properties[Engraving]" value="" data-property-input="Engraving">
-          <input type="hidden" name="properties[Production Time]" value="12–15 business days">
-          <input type="hidden" name="properties[Configured Price]" value="{{ base_price | money }}" data-property-input="Configured Price">
-          <button type="submit" name="add" class="jkb__primary-cta">Add to Cart</button>
-        </form>
-      {% else %}
-        <a class="jkb__primary-cta" href="{{ section.settings.request_link | default: '/pages/contact' }}">Enquire</a>
-      {% endif %}
-      <a class="jkb__secondary-cta" href="{{ section.settings.consultation_link | default: '/pages/contact' }}">Enquire</a>
-
-      <div class="jkb__trust-list" aria-label="Joyari service assurances">
-        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path></svg><span>Insured delivery</span></div>
-        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9M12 7v5l3 2M18 3v5h5"></path></svg><span>Free resizing</span></div>
-        <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l3 3v15H6zM15 3v4h4M9 12l2 2 4-4"></path></svg><span>Certificate available</span></div>
-      </div>
-    </aside>
-  </div>
-
-  <div class="jkb__mobile-cta">
-    <div><span>Estimated price</span><strong data-estimate-price>{{ base_price | money }}</strong></div>
-    <button type="button" data-mobile-builder-submit>Add to Cart</button>
+      <ul class="jkb-enquiry__list" aria-label="Custom ring inclusions">
+        <li>Lab-grown and natural diamonds available</li>
+        <li>10K, 14K and 18K gold options</li>
+        <li>CAD preview before production</li>
+        <li>IGI/GIA certified stones available</li>
+        <li>Made to order in 12–15 business days</li>
+        <li>Insured delivery</li>
+      </ul>
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Custom ring builder",
+  "name": "Custom ring enquiry",
   "tag": "section",
   "class": "shopify-section--custom-ring-builder",
-  "settings": [
-    { "type": "product", "id": "checkout_product", "label": "Checkout product", "info": "Selections are saved as line item properties." },
-    { "type": "text", "id": "checkout_variant_id", "label": "Fallback checkout variant ID" },
-    { "type": "number", "id": "base_price", "label": "Setting price, in cents", "default": 280000 },
-    { "type": "url", "id": "back_link", "label": "Back to gallery link" },
-    { "type": "url", "id": "consultation_link", "label": "Expert chat link" },
-    { "type": "url", "id": "request_link", "label": "Setting request link" },
-    { "type": "text", "id": "preview_image_alt", "label": "Gallery image alt text", "default": "Joyari Krafted custom engagement ring" },
-    { "type": "header", "content": "Product gallery" },
-    { "type": "image_picker", "id": "gallery_image_1", "label": "Gallery image 1" },
-    { "type": "image_picker", "id": "gallery_image_2", "label": "Gallery image 2" },
-    { "type": "image_picker", "id": "gallery_image_3", "label": "Gallery image 3" },
-    { "type": "image_picker", "id": "gallery_image_4", "label": "Gallery image 4" },
-    { "type": "header", "content": "Existing uploaded frames" },
-    { "type": "image_picker", "id": "sequence_frame_1", "label": "Frame 1 fallback" },
-    { "type": "image_picker", "id": "sequence_frame_2", "label": "Frame 2 fallback" },
-    { "type": "image_picker", "id": "sequence_frame_3", "label": "Frame 3 fallback" },
-    { "type": "image_picker", "id": "sequence_frame_4", "label": "Frame 4 fallback" },
-    { "type": "image_picker", "id": "sequence_frame_5", "label": "Frame 5 fallback" },
-    { "type": "image_picker", "id": "sequence_frame_6", "label": "Frame 6 fallback" }
-  ],
-  "presets": [{ "name": "Custom ring builder" }]
+  "settings": [],
+  "presets": [{ "name": "Custom ring enquiry" }]
 }
 {% endschema %}
