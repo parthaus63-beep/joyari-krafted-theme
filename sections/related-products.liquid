@@ -34,7 +34,7 @@
               </a>
               <div class="jk-product-card__content">
                 <h3 class="jk-product-card__title"><a href="{{ related_product.url }}">{{ related_product.title }}</a></h3>
-                <p class="jk-product-card__price">{{ related_product.price | money }}</p>
+                <p class="jk-product-card__price">{% render 'joyari-product-price', product: related_product %}</p>
                 <a class="jk-product-card__action" href="{{ related_product.url }}">Select details</a>
               </div>
             </article>

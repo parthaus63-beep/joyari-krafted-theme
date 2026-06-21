@@ -252,13 +252,7 @@
                         <p class="jk-product-card__meta">{{ product.type }}</p>
                       {% endif %}
                       <h2 class="jk-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h2>
-                      <p class="jk-product-card__price">
-                        {% if product.price_varies %}
-                          {{ 'products.product.from_price_html' | t: price: product.price_min | money }}
-                        {% else %}
-                          {{ product.price | money }}
-                        {% endif %}
-                      </p>
+                      <p class="jk-product-card__price">{% render 'joyari-product-price', product: product %}</p>
                       <a class="jk-product-card__action" href="{{ product.url }}">Select details</a>
                     </div>
                   </article>
@@ -312,13 +306,7 @@
               <p class="jk-product-card__meta">{{ product.type }}</p>
             {% endif %}
             <h2 class="jk-product-card__title"><a href="{{ product.url }}">{{ product.title }}</a></h2>
-            <p class="jk-product-card__price">
-              {% if product.price_varies %}
-                {{ 'products.product.from_price_html' | t: price: product.price_min | money }}
-              {% else %}
-                {{ product.price | money }}
-              {% endif %}
-            </p>
+            <p class="jk-product-card__price">{% render 'joyari-product-price', product: product %}</p>
             <a class="jk-product-card__action" href="{{ product.url }}">Select details</a>
           </div>
         </article>

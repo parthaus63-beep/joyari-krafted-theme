@@ -111,6 +111,11 @@
     return 'AUD $' + formatWithDelimiters(cents, 0);
   }
 
+  function formatProductPrice(cents) {
+    var amount = Number(cents || 0);
+    return amount > 0 ? formatAudMoney(amount) : 'Price on request';
+  }
+
   function escapeAttributeValue(value) {
     return String(value || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
   }
@@ -256,36 +261,93 @@
       return variant.available;
     }) || variants[0];
 
+    function normaliseOptionValue(value) {
+      return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+    }
+
+    function optionValuesMatch(selectedValue, variantValue) {
+      var selected = normaliseOptionValue(selectedValue);
+      var candidate = normaliseOptionValue(variantValue);
+      if (!selected || !candidate) return false;
+      return selected === candidate || selected.indexOf(candidate) !== -1 || candidate.indexOf(selected) !== -1;
+    }
+
+    function getCustomSelectedOption(optionName) {
+      var name = String(optionName || '').toLowerCase();
+      var selector = null;
+
+      if (name.indexOf('metal') !== -1 || name.indexOf('material') !== -1) {
+        selector = root.querySelector('[data-metal-select], select[name="properties[Metal]"]');
+      } else if (name.indexOf('carat') !== -1 || name.indexOf('ct') !== -1 || name.indexOf('weight') !== -1) {
+        selector = root.querySelector('[data-carat-select], select[name="properties[Carat]"]');
+      } else if (name.indexOf('size') !== -1) {
+        selector = root.querySelector('[data-ring-size-select], select[name="properties[Ring Size]"]');
+      } else if (name.indexOf('stone') !== -1 || name.indexOf('diamond') !== -1 || name.indexOf('gem') !== -1 || name.indexOf('type') !== -1) {
+        selector = root.querySelector('[data-stone-type-select], select[name="properties[Stone Type]"]');
+      } else if (name.indexOf('colour') !== -1 || name.indexOf('color') !== -1) {
+        selector = root.querySelector('[data-colour-select], select[name="properties[Colour]"]');
+      } else if (name.indexOf('clarity') !== -1) {
+        selector = root.querySelector('select[name="properties[Clarity]"]');
+      }
+
+      return selector ? selector.value : '';
+    }
+
     function getSelectedOptions() {
       var optionFieldsets = Array.prototype.slice.call(root.querySelectorAll('[data-option-name][data-option-position]'));
-      if (!optionFieldsets.length && currentVariant) {
-        return currentVariant.options || [];
-      }
+      var optionNames = product.options || [];
+      var selectedOptions = currentVariant && currentVariant.options ? currentVariant.options.slice() : [];
 
       optionFieldsets.sort(function (a, b) {
         return parseInt(a.getAttribute('data-option-position'), 10) - parseInt(b.getAttribute('data-option-position'), 10);
       });
 
-      return optionFieldsets.map(function (fieldset) {
+      optionFieldsets.forEach(function (fieldset) {
+        var index = parseInt(fieldset.getAttribute('data-option-position'), 10) - 1;
         var checked = fieldset.querySelector('[data-option-input]:checked');
-        return checked ? checked.value : '';
+        if (checked) selectedOptions[index] = checked.value;
       });
+
+      optionNames.forEach(function (optionName, index) {
+        var customValue = getCustomSelectedOption(optionName);
+        if (customValue) selectedOptions[index] = customValue;
+      });
+
+      return selectedOptions;
     }
 
     function findVariant() {
       var selectedOptions = getSelectedOptions();
-      return variants.find(function (variant) {
+      var exactVariant = variants.find(function (variant) {
         return selectedOptions.every(function (option, index) {
           return variant.options[index] === option;
+        });
+      });
+
+      if (exactVariant) return exactVariant;
+
+      return variants.find(function (variant) {
+        return selectedOptions.every(function (option, index) {
+          if (!option) return true;
+          return optionValuesMatch(option, variant.options[index]);
         });
       });
     }
 
     function updateEstimate(variant) {
       var basePrice = variant ? variant.price : 0;
+      if (!variant || basePrice <= 0) {
+        setText(root, '[data-builder-adjustment]', formatProductPrice(0));
+        setText(root, '[data-estimate-total]', formatProductPrice(0));
+        root.querySelectorAll('[data-builder-estimate-property]').forEach(function (input) {
+          input.value = formatProductPrice(0);
+        });
+        return;
+      }
+
       var adjustment = calculateBuilderAdjustment(root);
       var estimate = Math.max(0, basePrice + adjustment);
-      var formattedEstimate = root.matches('[data-product-builder]') ? formatAudMoney(estimate) : formatMoney(estimate);
+      var formattedEstimate = root.matches('[data-product-builder]') ? formatProductPrice(estimate) : formatMoney(estimate);
 
       setText(root, '[data-builder-adjustment]', root.matches('[data-product-builder]') ? formatAudMoney(adjustment) : formatMoney(adjustment));
       setText(root, '[data-estimate-total]', formattedEstimate);
@@ -305,12 +367,12 @@
       });
 
       if (variant) {
-        setText(root, '[data-variant-price]', formatAudMoney(variant.price));
+        setText(root, '[data-variant-price]', formatProductPrice(variant.price));
         setText(root, '[data-variant-sku]', variant.sku || 'Made to order');
 
         var compareElements = root.querySelectorAll('[data-variant-compare]');
         compareElements.forEach(function (element) {
-          if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+          if (variant.price > 0 && variant.compare_at_price && variant.compare_at_price > variant.price) {
             element.textContent = formatAudMoney(variant.compare_at_price);
             element.classList.remove('is-hidden');
           } else {
@@ -332,13 +394,14 @@
       }
 
       root.querySelectorAll('[data-add-to-cart]').forEach(function (button) {
-        button.disabled = !available;
-        button.textContent = available
-          ? (window.themeProductAddText || 'Add to cart')
-          : (variant ? 'Sold out' : 'Unavailable');
+        var requiresQuote = Boolean(variant && variant.price <= 0);
+        button.disabled = !available || requiresQuote;
+        button.textContent = requiresQuote
+          ? 'Enquire to order'
+          : (available ? (window.themeProductAddText || 'Add to cart') : (variant ? 'Sold out' : 'Unavailable'));
       });
 
-      setText(root, '[data-availability]', available ? 'Available for secure checkout' : (variant ? 'This configuration is sold out' : 'This configuration is unavailable'));
+      setText(root, '[data-availability]', variant && variant.price <= 0 ? 'Price available by private quote' : (available ? 'Available for secure checkout' : (variant ? 'This configuration is sold out' : 'This configuration is unavailable')));
       updateStonePreview(root);
       updateEstimate(variant);
     }
@@ -349,9 +412,17 @@
     });
 
     root.querySelectorAll('[data-stone-type-select]').forEach(function (select) {
-      select.addEventListener('change', updateStoneColourOptions);
+      select.addEventListener('change', function () {
+        updateStoneColourOptions();
+        updateVariantState();
+      });
     });
     updateStoneColourOptions();
+
+    root.querySelectorAll('[data-metal-select], [data-carat-select], [data-ring-size-select], [data-colour-select], select[name="properties[Clarity]"]').forEach(function (select) {
+      select.addEventListener('change', updateVariantState);
+      select.addEventListener('input', updateVariantState);
+    });
 
     root.querySelectorAll('input[name="properties[Metal]"], input[name="properties[Metal Preference]"]').forEach(function (input) {
       var updateSelectedMetal = function () {

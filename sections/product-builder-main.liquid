@@ -1,6 +1,10 @@
 {% liquid
   assign selected_variant = product.selected_or_first_available_variant
   assign product_form_id = 'JoyariProductBuilderForm-' | append: section.id
+  assign selected_variant_requires_quote = false
+  if selected_variant.price <= 0
+    assign selected_variant_requires_quote = true
+  endif
   assign product_type_downcase = product.type | downcase
   assign product_title_downcase = product.title | downcase
   assign is_ring_product = false
@@ -861,8 +865,14 @@
             </p>
 
             <div class="jk-product-price-row">
-              <p class="jk-product-price" data-variant-price>AUD ${{ selected_variant.price | money_without_currency | replace: '.00', '' }}</p>
-              {% if selected_variant.compare_at_price > selected_variant.price %}
+              <p class="jk-product-price" data-variant-price>
+                {% if selected_variant.price > 0 %}
+                  AUD ${{ selected_variant.price | money_without_currency | replace: '.00', '' }}
+                {% else %}
+                  Price on request
+                {% endif %}
+              </p>
+              {% if selected_variant.price > 0 and selected_variant.compare_at_price > selected_variant.price %}
                 <p class="jk-product-compare" data-variant-compare>AUD ${{ selected_variant.compare_at_price | money_without_currency | replace: '.00', '' }}</p>
               {% else %}
                 <p class="jk-product-compare is-hidden" data-variant-compare></p>
@@ -884,7 +894,9 @@
             {% endif %}
 
             <p class="jk-availability" data-availability>
-              {% if selected_variant.available %}
+              {% if selected_variant_requires_quote %}
+                Price available by private quote
+              {% elsif selected_variant.available %}
                 Available for secure checkout
               {% else %}
                 This configuration is currently unavailable
@@ -936,7 +948,7 @@
 
                 <div class="jk-builder-field jk-builder-field--quality-select jk-builder-field--carat">
                   <label for="CaratPreference-{{ section.id }}">Carat</label>
-                  <select id="CaratPreference-{{ section.id }}" name="properties[Carat]">
+                  <select id="CaratPreference-{{ section.id }}" name="properties[Carat]" data-carat-select>
                     {% assign carat_options = '1.5ct,2.0ct,2.5ct,3.0ct' | split: ',' %}
                     {% for carat in carat_options %}
                       <option value="{{ carat | escape }}" {% if forloop.first %}selected{% endif %}>{{ carat }}</option>
@@ -1047,15 +1059,19 @@
               {% endunless %}
 
               <div class="jk-product-actions">
-                <button type="submit" name="add" class="jk-button jk-button--primary jk-add-to-cart" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>
-                  {% if selected_variant.available %}
+                <button type="submit" name="add" class="jk-button jk-button--primary jk-add-to-cart" data-add-to-cart {% if selected_variant_requires_quote or selected_variant.available == false %}disabled{% endif %}>
+                  {% if selected_variant_requires_quote %}
+                    Enquire to order
+                  {% elsif selected_variant.available %}
                     {{ 'products.product.add_to_cart' | t }}
                   {% else %}
                     {{ 'products.product.sold_out' | t }}
                   {% endif %}
                 </button>
                 <p class="jk-availability" data-availability>
-                  {% if selected_variant.available %}
+                  {% if selected_variant_requires_quote %}
+                    Price available by private quote
+                  {% elsif selected_variant.available %}
                     Available for secure checkout
                   {% else %}
                     This configuration is currently unavailable
@@ -1196,10 +1212,18 @@
     <div class="jk-mobile-atc" data-mobile-atc>
       <div>
         <span>{{ product.title }}</span>
-        <strong data-estimate-total>AUD ${{ selected_variant.price | money_without_currency | replace: '.00', '' }}</strong>
+        <strong data-estimate-total>
+          {% if selected_variant.price > 0 %}
+            AUD ${{ selected_variant.price | money_without_currency | replace: '.00', '' }}
+          {% else %}
+            Price on request
+          {% endif %}
+        </strong>
       </div>
-      <button type="submit" name="add" form="{{ product_form_id }}" class="jk-button jk-button--primary" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>
-        {% if selected_variant.available %}
+      <button type="submit" name="add" form="{{ product_form_id }}" class="jk-button jk-button--primary" data-add-to-cart {% if selected_variant_requires_quote or selected_variant.available == false %}disabled{% endif %}>
+        {% if selected_variant_requires_quote %}
+          Enquire to order
+        {% elsif selected_variant.available %}
           {{ 'products.product.add_to_cart' | t }}
         {% else %}
           {{ 'products.product.sold_out' | t }}

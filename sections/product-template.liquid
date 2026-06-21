@@ -1,6 +1,10 @@
 {% liquid
   assign selected_variant = product.selected_or_first_available_variant
   assign product_form_id = 'ProductForm-' | append: section.id
+  assign selected_variant_requires_quote = false
+  if selected_variant.price <= 0
+    assign selected_variant_requires_quote = true
+  endif
   assign product_type_downcase = product.type | downcase
   assign product_title_downcase = product.title | downcase
   assign is_ring_product = false
@@ -102,8 +106,14 @@
             <h1>{{ product.title }}</h1>
 
             <div class="jk-product-price-row">
-              <p class="jk-product-price" data-variant-price>{{ selected_variant.price | money }}</p>
-              {% if selected_variant.compare_at_price > selected_variant.price %}
+              <p class="jk-product-price" data-variant-price>
+                {% if selected_variant.price > 0 %}
+                  {{ selected_variant.price | money }}
+                {% else %}
+                  Price on request
+                {% endif %}
+              </p>
+              {% if selected_variant.price > 0 and selected_variant.compare_at_price > selected_variant.price %}
                 <p class="jk-product-compare" data-variant-compare>{{ selected_variant.compare_at_price | money }}</p>
               {% else %}
                 <p class="jk-product-compare is-hidden" data-variant-compare></p>
@@ -210,15 +220,19 @@
               </div>
 
               <div class="jk-product-actions">
-                <button type="submit" name="add" class="jk-button jk-button--primary jk-add-to-cart" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>
-                  {% if selected_variant.available %}
+                <button type="submit" name="add" class="jk-button jk-button--primary jk-add-to-cart" data-add-to-cart {% if selected_variant_requires_quote or selected_variant.available == false %}disabled{% endif %}>
+                  {% if selected_variant_requires_quote %}
+                    Enquire to order
+                  {% elsif selected_variant.available %}
                     {{ 'products.product.add_to_cart' | t }}
                   {% else %}
                     {{ 'products.product.sold_out' | t }}
                   {% endif %}
                 </button>
                 <p class="jk-availability" data-availability>
-                  {% if selected_variant.available %}
+                  {% if selected_variant_requires_quote %}
+                    Price available by private quote
+                  {% elsif selected_variant.available %}
                     Available for secure checkout
                   {% else %}
                     This configuration is currently unavailable
@@ -286,10 +300,18 @@
     <div class="jk-mobile-atc" data-mobile-atc>
       <div>
         <span>{{ product.title }}</span>
-        <strong data-estimate-total>{{ selected_variant.price | money }}</strong>
+        <strong data-estimate-total>
+          {% if selected_variant.price > 0 %}
+            {{ selected_variant.price | money }}
+          {% else %}
+            Price on request
+          {% endif %}
+        </strong>
       </div>
-      <button type="submit" name="add" form="{{ product_form_id }}" class="jk-button jk-button--primary" data-add-to-cart {% unless selected_variant.available %}disabled{% endunless %}>
-        {% if selected_variant.available %}
+      <button type="submit" name="add" form="{{ product_form_id }}" class="jk-button jk-button--primary" data-add-to-cart {% if selected_variant_requires_quote or selected_variant.available == false %}disabled{% endif %}>
+        {% if selected_variant_requires_quote %}
+          Enquire to order
+        {% elsif selected_variant.available %}
           {{ 'products.product.add_to_cart' | t }}
         {% else %}
           {{ 'products.product.sold_out' | t }}

@@ -1,0 +1,21 @@
+{% doc %}
+Outputs a product card price while hiding zero-value placeholder prices.
+
+@param {product} product - Shopify product object
+{% enddoc %}
+{%- liquid
+  assign price_text = 'Price on request'
+  if product.price_min > 0
+    if product.price_varies
+      assign price_min_money = product.price_min | money
+      capture price_text
+        echo 'products.product.from_price_html' | t: price: price_min_money
+      endcapture
+    else
+      capture price_text
+        echo product.price | money
+      endcapture
+    endif
+  endif
+-%}
+{{- price_text -}}
