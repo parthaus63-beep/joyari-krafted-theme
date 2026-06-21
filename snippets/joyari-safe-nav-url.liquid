@@ -1,14 +1,17 @@
 {% doc %}
 Outputs a storefront-safe URL for a Shopify navigation link, with Joyari fallbacks for stale collection and page handles.
 
-@param {link} link - Shopify navigation link object
+@param {link} [link] - Shopify navigation link object
+@param {string} [raw_url] - Optional URL from a theme setting
+@param {string} [raw_title] - Optional label for a theme setting URL
 
 @example
 {% render 'joyari-safe-nav-url', link: link %}
 {% enddoc %}
 {%- liquid
-  assign resolved_url = link.url
-  assign link_title_handle = link.title | handleize
+  assign resolved_url = raw_url | default: link.url
+  assign link_title = raw_title | default: link.title
+  assign link_title_handle = link_title | handleize
   assign needs_fallback = false
 
   if resolved_url == blank or resolved_url == '#' or resolved_url contains 'javascript:'

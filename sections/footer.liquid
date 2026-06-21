@@ -81,7 +81,9 @@
       <h3>{{ section.settings.menu_title }}</h3>
       {% if section.settings.menu != blank and linklists[section.settings.menu].links.size > 0 %}
         {% for link in linklists[section.settings.menu].links %}
-          <a href="{{ link.url }}">{{ link.title }}</a>
+          {% capture safe_footer_link_url %}{% render 'joyari-safe-nav-url', link: link %}{% endcapture %}
+          {% assign safe_footer_link_url = safe_footer_link_url | strip %}
+          <a href="{{ safe_footer_link_url }}">{{ link.title }}</a>
         {% endfor %}
       {% else %}
         <a href="{{ engagement_rings_url }}">Engagement Rings</a>

@@ -19,6 +19,43 @@
 
   ensureCurrentThemeStylesheet();
 
+  function normaliseStaleStorefrontLinks() {
+    var routeMap = {
+      '/collections/engagement-rings': '/collections/engagement-ring',
+      '/collections/wedding-bands': '/collections/wedding-rings',
+      '/collections/diamond-jewellery': '/collections/fine-jewelry',
+      '/collections/jewellery': '/collections/fine-jewelry',
+      '/collections/loose-diamonds': '/pages/custom-design',
+      '/collections/diamonds': '/pages/custom-design',
+      '/pages/about': '/pages/about-us',
+      '/pages/shipping-returns': '/pages/contact',
+      '/pages/diamond-education': '/pages/education',
+      '/pages/diamond-shapes': '/pages/education',
+      '/pages/lab-grown-vs-natural-diamonds': '/pages/education',
+      '/pages/4cs-guide': '/pages/education',
+      '/pages/jewellery-care': '/pages/education'
+    };
+
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var rawHref = link.getAttribute('href');
+      if (!rawHref) return;
+
+      var url;
+      try {
+        url = new URL(rawHref, window.location.origin);
+      } catch (error) {
+        return;
+      }
+
+      if (url.origin !== window.location.origin) return;
+
+      var replacement = routeMap[url.pathname];
+      if (!replacement) return;
+
+      link.setAttribute('href', replacement + url.search + url.hash);
+    });
+  }
+
   function stripTags(value) {
     return String(value || '').replace(/<[^>]*>/g, '');
   }
@@ -1123,6 +1160,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    normaliseStaleStorefrontLinks();
     initLiveLuxuryFallbackPolish();
     initNavigation();
     initCollectionFilters();
